@@ -24,7 +24,7 @@ aws configure set aws_session_token $(echo $ROLE_CREDENTIALS | jq ".Credentials.
 
 aws configure set region $ENV_REGION
 
-for region in `aws ec2 describe-regions --output text | grep us | cut -f3`; do echo $region; aws cloudformation describe-stacks --stack-name mst-${ENVIRONMENT}-vpc-sg --region $region; if [ $? -eq 0 ]; then REGION=$region; break; fi; done
+for region in `aws ec2 describe-regions --output text | grep us | cut -f3`; do echo $region; aws cloudformation describe-stacks --stack-name mstc-${ENVIRONMENT}-vpc-sg --region $region; if [ $? -eq 0 ]; then REGION=$region; break; fi; done
 
 aws configure set region $REGION
 

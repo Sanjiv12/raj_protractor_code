@@ -16,7 +16,7 @@ def ENV_MAP = [dev:'dev', test:'test', qa:'qa', stage:'stage', prod:'prod']
 env.CROSS_ENV = ENV_MAP.get(env.ENVIRONMENT)
 def S3STACKNAME = "//mstc-dev-bdd-reports"
 
-env.SLACK_CHANNEL = 'toyota-builds-mst-console-d'
+env.SLACK_CHANNEL = 'toyota-builds-mstc-console-d'
 def RED = '#FF0000'
 def GREEN = '#008000'
 env.APP_NAME = 'MST CONSOLE TEST'
@@ -47,7 +47,7 @@ try {
     }
 
     node ('jenkins-ecs-mvn') {
-		checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'de1a79c6-f738-4892-8191-c35ee2574708', url: 'https://bitbucket.sdlc.toyota.com/scm/mstm/mst-console-bdd-framework.git']]])
+		checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'de1a79c6-f738-4892-8191-c35ee2574708', url: 'https://bitbucket.sdlc.toyota.com/scm/mstm/mstc-console-bdd-framework.git']]])
 		//checkout scm
 		// sh "mvn clean test -Dcucumber.options=\"--tags @rtiTest --tags ~@ignore --plugin pretty:target/json-report-rti-events.json --plugin html:target/html-report-rti-events\""
 		//sh "mvn clean test  -Dcucumber.options=\"--tags @rtiTest, --plugin html:target/cucumber-html-report\""		
@@ -72,7 +72,7 @@ try {
 
     // node ('jenkins-ecs-mvn') {
     //     stage ('Tests') {
-	// 	checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'de1a79c6-f738-4892-8191-c35ee2574708', url: 'https://bitbucket.sdlc.toyota.com/scm/mstm/mst-console-bdd-framework.git']]])
+	// 	checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'de1a79c6-f738-4892-8191-c35ee2574708', url: 'https://bitbucket.sdlc.toyota.com/scm/mstm/mstc-console-bdd-framework.git']]])
 	// 	//checkout scm
 	// 	// sh "mvn clean test -Dcucumber.options=\"--tags @rtiTest --tags ~@ignore --plugin pretty:target/json-report-rti-events.json --plugin html:target/html-report-rti-events\""
 	// 	//sh "mvn clean test  -Dcucumber.options=\"--tags @rtiTest, --plugin html:target/cucumber-html-report\""		
@@ -90,12 +90,12 @@ def sendSlackMessage(color, message) {
     //re-enabling slack to check for error messages after updating slack channel.
     //def slackMessage = "*APP: ${APP_NAME}*\n*Build: ${BUILD_TAG}*\n ${message} ${BUILD_URL}\" \"${color}\" \"${SLACK_CHANNEL}\""
     //echo "sendSlackMessage :: ${slackMessage}"
-   echo "sendSlackMessage :: ${message} to channel ${'toyota-builds-mst-console-bdd-framework-d'}"
+   echo "sendSlackMessage :: ${message} to channel ${'toyota-builds-mstc-console-bdd-framework-d'}"
    node {
         configFileProvider([configFile(fileId: 'PostToToyotaSlack', variable: 'postContent')]) {
         //original RT message format
         //sh "sh $postContent \"*$APP_NAME*\n${message} ${BUILD_URL}\" \"${color}\" \"${'toyota-builds-rti-d'}\""
-        sh "sh $postContent \"*APP:${APP_NAME}*\n*Build:${BUILD_TAG}*\n ${message} ${BUILD_URL}\" \"${color}\" \"${'toyota-builds-mst-console-bdd-framework-d'}\""
+        sh "sh $postContent \"*APP:${APP_NAME}*\n*Build:${BUILD_TAG}*\n ${message} ${BUILD_URL}\" \"${color}\" \"${'toyota-builds-mstc-console-bdd-framework-d'}\""
         }
     }
 }
