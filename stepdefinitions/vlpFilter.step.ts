@@ -14,16 +14,16 @@ Given('User is in Vehicle List Page', async () =>{
     await browser.driver.sleep(10*1000);
     browser.executeScript("arguments[0].click()", mspFilterPage.popUpClose);
     await browser.driver.sleep(5*1000);
-    await browser.get("?dealerCd=24022&source=t1");
-    await browser.driver.sleep(10*1000);
-    mspFilterPage.appcardButton.each((ele,i) => {
-        ele.getText().then((text) =>{
-            if(text.includes('Available', 0)){
-                console.log('appcard text - '+ text);
-                ele.click();                
-            }            
-        }).catch((err) => {})
-    })  
+    // await browser.get("?dealerCd=24022&source=t1");
+    // await browser.driver.sleep(10*1000);
+    // mspFilterPage.appcardButton.each((ele,i) => {
+    //     ele.getText().then((text) =>{
+    //         if(text.includes('Available', 0)){
+    //             console.log('appcard text - '+ text);
+    //             ele.click();                
+    //         }            
+    //     }).catch((err) => {})
+    // })  
        
     // mspFilterPage.appCard.reduce(function(acc, elem) {
     //     if(acc) return acc;

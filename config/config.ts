@@ -7,11 +7,11 @@ const jsonPath = path.join(process.cwd(), "/dist");
 
 export const config: Config = {
 
-     seleniumAddress: "http://127.0.0.1:4444/wd/hub",
-     SELENIUM_PROMISE_MANAGER: false,
+    //  seleniumAddress: "http://127.0.0.1:4444/wd/hub",
+    //  SELENIUM_PROMISE_MANAGER: false,
      
-    // sauceUser:"sso-toyota.tcoe-bishwadeep.pal",
-    // sauceKey:"fee6d21b-e2ec-4765-9424-fa9353d7e8bd",
+    sauceUser:"sso-toyota.tcoe-bishwadeep.pal",
+    sauceKey:"fee6d21b-e2ec-4765-9424-fa9353d7e8bd",
 
     // sauceUser:"sso-toyota.tcoe-raghunath.goteti",
     // sauceKey:"a1aaa34b-ba44-4bc7-a94c-f79aa068e60f",
@@ -32,19 +32,19 @@ export const config: Config = {
    },
     specs: [
         //"../../features/**/mspHome.feature"
-        //"../../features/**/mspFilter.feature",
+        "../../features/**/mspFilter.feature",
         //"../../features/**/vlpFilter.feature"
-        //"../../features/**/vdpPaymentDefaults.feature"
+        "../../features/**/vdpPaymentDefaults.feature"
         //"../../features/**/vdpTradeIn.feature"
         //"../../features/**/vdpAccessory.feature"
-        "../../features/**/vdpProtectionProductsWIP.feature"
+        //"../../features/**/vdpProtectionProductsWIP.feature"
     ],
     
     onPrepare: async() => {
         //browser.ignoreSynchronization = true;
         browser.manage().window().maximize(); 
         browser.driver.manage().deleteAllCookies(); 
-        // browser.manage().window().setSize(1600, 1000);
+        //browser.manage().window().setSize(1400, 1000);
         //await browser.get(config.baseUrl);
         browser.waitForAngularEnabled(false);
         reportConfig.createDirectory(jsonPath);

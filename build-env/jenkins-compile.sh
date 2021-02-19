@@ -3,8 +3,8 @@
 # This script should run the initial compilation of anything consumed
 # by static analysis or unit tests.
 
-sudo mkdir -p /output/mst-console-bdd-framework/node_modules
-ln -s /output/mst-console-bdd-framework/node_modules node_modules
+sudo mkdir -p /output/mstc-bdd-framework/node_modules
+ln -s /output/mstc-bdd-framework/node_modules node_modules
 
 # Register the rti-dealer registry path
 sudo npm config set @rti-dealer:registry http://jenkins-e-external-70o7nil4unkt-258609249.us-west-2.elb.amazonaws.com/
@@ -23,10 +23,9 @@ if [ "$?" -ne "0" ]; then
   compile_message="failed"
 fi
 # # Generating Reports
-# sudo npm run report:generate
+sudo npm run report
 
-# # Open Reports
-# sudo npm run report:open
+
 
 # Copy the compiled resources to the shared EFS directory, for
 # consumption by other jobs
