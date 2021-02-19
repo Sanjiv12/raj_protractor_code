@@ -23,7 +23,7 @@
     "clean-build": "npm run clean && npm run build",
     "init-contributors": "all-contributors init",
     "add-contributors": "all-contributors add",
-    "test": "protractor typeScript/config/config.js",
+    "test": "protractor typeScript/config/config.js && node typeScript/report/index.js",
     "generate-contributors": "all-contributors generate",
     "bdd": "npm run clean-build && protractor typeScript/config/config.js && node typeScript/report/index.js",
     "webdriver-update": "webdriver-manager update --ignore_ssl",
