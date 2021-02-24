@@ -25,15 +25,13 @@ Given('User is in Vehicle List Page', async () =>{
     //     }).catch((err) => {})
     // })  
        
-    // mspFilterPage.appCard.reduce(function(acc, elem) {
-    //     if(acc) return acc;
-    //     return elem.getText().then(function(text) {
-    //         if(text.includes('Available', 0)) return elem;
-    //     });
-    //   }, '').then((result) => {
-    //             if(!result) throw new Error("Element not found");
-    //             return result;
-    //         });
+    browser.executeScript('arguments[0].click()', mspFilterPage.sortDropDown);
+    await browser.driver.sleep(5*1000);
+    browser.executeScript('arguments[0].click()', mspFilterPage.sortPriceLowToHigh);
+    await browser.driver.sleep(5*1000);
+    //browser.actions().mouseMove(mspFilterPage.appcardButton.first()).click().perform();
+    browser.executeScript("window.scrollBy(0,250)");
+    browser.executeScript('arguments[0].click()', mspFilterPage.appcardButton.first());
 });
     
 

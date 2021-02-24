@@ -69,9 +69,36 @@ export class VdpPage {
     public alertModalButton : ElementFinder;
     public paymentOptionRb1 : ElementFinder;
     public productContainer : ElementFinder;
+    public vin : ElementFinder;
+    public vehicleTitle : ElementFinder;
+    public dgIcon : ElementFinder;
+    public advertisedPrice : ElementFinder;
+    public unlockSavings : ElementFinder;
+    public extColor : ElementFinder;
+    public intColor : ElementFinder;
+
+    public engine : ElementFinder;
+    public estMpg : ElementFinder;
+    public packageAcc : ElementFinder;
+    public viewVehDetails : ElementFinder;
+    public toyotaCareImg : ElementFinder;
+    public toyotaSafetySense : ElementFinder;
+    public carousel : ElementFinder;
+    public vehDetailModalVin : ElementFinder;
+    public vehDetailModalVehicleTitle : ElementFinder;
+    public vehDetailModalExtColor : ElementFinder;
+    public vehDetailModalIntColor : ElementFinder;
+    public vehDetailModalEstMpg : ElementFinder;
+    public vehDetailModalEngine : ElementFinder;
+    public vehDetailModalTab1 : ElementArrayFinder;
+    public vehDetailModalTab2 : ElementArrayFinder;
+    public vehDetailModalTab3 : ElementArrayFinder;
+    public vehDetailModalTab4 : ElementArrayFinder;
+    public vehDetailModalDisclosure : ElementFinder;
+    public carouselImgRight : ElementFinder;
     
-
-
+    
+    
     constructor() {
         this.cashDown = element(by.xpath('/html/body/main/app-root/mat-drawer-container/mat-drawer-content/app-vehicle-details/div/div[2]/div/section[1]/div[1]/vdp-payment-estimation/div/mat-tab-group/div/mat-tab-body[1]/div/app-lease/div/div[1]/app-cash-down/div/ngx-slider/span[9]')); 
         this.price = element(by.xpath("//div[@class='price']/div[@class='ng-star-inserted']"));
@@ -141,7 +168,37 @@ export class VdpPage {
         this.alertModal = element(by.className('mat-dialog-title'));
         this.alertModalButton = element(by.css('.got-it'));
         this.paymentOptionRb1 = element(by.xpath('/html/body/main/app-root/mat-drawer-container/mat-drawer-content/app-vehicle-details/div/div[2]/div[1]/section/div[1]/vdp-payment-estimation/div/mat-tab-group/div/mat-tab-body[1]/div/app-lease/div/div[3]/app-payment-option-list/div/mat-radio-group/div/con-payment-radiobutton-list/div/mat-radio-group/mat-radio-button[1]/label/div[1]/input'));
-        
         this.productContainer = element(by.xpath('//*[@id="product-container"]')); //*[@id="product-container"]
+
+        this.vin = element(by.className('vin'));
+        this.vehicleTitle = element(by.className('vehicle-title'));
+        this.dgIcon = element(by.className('dg-inline-save-heart'));
+        this.advertisedPrice = element(by.xpath("//div[@class='price']/div[@class='ng-star-inserted']"));
+        this.unlockSavings = element(by.xpath("//div[@class='price']/span[2]"));
+        this.extColor = element(by.xpath('//div[@class="vehicle-info"]/div[4]/div[1]/div[1]/div[2]/span[2]'));
+        this.intColor = element(by.xpath('//div[@class="vehicle-info"]/div[4]/div[1]/div[2]/div[2]/span[2]'));
+        this.engine = element(by.xpath('//div[@class="vehicle-info"]/div[4]/div[2]/div[1]/div[2]'));
+        this.estMpg = element(by.xpath('//div[@class="vehicle-info"]/div[4]/div[2]/div[2]/div[2]'));
+        this.packageAcc = element(by.xpath('//div[@class="vehicle-info"]/div[4]/div[2]/div[3]/div[2]'));
+        this.viewVehDetails = element(by.xpath('//div[@class="vehicle-info"]/div[4]/div[2]/div[3]/div[3]/div/span'));
+        this.toyotaCareImg = element(by.xpath('//div[@class="vehicle-info"]/div[4]/div[3]/div[1]/img'));
+        this.toyotaSafetySense = element(by.xpath('//div[@class="vehicle-info"]/div[4]/div[3]/div[2]'));
+        this.carousel = element(by.className('carousel'));
+        this.vehDetailModalVin = element(by.xpath('//div[@id="vehicle-detail-vin"]'));
+        this.vehDetailModalVehicleTitle = element(by.xpath('//div[@id="vehicle-detail-title"]'));
+        this.vehDetailModalExtColor = element(by.xpath('//div[@class="vehicleDetailRightDescriptionContainer"]/div[1]/div/span[2]'));
+        this.vehDetailModalIntColor = element(by.xpath('//div[@class="vehicleDetailRightDescriptionContainer"]/div[2]/div/span[2]'));
+
+        this.vehDetailModalEstMpg = element(by.xpath('//div[@class="vehicleDetailLeftDescriptionContainer"]/div[1]/div[2]'));
+        this.vehDetailModalEngine = element(by.xpath('//div[@class="vehicleDetailLeftDescriptionContainer"]/div[2]/div[2]'));
+
+        this.vehDetailModalTab1 = element.all(by.xpath('//div[@class="mat-tab-labels"]/div[1]'));
+        this.vehDetailModalTab2 = element.all(by.xpath('//div[@class="mat-tab-labels"]/div[2]'));
+        this.vehDetailModalTab3 = element.all(by.xpath('//div[@class="mat-tab-labels"]/div[3]'));
+        this.vehDetailModalTab4 = element.all(by.xpath('//div[@class="mat-tab-labels"]/div[4]'));
+        this.vehDetailModalDisclosure = element(by.xpath('//div[@class="Disclosure"]'));
+
+        this.carouselImgRight = element(by.xpath('//img[@alt="arrowRight"]'));
+                
     }
 }

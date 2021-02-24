@@ -69,27 +69,20 @@ Given('User is in Vehicle Details page', async() => {
     await browser.driver.sleep(10*1000);
     browser.executeScript("arguments[0].click()", mspFilterPage.popUpClose);
     await browser.driver.sleep(5*1000);
-    // await browser.get("?dealerCd=24022&source=t1");
-    // await browser.driver.sleep(10*1000);
-    // browser.executeScript("arguments[0].click()", mspFilterPage.popUpClose);
-    // await browser.driver.sleep(5*1000);
-    // // mspFilterPage.appcardButton.each((ele,i) => {
-    // //     ele.getText().then((text) =>{
-    // //         if(text.includes('Available', 0)){
-    // //             console.log('appcard text - '+ text);
-    // //             ele.click().catch((err) => {});                
-    // //         }            
-    // //     }).catch((err) => {})
-    // // }).catch((err) => {});
-
-    // browser.executeScript('arguments[0].click()', mspFilterPage.sortDropDown);
-    // await browser.driver.sleep(5*1000);
-    // browser.executeScript('arguments[0].click()', mspFilterPage.sortPriceLowToHigh);
-    // await browser.driver.sleep(10*1000);
-    // browser.actions().mouseMove(mspFilterPage.appcardButton.first()).click().perform();
-    // //mspFilterPage.appcardButton.first().click();
-    // await browser.driver.sleep(10*1000);
-    // vlpFilterPage.appCard.first().click();    
+    await browser.get("?dealerCd=24022&source=t1");
+    await browser.driver.sleep(10*1000);
+    browser.executeScript("arguments[0].click()", mspFilterPage.popUpClose);
+    //console.log('window size - '+browser.manage().window().getSize());
+    browser.executeScript('arguments[0].click()', mspFilterPage.sortDropDown);
+    await browser.driver.sleep(5*1000);
+    browser.executeScript('arguments[0].click()', mspFilterPage.sortPriceLowToHigh);
+    await browser.driver.sleep(10*1000);
+    //browser.actions().mouseMove(mspFilterPage.appcardButton.first()).click().perform();
+    browser.executeScript("window.scrollBy(0,250)");
+    await browser.driver.sleep(5*1000);
+    browser.executeScript('arguments[0].click()', mspFilterPage.appcardButton.first());
+    await browser.driver.sleep(10*1000);
+    browser.executeScript('arguments[0].click()', vlpFilterPage.appCard.first());    
 });
 
 When('User selects Finance', async  () =>{

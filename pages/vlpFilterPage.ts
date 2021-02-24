@@ -36,9 +36,14 @@ export class VlpFilterPage {
     public appCard : ElementArrayFinder;
     public filterPriceReset : ElementFinder;
     public sortPriceLowToHigh : ElementFinder;
-    
 
+    public unlockSavings : ElementArrayFinder;
+    public unlockSavingsModal : ElementFinder;
 
+    public unlockSavingsModalFirstName : ElementFinder;
+    public unlockSavingsModalLastName : ElementFinder;
+    public unlockSavingsModalEmail : ElementFinder;
+    public unlockSavingsModalZip : ElementFinder;
 
     constructor() {
         this.modelDropDown = element(by.css(".model-name"));
@@ -76,6 +81,14 @@ export class VlpFilterPage {
         
         this.appCard = element.all(by.css("div.card-panel-content > app-card-container"));
         this.filterPriceReset = element(by.css(".reset-button"));
+
+        this.unlockSavings = element.all(by.xpath('//app-card-container[1]//div[@class="text-underscore-link unlock-saving ng-star-inserted"]'));
+        this.unlockSavingsModal = element(by.id('smart-price-modal-component'));
+
+        this.unlockSavingsModalEmail = element(by.css("input[type='email']"));
+        this.unlockSavingsModalZip = element(by.css("input[type='number']"));
+        this.unlockSavingsModalFirstName = element(by.xpath('//span[@class="customer-name-field"]/con-textfield[1]/div/mat-form-field/div/div[1]/div[3]/input'));        
+        this.unlockSavingsModalLastName = element(by.xpath('//span[@class="customer-name-field"]/con-textfield[2]/div/mat-form-field/div/div[1]/div[3]/input'));
         
     }
 }

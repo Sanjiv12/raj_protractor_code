@@ -32,32 +32,25 @@ export const config: Config = {
    },
     specs: [
         //"../../features/**/mspHome.feature"
-        "../../features/**/mspFilter.feature",
+        //"../../features/**/mspFilter.feature",
         //"../../features/**/vlpFilter.feature"
-        "../../features/**/vdpPaymentDefaults.feature"
+        //"../../features/**/vdpPaymentDefaults.feature"
         //"../../features/**/vdpTradeIn.feature"
         //"../../features/**/vdpAccessory.feature"
         //"../../features/**/vdpProtectionProductsWIP.feature"
+        "../../features/**/vdpVehicleInformation.feature",
+        //"../../features/**/leadForms.feature",
     ],
     
     onPrepare: async() => {
         //browser.ignoreSynchronization = true;
         browser.manage().window().maximize(); 
         browser.driver.manage().deleteAllCookies(); 
-        //browser.manage().window().setSize(1400, 1000);
-        //await browser.get(config.baseUrl);
+        //browser.manage().window().setSize(1920, 1080);
         browser.waitForAngularEnabled(false);
         reportConfig.createDirectory(jsonPath);
-        //await browser.get("https://tcom_login:D!n0s@Ur@qa.smartpath.toyota.com/inventory?dealerCd=24022&source=t1");
-        await browser.get("https://tcom_login:D!n0s@Ur@qa.smartpath.tldealersystems.com/inventory?dealerCd=24022&source=t1");
-        // let alert = browser.switchTo().alert();
-        // (await alert).dismiss();
-        //  await browser.driver.sleep(1*10000);
-        //  await browser.driver.findElement(by.id("idToken1")).sendKeys('BDDT5');
-        //  await browser.driver.findElement(by.id("idToken2")).sendKeys('Toyota06');
-        //  await browser.driver.findElement(by.id("tandC")).click();
-        //  await browser.driver.findElement(by.id("loginButton_0")).click();
-
+        //await browser.get("https://tcom_user:@1L!gaT0r@qa.smartpath.toyota.com/inventory?dealerCd=24022&source=t1");
+        await browser.get("https://tcom_user:@1L!gaT0r@qa.smartpath.tldealersystems.com/inventory?dealerCd=24022&source=t1");
         // 
         // wait until login is done
         // that means when we are on summary page
@@ -68,61 +61,20 @@ export const config: Config = {
             return /inventory/.test(url);
         }, 100000);
     },
-    multiCapabilities: [{
-        browserName: 'chrome',
-        shardTestFiles: true,
-        platformName: 'windows',
-        maxInstances: 30,
-        version: '81.0',
+    capabilities: {
+         "browserName": 'chrome',
+        // "version": '87.0',
+        // "platform": 'Windows 10',
+        // "screenResolution": '1920x1080',
         chromeOptions: {
             args: ["--incognito"]
-        },
-        metadata: {
-            app:{
-                name: 'MST-C',
-                version: '1.0.0'
-            },
-            browser: {
-                name: "chrome",
-                version: "87.0.4044.122"
-            },
-            device: 'N/A',
-            platform: {
-                name: 'Windows',
-                version: '10'
-            }
-        },
-        
-    }],
+        },       
+    },
     commandTimeout: 10000,
     maxDuration: 12000,
     maxInstances: 30,
-    seleniumVersion: "3.142.7",
-    chromedriverVersion: "2.43",
-    // Here the magic happens
-    // plugins: [{
-    //     package: 'protractor-multiple-cucumber-html-reporter-plugin',
-    //     options:{
-    //         automaticallyGenerateReport: true,
-    //         //automaticallyGenerateReport: false,
-    //         removeExistingJsonReportFile: false,
-    //         removeOriginalJsonReportFile: false,
-    //         customData: {
-    //             title: 'Management Console',
-    //             data: [
-    //                 {label: 'Project', value: 'Management Console Daily Build'},
-    //                 {label: 'Release', value: '16.6'}, // manual starter
-    //                 {label: 'Cycle', value: 'Sprint-2'},
-    //                 {label: 'Execution Start Time', value: (new Date()).toLocaleString()},
-    //             ]
-    //         },
-    //         pageTitle:'Management Console Test Report',
-    //         reportName:'Management Console Test Report',
-    //         pageFooter:'<div><p></p></div>',
-    //         displayDuration:true,
-    //         durationInMS:false,
-    //     }
-    // }]
+    //seleniumVersion: "3.142.7",
+    //chromedriverVersion: "2.43",
 };
 
 export class reportConfig {
