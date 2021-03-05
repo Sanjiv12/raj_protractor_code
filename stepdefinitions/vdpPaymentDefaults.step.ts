@@ -18,7 +18,7 @@ When('User selects a vehicle', async  () =>{
 
 Then('User should be navigated to Vehicle Details page', async () => {
     await browser.driver.sleep(15*1000);
-    // expect(await browser.getCurrentUrl()).to.contain('vin=');    
+    expect(await browser.getCurrentUrl()).to.contain('vin=');    
 });
 
 Then('Default tab is Lease', async () => {
@@ -66,22 +66,23 @@ Then('Default Term is selected', async() => {
 
 
 Given('User is in Vehicle Details page', async() => {
-    await browser.driver.sleep(10*1000);
-    browser.executeScript("arguments[0].click()", mspFilterPage.popUpClose);
-    await browser.driver.sleep(5*1000);
     await browser.get("?dealerCd=24022&source=t1");
     await browser.driver.sleep(10*1000);
+    browser.driver.manage().deleteAllCookies();
     browser.executeScript("arguments[0].click()", mspFilterPage.popUpClose);
-    //console.log('window size - '+browser.manage().window().getSize());
+    await browser.driver.sleep(5*1000);
     browser.executeScript('arguments[0].click()', mspFilterPage.sortDropDown);
     await browser.driver.sleep(5*1000);
     browser.executeScript('arguments[0].click()', mspFilterPage.sortPriceLowToHigh);
     await browser.driver.sleep(10*1000);
-    //browser.actions().mouseMove(mspFilterPage.appcardButton.first()).click().perform();
     browser.executeScript("window.scrollBy(0,250)");
     await browser.driver.sleep(5*1000);
     browser.executeScript('arguments[0].click()', mspFilterPage.appcardButton.first());
     await browser.driver.sleep(10*1000);
+    browser.executeScript('arguments[0].click()', mspFilterPage.sortDropDown);
+    await browser.driver.sleep(2*1000);
+    browser.executeScript('arguments[0].click()', mspFilterPage.sortPriceLowToHigh);
+    await browser.driver.sleep(5*1000);
     browser.executeScript('arguments[0].click()', vlpFilterPage.appCard.first());    
 });
 

@@ -25,11 +25,10 @@
     "add-contributors": "all-contributors add",
     "test": "protractor typeScript/config/config.js || exit 0",
     "generate-contributors": "all-contributors generate",
-    "bdd": "npm run clean-build && protractor typeScript/config/config.js && node typeScript/report/index.js",
+    "bdd": "npm run clean-build && protractor typeScript/config/config.js",
     "webdriver-update": "webdriver-manager update --ignore_ssl",
     "webdriver-start": "webdriver-manager start --ignore_ssl",
     "report": "node typeScript/report/index.js",
-    "pretest": "npm run clean-build",
     "posttest": "node typeScript/report/index.js"
   },
   "devDependencies": {

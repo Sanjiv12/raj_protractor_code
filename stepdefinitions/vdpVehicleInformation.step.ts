@@ -32,7 +32,7 @@ Then('Vehicle Information should be displayed with DG Save Icon', async  () =>{
 
 Then('Vehicle Information should be displayed with Advertised Price', async  () =>{
     await browser.driver.sleep(5*1000);
-    Assertion.expect((await vdpPage.advertisedPrice.getText()).length).to.be.gt(0);
+    Assertion.expect((await vdpPage.price.getText()).length).to.be.gt(0);
 });
 
 

@@ -11,27 +11,22 @@ let p = 0;
 let np = 0;
 
 Given('User is in Vehicle List Page', async () =>{
+    await browser.get("?dealerCd=24022&source=t1");
     await browser.driver.sleep(10*1000);
+    browser.driver.manage().deleteAllCookies();
     browser.executeScript("arguments[0].click()", mspFilterPage.popUpClose);
-    await browser.driver.sleep(5*1000);
-    // await browser.get("?dealerCd=24022&source=t1");
-    // await browser.driver.sleep(10*1000);
-    // mspFilterPage.appcardButton.each((ele,i) => {
-    //     ele.getText().then((text) =>{
-    //         if(text.includes('Available', 0)){
-    //             console.log('appcard text - '+ text);
-    //             ele.click();                
-    //         }            
-    //     }).catch((err) => {})
-    // })  
-       
+    await browser.driver.sleep(5*1000);       
     browser.executeScript('arguments[0].click()', mspFilterPage.sortDropDown);
-    await browser.driver.sleep(5*1000);
+    await browser.driver.sleep(3*1000);
     browser.executeScript('arguments[0].click()', mspFilterPage.sortPriceLowToHigh);
-    await browser.driver.sleep(5*1000);
-    //browser.actions().mouseMove(mspFilterPage.appcardButton.first()).click().perform();
+    await browser.driver.sleep(2*1000);
     browser.executeScript("window.scrollBy(0,250)");
     browser.executeScript('arguments[0].click()', mspFilterPage.appcardButton.first());
+    await browser.driver.sleep(10*1000);
+    browser.executeScript('arguments[0].click()', mspFilterPage.sortDropDown);
+    await browser.driver.sleep(2*1000);
+    browser.executeScript('arguments[0].click()', mspFilterPage.sortPriceLowToHigh);
+    
 });
     
 

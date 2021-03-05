@@ -13,33 +13,28 @@ export const config: Config = {
     sauceUser:"sso-toyota.tcoe-bishwadeep.pal",
     sauceKey:"fee6d21b-e2ec-4765-9424-fa9353d7e8bd",
 
-    // sauceUser:"sso-toyota.tcoe-raghunath.goteti",
-    // sauceKey:"a1aaa34b-ba44-4bc7-a94c-f79aa068e60f",
-
     baseUrl: "https://qa.smartpath.tldealersystems.com/inventory?dealerCd=24022&source=t1",
 
 
     framework: "custom",
     frameworkPath: require.resolve("protractor-cucumber-framework"),
     cucumberOpts: {
-        // require: ["../../**/*.js", '../../**/*.js'],
         require: ["../../typeScript/stepdefinitions/**/*.step.js", "../../typeScript/util/*.js"],
-        // require: [
-        // path.resolve(process.cwd(), "../../**/*.js")
-        // ],
         format: 'json:dist/results.json',
         strict: true
    },
     specs: [
         //"../../features/**/mspHome.feature"
-        //"../../features/**/mspFilter.feature",
+        "../../features/**/mspFilter.feature",
         //"../../features/**/vlpFilter.feature"
         //"../../features/**/vdpPaymentDefaults.feature"
         //"../../features/**/vdpTradeIn.feature"
-        //"../../features/**/vdpAccessory.feature"
-        //"../../features/**/vdpProtectionProductsWIP.feature"
-        "../../features/**/vdpVehicleInformation.feature",
-        //"../../features/**/leadForms.feature",
+        //"../../features/**/vdpAccessory.feature",
+        //"../../features/**/vdpProtectionProducts.feature",
+        //"../../features/**/vdpVehicleInformation.feature",
+        "../../features/**/unlockSavingsLeadForms.feature",
+        "../../features/**/sendEstimateLeadForms.feature",
+        "../../features/**/contactDealerLeadForms.feature",        
     ],
     
     onPrepare: async() => {
@@ -62,19 +57,20 @@ export const config: Config = {
         }, 100000);
     },
     capabilities: {
-         "browserName": 'chrome',
-        // "version": '87.0',
-        // "platform": 'Windows 10',
-        // "screenResolution": '1920x1080',
+        "browserName": 'chrome',
+        "shardTestFiles": true,
+        "maxInstances" : 15,
+        "version": '88.0',
+        "platform": 'Windows 10',
+        "screenResolution": '1920x1080',
         chromeOptions: {
             args: ["--incognito"]
         },       
     },
     commandTimeout: 10000,
     maxDuration: 12000,
-    maxInstances: 30,
-    //seleniumVersion: "3.142.7",
-    //chromedriverVersion: "2.43",
+    //maxSessions: 30,
+    seleniumVersion: "3.141.59",
 };
 
 export class reportConfig {

@@ -44,6 +44,15 @@ export class VlpFilterPage {
     public unlockSavingsModalLastName : ElementFinder;
     public unlockSavingsModalEmail : ElementFinder;
     public unlockSavingsModalZip : ElementFinder;
+    public unlockSavingsModalEmailError : ElementFinder;
+    public unlockSavingsModalZipError : ElementFinder;
+    public unlockSavingsModalRevealBtn : ElementFinder;
+    public unlockSavingsModalTitle : ElementFinder;
+    public unlockSavingsModalPrice : ElementFinder;
+    public unlockSavingsModalreturnToPage : ElementFinder;
+    public unlockSavingsModalSmartPriceTxt : ElementArrayFinder;
+    public unlockSavingsModalSmartPriceFilterTxt : ElementFinder;    
+            
 
     constructor() {
         this.modelDropDown = element(by.css(".model-name"));
@@ -89,6 +98,13 @@ export class VlpFilterPage {
         this.unlockSavingsModalZip = element(by.css("input[type='number']"));
         this.unlockSavingsModalFirstName = element(by.xpath('//span[@class="customer-name-field"]/con-textfield[1]/div/mat-form-field/div/div[1]/div[3]/input'));        
         this.unlockSavingsModalLastName = element(by.xpath('//span[@class="customer-name-field"]/con-textfield[2]/div/mat-form-field/div/div[1]/div[3]/input'));
-        
+        this.unlockSavingsModalEmailError = element(by.css('con-textfield.email-form-field .mat-error'));
+        this.unlockSavingsModalZipError = element(by.css('span.customer-zip-field .mat-error'));
+        this.unlockSavingsModalRevealBtn = element(by.xpath('//div[@class="customer-submit"]/button'));
+        this.unlockSavingsModalTitle = element(by.css('.unlock-price-modal-title'));
+        this.unlockSavingsModalPrice = element(by.css('.unlock-vehicle-smart-price'));
+        this.unlockSavingsModalreturnToPage = element(by.xpath('//div[@class="return-to-page"]/div[@class="text-button"]'));
+        this.unlockSavingsModalSmartPriceTxt = element.all(by.css('.price-section'));
+        this.unlockSavingsModalSmartPriceFilterTxt = element(by.css('.filter-price-sub-title'));        
     }
 }

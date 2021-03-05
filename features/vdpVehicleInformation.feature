@@ -20,3 +20,23 @@ Scenario: Navigating to VDP (Price not unlocked)
   Then Vehicle Information should be displayed with Toyota Safety Sense Logo
   Then Vehicle Information should be displayed with Image Carousal
 
+Scenario: Vehicle Details Modal
+
+  Given User is in Vehicle Details page
+  When User clicks on View All Vehicle Details CTA
+  Then System should open Vehicle Detail modal with VIN
+  Then System should open Vehicle Detail modal with Model Name
+  Then System should open Vehicle Detail modal with Exterior Color
+  Then System should open Vehicle Detail modal with Interior Color
+  Then System should open Vehicle Detail modal with Interior Features tab
+  Then System should open Vehicle Detail modal with Exterior Features tab
+  Then System should open Vehicle Detail modal with Safety Features tab
+  Then System should open Vehicle Detail modal with Package & Accessories tab
+  Then System should open Vehicle Detail modal with Disclosures in the bottom
+
+Scenario: Image carousal
+
+  Given User is in Vehicle Details page
+  When User clicks on arrows in image carousal
+  Then System should display the image on the carousal
+

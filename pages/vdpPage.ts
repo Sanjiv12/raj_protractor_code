@@ -96,7 +96,15 @@ export class VdpPage {
     public vehDetailModalTab4 : ElementArrayFinder;
     public vehDetailModalDisclosure : ElementFinder;
     public carouselImgRight : ElementFinder;
-    
+    public additionalDealerSavings : ElementFinder;
+    public sendEstimateToDealer : ElementFinder;
+    public sendEstimateModal : ElementFinder;
+    public sendEstimateModalPaymentTerm : ElementFinder;
+    public sendEstimateModalFirstName : ElementFinder;
+    public sendEstimateModalLastName : ElementFinder;
+    public sendEstimateModalZipError : ElementFinder;
+    public sentEstimateModalTitle : ElementFinder;
+    public sentEstimateModalreturnToPage : ElementFinder;
     
     
     constructor() {
@@ -173,7 +181,7 @@ export class VdpPage {
         this.vin = element(by.className('vin'));
         this.vehicleTitle = element(by.className('vehicle-title'));
         this.dgIcon = element(by.className('dg-inline-save-heart'));
-        this.advertisedPrice = element(by.xpath("//div[@class='price']/div[@class='ng-star-inserted']"));
+        this.advertisedPrice = element(by.xpath("//div[@class='price']"));
         this.unlockSavings = element(by.xpath("//div[@class='price']/span[2]"));
         this.extColor = element(by.xpath('//div[@class="vehicle-info"]/div[4]/div[1]/div[1]/div[2]/span[2]'));
         this.intColor = element(by.xpath('//div[@class="vehicle-info"]/div[4]/div[1]/div[2]/div[2]/span[2]'));
@@ -188,17 +196,23 @@ export class VdpPage {
         this.vehDetailModalVehicleTitle = element(by.xpath('//div[@id="vehicle-detail-title"]'));
         this.vehDetailModalExtColor = element(by.xpath('//div[@class="vehicleDetailRightDescriptionContainer"]/div[1]/div/span[2]'));
         this.vehDetailModalIntColor = element(by.xpath('//div[@class="vehicleDetailRightDescriptionContainer"]/div[2]/div/span[2]'));
-
         this.vehDetailModalEstMpg = element(by.xpath('//div[@class="vehicleDetailLeftDescriptionContainer"]/div[1]/div[2]'));
         this.vehDetailModalEngine = element(by.xpath('//div[@class="vehicleDetailLeftDescriptionContainer"]/div[2]/div[2]'));
-
         this.vehDetailModalTab1 = element.all(by.xpath('//div[@class="mat-tab-labels"]/div[1]'));
         this.vehDetailModalTab2 = element.all(by.xpath('//div[@class="mat-tab-labels"]/div[2]'));
         this.vehDetailModalTab3 = element.all(by.xpath('//div[@class="mat-tab-labels"]/div[3]'));
         this.vehDetailModalTab4 = element.all(by.xpath('//div[@class="mat-tab-labels"]/div[4]'));
         this.vehDetailModalDisclosure = element(by.xpath('//div[@class="Disclosure"]'));
-
         this.carouselImgRight = element(by.xpath('//img[@alt="arrowRight"]'));
-                
+        this.additionalDealerSavings = element(by.xpath('//div[@class="AdditionalDealerSavings flexBox"]'));
+
+        this.sendEstimateToDealer = element(by.xpath('//div[@class="text-button send-estimate-text"]'));
+        this.sendEstimateModal = element(by.xpath('//div[@class="smart-price-modal-container ng-star-inserted"]'));
+        this.sendEstimateModalPaymentTerm = element(by.css('div.price-sub-con > .prefix'));
+        this.sendEstimateModalFirstName = element(by.xpath('//div[@class="customer-name-field"]/con-textfield[1]/div/mat-form-field/div/div[1]/div[3]/input'));
+        this.sendEstimateModalLastName = element(by.xpath('//div[@class="customer-name-field"]/con-textfield[2]/div/mat-form-field/div/div[1]/div[3]/input'));
+        this.sendEstimateModalZipError = element(by.css('div.customer-zip-field .mat-error'));
+        this.sentEstimateModalTitle = element(by.css('.smart-price-modal-header'));
+        this.sentEstimateModalreturnToPage = element(by.xpath('//div[@class="return-to-page"]/button'));
     }
 }

@@ -30,6 +30,15 @@ export class MspFilterPage {
     public initialAprValue: string;
     public addedAprValue: string;
     public writeUpDetailHeaderActiveTab: ElementFinder;
+    public contactDealerLink: ElementFinder;
+    public contactDealerModal: ElementFinder;
+    public contactDealerModalFirstName: ElementFinder;
+    public contactDealerModalLastName: ElementFinder;
+    public contactDealerModalEmail: ElementFinder;
+    public contactDealerModalPhone: ElementFinder;
+    public contactDealerModalSendBtn: ElementFinder;
+    public contactDealerModalConf: ElementFinder;
+    public contactDealerModalreturnToPage: ElementFinder;    
 
     constructor() {
 
@@ -64,5 +73,16 @@ export class MspFilterPage {
         this.initialAprValue = '';
         this.addedAprValue = '';
         this.writeUpDetailHeaderActiveTab = element(by.className('writeUp-detail-title-panel-container-item active ng-star-inserted'));
+
+        this.contactDealerLink = element(by.className('contact-us text-underscore-black-link'));
+        this.contactDealerModal = element(by.className('contactDealer-container ng-star-inserted'));
+
+        this.contactDealerModalFirstName = element(by.xpath('//span[@class="customer-name-field"]/con-textfield[1]/div/mat-form-field/div/div[1]/div[3]/input'));
+        this.contactDealerModalLastName = element(by.xpath('//span[@class="customer-name-field"]/con-textfield[2]/div/mat-form-field/div/div[1]/div[3]/input'));
+        this.contactDealerModalEmail = element(by.css("input[type='email']"));
+        this.contactDealerModalPhone = element(by.css("input[type='tel']"));
+        this.contactDealerModalSendBtn = element(by.xpath('//div[@class="customer-submit"]/button'));
+        this.contactDealerModalConf = element(by.className('contactDealer-container ng-star-inserted'));
+        this.contactDealerModalreturnToPage = element(by.xpath('//div[@class="return_page"]/button'));        
     }
 }
