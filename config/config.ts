@@ -34,18 +34,21 @@ export const config: Config = {
         //"../../features/**/vdpVehicleInformation.feature",
         "../../features/**/unlockSavingsLeadForms.feature",
         "../../features/**/sendEstimateLeadForms.feature",
-        "../../features/**/contactDealerLeadForms.feature",        
+        "../../features/**/contactDealerLeadForms.feature",
     ],
     
     onPrepare: async() => {
-        //browser.ignoreSynchronization = true;
+        //npm run test -- --params.param1=abc --params.param2=def
+        console.log('param1 = '+ browser.params.url);
+        console.log('param2 = '+ browser.params.dealerCd);
+        console.log('param2 = '+ browser.params.source);
         browser.manage().window().maximize(); 
         browser.driver.manage().deleteAllCookies(); 
-        //browser.manage().window().setSize(1920, 1080);
         browser.waitForAngularEnabled(false);
         reportConfig.createDirectory(jsonPath);
         //await browser.get("https://tcom_user:@1L!gaT0r@qa.smartpath.toyota.com/inventory?dealerCd=24022&source=t1");
-        await browser.get("https://tcom_user:@1L!gaT0r@qa.smartpath.tldealersystems.com/inventory?dealerCd=24022&source=t1");
+        //await browser.get("https://tcom_user:@1L!gaT0r@qa.smartpath.tldealersystems.com/inventory?dealerCd=24022&source=t1");
+        await browser.get(browser.params.url+'?dealerCd='+browser.params.dealerCd+'&source='+browser.params.source);
         // 
         // wait until login is done
         // that means when we are on summary page
@@ -71,6 +74,11 @@ export const config: Config = {
     maxDuration: 12000,
     //maxSessions: 30,
     seleniumVersion: "3.141.59",
+    params: {
+        url: 'https://tcom_user:@1L!gaT0r@qa.smartpath.toyota.com/inventory',
+        dealerCd: '12345',
+        source: 't3'
+    }
 };
 
 export class reportConfig {
