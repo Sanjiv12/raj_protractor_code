@@ -22,6 +22,7 @@ Then('User should be navigated to Vehicle Details page', async () => {
 });
 
 Then('Default tab is Lease', async () => {
+    await browser.driver.sleep(15*1000);
     return Assertion.expect(vdpPage.tabDefault.getAttribute('aria-selected')).to.eventually.equal('true');
 });
 
@@ -66,17 +67,17 @@ Then('Default Term is selected', async() => {
 
 
 Given('User is in Vehicle Details page', async() => {
-    await browser.get("?dealerCd=24022&source=t1");
+    //await browser.get('?dealerCd='+browser.params.dealerCd+'&source='+browser.params.source);
+    await browser.get(browser.params.url+'?dealerCd='+browser.params.dealerCd+'&source='+browser.params.source);
     await browser.driver.sleep(10*1000);
     browser.driver.manage().deleteAllCookies();
     browser.executeScript("arguments[0].click()", mspFilterPage.popUpClose);
     await browser.driver.sleep(5*1000);
     browser.executeScript('arguments[0].click()', mspFilterPage.sortDropDown);
-    await browser.driver.sleep(5*1000);
+    await browser.driver.sleep(2*1000);
     browser.executeScript('arguments[0].click()', mspFilterPage.sortPriceLowToHigh);
-    await browser.driver.sleep(10*1000);
-    browser.executeScript("window.scrollBy(0,250)");
     await browser.driver.sleep(5*1000);
+    browser.executeScript("window.scrollBy(0,250)");
     browser.executeScript('arguments[0].click()', mspFilterPage.appcardButton.first());
     await browser.driver.sleep(10*1000);
     browser.executeScript('arguments[0].click()', mspFilterPage.sortDropDown);
@@ -88,12 +89,12 @@ Given('User is in Vehicle Details page', async() => {
 
 When('User selects Finance', async  () =>{
     await browser.driver.sleep(15*1000);
-    // vdpPage.tabFinance.click();      
+    vdpPage.tabFinance.click();      
 });
 
 Then('Default Finance Credit Rating is Excellent', async() => {
     await browser.driver.sleep(5*1000);
-    //return Assertion.expect(vdpPage.creditRatingFinance.getText()).to.eventually.equal('Excellent Credit (720-850)');
+    return Assertion.expect(vdpPage.creditRatingFinance.getText()).to.eventually.equal('Excellent Credit (720-850)');
     
 });
 
@@ -117,11 +118,11 @@ When('User selects Lease', async  () =>{
 
 When('User updates Mileage', async  () =>{
     await browser.driver.sleep(5*1000);
-    //vdpPage.annualMileageOption1.click();     
+    vdpPage.annualMileageOption1.click();     
 });
 
 Then('System should call the Payment service and update the payment terms', async  () =>{
     await browser.driver.sleep(15*1000);
-    //return expect((await vdpPage.paymentOptionsList).length).to.be.gt(0);
+    return expect((await vdpPage.paymentOptionsList).length).to.be.gt(0);
 });
 
