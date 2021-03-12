@@ -9,11 +9,9 @@ let p = 0;
 let np = 0;
 
 Given('User is in Model Selection page', async () =>{
-    // await browser.driver.sleep(10*1000);
-    // browser.executeScript("arguments[0].click()", mspFilterPage.popUpClose);
-    await browser.get("?dealerCd=24022&source=t1");
-    browser.driver.manage().deleteAllCookies();
+    await browser.get(browser.params.url+'?dealerCd='+browser.params.dealerCd+'&source='+browser.params.source);
     await browser.driver.sleep(10*1000);
+    browser.driver.manage().deleteAllCookies();
     browser.executeScript("arguments[0].click()", mspFilterPage.popUpClose);
 });
     

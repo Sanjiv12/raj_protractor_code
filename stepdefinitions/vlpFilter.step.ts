@@ -11,7 +11,7 @@ let p = 0;
 let np = 0;
 
 Given('User is in Vehicle List Page', async () =>{
-    await browser.get("?dealerCd=24022&source=t1");
+    await browser.get(browser.params.url+'?dealerCd='+browser.params.dealerCd+'&source='+browser.params.source);
     await browser.driver.sleep(10*1000);
     browser.driver.manage().deleteAllCookies();
     browser.executeScript("arguments[0].click()", mspFilterPage.popUpClose);
@@ -406,7 +406,7 @@ Given('User has filters set', async () =>{
     await browser.driver.sleep(5*1000);
     // mspFilterPage.appCard.first().click();
     // await browser.driver.sleep(5*1000);
-    await browser.get("?dealerCd=24022&source=t1");
+    await browser.get(browser.params.url+'?dealerCd='+browser.params.dealerCd+'&source='+browser.params.source);
     await browser.driver.sleep(10*1000);
     mspFilterPage.appcardButton.each((ele,i) => {
         ele.getText().then((text) =>{
