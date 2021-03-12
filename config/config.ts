@@ -4,6 +4,7 @@ import * as mkdirp from "mkdirp";
 import * as path from "path";
 
 const jsonPath = path.join(process.cwd(), "/dist");
+let baseurl ='';
 
 export const config: Config = {
 
@@ -13,8 +14,7 @@ export const config: Config = {
     sauceUser:"sso-toyota.tcoe-bishwadeep.pal",
     sauceKey:"fee6d21b-e2ec-4765-9424-fa9353d7e8bd",
 
-    baseUrl: "https://qa.smartpath.tldealersystems.com/inventory?dealerCd=24022&source=t1",
-
+    //baseUrl: 'baseurl',
 
     framework: "custom",
     frameworkPath: require.resolve("protractor-cucumber-framework"),
@@ -25,23 +25,21 @@ export const config: Config = {
    },
     specs: [
         //"../../features/**/mspHome.feature"
-        "../../features/**/mspFilter.feature",
         //"../../features/**/vlpFilter.feature"
-        //"../../features/**/vdpPaymentDefaults.feature"
         //"../../features/**/vdpTradeIn.feature"
-        //"../../features/**/vdpAccessory.feature",
-        //"../../features/**/vdpProtectionProducts.feature",
-        //"../../features/**/vdpVehicleInformation.feature",
+        
+        //done
+        "../../features/**/vdpVehicleInformation.feature",
+        "../../features/**/vdpProtectionProducts.feature",
+        "../../features/**/vdpAccessory.feature",
+        "../../features/**/vdpPaymentDefaults.feature",
+        "../../features/**/mspFilter.feature",
         "../../features/**/unlockSavingsLeadForms.feature",
         "../../features/**/sendEstimateLeadForms.feature",
         "../../features/**/contactDealerLeadForms.feature",
     ],
     
     onPrepare: async() => {
-        //npm run test -- --params.param1=abc --params.param2=def
-        console.log('param1 = '+ browser.params.url);
-        console.log('param2 = '+ browser.params.dealerCd);
-        console.log('param2 = '+ browser.params.source);
         browser.manage().window().maximize(); 
         browser.driver.manage().deleteAllCookies(); 
         browser.waitForAngularEnabled(false);
@@ -49,6 +47,7 @@ export const config: Config = {
         //await browser.get("https://tcom_user:@1L!gaT0r@qa.smartpath.toyota.com/inventory?dealerCd=24022&source=t1");
         //await browser.get("https://tcom_user:@1L!gaT0r@qa.smartpath.tldealersystems.com/inventory?dealerCd=24022&source=t1");
         await browser.get(browser.params.url+'?dealerCd='+browser.params.dealerCd+'&source='+browser.params.source);
+        //baseurl = browser.params.url;
         // 
         // wait until login is done
         // that means when we are on summary page
