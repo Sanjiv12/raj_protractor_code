@@ -269,5 +269,5 @@ When('User clicks on Return to page in Contact Dealer confirmation modal', async
 
 Then('User should be navigated to Model Selection page', async () => {
     await browser.driver.sleep(2*1000);
-    expect(await browser.getCurrentUrl()).to.contain('inventory?dealerCd=');    
+    return Assertion.expect(await browser.getCurrentUrl()).to.contain('inventory?dealerCd=');    
 });

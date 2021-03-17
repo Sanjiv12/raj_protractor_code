@@ -105,7 +105,7 @@ export class VdpPage {
     public sendEstimateModalZipError : ElementFinder;
     public sentEstimateModalTitle : ElementFinder;
     public sentEstimateModalreturnToPage : ElementFinder;
-    
+    public startPurchase : ElementFinder;
     
     constructor() {
         this.cashDown = element(by.xpath('/html/body/main/app-root/mat-drawer-container/mat-drawer-content/app-vehicle-details/div/div[2]/div/section[1]/div[1]/vdp-payment-estimation/div/mat-tab-group/div/mat-tab-body[1]/div/app-lease/div/div[1]/app-cash-down/div/ngx-slider/span[9]')); 
@@ -214,5 +214,8 @@ export class VdpPage {
         this.sendEstimateModalZipError = element(by.css('div.customer-zip-field .mat-error'));
         this.sentEstimateModalTitle = element(by.css('.smart-price-modal-header'));
         this.sentEstimateModalreturnToPage = element(by.xpath('//div[@class="return-to-page"]/button'));
+
+        this.startPurchase = element(by.xpath('//div[@class="price-details"]/button[2]'));
+        
     }
 }

@@ -21,23 +21,37 @@ export const config: Config = {
     cucumberOpts: {
         require: ["../../typeScript/stepdefinitions/**/*.step.js", "../../typeScript/util/*.js"],
         format: 'json:dist/results.json',
-        strict: true
-   },
-    specs: [
-        //"../../features/**/mspHome.feature"
-        //"../../features/**/vlpFilter.feature"
-        //"../../features/**/vdpTradeIn.feature"
+        strict: true,
         
-        //done
-        "../../features/**/vdpVehicleInformation.feature",
-        "../../features/**/vdpProtectionProducts.feature",
-        "../../features/**/vdpAccessory.feature",
-        "../../features/**/vdpPaymentDefaults.feature",
-        "../../features/**/mspFilter.feature",
-        "../../features/**/unlockSavingsLeadForms.feature",
-        "../../features/**/sendEstimateLeadForms.feature",
-        "../../features/**/contactDealerLeadForms.feature",
-    ],
+   },
+    // specs: [
+    //     //"../../features/**/mspHome.feature"
+    //     //"../../features/**/vlpFilter.feature"
+    //     //"../../features/**/vdpTradeIn.feature"
+    //     "../../features/**/createAccount.feature"
+        
+    //     //done
+    //     // "../../features/**/vdpVehicleInformation.feature",
+    //     // "../../features/**/vdpProtectionProducts.feature",
+    //     // "../../features/**/vdpAccessory.feature",
+    //     // "../../features/**/vdpPaymentDefaults.feature",
+    //     // "../../features/**/mspFilter.feature",
+    //     // "../../features/**/unlockSavingsLeadForms.feature",
+    //     // "../../features/**/sendEstimateLeadForms.feature",
+    //     //"../../features/**/contactDealerLeadForms.feature",
+    // ],
+    suites:{
+        createaccount: "../../features/**/createAccount.feature",
+        mspfilter: "../../features/**/mspFilter.feature",
+        vlpfilter: "../../features/**/vlpFilter.feature",
+        vdpvehicleinfo: "../../features/**/vdpVehicleInformation.feature",
+        vdpprotectionproducts: "../../features/**/vdpProtectionProducts.feature",
+        vdpaccessory: "../../features/**/vdpAccessory.feature",
+        vdppaymentdefaults: "../../features/**/vdpPaymentDefaults.feature",     
+        unlocksavingsleadforms: "../../features/**/unlockSavingsLeadForms.feature",
+        sendestimateleadforms: "../../features/**/sendEstimateLeadForms.feature",
+        contactdealerleadforms: "../../features/**/contactDealerLeadForms.feature",           
+    },
     
     onPrepare: async() => {
         browser.manage().window().maximize(); 
@@ -67,17 +81,26 @@ export const config: Config = {
         "screenResolution": '1920x1080',
         chromeOptions: {
             args: ["--incognito"]
-        },       
+        }, 
+              
     },
     commandTimeout: 10000,
     maxDuration: 12000,
     //maxSessions: 30,
     seleniumVersion: "3.141.59",
     params: {
-        url: 'https://tcom_user:@1L!gaT0r@qa.smartpath.toyota.com/inventory',
-        dealerCd: '12345',
-        source: 't3'
-    }
+        url: '',
+        dealerCd: '',
+        source: '',
+        fname: '',
+        lname: '',
+        caemailreg: '',
+        capwdreg: '',
+        caemailnew: '',
+        capwdnew: '',
+        caphonenew: '',
+    },
+    
 };
 
 export class reportConfig {
