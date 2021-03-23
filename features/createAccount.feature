@@ -1,5 +1,5 @@
 
-Feature: Contact Dealer Lead Forms
+Feature: Create Account
 A MST-C user creates an account for check out
 
 Scenario: Start Purchase 

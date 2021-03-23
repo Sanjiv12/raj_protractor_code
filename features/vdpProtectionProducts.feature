@@ -17,13 +17,6 @@ Scenario: Protection products Detail modal
   And System should open Protection products detail modal with View Brochure
   And System should open Protection products detail modal with Disclaimers at the bottom
 
-Scenario: Protection products - Select plan 
-
-  Given User is in Vehicle Details page
-  When User selects a Protection product  
-  Then System should update the total amount in Step 4
-  And Price summary should be updated
-
 Scenario: Protection products - Change plan
 
   Given User is in Vehicle Details page
