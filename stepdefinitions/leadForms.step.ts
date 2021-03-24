@@ -51,13 +51,13 @@ Then('Display Reveal Price CTA in disabled state', async  () =>{
 
 When('User has entered valid values for all fields', async  () =>{
     await browser.driver.sleep(5*1000);
-    vlpFilterPage.unlockSavingsModalFirstName.sendKeys('Abc');
+    vlpFilterPage.unlockSavingsModalFirstName.sendKeys(browser.params.fname);
     await browser.driver.sleep(2*1000);
-    vlpFilterPage.unlockSavingsModalLastName.sendKeys('Abc');
+    vlpFilterPage.unlockSavingsModalLastName.sendKeys(browser.params.lname);
     await browser.driver.sleep(2*1000);
-    vlpFilterPage.unlockSavingsModalEmail.sendKeys('Abc@yahoo.com');
+    vlpFilterPage.unlockSavingsModalEmail.sendKeys(browser.params.usemail);
     await browser.driver.sleep(2*1000);
-    vlpFilterPage.unlockSavingsModalZip.sendKeys('65141');
+    vlpFilterPage.unlockSavingsModalZip.sendKeys(browser.params.zipcode);
     await browser.driver.sleep(2*1000);
 });
 
@@ -171,13 +171,13 @@ Then('Display Submit CTA in Disabled state', async  () =>{
 
 When('User has entered valid values for all fields in Send Estimate modal', async  () =>{
     await browser.driver.sleep(5*1000);
-    vdpPage.sendEstimateModalFirstName.sendKeys('Abc');
+    vdpPage.sendEstimateModalFirstName.sendKeys(browser.params.fname);
     await browser.driver.sleep(2*1000);
-    vdpPage.sendEstimateModalLastName.sendKeys('Abc');
+    vdpPage.sendEstimateModalLastName.sendKeys(browser.params.lname);
     await browser.driver.sleep(2*1000);
-    vlpFilterPage.unlockSavingsModalEmail.sendKeys('Abc@yahoo.com');
+    vlpFilterPage.unlockSavingsModalEmail.sendKeys(browser.params.seemail);
     await browser.driver.sleep(2*1000);
-    vlpFilterPage.unlockSavingsModalZip.sendKeys('65141');
+    vlpFilterPage.unlockSavingsModalZip.sendKeys(browser.params.zipcode);
     await browser.driver.sleep(2*1000);
 });
 
@@ -243,11 +243,11 @@ Then('Display Send CTA in Disabled state', async  () =>{
 
 When('User has entered valid values for all fields in Contact Dealer modal', async  () =>{
     await browser.driver.sleep(3*1000);
-    mspFilterPage.contactDealerModalFirstName.sendKeys('Abc');
+    mspFilterPage.contactDealerModalFirstName.sendKeys(browser.params.fname);
     await browser.driver.sleep(2*1000);
-    mspFilterPage.contactDealerModalLastName.sendKeys('Abc');
+    mspFilterPage.contactDealerModalLastName.sendKeys(browser.params.lname);
     await browser.driver.sleep(2*1000);
-    mspFilterPage.contactDealerModalEmail.sendKeys('Abc@yahoo.com'); 
+    mspFilterPage.contactDealerModalEmail.sendKeys(browser.params.cdemail); 
     await browser.driver.sleep(1*1000);
     browser.executeScript("arguments[0].click()", mspFilterPage.contactDealerModalPhone);   
 });

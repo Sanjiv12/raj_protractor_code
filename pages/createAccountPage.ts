@@ -14,6 +14,10 @@ export class CreateAccountPage {
     public createAccountError: ElementFinder;
     public accountAlreadyReg: ElementFinder;
     public checkEmail: ElementFinder;
+    public userName: ElementFinder;
+    public logonBtn: ElementFinder;
+    public userPwd: ElementFinder;
+    public signInBtn: ElementFinder;
 
     constructor() {
         this.createAccountFirstName = element(by.xpath('//div[@class="customer-name-field"]/div[1]/con-textfield/div/mat-form-field/div/div[1]/div[3]/input'));
@@ -29,5 +33,10 @@ export class CreateAccountPage {
         this.createAccountError = element(by.id('divAccountError'));
         this.accountAlreadyReg = element(by.id('divAlreadyRegistered'));
         this.checkEmail = element(by.id('divResendEmail'));
+
+        this.userName = element(by.name('username'));
+        this.logonBtn = element(by.id('logonButton'));
+        this.userPwd = element(by.name('password'));
+        this.signInBtn = element(by.xpath('//div[@class="button-right"]/button'));
     }
 }

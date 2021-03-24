@@ -43,14 +43,15 @@ export const config: Config = {
     suites:{
         createaccount: "../../features/**/createAccount.feature",
         mspfilter: "../../features/**/mspFilter.feature",
-        vlpfilter: "../../features/**/vlpFilter.feature",
+        //vlpfilter: "../../features/**/vlpFilter.feature",
         vdpvehicleinfo: "../../features/**/vdpVehicleInformation.feature",
         vdpprotectionproducts: "../../features/**/vdpProtectionProducts.feature",
         vdpaccessory: "../../features/**/vdpAccessory.feature",
         vdppaymentdefaults: "../../features/**/vdpPaymentDefaults.feature",     
         unlocksavingsleadforms: "../../features/**/unlockSavingsLeadForms.feature",
         sendestimateleadforms: "../../features/**/sendEstimateLeadForms.feature",
-        contactdealerleadforms: "../../features/**/contactDealerLeadForms.feature",           
+        contactdealerleadforms: "../../features/**/contactDealerLeadForms.feature",
+        //checkout: "../../features/**/checkOut.feature",
     },
     
     onPrepare: async() => {
@@ -99,6 +100,10 @@ export const config: Config = {
         caemailnew: '',
         capwdnew: '',
         caphonenew: '',
+        zipcode:'',
+        usemail:'',
+        seemail:'',
+        cdemail:''
     },
     
 };

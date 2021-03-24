@@ -30,12 +30,12 @@ Then('Cash down is 10% of listed price', async () => {
     await browser.driver.sleep(5*1000);
     vdpPage.price.getText().then(async (value) => {
         let cprice : number = parseInt((value.replace('$','')).replace(',','')) * .1;
-        console.log('cprice = '+ cprice);
-        vdpPage.cashDown.getText().then((cashdown) =>{
-            console.log('cdown before= '+ cashdown);
-            let cdown : number = parseInt((cashdown.replace('$','')).replace(',',''));
-            console.log('cdown = '+ cdown);
-            return expect(cdown).to.equal(Math.ceil(cprice));
+        //console.log('cprice = '+ cprice);
+        vdpPage.cashDown.getAttribute('aria-valuetext').then((cashdown) =>{
+            // console.log('cdown before= '+ cashdown);
+            // let cdown : number = parseInt(cashdown);
+            // console.log('cdown = '+ cdown);
+            return Assertion.expect(parseInt(cashdown)).to.equal(Math.ceil(cprice));
         });
     });
     
@@ -43,7 +43,7 @@ Then('Cash down is 10% of listed price', async () => {
 });
 
 Then('Default Annual Mileage is 12000 miles', async() => {
-    return Assertion.expect(vdpPage.annualMileageDefault.getAttribute('ng-reflect-checked')).to.eventually.equal('true');
+    return Assertion.expect(vdpPage.annualMileageDefault.getAttribute('class')).to.eventually.contain('mat-radio-checked');
     
 });
 
@@ -61,7 +61,7 @@ Then('Default Terms are displayed', async() => {
 });
 
 Then('Default Term is selected', async() => {
-    return Assertion.expect(vdpPage.termSelectedDefault.getAttribute('ng-reflect-checked')).to.eventually.equal('true');
+    return Assertion.expect(vdpPage.termSelectedDefault.getAttribute('class')).to.eventually.contain('mat-radio-checked');
     
 });
 
@@ -101,13 +101,16 @@ Then('Default Finance Credit Rating is Excellent', async() => {
 Then('Default Finance Terms are displayed', async() => {
     await browser.driver.sleep(5*1000);
     return vdpPage.termsDefault.each((ele,i) => {
+        // ele.getText().then((val) => {
+        //     console.log('Term['+i+'] - '+val);
+        // })        
         Assertion.expect(ele.getText()).to.eventually.be.oneOf(['24 mos.','36 mos.','48 mos.','60 mos.','72 mos.']);
     });
     
 });
 
 Then('Default Term selected is 60 Months', async() => {
-    return Assertion.expect(vdpPage.termSelectedFinance.getAttribute('ng-reflect-checked')).to.eventually.equal('true');
+    return Assertion.expect(vdpPage.termSelectedFinance.getAttribute('class')).to.eventually.contain('mat-radio-checked');
     
 });
 

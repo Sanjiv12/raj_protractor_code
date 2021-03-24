@@ -106,13 +106,24 @@ export class VdpPage {
     public sentEstimateModalTitle : ElementFinder;
     public sentEstimateModalreturnToPage : ElementFinder;
     public startPurchase : ElementFinder;
+    public rightPaneMenu : ElementFinder;
+    public signInBtn : ElementFinder;
+    public profileIcon : ElementFinder;
+    public zipCodeModal : ElementFinder;
+    public closeZipCodeModal : ElementFinder;
+    public confirmZipText : ElementFinder;
+    public zipTaxDesc : ElementFinder;
+    public chsFinanceBtn : ElementFinder;
+    public zipCodeModalInput : ElementFinder;
+    public zipCodeModalDoneBtn : ElementFinder;
+    public reviewDealZipCode : ElementFinder;
     
     constructor() {
-        this.cashDown = element(by.xpath('/html/body/main/app-root/mat-drawer-container/mat-drawer-content/app-vehicle-details/div/div[2]/div/section[1]/div[1]/vdp-payment-estimation/div/mat-tab-group/div/mat-tab-body[1]/div/app-lease/div/div[1]/app-cash-down/div/ngx-slider/span[9]')); 
+        this.cashDown = element(by.className('ngx-slider-span ngx-slider-pointer ngx-slider-pointer-min'));
         this.price = element(by.xpath("//div[@class='price']/div[@class='ng-star-inserted']"));
         this.annualMileageDefault = element(by.xpath('/html/body/main/app-root/mat-drawer-container/mat-drawer-content/app-vehicle-details/div/div[2]/div/section[1]/div[1]/vdp-payment-estimation/div/mat-tab-group/div/mat-tab-body[1]/div/app-lease/div/div[2]/app-annual-mileage/div/con-radiobutton-list/div/mat-radio-group/mat-radio-button[2]'));
         this.creditRatingDefault = element(by.xpath('/html/body/main/app-root/mat-drawer-container/mat-drawer-content/app-vehicle-details/div/div[2]/div/section[1]/div[1]/vdp-payment-estimation/div/mat-tab-group/div/mat-tab-body[1]/div/app-lease/div/div[3]/div[1]/con-slim-combobox/div/mat-form-field/div/div[1]/div/mat-select/div/div[1]/span'));
-        this.termsDefault = element.all(by.xpath('/html/body/main/app-root/mat-drawer-container/mat-drawer-content/app-vehicle-details/div/div[2]/div/section[1]/div[1]/vdp-payment-estimation/div/mat-tab-group/div/mat-tab-body[1]/div/app-lease/div/div[3]/app-payment-option-list/div/mat-radio-group/div/con-payment-radiobutton-list/div/mat-radio-group/mat-radio-button/label/div[2]/span[2]/span[3]')); 
+        this.termsDefault = element.all(by.xpath("//span[@class='terms']"))
         this.termSelectedDefault = element(by.xpath('/html/body/main/app-root/mat-drawer-container/mat-drawer-content/app-vehicle-details/div/div[2]/div/section[1]/div[1]/vdp-payment-estimation/div/mat-tab-group/div/mat-tab-body[1]/div/app-lease/div/div[3]/app-payment-option-list/div/mat-radio-group/div/con-payment-radiobutton-list/div/mat-radio-group/mat-radio-button[2]'));
         this.tabDefault = element(by.xpath('/html/body/main/app-root/mat-drawer-container/mat-drawer-content/app-vehicle-details/div/div[2]/div/section[1]/div[1]/vdp-payment-estimation/div/mat-tab-group/mat-tab-header/div[2]/div/div/div[1]'));
         this.tabFinance = element(by.xpath('/html/body/main/app-root/mat-drawer-container/mat-drawer-content/app-vehicle-details/div/div[2]/div/section[1]/div[1]/vdp-payment-estimation/div/mat-tab-group/mat-tab-header/div[2]/div/div/div[2]'));
@@ -214,8 +225,21 @@ export class VdpPage {
         this.sendEstimateModalZipError = element(by.css('div.customer-zip-field .mat-error'));
         this.sentEstimateModalTitle = element(by.css('.smart-price-modal-header'));
         this.sentEstimateModalreturnToPage = element(by.xpath('//div[@class="return-to-page"]/button'));
-
         this.startPurchase = element(by.xpath('//div[@class="price-details"]/button[2]'));
+
+        this.rightPaneMenu = element(by.xpath('//div[@class="menu-items ng-star-inserted"]'));    //element(by.css("div.right-pane > div.menu-items"));
+        this.signInBtn = element(by.xpath("//div[@class='sign-in menu-button ng-star-inserted']")); //element(by.css('.sign-in'));
+        
+        this.profileIcon = element(by.xpath('//*[@id="dg-component-nav-menu-desktop"]'));
+        this.zipCodeModal = element(by.xpath("//div[@class='zip-code-container']"));
+        this.closeZipCodeModal = element(by.xpath('//div[@class="close-btn-container"]'));
+        this.confirmZipText = element(by.className('text-button confirm_zip'));
+        this.zipTaxDesc = element(by.className('edit_zip_tax_desc'));
+        this.chsFinanceBtn = element(by.xpath('//div[@class="finance_buttons"]/button'));
+
+        this.zipCodeModalInput = element(by.id('textInput'));
+        this.zipCodeModalDoneBtn = element(by.xpath('//div[@class="zip-container"]/button'));
+        this.reviewDealZipCode = element(by.xpath('//span[@class="text-link custom_zip_button"]'));
         
     }
 }
