@@ -11,6 +11,7 @@ export class VdpPage {
     public termSelectedDefault : ElementFinder;
     public tabDefault : ElementFinder;
     public tabFinance : ElementFinder;
+    public tabCash : ElementFinder;
     public termSelectedFinance : ElementFinder;
     public creditRatingFinance : ElementFinder;
     public paymentOptionsList : ElementArrayFinder;
@@ -117,6 +118,13 @@ export class VdpPage {
     public zipCodeModalInput : ElementFinder;
     public zipCodeModalDoneBtn : ElementFinder;
     public reviewDealZipCode : ElementFinder;
+    public editDetailsBtn : ElementFinder;
+    public ownFinance : ElementFinder;
+    public tfsFinance : ElementFinder;
+    public applyFinanceModal : ElementFinder;
+    public acceptApplyFinanceModalBtn : ElementFinder;
+    public notNowApplyFinanceModalBtn : ElementFinder;
+    public authTfsCb : ElementFinder;
     
     constructor() {
         this.cashDown = element(by.className('ngx-slider-span ngx-slider-pointer ngx-slider-pointer-min'));
@@ -127,6 +135,7 @@ export class VdpPage {
         this.termSelectedDefault = element(by.xpath('/html/body/main/app-root/mat-drawer-container/mat-drawer-content/app-vehicle-details/div/div[2]/div/section[1]/div[1]/vdp-payment-estimation/div/mat-tab-group/div/mat-tab-body[1]/div/app-lease/div/div[3]/app-payment-option-list/div/mat-radio-group/div/con-payment-radiobutton-list/div/mat-radio-group/mat-radio-button[2]'));
         this.tabDefault = element(by.xpath('/html/body/main/app-root/mat-drawer-container/mat-drawer-content/app-vehicle-details/div/div[2]/div/section[1]/div[1]/vdp-payment-estimation/div/mat-tab-group/mat-tab-header/div[2]/div/div/div[1]'));
         this.tabFinance = element(by.xpath('/html/body/main/app-root/mat-drawer-container/mat-drawer-content/app-vehicle-details/div/div[2]/div/section[1]/div[1]/vdp-payment-estimation/div/mat-tab-group/mat-tab-header/div[2]/div/div/div[2]'));
+        this.tabCash = element(by.xpath('/html/body/main/app-root/mat-drawer-container/mat-drawer-content/app-vehicle-details/div/div[2]/div[1]/section/div[1]/vdp-payment-estimation/div/mat-tab-group/mat-tab-header/div[2]/div/div/div[3]')); 
         this.termSelectedFinance = element(by.xpath('/html/body/main/app-root/mat-drawer-container/mat-drawer-content/app-vehicle-details/div/div[2]/div/section[1]/div[1]/vdp-payment-estimation/div/mat-tab-group/div/mat-tab-body[2]/div/app-finance/div/div[2]/app-payment-option-list/div/mat-radio-group/div/con-payment-radiobutton-list/div/mat-radio-group/mat-radio-button[4]'));
         this.creditRatingFinance = element(by.xpath('/html/body/main/app-root/mat-drawer-container/mat-drawer-content/app-vehicle-details/div/div[2]/div/section[1]/div[1]/vdp-payment-estimation/div/mat-tab-group/div/mat-tab-body[2]/div/app-finance/div/div[2]/div[1]/con-slim-combobox/div/mat-form-field/div/div[1]/div/mat-select/div/div[1]/span'));
         this.paymentOptionsList = element.all(by.xpath('/html/body/main/app-root/mat-drawer-container/mat-drawer-content/app-vehicle-details/div/div[2]/div/section[1]/div[1]/vdp-payment-estimation/div/mat-tab-group/div/mat-tab-body[1]/div/app-lease/div/div[3]/app-payment-option-list/div/mat-radio-group/div/con-payment-radiobutton-list/div/mat-radio-group/mat-radio-button'));
@@ -170,7 +179,7 @@ export class VdpPage {
         this.ppModalPlanDesc = element(by.xpath('//*[@id="protection-product-text"]/div/div/p'));
         this.ppModalVideo = element(by.xpath('//*[@id="protection-products-modal-container"]/div[3]/video'));
 
-        this.ppModalCoverageLength = element(by.xpath('//*[@id="protection-products-modal-component"]/vdp-protection-products-model/protection-products-model-content/div/div[2]/con-slim-combobox/div/mat-form-field/div'));
+        this.ppModalCoverageLength = element(by.className('select-content'));  //element(by.xpath('//*[@id="protection-products-modal-component"]/vdp-protection-products-model/protection-products-model-content/div/div[2]/con-slim-combobox/div/mat-form-field/div'));
         this.ppModalTotalDue = element(by.xpath('//*[@id="protection-products-modal-component"]/vdp-protection-products-model/protection-products-model-content/div/div[2]/div/span[1]'));
         this.ppModalSelectButton = element(by.xpath('//*[@id="protection-products-modal-component"]/vdp-protection-products-model/protection-products-model-content/div/div[2]/div/div'));
         this.ppModalPlanDetails = element(by.xpath('//*[@id="protection-products-modal-component"]/vdp-protection-products-model/protection-products-model-content/div/div[3]/div/div'));
@@ -181,7 +190,7 @@ export class VdpPage {
         this.ppPlanSelectCb = element.all(by.xpath('//html/body/main/app-root/mat-drawer-container/mat-drawer-content/app-vehicle-details/div/div[2]/div/section[1]/div[4]/vpd-protection-product/div/div/div[2]/vdp-product-list/div/div[3]/div[2]/con-checkbox/div/mat-checkbox/label/div/input')); 
         this.ppTerm = element(by.className('term'));
         this.ppTotal = element(by.className('product-container-content-total'));
-        this.dueAtSigning = element(by.xpath('/html/body/main/app-root/mat-drawer-container/mat-drawer-content/app-vehicle-details/div/div[2]/div/section[2]/vdp-pricing-summary/div/div[3]/div[1]/div/div[2]/div[2]/span'));
+        this.dueAtSigning =  element(by.xpath('//div[@class="term-length"]/div[2]/span'));  //element(by.xpath('/html/body/main/app-root/mat-drawer-container/mat-drawer-content/app-vehicle-details/div/div[2]/div/section[2]/vdp-pricing-summary/div/div[3]/div[1]/div/div[2]/div[2]/span'));
         this.ppPlanOptionClick = element.all(by.className('product-type')); 
         this.ppPlanOption = element.all(by.css('mat-option > .mat-option-text > span')); 
         this.alertModal = element(by.className('mat-dialog-title'));
@@ -236,10 +245,16 @@ export class VdpPage {
         this.confirmZipText = element(by.className('text-button confirm_zip'));
         this.zipTaxDesc = element(by.className('edit_zip_tax_desc'));
         this.chsFinanceBtn = element(by.xpath('//div[@class="finance_buttons"]/button'));
-
         this.zipCodeModalInput = element(by.id('textInput'));
         this.zipCodeModalDoneBtn = element(by.xpath('//div[@class="zip-container"]/button'));
         this.reviewDealZipCode = element(by.xpath('//span[@class="text-link custom_zip_button"]'));
-        
+        this.editDetailsBtn = element(by.className('text-button edit_Details_button'));
+        this.ownFinance = element(by.className('own-finance'));
+        this.tfsFinance = element(by.className('tfs-finance'));
+
+        this.applyFinanceModal = element(by.className('apply-finance-modal-container'));
+        this.acceptApplyFinanceModalBtn = element(by.xpath('//section[@class="apply-finance-modal-body"]/button[1]'));
+        this.notNowApplyFinanceModalBtn = element(by.xpath('//section[@class="apply-finance-modal-body"]/button[2]'));
+        this.authTfsCb = element(by.xpath('//div[@class="con-checkbox"]/mat-checkbox'))
     }
 }

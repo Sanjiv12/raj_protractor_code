@@ -22,42 +22,42 @@ Then('System should open Protection products detail modal with Plan Name', async
 });
 
 Then('System should open Protection products detail modal with Plan Description', async () => {
-    await browser.driver.sleep(5*1000);
+    await browser.driver.sleep(2*1000);
     return Assertion.expect(vdpPage.ppModalPlanDesc.isDisplayed().valueOf()).to.eventually.be.true;
 });
 
 Then('System should open Protection products detail modal with Video', async () => {
-    await browser.driver.sleep(5*1000);
+    await browser.driver.sleep(2*1000);
     return Assertion.expect(vdpPage.ppModalVideo.isDisplayed().valueOf()).to.eventually.be.true;
 });
 
 Then('System should open Protection products detail modal with Length of Coverage', async () => {
-    await browser.driver.sleep(5*1000);
+    await browser.driver.sleep(2*1000);
     return Assertion.expect(vdpPage.ppModalCoverageLength.isDisplayed().valueOf()).to.eventually.be.true;
 });
 
 Then('System should open Protection products detail modal with Total Due at Signing', async () => {
-    await browser.driver.sleep(5*1000);
+    await browser.driver.sleep(2*1000);
     return Assertion.expect((await vdpPage.ppModalTotalDue.getText()).length).to.be.gt(0);
 });
 
 Then('System should open Protection products detail modal with Select CTA', async () => {
-    await browser.driver.sleep(5*1000);
+    await browser.driver.sleep(2*1000);
     return Assertion.expect(vdpPage.ppModalSelectButton.isDisplayed().valueOf()).to.eventually.be.true;
 });
 
 Then('System should open Protection products detail modal with Plan Detail', async () => {
-    await browser.driver.sleep(5*1000);
+    await browser.driver.sleep(2*1000);
     return Assertion.expect((await vdpPage.ppModalPlanDetails.getText()).length).to.be.gt(0);
 });
 
 Then('System should open Protection products detail modal with View Brochure', async () => {
-    await browser.driver.sleep(5*1000);
+    await browser.driver.sleep(2*1000);
     return Assertion.expect(vdpPage.ppModalViewBrochure.isDisplayed().valueOf()).to.eventually.be.true;
 });
 
 Then('System should open Protection products detail modal with Disclaimers at the bottom', async () => {
-    await browser.driver.sleep(5*1000);
+    await browser.driver.sleep(2*1000);
     return Assertion.expect(vdpPage.ppModalFooter.isDisplayed().valueOf()).to.eventually.be.true;
 });
 
@@ -96,8 +96,8 @@ When('User changes the plan for the Protection product selected', async  () =>{
 });
 
 
-Then('System should remove the check from Selection check box', async () => {
-    return Assertion.expect(vdpPage.ppPlanSelectCb.getAttribute('aria-checked')).to.eventually.eql(['false']);
+Then('System should not remove the check from Selection check box', async () => {
+    return Assertion.expect(vdpPage.ppPlanSelectCb.getAttribute('aria-checked')).to.eventually.eql(['true']);
 });
 
 

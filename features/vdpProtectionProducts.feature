@@ -10,7 +10,6 @@ Scenario: Protection products Detail modal
   And System should open Protection products detail modal with Plan Description
   And System should open Protection products detail modal with Video
   And System should open Protection products detail modal with Length of Coverage
-  #And System should open Protection products detail modal with Monthly / Total $
   And System should open Protection products detail modal with Total Due at Signing
   And System should open Protection products detail modal with Select CTA
   And System should open Protection products detail modal with Plan Detail
@@ -22,7 +21,7 @@ Scenario: Protection products - Change plan
   Given User is in Vehicle Details page
   When User selects a Protection product
   And User changes the plan for the Protection product selected
-  Then System should remove the check from Selection check box
+  Then System should not remove the check from Selection check box
   And Price summary should be updated 
 
 Scenario: Select from PP Detail modal
@@ -59,8 +58,3 @@ Scenario: Change Payment term
   And Deselect all the Protection products
   And System should call the Payment service and update the payment terms 
 
-Scenario: Protection products - Do not display
-
-  Given Protection products feature is not enabled for the dealer
-  When User is in Vehicle Details page for the disabled dealer 
-  Then Protect your vehicle should not be displayed 
