@@ -68,9 +68,9 @@ Then('Default Term is selected', async() => {
 
 Given('User is in Vehicle Details page', async() => {
     //await browser.get('?dealerCd='+browser.params.dealerCd+'&source='+browser.params.source);
+    browser.driver.manage().deleteAllCookies();
     await browser.get(browser.params.url+'?dealerCd='+browser.params.dealerCd+'&source='+browser.params.source);
     await browser.driver.sleep(10*1000);
-    browser.driver.manage().deleteAllCookies();
     browser.executeScript("arguments[0].click()", mspFilterPage.popUpClose);
     await browser.driver.sleep(5*1000);
     browser.executeScript('arguments[0].click()', mspFilterPage.sortDropDown);
@@ -127,5 +127,10 @@ When('User updates Mileage', async  () =>{
 Then('System should call the Payment service and update the payment terms', async  () =>{
     await browser.driver.sleep(15*1000);
     return expect((await vdpPage.paymentOptionsList).length).to.be.gt(0);
+});
+
+When('User selects Cash', async  () =>{
+    await browser.driver.sleep(15*1000);
+    vdpPage.tabCash.click();      
 });
 
