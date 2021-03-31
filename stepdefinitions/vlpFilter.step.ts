@@ -36,11 +36,11 @@ When('User selects one or more vehicle series from Model in Filters panel', asyn
     
     await browser.driver.sleep(5*1000);
     vlpFilterPage.modelDropDown.click();
-    await browser.driver.sleep(5*1000);
-    vlpFilterPage.modelOption1.click();
-    await browser.driver.sleep(5*1000);
-    vlpFilterPage.modelOption2.click();
-    await browser.driver.sleep(5*1000);
+    await browser.driver.sleep(2*1000);
+    // vlpFilterPage.modelOption1.click();
+    // await browser.driver.sleep(5*1000);
+    // vlpFilterPage.modelOption2.click();
+    // await browser.driver.sleep(5*1000);
     // vlpFilterPage.modelOption3.click();
     browser.driver.findElement(By.xpath("//body")).click();
 });
@@ -243,6 +243,7 @@ Given('User is in Model Selection page with all filter chips cleared', async() =
 });
 
 When('User selects model as Truck', async () =>{
+    await browser.driver.sleep(5*1000);
     vlpFilterPage.filtercheckBoxTruck.click();
     await browser.driver.sleep(5*1000);
 });
