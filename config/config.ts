@@ -11,8 +11,11 @@ export const config: Config = {
     //  seleniumAddress: "http://127.0.0.1:4444/wd/hub",
     //  SELENIUM_PROMISE_MANAGER: false,
      
-    sauceUser:"sso-toyota.tcoe-raghunath.goteti",
-    sauceKey:"a1aaa34b-ba44-4bc7-a94c-f79aa068e60f",
+    // sauceUser:"sso-toyota.tcoe-raghunath.goteti",
+    // sauceKey:"a1aaa34b-ba44-4bc7-a94c-f79aa068e60f",
+
+    sauceUser:"sso-toyota.tcoe-kimberlee.dixon",
+    sauceKey:"aad70988-20cb-4d05-b24e-65bea4dfb0ee",
 
     //baseUrl: 'baseurl',
 
