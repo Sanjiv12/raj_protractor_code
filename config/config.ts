@@ -8,7 +8,8 @@ let baseurl ='';
 
 export const config: Config = {
 
-    //  seleniumAddress: "http://127.0.0.1:4444/wd/hub",
+    // seleniumAddress: "http://127.0.0.1:4444/wd/hub",
+    seleniumAddress: "https://ondemand.us-west-1.saucelabs.com:443/wd/hub",
     //  SELENIUM_PROMISE_MANAGER: false,
      
     // sauceUser:"sso-toyota.tcoe-raghunath.goteti",
