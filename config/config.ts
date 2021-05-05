@@ -2,9 +2,65 @@ import { browser, Config ,$,by} from "protractor";
 import * as fs from "fs";
 import * as mkdirp from "mkdirp";
 import * as path from "path";
+import {PLATFORMS,JENKINS_OPTIONS,CLI} from "../util/Constants"
+import {BrowserPlatformConfigurations} from "./BrowserPlatformConfigurations";
 
 const jsonPath = path.join(process.cwd(), "/dist");
 let baseurl ='';
+
+let extractBrowserFromCli = function() {
+    let browser = JENKINS_OPTIONS.ALL; // Default to 'All' if nothing found
+    let foundParam = process.argv.find((arg) => {
+        const parts = arg.split(CLI.splitChar);
+        const name = parts[0].trim().replace(CLI.params, '');
+        return name == CLI.browserPlatformParam;
+    });
+    if (foundParam && foundParam.split(CLI.splitChar)) {
+        browser = foundParam.split(CLI.splitChar)[1];
+    }
+    return browser;
+};
+let browserSupportsBasicAuth = function(browser) {
+    return browser !== JENKINS_OPTIONS.SAFARI_DESKTOP && browser !== JENKINS_OPTIONS.SAFARI_IOS;
+}
+let generateBrowserConfiguration = function() {
+    const selectedBrowser = extractBrowserFromCli();
+    let multiCapabilities = [];
+    switch(selectedBrowser) {
+        case JENKINS_OPTIONS.CHROME_DESKTOP:
+            multiCapabilities.push(BrowserPlatformConfigurations.ChromeDesktop);
+            break;
+        case JENKINS_OPTIONS.CHROME_ANDROID:
+            multiCapabilities.push(BrowserPlatformConfigurations.ChromeAndroid);
+            break;
+        case JENKINS_OPTIONS.SAFARI_DESKTOP:
+            multiCapabilities.push(BrowserPlatformConfigurations.SafariDesktop);
+            break;
+        case JENKINS_OPTIONS.SAFARI_IOS:
+            multiCapabilities.push(BrowserPlatformConfigurations.SafariIOS);
+            break;
+        case JENKINS_OPTIONS.FIREFOX:
+            multiCapabilities.push(BrowserPlatformConfigurations.Firefox)
+            break;
+        case JENKINS_OPTIONS.EDGE:
+            multiCapabilities.push(BrowserPlatformConfigurations.Edge);
+            break;
+        case JENKINS_OPTIONS.ALL_SUBPROD:
+            for (const [browser, capability] of Object.entries(BrowserPlatformConfigurations)) {
+                if (browserSupportsBasicAuth(browser)) {
+                    multiCapabilities.push(capability);
+                }
+            }
+            break;
+        case JENKINS_OPTIONS.ALL:default:
+            for (const [, capability] of Object.entries(BrowserPlatformConfigurations)) {
+                multiCapabilities.push(capability);
+            }
+            break;
+    }
+    return multiCapabilities;
+}
+
 
 export const config: Config = {
 
@@ -43,8 +99,8 @@ export const config: Config = {
     },
     
     onPrepare: async() => {
-        browser.manage().window().maximize(); 
-        browser.driver.manage().deleteAllCookies(); 
+        browser.manage().window().maximize();
+        browser.driver.manage().deleteAllCookies();
         browser.waitForAngularEnabled(false);
         reportConfig.createDirectory(jsonPath);
         await browser.get(browser.params.url+'?dealerCd='+browser.params.dealerCd+'&source='+browser.params.source);
@@ -59,30 +115,7 @@ export const config: Config = {
             return /inventory/.test(url);
         }, 100000);
     },
-    multiCapabilities: [
-        {
-            "browserName": 'chrome',
-            "shardTestFiles": true,
-            "maxInstances" : 15,
-            "version": '88.0',
-            "platform": 'Windows 10',
-            "screenResolution": '1920x1080',
-            chromeOptions: {
-                args: ["--incognito"]
-            }, 
-        },
-        // {
-        //     "browserName": 'firefox',
-        //     "shardTestFiles": true,
-        //     "maxInstances" : 15,
-        //     //"version": '88.0',
-        //     "platform": 'Windows 10',
-        //     "screenResolution": '1920x1080',
-        //     "moz:firefoxOptions": {
-        //         args: ["--incognito"]
-        //     },         
-        // }
-    ],
+    multiCapabilities: generateBrowserConfiguration(),
     // capabilities: {            
     // },
     
