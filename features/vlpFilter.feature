@@ -42,6 +42,13 @@ Scenario: VLP - Advertised / Selling Price
   And Count of options under all filter categories should be updated
   And Filter chip should be displayed for price
 
+Scenario: VLP - Save Heart
+
+  Given User is in Vehicle List Page
+  When User clicks on a vehicle save heart
+  Then Heart should turn active
+  And Tooltip should open
+
 
 ## Scenarios for truck, no data available for test
 

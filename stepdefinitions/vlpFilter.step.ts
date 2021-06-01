@@ -1,4 +1,4 @@
-import { browser, By, protractor } from "protractor"; 
+import { browser, By, element, protractor } from "protractor"; 
 import { Then, When, Given, Before, BeforeAll, SummaryFormatter } from "cucumber";
 import { MspFilterPage } from "../pages/mspFilterPage";
 import { VlpFilterPage } from "../pages/vlpFilterPage";
@@ -466,4 +466,18 @@ Then('The Vehicle cards should be sorted by Price in ascending order', async () 
         console.log('sorted - '+ sorted);
     });
     
+});
+
+When('User clicks on a vehicle save heart', async () =>{
+    
+    vlpFilterPage.vehicleSaveHeart.click();
+    await browser.driver.sleep(5*1000);
+});
+
+Then('Heart should turn active', async () =>{
+    expect(element(By.css('dg-encircle')).getAttribute('class')).to.contain('active');
+});
+
+Then('Tooltip should open', async () =>{
+    expect(element(By.css('dg-encircle')).getAttribute('class')).to.contain('v-tooltip-open');
 });
