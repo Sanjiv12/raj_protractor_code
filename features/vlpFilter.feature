@@ -3,44 +3,44 @@ Feature: VLP - Filters
 A MST-C user navigates the filters on VLP page.
  
 
-Scenario: VLP - Model
+# Scenario: VLP - Model
 
-  Given User is in Vehicle List Page
-  When User selects one or more vehicle series from Model in Filters panel
-  Then Vehicles List and count should be updated based on users selection
+#   Given User is in Vehicle List Page
+#   When User selects one or more vehicle series from Model in Filters panel
+#   Then Vehicles List and count should be updated based on users selection
 
-Scenario: VLP - Trim
+# Scenario: VLP - Trim
 
-  Given User is in Vehicle List Page
-  When User selects a trim from Filters panel
-  Then Only the applicable vehicles should be displayed in the page by trim
-  And Count of options under all filter categories should be updated
-  And Filter chip should be displayed for trim
+#   Given User is in Vehicle List Page
+#   When User selects a trim from Filters panel
+#   Then Only the applicable vehicles should be displayed in the page by trim
+#   And Count of options under all filter categories should be updated
+#   And Filter chip should be displayed for trim
 
-Scenario: VLP - Engine
+# Scenario: VLP - Engine
 
-  Given User is in Vehicle List Page
-  When User selects an Engine option from Filters panel
-  Then Only the applicable vehicles should be displayed in the page by engine
-  And Count of options under all filter categories should be updated
-  And Filter chip should be displayed for engine
+#   Given User is in Vehicle List Page
+#   When User selects an Engine option from Filters panel
+#   Then Only the applicable vehicles should be displayed in the page by engine
+#   And Count of options under all filter categories should be updated
+#   And Filter chip should be displayed for engine
 
-Scenario: VLP - Year
+# Scenario: VLP - Year
 
-  Given User is in Vehicle List Page
-  When User selects a Year from Filters panel
-  Then Only the applicable vehicles should be displayed in the page
-  And Count of options under all filter categories should be updated
-  And Filter chip should be displayed for year
+#   Given User is in Vehicle List Page
+#   When User selects a Year from Filters panel
+#   Then Only the applicable vehicles should be displayed in the page
+#   And Count of options under all filter categories should be updated
+#   And Filter chip should be displayed for year
 
 
-Scenario: VLP - Advertised / Selling Price
+# Scenario: VLP - Advertised / Selling Price
 
-  Given User is in Vehicle List Page
-  When User selects Price range for Advertised / Selling Price from Filters panel
-  Then Only the applicable vehicles should be displayed in the page by price
-  And Count of options under all filter categories should be updated
-  And Filter chip should be displayed for price
+#   Given User is in Vehicle List Page
+#   When User selects Price range for Advertised / Selling Price from Filters panel
+#   Then Only the applicable vehicles should be displayed in the page by price
+#   And Count of options under all filter categories should be updated
+#   And Filter chip should be displayed for price
 
 Scenario: VLP - Save Heart
 
