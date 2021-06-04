@@ -477,7 +477,9 @@ When('User clicks on a vehicle save heart', async () =>{
 });
 
 Then('Heart should turn active', async () =>{
-    expect(element(By.css('.dg-encircle.active')).isPresent()).to.eventually.equal(true);
+    element(By.css('.dg-encircle.active')).isPresent().then((select) => {
+        expect(select).to.be.true;
+    });
 });
 
 Then('Tooltip should open', async () =>{
