@@ -1,3 +1,6 @@
+Feature: GXP Save heart tests
+A MST-C user clicks GXP hearts.
+
 Scenario: VLP - Save Heart
 
   Given User is in Vehicle List Page
