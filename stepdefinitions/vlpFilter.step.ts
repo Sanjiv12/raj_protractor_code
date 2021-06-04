@@ -474,7 +474,7 @@ Then('The Vehicle cards should be sorted by Price in ascending order', async () 
 When('User clicks on a vehicle save heart', async () =>{
     var heart : ElementFinder = vlpFilterPage.vehicleSaveHeart.get(1);
     browser.driver.wait(until.visibilityOf(heart),MAX_TIME_WAIT,'Element taking too long to appear in the DOM');
-    vlpFilterPage.vehicleSaveHeart.get(1).click();
+    heart.click();
 });
 
 Then('Heart should turn active', async () =>{
@@ -484,5 +484,4 @@ Then('Heart should turn active', async () =>{
 
 Then('Tooltip should open', async () =>{
     expect((await vlpFilterPage.tooltip.isPresent()).valueOf()).to.be.true;
-
 });
