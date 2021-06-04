@@ -477,10 +477,7 @@ When('User clicks on a vehicle save heart', async () =>{
 });
 
 Then('Heart should turn active', async () =>{
-    console.log(vlpFilterPage.vehicleSaveHeartActive.isPresent());
-    vlpFilterPage.vehicleSaveHeartActive.isPresent().then((heart) =>{
-        expect(heart).is.true;
-    })
+    expect((await vlpFilterPage.vehicleSaveHeartActive.isPresent()).valueOf()).to.be.true;
 });
 
 Then('Tooltip should open', async () =>{
