@@ -1,5 +1,5 @@
-Feature: GXP Save heart tests
-A MST-C user clicks GXP hearts.
+Feature: GXP VLP Save heart tests
+A MST-C user clicks GXP hearts on the VLP Page.
 
 Scenario: VLP - Save Heart
 

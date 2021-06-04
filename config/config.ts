@@ -96,7 +96,8 @@ export const config: Config = {
         sendestimateleadforms: "../../features/**/sendEstimateLeadForms.feature",
         contactdealerleadforms: "../../features/**/contactDealerLeadForms.feature",
         checkout: "../../features/**/checkOut.feature",
-        gxp: "../../features/**/gxp.feature"
+        gxpvlp: "../../features/**/gxp-vlp.feature",
+        gxpvdp: "../../features/**/gxp-vdp.feature"
     },
     
     onPrepare: async() => {

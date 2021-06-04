@@ -42,7 +42,7 @@ cucumber_1.When('User clicks on "Select" CTA', () => __awaiter(void 0, void 0, v
 }));
 cucumber_1.Then('The Accessory should be displayed as selected', () => __awaiter(void 0, void 0, void 0, function* () {
     yield protractor_1.browser.driver.sleep(2 * 1000);
-    return assertion_1.Assertion.expect(vdpPage.accessoriesCardWrapper.first().getAttribute('ng-reflect-ng-class')).to.eventually.equal('card-highlight');
+    return assertion_1.Assertion.expect(vdpPage.accessoriesCardWrapper.first().getAttribute('class')).to.eventually.contain('card-highlight');
 }));
 cucumber_1.Then('Count of accessories selected and Total value should be updated', () => __awaiter(void 0, void 0, void 0, function* () {
     //console.log('+++Inside Count of accessories selected and Total value should be updated ');
