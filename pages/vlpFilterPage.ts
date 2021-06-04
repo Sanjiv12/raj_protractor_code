@@ -53,7 +53,8 @@ export class VlpFilterPage {
     public unlockSavingsModalSmartPriceTxt : ElementArrayFinder;
     public unlockSavingsModalSmartPriceFilterTxt : ElementFinder;    
     public vehicleSaveHeart : ElementArrayFinder; 
-    public vehicleSaveHeartActive : ElementFinder; 
+    public vehicleSaveHeartActive : ElementFinder;
+    public tooltip : ElementFinder; 
 
 
     constructor() {
@@ -111,7 +112,6 @@ export class VlpFilterPage {
         this.unlockSavingsModalSmartPriceFilterTxt = element(by.css('.filter-price-sub-title'));        
         this.vehicleSaveHeart = element.all(by.css('.save-icon'));
         this.vehicleSaveHeartActive = element(by.css('.dg-encircle.active'));
-
-        
+        this.tooltip = element(by.css('.dg-tooltip'));
     }
 }

@@ -471,8 +471,6 @@ Then('The Vehicle cards should be sorted by Price in ascending order', async () 
 When('User clicks on a vehicle save heart', async () =>{
     await browser.driver.sleep(5*1000);
     vlpFilterPage.vehicleSaveHeart.get(1).click();
-    await browser.driver.sleep(5*1000);
-
 });
 
 Then('Heart should turn active', async () =>{
@@ -480,6 +478,6 @@ Then('Heart should turn active', async () =>{
 });
 
 Then('Tooltip should open', async () =>{
-    expect(element(By.css('.dg-encircle')).getAttribute('class')).to.contain('v-tooltip-open');
+    expect((await vlpFilterPage.tooltip.isPresent()).valueOf()).to.be.true;
 
 });
