@@ -125,6 +125,10 @@ export class VdpPage {
     public acceptApplyFinanceModalBtn : ElementFinder;
     public notNowApplyFinanceModalBtn : ElementFinder;
     public authTfsCb : ElementFinder;
+
+    public inventorySaveHeart : ElementArrayFinder; 
+    public inventorySaveHeartActive : ElementFinder;
+    public inventorySaveHeartTooltip : ElementFinder; 
     
     constructor() {
         this.cashDown = element(by.className('ngx-slider-span ngx-slider-pointer ngx-slider-pointer-min'));
@@ -256,5 +260,9 @@ export class VdpPage {
         this.acceptApplyFinanceModalBtn = element(by.xpath('//section[@class="apply-finance-modal-body"]/button[1]'));
         this.notNowApplyFinanceModalBtn = element(by.xpath('//section[@class="apply-finance-modal-body"]/button[2]'));
         this.authTfsCb = element(by.xpath('//div[@class="con-checkbox"]/mat-checkbox'))
+
+        this.inventorySaveHeart = element.all(by.css('.save-icon'));
+        this.inventorySaveHeartActive = element(by.css('.dg-encircle.active'));
+        this.inventorySaveHeartTooltip = element(by.css('.dg-tooltip'));
     }
 }
