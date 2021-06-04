@@ -1,4 +1,4 @@
-import { browser, By, element, protractor } from "protractor"; 
+import { browser, By, element, ElementFinder, protractor } from "protractor"; 
 import { Then, When, Given, Before, BeforeAll, SummaryFormatter } from "cucumber";
 import { MspFilterPage } from "../pages/mspFilterPage";
 import { VlpFilterPage } from "../pages/vlpFilterPage";
@@ -6,9 +6,12 @@ import { expect } from "chai";
 
 let mspFilterPage : MspFilterPage = new MspFilterPage();
 let vlpFilterPage : VlpFilterPage = new VlpFilterPage();
+let until = protractor.ExpectedConditions;
 
+let MAX_TIME_WAIT = 5000;
 let p = 0;
 let np = 0;
+
 
 Given('User is in Vehicle List Page', async () =>{
     await browser.get(browser.params.url+'?dealerCd='+browser.params.dealerCd+'&source='+browser.params.source);
@@ -469,12 +472,13 @@ Then('The Vehicle cards should be sorted by Price in ascending order', async () 
 });
 
 When('User clicks on a vehicle save heart', async () =>{
-    await browser.driver.sleep(5*1000);
+    var heart : ElementFinder = vlpFilterPage.vehicleSaveHeart.get(1);
+    browser.driver.wait(until.presenceOf(heart),MAX_TIME_WAIT,'Element taking too long to appear in the DOM');
     vlpFilterPage.vehicleSaveHeart.get(1).click();
-    await browser.driver.sleep(5*1000);
 });
 
 Then('Heart should turn active', async () =>{
+    browser.driver.wait(until.presenceOf(vlpFilterPage.vehicleSaveHeartActive),MAX_TIME_WAIT,'Element taking too long to appear in the DOM');
     expect((await vlpFilterPage.vehicleSaveHeartActive.isPresent()).valueOf()).to.be.true;
 });
 
