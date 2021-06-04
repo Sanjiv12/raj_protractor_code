@@ -16,40 +16,35 @@ const vlpFilterPage_1 = require("../pages/vlpFilterPage");
 const chai_1 = require("chai");
 let mspFilterPage = new mspFilterPage_1.MspFilterPage();
 let vlpFilterPage = new vlpFilterPage_1.VlpFilterPage();
+let until = protractor_1.protractor.ExpectedConditions;
+let MAX_TIME_WAIT = 5000;
 let p = 0;
 let np = 0;
 cucumber_1.Given('User is in Vehicle List Page', () => __awaiter(void 0, void 0, void 0, function* () {
+    yield protractor_1.browser.get(protractor_1.browser.params.url + '?dealerCd=' + protractor_1.browser.params.dealerCd + '&source=' + protractor_1.browser.params.source);
     yield protractor_1.browser.driver.sleep(10 * 1000);
+    protractor_1.browser.driver.manage().deleteAllCookies();
     protractor_1.browser.executeScript("arguments[0].click()", mspFilterPage.popUpClose);
     yield protractor_1.browser.driver.sleep(5 * 1000);
-    // await browser.get("?dealerCd=24022&source=t1");
-    // await browser.driver.sleep(10*1000);
-    // mspFilterPage.appcardButton.each((ele,i) => {
-    //     ele.getText().then((text) =>{
-    //         if(text.includes('Available', 0)){
-    //             console.log('appcard text - '+ text);
-    //             ele.click();                
-    //         }            
-    //     }).catch((err) => {})
-    // })  
-    // mspFilterPage.appCard.reduce(function(acc, elem) {
-    //     if(acc) return acc;
-    //     return elem.getText().then(function(text) {
-    //         if(text.includes('Available', 0)) return elem;
-    //     });
-    //   }, '').then((result) => {
-    //             if(!result) throw new Error("Element not found");
-    //             return result;
-    //         });
+    protractor_1.browser.executeScript('arguments[0].click()', mspFilterPage.sortDropDown);
+    yield protractor_1.browser.driver.sleep(3 * 1000);
+    protractor_1.browser.executeScript('arguments[0].click()', mspFilterPage.sortPriceLowToHigh);
+    yield protractor_1.browser.driver.sleep(2 * 1000);
+    protractor_1.browser.executeScript("window.scrollBy(0,250)");
+    protractor_1.browser.executeScript('arguments[0].click()', mspFilterPage.appcardButton.first());
+    yield protractor_1.browser.driver.sleep(10 * 1000);
+    protractor_1.browser.executeScript('arguments[0].click()', mspFilterPage.sortDropDown);
+    yield protractor_1.browser.driver.sleep(2 * 1000);
+    protractor_1.browser.executeScript('arguments[0].click()', mspFilterPage.sortPriceLowToHigh);
 }));
 cucumber_1.When('User selects one or more vehicle series from Model in Filters panel', () => __awaiter(void 0, void 0, void 0, function* () {
     yield protractor_1.browser.driver.sleep(5 * 1000);
     vlpFilterPage.modelDropDown.click();
-    yield protractor_1.browser.driver.sleep(5 * 1000);
-    vlpFilterPage.modelOption1.click();
-    yield protractor_1.browser.driver.sleep(5 * 1000);
-    vlpFilterPage.modelOption2.click();
-    yield protractor_1.browser.driver.sleep(5 * 1000);
+    yield protractor_1.browser.driver.sleep(2 * 1000);
+    // vlpFilterPage.modelOption1.click();
+    // await browser.driver.sleep(5*1000);
+    // vlpFilterPage.modelOption2.click();
+    // await browser.driver.sleep(5*1000);
     // vlpFilterPage.modelOption3.click();
     protractor_1.browser.driver.findElement(protractor_1.By.xpath("//body")).click();
 }));
@@ -227,6 +222,7 @@ cucumber_1.Given('User is in Model Selection page with all filter chips cleared'
     yield protractor_1.browser.driver.sleep(5 * 1000);
 }));
 cucumber_1.When('User selects model as Truck', () => __awaiter(void 0, void 0, void 0, function* () {
+    yield protractor_1.browser.driver.sleep(5 * 1000);
     vlpFilterPage.filtercheckBoxTruck.click();
     yield protractor_1.browser.driver.sleep(5 * 1000);
 }));
@@ -365,7 +361,7 @@ cucumber_1.Given('User has filters set', () => __awaiter(void 0, void 0, void 0,
     yield protractor_1.browser.driver.sleep(5 * 1000);
     // mspFilterPage.appCard.first().click();
     // await browser.driver.sleep(5*1000);
-    yield protractor_1.browser.get("?dealerCd=24022&source=t1");
+    yield protractor_1.browser.get(protractor_1.browser.params.url + '?dealerCd=' + protractor_1.browser.params.dealerCd + '&source=' + protractor_1.browser.params.source);
     yield protractor_1.browser.driver.sleep(10 * 1000);
     mspFilterPage.appcardButton.each((ele, i) => {
         ele.getText().then((text) => {

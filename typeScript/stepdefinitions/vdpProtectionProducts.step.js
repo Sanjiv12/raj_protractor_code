@@ -27,35 +27,35 @@ cucumber_1.Then('System should open Protection products detail modal with Plan N
     return assertion_1.Assertion.expect(vdpPage.ppModalPlanName.isDisplayed().valueOf()).to.eventually.be.true;
 }));
 cucumber_1.Then('System should open Protection products detail modal with Plan Description', () => __awaiter(void 0, void 0, void 0, function* () {
-    yield protractor_1.browser.driver.sleep(5 * 1000);
+    yield protractor_1.browser.driver.sleep(2 * 1000);
     return assertion_1.Assertion.expect(vdpPage.ppModalPlanDesc.isDisplayed().valueOf()).to.eventually.be.true;
 }));
 cucumber_1.Then('System should open Protection products detail modal with Video', () => __awaiter(void 0, void 0, void 0, function* () {
-    yield protractor_1.browser.driver.sleep(5 * 1000);
+    yield protractor_1.browser.driver.sleep(2 * 1000);
     return assertion_1.Assertion.expect(vdpPage.ppModalVideo.isDisplayed().valueOf()).to.eventually.be.true;
 }));
 cucumber_1.Then('System should open Protection products detail modal with Length of Coverage', () => __awaiter(void 0, void 0, void 0, function* () {
-    yield protractor_1.browser.driver.sleep(5 * 1000);
+    yield protractor_1.browser.driver.sleep(2 * 1000);
     return assertion_1.Assertion.expect(vdpPage.ppModalCoverageLength.isDisplayed().valueOf()).to.eventually.be.true;
 }));
 cucumber_1.Then('System should open Protection products detail modal with Total Due at Signing', () => __awaiter(void 0, void 0, void 0, function* () {
-    yield protractor_1.browser.driver.sleep(5 * 1000);
+    yield protractor_1.browser.driver.sleep(2 * 1000);
     return assertion_1.Assertion.expect((yield vdpPage.ppModalTotalDue.getText()).length).to.be.gt(0);
 }));
 cucumber_1.Then('System should open Protection products detail modal with Select CTA', () => __awaiter(void 0, void 0, void 0, function* () {
-    yield protractor_1.browser.driver.sleep(5 * 1000);
+    yield protractor_1.browser.driver.sleep(2 * 1000);
     return assertion_1.Assertion.expect(vdpPage.ppModalSelectButton.isDisplayed().valueOf()).to.eventually.be.true;
 }));
 cucumber_1.Then('System should open Protection products detail modal with Plan Detail', () => __awaiter(void 0, void 0, void 0, function* () {
-    yield protractor_1.browser.driver.sleep(5 * 1000);
+    yield protractor_1.browser.driver.sleep(2 * 1000);
     return assertion_1.Assertion.expect((yield vdpPage.ppModalPlanDetails.getText()).length).to.be.gt(0);
 }));
 cucumber_1.Then('System should open Protection products detail modal with View Brochure', () => __awaiter(void 0, void 0, void 0, function* () {
-    yield protractor_1.browser.driver.sleep(5 * 1000);
+    yield protractor_1.browser.driver.sleep(2 * 1000);
     return assertion_1.Assertion.expect(vdpPage.ppModalViewBrochure.isDisplayed().valueOf()).to.eventually.be.true;
 }));
 cucumber_1.Then('System should open Protection products detail modal with Disclaimers at the bottom', () => __awaiter(void 0, void 0, void 0, function* () {
-    yield protractor_1.browser.driver.sleep(5 * 1000);
+    yield protractor_1.browser.driver.sleep(2 * 1000);
     return assertion_1.Assertion.expect(vdpPage.ppModalFooter.isDisplayed().valueOf()).to.eventually.be.true;
 }));
 cucumber_1.When('User selects a Protection product', () => __awaiter(void 0, void 0, void 0, function* () {
@@ -84,8 +84,8 @@ cucumber_1.When('User changes the plan for the Protection product selected', () 
     vdpPage.ppPlanOption.first().click();
     yield protractor_1.browser.driver.sleep(10 * 1000);
 }));
-cucumber_1.Then('System should remove the check from Selection check box', () => __awaiter(void 0, void 0, void 0, function* () {
-    return assertion_1.Assertion.expect(vdpPage.ppPlanSelectCb.getAttribute('aria-checked')).to.eventually.eql(['false']);
+cucumber_1.Then('System should not remove the check from Selection check box', () => __awaiter(void 0, void 0, void 0, function* () {
+    return assertion_1.Assertion.expect(vdpPage.ppPlanSelectCb.getAttribute('aria-checked')).to.eventually.eql(['true']);
 }));
 cucumber_1.When('User clicks on Select CTA', () => __awaiter(void 0, void 0, void 0, function* () {
     yield protractor_1.browser.driver.sleep(5 * 1000);

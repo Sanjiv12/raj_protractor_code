@@ -12,7 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const { BeforeAll, After, AfterAll, Status, defineSupportCode, setDefaultTimeout } = require("cucumber");
 const protractor_1 = require("protractor");
 BeforeAll({ timeout: 100 * 1000 }, () => __awaiter(void 0, void 0, void 0, function* () {
-    setDefaultTimeout(60 * 1000);
+    setDefaultTimeout(90 * 1000);
 }));
 After(function (scenario) {
     return __awaiter(this, void 0, void 0, function* () {
