@@ -477,9 +477,9 @@ When('User clicks on a vehicle save heart', async () =>{
 });
 
 Then('Heart should turn active', async () =>{
-    expect(element(By.css('dg-encircle')).getAttribute('class')).to.contain('active');
+    expect(element(By.css('.dg-encircle')).getAttribute('class')).to.contain('active');
 });
 
 Then('Tooltip should open', async () =>{
-    expect(element(By.css('dg-encircle')).getAttribute('class')).to.contain('v-tooltip-open');
+    expect(element(By.css('.dg-encircle')).getAttribute('class')).to.contain('v-tooltip-open');
 });
