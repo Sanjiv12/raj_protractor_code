@@ -470,18 +470,3 @@ Then('The Vehicle cards should be sorted by Price in ascending order', async () 
     });
     
 });
-
-When('User clicks on a vehicle save heart', async () =>{
-    var heart : ElementFinder = vlpFilterPage.vehicleSaveHeart.get(1);
-    browser.driver.wait(until.visibilityOf(heart),MAX_TIME_WAIT,'Element taking too long to appear in the DOM');
-    heart.click();
-});
-
-Then('Heart should turn active', async () =>{
-    browser.driver.wait(until.visibilityOf(vlpFilterPage.vehicleSaveHeartActive),MAX_TIME_WAIT,'Element taking too long to appear in the DOM');
-    expect((await vlpFilterPage.vehicleSaveHeartActive.isPresent()).valueOf()).to.be.true;
-});
-
-Then('Tooltip should open', async () =>{
-    expect((await vlpFilterPage.tooltip.isPresent()).valueOf()).to.be.true;
-});
