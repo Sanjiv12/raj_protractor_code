@@ -482,6 +482,5 @@ Then('Heart should turn active', async () =>{
 
 Then('Tooltip should open', async () =>{
     expect(element(By.css('.dg-encircle')).getAttribute('class')).to.contain('v-tooltip-open');
-    expect(element(By.css('.dg-encircle.active')).isPresent()).to.be.true;
 
 });
