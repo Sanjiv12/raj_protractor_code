@@ -19,7 +19,7 @@
   "scripts": {
     "build": "rimraf typeScript/ && tsc",
     "clean": "rimraf typeScript/",
-    "package": "zip -rq temp-app.zip dist/report && mv temp-app.zip",
+    "package": "zip -rq temp-app.zip dist/newReport_1 && mv temp-app.zip",
     "clean-build": "npm run clean && npm run build",
     "init-contributors": "all-contributors init",
     "add-contributors": "all-contributors add",

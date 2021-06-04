@@ -4,25 +4,23 @@ A MST-C user selects a vehicle and checks the default payment options
  
 Scenario: Navigating to VDP Payment Estimation - Defaults
 
-  Given User is in Vehicle List Page
-  When User selects a vehicle   
-  Then User should be navigated to Vehicle Details page
-  #And Default tab is Lease
-  #And Cash down is 10% of listed price
-  #And Default Annual Mileage is 12000 miles
-  #And Default Credit Rating is Excellent
-  #And Default Terms are displayed
-  #And Default Term is selected
+  Given User is in Vehicle Details page
+  Then Default tab is Lease
+  And Cash down is 10% of listed price
+  And Default Annual Mileage is 12000 miles
+  And Default Credit Rating is Excellent
+  And Default Terms are displayed
+  And Default Term is selected
   
 
 Scenario: Finance - Defaults
 
   Given User is in Vehicle Details page
   When User selects Finance 
-  #Then Cash down is 10% of listed price
+  Then Cash down is 10% of listed price
   Then Default Finance Credit Rating is Excellent
-  #And Default Finance Terms are displayed
-  #And Default Term selected is 60 Months
+  And Default Finance Terms are displayed
+  And Default Term selected is 60 Months
 
 Scenario: Payment Estimation - Lease
 

@@ -2,7 +2,7 @@ const { BeforeAll, After, AfterAll, Status, defineSupportCode,setDefaultTimeout 
 import { browser } from "protractor";
 
 BeforeAll({timeout: 100 * 1000}, async () => {
-    setDefaultTimeout(60 * 1000);
+    setDefaultTimeout(90 * 1000);
 });
 
 After(async function(scenario) {

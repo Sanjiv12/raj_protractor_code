@@ -1,4 +1,4 @@
-import { browser, By, protractor } from "protractor"; 
+import { browser, By, element, ElementFinder, protractor } from "protractor"; 
 import { Then, When, Given, Before, BeforeAll, SummaryFormatter } from "cucumber";
 import { MspFilterPage } from "../pages/mspFilterPage";
 import { VlpFilterPage } from "../pages/vlpFilterPage";
@@ -6,34 +6,30 @@ import { expect } from "chai";
 
 let mspFilterPage : MspFilterPage = new MspFilterPage();
 let vlpFilterPage : VlpFilterPage = new VlpFilterPage();
+let until = protractor.ExpectedConditions;
 
+let MAX_TIME_WAIT = 5000;
 let p = 0;
 let np = 0;
 
+
 Given('User is in Vehicle List Page', async () =>{
+    await browser.get(browser.params.url+'?dealerCd='+browser.params.dealerCd+'&source='+browser.params.source);
     await browser.driver.sleep(10*1000);
+    browser.driver.manage().deleteAllCookies();
     browser.executeScript("arguments[0].click()", mspFilterPage.popUpClose);
-    await browser.driver.sleep(5*1000);
-    // await browser.get("?dealerCd=24022&source=t1");
-    // await browser.driver.sleep(10*1000);
-    // mspFilterPage.appcardButton.each((ele,i) => {
-    //     ele.getText().then((text) =>{
-    //         if(text.includes('Available', 0)){
-    //             console.log('appcard text - '+ text);
-    //             ele.click();                
-    //         }            
-    //     }).catch((err) => {})
-    // })  
-       
-    // mspFilterPage.appCard.reduce(function(acc, elem) {
-    //     if(acc) return acc;
-    //     return elem.getText().then(function(text) {
-    //         if(text.includes('Available', 0)) return elem;
-    //     });
-    //   }, '').then((result) => {
-    //             if(!result) throw new Error("Element not found");
-    //             return result;
-    //         });
+    await browser.driver.sleep(5*1000);       
+    browser.executeScript('arguments[0].click()', mspFilterPage.sortDropDown);
+    await browser.driver.sleep(3*1000);
+    browser.executeScript('arguments[0].click()', mspFilterPage.sortPriceLowToHigh);
+    await browser.driver.sleep(2*1000);
+    browser.executeScript("window.scrollBy(0,250)");
+    browser.executeScript('arguments[0].click()', mspFilterPage.appcardButton.first());
+    await browser.driver.sleep(10*1000);
+    browser.executeScript('arguments[0].click()', mspFilterPage.sortDropDown);
+    await browser.driver.sleep(2*1000);
+    browser.executeScript('arguments[0].click()', mspFilterPage.sortPriceLowToHigh);
+    
 });
     
 
@@ -43,11 +39,11 @@ When('User selects one or more vehicle series from Model in Filters panel', asyn
     
     await browser.driver.sleep(5*1000);
     vlpFilterPage.modelDropDown.click();
-    await browser.driver.sleep(5*1000);
-    vlpFilterPage.modelOption1.click();
-    await browser.driver.sleep(5*1000);
-    vlpFilterPage.modelOption2.click();
-    await browser.driver.sleep(5*1000);
+    await browser.driver.sleep(2*1000);
+    // vlpFilterPage.modelOption1.click();
+    // await browser.driver.sleep(5*1000);
+    // vlpFilterPage.modelOption2.click();
+    // await browser.driver.sleep(5*1000);
     // vlpFilterPage.modelOption3.click();
     browser.driver.findElement(By.xpath("//body")).click();
 });
@@ -250,6 +246,7 @@ Given('User is in Model Selection page with all filter chips cleared', async() =
 });
 
 When('User selects model as Truck', async () =>{
+    await browser.driver.sleep(5*1000);
     vlpFilterPage.filtercheckBoxTruck.click();
     await browser.driver.sleep(5*1000);
 });
@@ -413,7 +410,7 @@ Given('User has filters set', async () =>{
     await browser.driver.sleep(5*1000);
     // mspFilterPage.appCard.first().click();
     // await browser.driver.sleep(5*1000);
-    await browser.get("?dealerCd=24022&source=t1");
+    await browser.get(browser.params.url+'?dealerCd='+browser.params.dealerCd+'&source='+browser.params.source);
     await browser.driver.sleep(10*1000);
     mspFilterPage.appcardButton.each((ele,i) => {
         ele.getText().then((text) =>{
