@@ -477,9 +477,10 @@ When('User clicks on a vehicle save heart', async () =>{
 });
 
 Then('Heart should turn active', async () =>{
-    element(By.css('.dg-encircle.active')).isPresent().then((select) => {
-        expect(select).to.be.true;
-    });
+    console.log(vlpFilterPage.vehicleSaveHeartActive.isPresent());
+    vlpFilterPage.vehicleSaveHeartActive.isPresent().then((heart) =>{
+        expect(heart).is.true;
+    })
 });
 
 Then('Tooltip should open', async () =>{
