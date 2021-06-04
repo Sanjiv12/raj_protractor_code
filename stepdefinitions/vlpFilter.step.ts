@@ -469,7 +469,6 @@ Then('The Vehicle cards should be sorted by Price in ascending order', async () 
 });
 
 When('User clicks on a vehicle save heart', async () =>{
-    
     vlpFilterPage.vehicleSaveHeart.click();
     await browser.driver.sleep(5*1000);
 });
