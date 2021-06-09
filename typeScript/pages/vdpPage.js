@@ -124,9 +124,10 @@ class VdpPage {
         this.acceptApplyFinanceModalBtn = protractor_1.element(protractor_1.by.xpath('//section[@class="apply-finance-modal-body"]/button[1]'));
         this.notNowApplyFinanceModalBtn = protractor_1.element(protractor_1.by.xpath('//section[@class="apply-finance-modal-body"]/button[2]'));
         this.authTfsCb = protractor_1.element(protractor_1.by.xpath('//div[@class="con-checkbox"]/mat-checkbox'));
-        this.inventorySaveHeart = protractor_1.element.all(protractor_1.by.css('.save-icon'));
-        this.inventorySaveHeartActive = protractor_1.element(protractor_1.by.css('.dg-encircle.active'));
-        this.inventorySaveHeartTooltip = protractor_1.element(protractor_1.by.css('.dg-tooltip'));
+        this.saveHearts = protractor_1.element.all(protractor_1.by.css('.save-icon'));
+        this.saveHeartActive = protractor_1.element(protractor_1.by.css('.dg-encircle.active'));
+        this.saveHeartTooltip = protractor_1.element(protractor_1.by.css('.dg-tooltip'));
+        this.estimateTabs = protractor_1.element.all(protractor_1.by.className('mat-tab-label-content'));
     }
 }
 exports.VdpPage = VdpPage;

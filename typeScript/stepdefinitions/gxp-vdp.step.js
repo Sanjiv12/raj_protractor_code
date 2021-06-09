@@ -15,17 +15,30 @@ const vdpPage_1 = require("../pages/vdpPage");
 const chai_1 = require("chai");
 let vdpPage = new vdpPage_1.VdpPage();
 let until = protractor_1.protractor.ExpectedConditions;
-let MAX_TIME_WAIT = 5000;
-cucumber_1.When('User clicks on an inventory save heart', () => __awaiter(void 0, void 0, void 0, function* () {
-    var heart = vdpPage.inventorySaveHeart.get(0);
-    ;
-    protractor_1.browser.driver.wait(until.visibilityOf(heart), MAX_TIME_WAIT, 'Heart Element taking too long to appear in the DOM');
+let MAX_TIME_WAIT = 15000;
+cucumber_1.When('User clicks on lease estimate tab', () => __awaiter(void 0, void 0, void 0, function* () {
+    var leaseTab = vdpPage.estimateTabs.get(0);
+    protractor_1.browser.driver.wait(until.visibilityOf(leaseTab), MAX_TIME_WAIT, 'Lease estimate tab element taking too long to appear in the DOM');
+    leaseTab.click();
+}));
+// When('User clicks on finance estimate tab', async () => {
+// });
+// When('User clicks on cash estimate tab', async () => {
+// });
+// When('User clicks on inventory save heart', async () => {
+//     var heart : ElementFinder = vdpPage.saveHearts.get(0);
+//     browser.driver.wait(until.visibilityOf(heart),MAX_TIME_WAIT,'Inventory save heart element taking too long to appear in the DOM');
+//     heart.click();
+// });
+cucumber_1.When('User clicks on estimate save heart', () => __awaiter(void 0, void 0, void 0, function* () {
+    var heart = vdpPage.saveHearts.get(1);
+    protractor_1.browser.driver.wait(until.visibilityOf(heart), MAX_TIME_WAIT, 'Lease estimate save heart element taking too long to appear in the DOM');
     heart.click();
 }));
-cucumber_1.Then('Inventory heart should turn active', () => __awaiter(void 0, void 0, void 0, function* () {
-    protractor_1.browser.driver.wait(until.visibilityOf(vdpPage.inventorySaveHeartActive), MAX_TIME_WAIT, 'Active heart Element taking too long to appear in the DOM');
-    chai_1.expect((yield vdpPage.inventorySaveHeartActive.isPresent()).valueOf()).to.be.true;
+cucumber_1.Then('Save heart should turn active', () => __awaiter(void 0, void 0, void 0, function* () {
+    protractor_1.browser.driver.wait(until.visibilityOf(vdpPage.saveHeartActive), MAX_TIME_WAIT, 'Save heart element taking too long to appear in the DOM');
+    chai_1.expect((yield vdpPage.saveHeartActive.isPresent()).valueOf()).to.be.true;
 }));
-cucumber_1.Then('Inventory heart tooltip should open', () => __awaiter(void 0, void 0, void 0, function* () {
-    chai_1.expect((yield vdpPage.inventorySaveHeartTooltip.isPresent()).valueOf()).to.be.true;
+cucumber_1.Then('Save heart tooltip should open', () => __awaiter(void 0, void 0, void 0, function* () {
+    chai_1.expect((yield vdpPage.saveHeartTooltip.isPresent()).valueOf()).to.be.true;
 }));
