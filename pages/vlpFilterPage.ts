@@ -56,6 +56,10 @@ export class VlpFilterPage {
     public vehicleSaveHeartActive : ElementFinder;
     public tooltip : ElementFinder; 
 
+    //GXP Top Nav
+    public profileIcon : ElementFinder;
+    public dgComponentMenuDropdownDesktop : ElementFinder;
+
 
     constructor() {
         this.modelDropDown = element(by.css(".model-name"));
@@ -113,5 +117,8 @@ export class VlpFilterPage {
         this.vehicleSaveHeart = element.all(by.css('.save-icon'));
         this.vehicleSaveHeartActive = element(by.css('.dg-encircle.active'));
         this.tooltip = element(by.css('.dg-tooltip'));
+
+        this.profileIcon = element(by.xpath('//*[@id="dg-component-nav-menu-desktop"]'));
+        this.dgComponentMenuDropdownDesktop = this.profileIcon.element(by.css('.dg-component-menu-dropdown'));
     }
 }
