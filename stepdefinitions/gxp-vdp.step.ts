@@ -1,12 +1,35 @@
 import { browser, By, element, ElementFinder, protractor } from "protractor"; 
 import { Then, When, Given, Before, BeforeAll, SummaryFormatter } from "cucumber";
+import { VlpFilterPage } from "../pages/vlpFilterPage";
 import { VdpPage } from "../pages/vdpPage";
 import { expect } from "chai";
 
+let vlpFilterPage : VlpFilterPage = new VlpFilterPage();
 let vdpPage : VdpPage = new VdpPage();
 let until = protractor.ExpectedConditions;
 
 let MAX_TIME_WAIT = 15000;
+
+Given('User is in Vehicle Details page GXP', async () =>{
+    await browser.get(
+        browser.params.url
+        +'/search'
+        +'?dealerCd='+browser.params.dealerCd
+        +'&source='+browser.params.source
+        +'&series=4runner'
+        +'&seriesDesc=4Runner'
+        +'&type=suvs'
+        +'&zipcode='+browser.params.zipcode
+    );
+    await browser.driver.sleep(10*1000);
+    await browser.driver.manage().deleteAllCookies();
+    await browser.driver.wait(
+        until.visibilityOf(vlpFilterPage.appCard.first()),
+        MAX_TIME_WAIT,
+        'VLP App Card Element taking too long to appear in the DOM'
+    );
+    await vlpFilterPage.appCard.first().click();
+});
 
 // When('User clicks on lease estimate tab', async () => {
 //     var leaseTab : ElementFinder = vdpPage.estimateTabs.get(0);
@@ -34,3 +57,5 @@ Then('Save heart should turn active', async () => {
 Then('Save heart tooltip should open', async () => {
     expect((await vdpPage.saveHeartTooltip.isPresent()).valueOf()).to.be.true;
 });
+
+
