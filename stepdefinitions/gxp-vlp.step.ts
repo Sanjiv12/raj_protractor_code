@@ -21,7 +21,6 @@ Given('User is in Vehicle List Page GXP', async () =>{
         +'&zipcode='+browser.params.zipcode
     );
     await browser.driver.sleep(10*1000);
-    browser.driver.manage().deleteAllCookies();
 });
 
 When('User clicks on a vehicle save heart', async () =>{

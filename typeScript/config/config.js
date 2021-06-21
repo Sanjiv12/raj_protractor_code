@@ -100,7 +100,8 @@ exports.config = {
         contactdealerleadforms: "../../features/**/contactDealerLeadForms.feature",
         checkout: "../../features/**/checkOut.feature",
         gxpvlp: "../../features/**/gxp-vlp.feature",
-        gxpvdp: "../../features/**/gxp-vdp.feature"
+        gxpvdp: "../../features/**/gxp-vdp.feature",
+        gxpsaves: "../../features/**/gxp-saves.feature"
     },
     onPrepare: () => __awaiter(void 0, void 0, void 0, function* () {
         protractor_1.browser.manage().window().maximize();

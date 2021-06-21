@@ -1,4 +1,4 @@
-Feature: GXP Vehicle List Page (VLP) Tests
+Feature: GXP Vehicle List Page (VLP)
 A MST-C user interacts with the VLP Page.
 
 # Save Hearts Section
@@ -6,6 +6,7 @@ A MST-C user interacts with the VLP Page.
 Scenario: VLP - Save Heart
 
   Given User is in Vehicle List Page GXP
+  And Cookies are cleared
   When User clicks on a vehicle save heart
   Then Heart should turn active
   And Tooltip should open
@@ -17,6 +18,7 @@ Scenario: VLP - Save Heart
 Scenario: VLP - Top Nav Dropdown Desktop Signed Out
 
   Given User is in Vehicle List Page GXP
+  And Cookies are cleared
   When User clicks the Top Nav Dropdown Menu icon
   Then The Top Nav Menu Dropdown should be visible
   And The Profile Icon should be in Selected state

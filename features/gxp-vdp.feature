@@ -1,4 +1,4 @@
-Feature: GXP VDP Save heart tests
+Feature: GXP Vehicle Details Page (VDP)
 A MST-C user clicks GXP hearts on the VDP page.
 
 # Save Hearts Section
@@ -6,6 +6,7 @@ A MST-C user clicks GXP hearts on the VDP page.
 Scenario: VDP - Save Hearts
 
   Given User is in Vehicle Details page GXP
+  And Cookies are cleared
   When User clicks on inventory save heart
   Then Save heart should turn active
   And Save heart tooltip should open
@@ -25,6 +26,7 @@ Scenario: VDP - Save Hearts
 Scenario: VDP - Top Nav Dropdown Desktop Signed Out
 
   Given User is in Vehicle Details page GXP
+  And Cookies are cleared
   When User clicks the Top Nav Dropdown Menu icon
   Then The Top Nav Menu Dropdown should be visible
   And The Profile Icon should be in Selected state

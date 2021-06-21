@@ -56,8 +56,6 @@ class VlpFilterPage {
         this.vehicleSaveHeart = protractor_1.element.all(protractor_1.by.css('.save-icon'));
         this.vehicleSaveHeartActive = protractor_1.element(protractor_1.by.css('.dg-encircle.active'));
         this.tooltip = protractor_1.element(protractor_1.by.css('.dg-tooltip'));
-        this.profileIcon = protractor_1.element(protractor_1.by.xpath('//*[@id="dg-component-nav-menu-desktop"]'));
-        this.dgComponentMenuDropdownDesktop = this.profileIcon.element(protractor_1.by.css('.dg-component-menu-dropdown'));
     }
 }
 exports.VlpFilterPage = VlpFilterPage;

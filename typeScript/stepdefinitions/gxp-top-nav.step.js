@@ -17,7 +17,7 @@ const chai_1 = require("chai");
 let createAccountPage = new createAccountPage_1.CreateAccountPage();
 let navMenu = new navMenu_1.NavMenu();
 let until = protractor_1.protractor.ExpectedConditions;
-let MAX_TIME_WAIT = 10000;
+let MAX_TIME_WAIT = 5000;
 // Signed Out Scenario
 // Uses Given Statement from VDP or VLP
 cucumber_1.When('User clicks the Top Nav Dropdown Menu icon', () => __awaiter(void 0, void 0, void 0, function* () {
@@ -121,7 +121,6 @@ cucumber_1.When('User clicks the Top Nav Dropdown Menu icon and Signs In', () =>
     yield protractor_1.browser.driver.wait(until.visibilityOf(createAccountPage.userPwd), MAX_TIME_WAIT, 'Password Element taking too long to appear in the DOM');
     yield createAccountPage.userPwd.sendKeys(password);
     yield createAccountPage.signInBtn.click();
-    yield protractor_1.browser.driver.sleep(10 * 1000);
     // Open Dropdown Menu
     protractor_1.browser.driver.wait(until.visibilityOf(navMenu.profileIcon), MAX_TIME_WAIT, 'Top Nav Profile Icon taking too long to appear in the DOM');
     navMenu.profileIcon.click();

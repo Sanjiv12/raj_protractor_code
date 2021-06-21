@@ -22,7 +22,6 @@ Given('User is in Vehicle Details page GXP', async () =>{
         +'&zipcode='+browser.params.zipcode
     );
     await browser.driver.sleep(10*1000);
-    await browser.driver.manage().deleteAllCookies();
     await browser.driver.wait(
         until.visibilityOf(vlpFilterPage.appCard.first()),
         MAX_TIME_WAIT,

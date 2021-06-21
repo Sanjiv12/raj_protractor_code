@@ -15,7 +15,7 @@ const vlpFilterPage_1 = require("../pages/vlpFilterPage");
 const chai_1 = require("chai");
 let vlpFilterPage = new vlpFilterPage_1.VlpFilterPage();
 let until = protractor_1.protractor.ExpectedConditions;
-let MAX_TIME_WAIT = 10000;
+let MAX_TIME_WAIT = 5000;
 // Save Hearts
 cucumber_1.Given('User is in Vehicle List Page GXP', () => __awaiter(void 0, void 0, void 0, function* () {
     yield protractor_1.browser.get(protractor_1.browser.params.url
@@ -27,7 +27,6 @@ cucumber_1.Given('User is in Vehicle List Page GXP', () => __awaiter(void 0, voi
         + '&type=suvs'
         + '&zipcode=' + protractor_1.browser.params.zipcode);
     yield protractor_1.browser.driver.sleep(10 * 1000);
-    protractor_1.browser.driver.manage().deleteAllCookies();
 }));
 cucumber_1.When('User clicks on a vehicle save heart', () => __awaiter(void 0, void 0, void 0, function* () {
     var heart = vlpFilterPage.vehicleSaveHeart.get(1);
