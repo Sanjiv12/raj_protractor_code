@@ -10,13 +10,6 @@ let until = protractor.ExpectedConditions;
 
 let MAX_TIME_WAIT = 5000;
 
-// ^(\s*)[A-Z]hen (.*?)"([a-zA-Z]+)"(.*?)$
-// Then('^$2\"(.*?)\"$4$', async (section) => { \n\n});
-
-Given('User is in Saves page GXP', async () => {
-    // Take no action, saves page already loaded
-});
-
 When('User loads the Saves page', async () => {
     browser.driver.wait(
         until.visibilityOf(navMenu.profileIcon),
@@ -34,6 +27,10 @@ When('User loads the Saves page', async () => {
         MAX_TIME_WAIT,
         'Saves Page taking too long to appear in the DOM'
     );
+});
+
+Given('User is in Saves page', async () => {
+    // Take no action, saves page already loaded
 });
 
 When('User views the Saves page', async () => {
@@ -89,30 +86,44 @@ Then(/Sidebar \"(.*?)\" Linkout should be \"(.*?)\"/, async (section: string, va
 });
 Then(/Sidebar \"(.*?)\" Linkout should link to \"(.*?)\"/, async (section: string, location: string) => {
     await browser.waitForAngular();
+    const originalUrl = await browser.getCurrentUrl();
     const linkout : ElementFinder = savesPage[section.toLowerCase()+"Link"];
     browser.driver.wait(
         until.visibilityOf(linkout),
         MAX_TIME_WAIT,
         section + ' Section Linkout taking too long to appear in the DOM'
     );
-    await linkout.click().then(() => {
-        browser.getAllWindowHandles().then((handles: string[]) => {
-            // Switch to Last Tab
-            browser.driver.switchTo().window(handles[handles.length-1]);
+    await linkout.click();
+    let handles : string[] = await browser.getAllWindowHandles();
+    
+    // Switch to Last Tab
+    await browser.driver.switchTo().window(handles[handles.length-1]);
 
-            // Check if url is what we expect
-            browser.getCurrentUrl().then((url) => {
-                expect(url).to.include(location);
-            });
+    // Check if url is what we expect, sleep to allow for redirects
+    await browser.driver.sleep(10*1000);
+    let currentUrl = await browser.getCurrentUrl();
+    expect(currentUrl).to.include(location);
 
-            // If more than one tab, close the tab
-            // Else navigate back
-            handles.length > 1 ? browser.driver.close() : browser.navigate().back();
+    // If there is only 1 tab, navigate back until we reach the original page
+    if (handles.length === 1) {
+        await browser.navigate().back();
+    
+        currentUrl = await browser.getCurrentUrl();
+        let backCommandCount = 0;
+        while (currentUrl != originalUrl && backCommandCount < 3) {
+            await browser.navigate().back();
+            backCommandCount++;
+            await browser.waitForAngular();
+            currentUrl = await browser.getCurrentUrl();
+        }
+    }
+    // If a new tab was opened, close the tab
+    else {
+        await browser.driver.close();
+    }
 
-            // Return to main page
-            browser.driver.switchTo().window(handles[0]);
-        });
-    });
+    // Return to main page
+    await browser.driver.switchTo().window(handles[0]);
 });
 
 // Scenario: Saves - SmartPath Header has correct structure

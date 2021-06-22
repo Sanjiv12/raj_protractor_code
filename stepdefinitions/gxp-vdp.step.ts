@@ -10,26 +10,6 @@ let until = protractor.ExpectedConditions;
 
 let MAX_TIME_WAIT = 15000;
 
-Given('User is in Vehicle Details page GXP', async () =>{
-    await browser.get(
-        browser.params.url
-        +'/search'
-        +'?dealerCd='+browser.params.dealerCd
-        +'&source='+browser.params.source
-        +'&series=4runner'
-        +'&seriesDesc=4Runner'
-        +'&type=suvs'
-        +'&zipcode='+browser.params.zipcode
-    );
-    await browser.driver.sleep(10*1000);
-    await browser.driver.wait(
-        until.visibilityOf(vlpFilterPage.appCard.first()),
-        MAX_TIME_WAIT,
-        'VLP App Card Element taking too long to appear in the DOM'
-    );
-    await vlpFilterPage.appCard.first().click();
-});
-
 // When('User clicks on lease estimate tab', async () => {
 //     var leaseTab : ElementFinder = vdpPage.estimateTabs.get(0);
 //     browser.driver.wait(until.visibilityOf(leaseTab),MAX_TIME_WAIT,'Lease estimate tab element taking too long to appear in the DOM');

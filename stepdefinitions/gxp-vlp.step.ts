@@ -9,20 +9,6 @@ let until = protractor.ExpectedConditions;
 let MAX_TIME_WAIT = 5000;
 
 // Save Hearts
-Given('User is in Vehicle List Page GXP', async () =>{
-    await browser.get(
-        browser.params.url
-        +'/search'
-        +'?dealerCd='+browser.params.dealerCd
-        +'&source='+browser.params.source
-        +'&series=4runner'
-        +'&seriesDesc=4Runner'
-        +'&type=suvs'
-        +'&zipcode='+browser.params.zipcode
-    );
-    await browser.driver.sleep(10*1000);
-});
-
 When('User clicks on a vehicle save heart', async () =>{
     var heart : ElementFinder = vlpFilterPage.vehicleSaveHeart.get(1);
     browser.driver.wait(until.visibilityOf(heart),MAX_TIME_WAIT,'Save Heart Element taking too long to appear in the DOM');

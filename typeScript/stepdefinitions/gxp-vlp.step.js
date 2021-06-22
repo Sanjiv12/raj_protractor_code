@@ -17,17 +17,6 @@ let vlpFilterPage = new vlpFilterPage_1.VlpFilterPage();
 let until = protractor_1.protractor.ExpectedConditions;
 let MAX_TIME_WAIT = 5000;
 // Save Hearts
-cucumber_1.Given('User is in Vehicle List Page GXP', () => __awaiter(void 0, void 0, void 0, function* () {
-    yield protractor_1.browser.get(protractor_1.browser.params.url
-        + '/search'
-        + '?dealerCd=' + protractor_1.browser.params.dealerCd
-        + '&source=' + protractor_1.browser.params.source
-        + '&series=4runner'
-        + '&seriesDesc=4Runner'
-        + '&type=suvs'
-        + '&zipcode=' + protractor_1.browser.params.zipcode);
-    yield protractor_1.browser.driver.sleep(10 * 1000);
-}));
 cucumber_1.When('User clicks on a vehicle save heart', () => __awaiter(void 0, void 0, void 0, function* () {
     var heart = vlpFilterPage.vehicleSaveHeart.get(1);
     protractor_1.browser.driver.wait(until.visibilityOf(heart), MAX_TIME_WAIT, 'Save Heart Element taking too long to appear in the DOM');

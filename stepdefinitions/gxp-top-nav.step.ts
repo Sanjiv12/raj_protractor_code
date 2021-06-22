@@ -14,95 +14,85 @@ let MAX_TIME_WAIT = 5000;
 // Uses Given Statement from VDP or VLP
 When('User clicks the Top Nav Dropdown Menu icon', async () => {
     // Perform click action
-    browser.driver.wait(
+    await browser.driver.wait(
         until.visibilityOf(navMenu.profileIcon),
         MAX_TIME_WAIT,
         'Top Nav Profile Icon taking too long to appear in the DOM'
     );
-    navMenu.profileIcon.click();
+    await navMenu.profileIcon.click();
 });
 
 Then('The Top Nav Menu Dropdown should be visible', async () => {
     // dg-component-menu-dropdown has class 'dg-open'
-    browser.driver.wait(until.visibilityOf(navMenu.dgComponentMenuDropdownDesktop),MAX_TIME_WAIT,'Dropdown Element taking too long to appear in the DOM');
+    await browser.driver.wait(until.visibilityOf(navMenu.dgComponentMenuDropdownDesktop),MAX_TIME_WAIT,'Dropdown Element taking too long to appear in the DOM');
     expect(await navMenu.dgComponentMenuDropdownDesktop.getAttribute('class')).to.contain('dg-open');
 });
 Then('The Profile Icon should be in Selected state', async () => {
     // dg-menu-dropdown-icon has class 'dg-selected-icon'
     expect(await navMenu.profileIcon.$('.dg-menu-dropdown-icon img').getAttribute('class')).to.contain('dg-selected-icon');
 });
-Then('Deals Linkout should be present', async() => {
-    // dg-menu-saves-page-linkout is present
-    expect(await navMenu.dgComponentMenuDropdownDesktop.$('#dg-menu-deals-page-linkout').isPresent()).to.be.true;
+Then(/Top Nav \"(.*?)\" Linkout should be present/, async (section: string) => {
+    await browser.driver.wait(until.visibilityOf(navMenu.dgComponentMenuDropdownDesktop),MAX_TIME_WAIT,'Dropdown Element taking too long to appear in the DOM');
+    expect(await navMenu.dgComponentMenuDropdownDesktop.$('#dg-menu-'+section.toLowerCase()+'-page-linkout').isPresent()).to.be.true;
 });
-Then('Deals Linkout should have Correct Text', async() => {
-    // dg-menu-saves-page-linkout has correct text
-    let correctText = "Buy Online"
+Then(/Top Nav \"(.*?)\" Linkout should not be present/, async (section: string) => {
+    await browser.driver.wait(until.visibilityOf(navMenu.dgComponentMenuDropdownDesktop),MAX_TIME_WAIT,'Dropdown Element taking too long to appear in the DOM');
+    expect(await navMenu.dgComponentMenuDropdownDesktop.$('#dg-menu-'+section.toLowerCase()+'-page-linkout').isPresent()).to.be.false;
+});
+Then(/Top Nav \"(.*?)\" Linkout Text should be \"(.*?)\"/, async (section: string, correctText: string) => {
+    await browser.driver.wait(until.visibilityOf(navMenu.dgComponentMenuDropdownDesktop),MAX_TIME_WAIT,'Dropdown Element taking too long to appear in the DOM');
     expect(
-        await navMenu.dgComponentMenuDropdownDesktop.$('#dg-menu-deals-page-linkout .dg-component-menu-text').getText()
+        await navMenu.dgComponentMenuDropdownDesktop.$('#dg-menu-'+section.toLowerCase()+'-page-linkout .dg-component-menu-text').getText()
     ).to.equal(correctText);
 });
-Then('Deals Linkout should link to Deals Page', async() => {
+
+Then(/Top Nav \"(.*?)\" Linkout should link to \"(.*?)\"/, async (section: string, location: string) => {
     // Click Saves Linkout, Check the Url, and then Navigate Back
-    await navMenu.dgComponentMenuDropdownDesktop.$('#dg-menu-deals-page-linkout').click().then(() => {
-        browser.getCurrentUrl().then((url) => {
-            expect(url).to.include(
-                '/my-deals?'
-                +'dealerCd='+browser.params.dealerCd
-                +'&source='+browser.params.source
-            );
-        });
-        browser.navigate().back();
-    });
-    browser.driver.wait(
-        until.visibilityOf(navMenu.profileIcon),
-        MAX_TIME_WAIT,
-        'Top Nav Profile Icon taking too long to appear in the DOM'
-    );
-    navMenu.profileIcon.click();
-});
-Then('Saves Linkout should be present', async() => {
-    // dg-menu-saves-page-linkout is present
-    browser.driver.wait(until.visibilityOf(navMenu.dgComponentMenuDropdownDesktop),MAX_TIME_WAIT,'Dropdown Element taking too long to appear in the DOM');
-    expect(await navMenu.dgComponentMenuDropdownDesktop.$('#dg-menu-saves-page-linkout').isPresent()).to.be.true;
-});
-Then('Saves Linkout should have Correct Text', async() => {
-    // dg-menu-saves-page-linkout has correct text
-    browser.driver.wait(until.visibilityOf(navMenu.dgComponentMenuDropdownDesktop),MAX_TIME_WAIT,'Dropdown Element taking too long to appear in the DOM');
-    let correctText = "My Saves";
-    expect(
-        await navMenu.dgComponentMenuDropdownDesktop.$('#dg-menu-saves-page-linkout .dg-component-menu-text').getText()
-    ).to.equal(correctText);
-});
-Then('Saves Linkout should link to Saves Page', async() => {
-    // Click Saves Linkout, Check the Url, and then Navigate Back
-    browser.driver.wait(until.visibilityOf(navMenu.dgComponentMenuDropdownDesktop),MAX_TIME_WAIT,'Dropdown Element taking too long to appear in the DOM');
-    await navMenu.dgComponentMenuDropdownDesktop.$('#dg-menu-saves-page-linkout').click().then(() => {
-        browser.getCurrentUrl().then((url) => {
-            expect(url).to.include(
-                '/saves?'
-                +'dealerCd='+browser.params.dealerCd
-                +'&source='+browser.params.source
-            );
-        });
-        browser.navigate().back();
-    });
-    browser.driver.wait(
-        until.visibilityOf(navMenu.profileIcon),
-        MAX_TIME_WAIT,
-        'Top Nav Profile Icon taking too long to appear in the DOM'
-    );
-    navMenu.profileIcon.click();
-});
-Then('Owners Linkout should not be present', async() => {
-    // dg-menu-owners-page-linkout is present
-    browser.driver.wait(until.visibilityOf(navMenu.dgComponentMenuDropdownDesktop),MAX_TIME_WAIT,'Dropdown Element taking too long to appear in the DOM');
-    expect(await navMenu.dgComponentMenuDropdownDesktop.$('#dg-menu-owners-page-linkout').isPresent()).to.be.false;
+    await browser.driver.wait(until.visibilityOf(navMenu.dgComponentMenuDropdownDesktop),MAX_TIME_WAIT,'Dropdown Element taking too long to appear in the DOM');
+    const originalUrl = await browser.getCurrentUrl();
+    await navMenu.dgComponentMenuDropdownDesktop.$('#dg-menu-'+section.toLowerCase()+'-page-linkout').click();
+
+    let handles : string[] = await browser.getAllWindowHandles();
+    
+    // Switch to Last Tab
+    await browser.driver.switchTo().window(handles[handles.length-1]);
+
+    // Check if url is what we expect, sleep to allow for redirects
+    await browser.driver.sleep(10*1000);
+    let currentUrl = await browser.getCurrentUrl();
+    expect(currentUrl).to.include(location);
+
+    // If there is only 1 tab, navigate back until we reach the original page
+    if (handles.length === 1) {
+        await browser.navigate().back();
+    
+        currentUrl = await browser.getCurrentUrl();
+        let backCommandCount = 0;
+        while (currentUrl != originalUrl && backCommandCount < 3) {
+            await browser.navigate().back();
+            backCommandCount++;
+            await browser.waitForAngular();
+            currentUrl = await browser.getCurrentUrl();
+        }
+        await browser.driver.wait(
+            until.visibilityOf(navMenu.profileIcon),
+            MAX_TIME_WAIT,
+            'Top Nav Profile Icon taking too long to appear in the DOM'
+        );
+        await navMenu.profileIcon.click();
+    }
+    // If a new tab was opened, close the tab
+    else {
+        await browser.driver.close();
+    }
+
+    // Return to main page
+    await browser.driver.switchTo().window(handles[0]);
 });
 Then('Temporary Saved Items Message should be present', async () => {
     // dg-menu-message is the correct text
-    browser.driver.wait(until.visibilityOf(navMenu.dgComponentMenuDropdownDesktop),MAX_TIME_WAIT,'Dropdown Element taking too long to appear in the DOM');
-    navMenu.dgComponentMenuDropdownDesktop.$$('.dg-menu-dropdown-login .dg-menu-message').then(
+    await browser.driver.wait(until.visibilityOf(navMenu.dgComponentMenuDropdownDesktop),MAX_TIME_WAIT,'Dropdown Element taking too long to appear in the DOM');
+    await navMenu.dgComponentMenuDropdownDesktop.$$('.dg-menu-dropdown-login .dg-menu-message').then(
         async (messages: ElementFinder[]) => {
             expect(await messages[0].getText()).to.equal('These saved items are temporary.')
             expect(await messages[1].getText()).to.equal('Create an account to permanently save your selections.')
@@ -111,12 +101,12 @@ Then('Temporary Saved Items Message should be present', async () => {
 });
 Then('Create Account Button should be present', async () => {
     // dg-register-btn exists
-    browser.driver.wait(until.visibilityOf(navMenu.dgComponentMenuDropdownDesktop),MAX_TIME_WAIT,'Dropdown Element taking too long to appear in the DOM');
+    await browser.driver.wait(until.visibilityOf(navMenu.dgComponentMenuDropdownDesktop),MAX_TIME_WAIT,'Dropdown Element taking too long to appear in the DOM');
     expect(await navMenu.dgComponentMenuDropdownDesktop.$('#dg-register-btn').isPresent()).to.be.true;
 });
 Then('Sign In Button should be present', async() => {
     // dg-login-btn exists
-    browser.driver.wait(until.visibilityOf(navMenu.dgComponentMenuDropdownDesktop),MAX_TIME_WAIT,'Dropdown Element taking too long to appear in the DOM');
+    await browser.driver.wait(until.visibilityOf(navMenu.dgComponentMenuDropdownDesktop),MAX_TIME_WAIT,'Dropdown Element taking too long to appear in the DOM');
     expect(await navMenu.dgComponentMenuDropdownDesktop.$('#dg-login-btn').isPresent()).to.be.true;
 });
 
@@ -151,47 +141,21 @@ When('User clicks the Top Nav Dropdown Menu icon and Signs In', async () => {
     await createAccountPage.signInBtn.click();
 
     // Open Dropdown Menu
-    browser.driver.wait(
+    await browser.driver.wait(
         until.visibilityOf(navMenu.profileIcon),
         MAX_TIME_WAIT,
         'Top Nav Profile Icon taking too long to appear in the DOM'
     );
-    navMenu.profileIcon.click();
-});
-Then('Owners Linkout should be present', async() => {
-    // dg-menu-owners-page-linkout is present
-    browser.driver.wait(until.visibilityOf(navMenu.dgComponentMenuDropdownDesktop),MAX_TIME_WAIT,'Dropdown Element taking too long to appear in the DOM');
-    expect(await navMenu.dgComponentMenuDropdownDesktop.$('#dg-menu-owners-page-linkout').isPresent()).to.be.true;
-});
-Then('Owners Linkout should have Correct Text', async() => {
-    // dg-menu-owners-page-linkout has correct text
-    let correctText = "My Vehicles"
-    expect(
-        await navMenu.dgComponentMenuDropdownDesktop.$('#dg-menu-owners-page-linkout .dg-component-menu-text').getText()
-    ).to.equal(correctText);
-});
-Then('Owners Linkout should link to Owners Page', async() => {
-    // Click Owners Linkout, Switch Tabs, Check the Url, and then Navigate Back
-    browser.driver.wait(until.visibilityOf(navMenu.dgComponentMenuDropdownDesktop),MAX_TIME_WAIT,'Dropdown Element taking too long to appear in the DOM');
-    await navMenu.dgComponentMenuDropdownDesktop.$('#dg-menu-owners-page-linkout').click().then(() => {
-        browser.getAllWindowHandles().then((handles) => {
-            browser.driver.switchTo().window(handles[1]);
-            browser.getCurrentUrl().then((url) => {
-                expect(url).to.include('/owners');
-            });
-            browser.driver.close();
-            browser.driver.switchTo().window(handles[0]);
-        });
-    });
+    await navMenu.profileIcon.click();
 });
 Then('Account Button should be present', async() => {
     // dg-account-btn exists
-    browser.driver.wait(until.visibilityOf(navMenu.dgComponentMenuDropdownDesktop),MAX_TIME_WAIT,'Dropdown Element taking too long to appear in the DOM');
+    await browser.driver.wait(until.visibilityOf(navMenu.dgComponentMenuDropdownDesktop),MAX_TIME_WAIT,'Dropdown Element taking too long to appear in the DOM');
     expect(await navMenu.dgComponentMenuDropdownDesktop.$('#dg-account-btn').isPresent()).to.be.true;
 });
 Then('Sign Out Button should be present', async() => {
     // dg-logout-btn exists
-    browser.driver.wait(until.visibilityOf(navMenu.dgComponentMenuDropdownDesktop),MAX_TIME_WAIT,'Dropdown Element taking too long to appear in the DOM');
+    await browser.driver.wait(until.visibilityOf(navMenu.dgComponentMenuDropdownDesktop),MAX_TIME_WAIT,'Dropdown Element taking too long to appear in the DOM');
     expect(await navMenu.dgComponentMenuDropdownDesktop.$('#dg-logout-btn').isPresent()).to.be.true;
-    navMenu.dgComponentMenuDropdownDesktop.$('#dg-logout-btn').click();
+    await navMenu.dgComponentMenuDropdownDesktop.$('#dg-logout-btn').click();
 });

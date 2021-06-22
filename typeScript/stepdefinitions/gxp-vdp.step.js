@@ -28,7 +28,6 @@ cucumber_1.Given('User is in Vehicle Details page GXP', () => __awaiter(void 0, 
         + '&type=suvs'
         + '&zipcode=' + protractor_1.browser.params.zipcode);
     yield protractor_1.browser.driver.sleep(10 * 1000);
-    yield protractor_1.browser.driver.manage().deleteAllCookies();
     yield protractor_1.browser.driver.wait(until.visibilityOf(vlpFilterPage.appCard.first()), MAX_TIME_WAIT, 'VLP App Card Element taking too long to appear in the DOM');
     yield vlpFilterPage.appCard.first().click();
 }));

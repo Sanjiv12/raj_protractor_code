@@ -5,14 +5,13 @@ A MST-C user opens their My Saves page.
 # ====================================================================================
 Scenario: Saves - Profile Icon is visible
 
-  Given User is in Vehicle List Page GXP
-  And Cookies are cleared
+  Given User is in Vehicle List page
   When User loads the Saves page
   Then The Profile Icon should be visible
 
 Scenario: Saves - Sidebar Has Correct Structure
 
-  Given User is in Saves page GXP
+  Given User is in Saves page
   When User views the Saves page
   Then Sidebar Component should be visible
   And Sidebar "Deals" Linkout should be present
@@ -33,27 +32,27 @@ Scenario: Saves - Sidebar Has Correct Structure
 
 Scenario: Saves - SmartPath Header has correct structure
 
-  Given User is in Saves page GXP
+  Given User is in Saves page
   When User views the Saves page
   Then SmartPath Header is "My Saves"
   And SmartPath progress bar is visible
 
 Scenario: Saves - Sticky Header has correct structure
 
-  Given User is in Saves page GXP
+  Given User is in Saves page
   When User views the Saves page
   Then Sticky Header is visible
   And Name of dealership is present
 
 Scenario: Saves - Temporary Saves Banner is present
 
-  Given User is in Saves page GXP
+  Given User is in Saves page
   When User views the Saves page
   Then Temporary Saves banner is visible
 
 Scenario: Saves - Empty Saved Inventory Section has correct structure
 
-  Given User is in Saves page GXP
+  Given User is in Saves page
   When User views the Saves page
   Then Saved "Inventory" Header is "Saved Inventory"
   And Saved "Inventory" SubHeader is "Save vehicles you're interested in and track their availablility."
@@ -63,7 +62,7 @@ Scenario: Saves - Empty Saved Inventory Section has correct structure
 
 Scenario: Saves - Empty Saved Offers Section has correct structure
 
-  Given User is in Saves page GXP
+  Given User is in Saves page
   When User views the Saves page
   Then Saved "Offer" Header is "Saved Offers"
   And Saved "Offer" SubHeader is "Save offers so you won't miss out on a deal."
@@ -73,7 +72,7 @@ Scenario: Saves - Empty Saved Offers Section has correct structure
 
 Scenario: Saves - Empty Saved Searches Section has correct structure
 
-  Given User is in Saves page GXP
+  Given User is in Saves page
   When User views the Saves page
   Then Saved "Search" Header is "Saved Searches"
   And Saved "Search" SubHeader is "Save searches to easily look for new matching inventory."
@@ -83,7 +82,7 @@ Scenario: Saves - Empty Saved Searches Section has correct structure
 
 Scenario: Saves - Empty Saved Builds Section has correct structure
 
-  Given User is in Saves page GXP
+  Given User is in Saves page
   When User views the Saves page
   Then Saved "Build" Header is "Saved Builds"
   And Saved "Build" SubHeader is "Save builds to find inventory that matches your ideal vehicle."
@@ -99,7 +98,7 @@ Scenario: Saves - Saved Inventory Section shows saved vehicle
 
 Scenario: Saves - Division Line Count is Correct
   
-  Given User is in Saves page GXP
+  Given User is in Saves page
   When User views the Saves page
   Then "3" Dividers are present
 

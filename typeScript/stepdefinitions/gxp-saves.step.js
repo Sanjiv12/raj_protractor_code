@@ -18,11 +18,6 @@ let navMenu = new navMenu_1.NavMenu();
 let savesPage = new savesPage_1.SavesPage();
 let until = protractor_1.protractor.ExpectedConditions;
 let MAX_TIME_WAIT = 5000;
-// ^(\s*)[A-Z]hen (.*?)"([a-zA-Z]+)"(.*?)$
-// Then('^$2\"(.*?)\"$4$', async (section) => { \n\n});
-cucumber_1.Given('User is in Saves page GXP', () => __awaiter(void 0, void 0, void 0, function* () {
-    // Take no action, saves page already loaded
-}));
 cucumber_1.When('User loads the Saves page', () => __awaiter(void 0, void 0, void 0, function* () {
     protractor_1.browser.driver.wait(until.visibilityOf(navMenu.profileIcon), MAX_TIME_WAIT, 'Top Nav Profile Icon taking too long to appear in the DOM');
     navMenu.profileIcon.click();
@@ -31,6 +26,9 @@ cucumber_1.When('User loads the Saves page', () => __awaiter(void 0, void 0, voi
     yield navMenu.dgComponentMenuDropdownDesktop.$('#dg-menu-saves-page-linkout').click();
     yield protractor_1.browser.driver.sleep(10 * 1000);
     protractor_1.browser.driver.wait(until.visibilityOf(savesPage.standaloneContainer), MAX_TIME_WAIT, 'Saves Page taking too long to appear in the DOM');
+}));
+cucumber_1.Given('User is in Saves page', () => __awaiter(void 0, void 0, void 0, function* () {
+    // Take no action, saves page already loaded
 }));
 cucumber_1.When('User views the Saves page', () => __awaiter(void 0, void 0, void 0, function* () {
     // Take no action, saves page already loaded
@@ -67,23 +65,35 @@ cucumber_1.Then(/Sidebar \"(.*?)\" Linkout should be \"(.*?)\"/, (section, value
 }));
 cucumber_1.Then(/Sidebar \"(.*?)\" Linkout should link to \"(.*?)\"/, (section, location) => __awaiter(void 0, void 0, void 0, function* () {
     yield protractor_1.browser.waitForAngular();
+    const originalUrl = yield protractor_1.browser.getCurrentUrl();
     const linkout = savesPage[section.toLowerCase() + "Link"];
     protractor_1.browser.driver.wait(until.visibilityOf(linkout), MAX_TIME_WAIT, section + ' Section Linkout taking too long to appear in the DOM');
-    yield linkout.click().then(() => {
-        protractor_1.browser.getAllWindowHandles().then((handles) => {
-            // Switch to Last Tab
-            protractor_1.browser.driver.switchTo().window(handles[handles.length - 1]);
-            // Check if url is what we expect
-            protractor_1.browser.getCurrentUrl().then((url) => {
-                chai_1.expect(url).to.include(location);
-            });
-            // If more than one tab, close the tab
-            // Else navigate back
-            handles.length > 1 ? protractor_1.browser.driver.close() : protractor_1.browser.navigate().back();
-            // Return to main page
-            protractor_1.browser.driver.switchTo().window(handles[0]);
-        });
-    });
+    yield linkout.click();
+    let handles = yield protractor_1.browser.getAllWindowHandles();
+    // Switch to Last Tab
+    yield protractor_1.browser.driver.switchTo().window(handles[handles.length - 1]);
+    // Check if url is what we expect, sleep to allow for redirects
+    yield protractor_1.browser.driver.sleep(10 * 1000);
+    let currentUrl = yield protractor_1.browser.getCurrentUrl();
+    chai_1.expect(currentUrl).to.include(location);
+    // If there is only 1 tab, navigate back until we reach the original page
+    if (handles.length === 1) {
+        yield protractor_1.browser.navigate().back();
+        currentUrl = yield protractor_1.browser.getCurrentUrl();
+        let backCommandCount = 0;
+        while (currentUrl != originalUrl && backCommandCount < 3) {
+            yield protractor_1.browser.navigate().back();
+            backCommandCount++;
+            yield protractor_1.browser.waitForAngular();
+            currentUrl = yield protractor_1.browser.getCurrentUrl();
+        }
+    }
+    // If a new tab was opened, close the tab
+    else {
+        yield protractor_1.browser.driver.close();
+    }
+    // Return to main page
+    yield protractor_1.browser.driver.switchTo().window(handles[0]);
 }));
 // Scenario: Saves - SmartPath Header has correct structure
 cucumber_1.Then(/SmartPath Header is \"(.*?)\"/, (value) => __awaiter(void 0, void 0, void 0, function* () {
