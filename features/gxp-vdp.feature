@@ -10,14 +10,6 @@ Scenario: VDP - Save Hearts
   Then Save heart should turn active
   And Save heart tooltip should open
 
-# Scenario: VDP - Lease Estimate Save Heart
-
-#   Given User is in Vehicle Details page
-#   When User clicks on lease estimate tab
-#   And User clicks on estimate save heart
-#   Then Save heart should turn active
-#   And Save heart tooltip should open
-
 # ====================================================================================
 
 # Top Nav Section
