@@ -316,7 +316,7 @@ Then(/\"(.*?)\" Dividers are present/, async (dividerCount: string) => {
 });
 
 Then('Saved Estimates are visible in Saves Page', async () => {
-    await browser.driver.sleep(20*1000);
+    await browser.driver.sleep(30*1000);
     navMenu.profileIcon.click();
     
     // Click Saves Linkout, Check the Url, and then Navigate Back

@@ -229,7 +229,7 @@ cucumber_1.Then(/\"(.*?)\" Dividers are present/, (dividerCount) => __awaiter(vo
     chai_1.expect((yield savesPage.divisionLines).length).to.equal(count);
 }));
 cucumber_1.Then('Saved Estimates are visible in Saves Page', () => __awaiter(void 0, void 0, void 0, function* () {
-    yield protractor_1.browser.driver.sleep(20 * 1000);
+    yield protractor_1.browser.driver.sleep(30 * 1000);
     navMenu.profileIcon.click();
     // Click Saves Linkout, Check the Url, and then Navigate Back
     protractor_1.browser.driver.wait(until.visibilityOf(navMenu.dgComponentMenuDropdownDesktop), MAX_TIME_WAIT, 'Dropdown Element taking too long to appear in the DOM');
