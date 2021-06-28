@@ -18,34 +18,11 @@ let vlpFilterPage = new vlpFilterPage_1.VlpFilterPage();
 let vdpPage = new vdpPage_1.VdpPage();
 let until = protractor_1.protractor.ExpectedConditions;
 let MAX_TIME_WAIT = 15000;
-cucumber_1.Given('User is in Vehicle Details page GXP', () => __awaiter(void 0, void 0, void 0, function* () {
-    yield protractor_1.browser.get(protractor_1.browser.params.url
-        + '/search'
-        + '?dealerCd=' + protractor_1.browser.params.dealerCd
-        + '&source=' + protractor_1.browser.params.source
-        + '&series=4runner'
-        + '&seriesDesc=4Runner'
-        + '&type=suvs'
-        + '&zipcode=' + protractor_1.browser.params.zipcode);
-    yield protractor_1.browser.driver.sleep(10 * 1000);
-    yield protractor_1.browser.driver.wait(until.visibilityOf(vlpFilterPage.appCard.first()), MAX_TIME_WAIT, 'VLP App Card Element taking too long to appear in the DOM');
-    yield vlpFilterPage.appCard.first().click();
-}));
-// When('User clicks on lease estimate tab', async () => {
-//     var leaseTab : ElementFinder = vdpPage.estimateTabs.get(0);
-//     browser.driver.wait(until.visibilityOf(leaseTab),MAX_TIME_WAIT,'Lease estimate tab element taking too long to appear in the DOM');
-//     leaseTab.click();
-// });
 cucumber_1.When('User clicks on inventory save heart', () => __awaiter(void 0, void 0, void 0, function* () {
     var heart = vdpPage.saveHearts.get(0);
     protractor_1.browser.driver.wait(until.visibilityOf(heart), MAX_TIME_WAIT, 'Inventory save heart element taking too long to appear in the DOM');
     heart.click();
 }));
-// When('User clicks on estimate save heart', async () => {
-//     var heart : ElementFinder = vdpPage.saveHearts.get(1);
-//     browser.driver.wait(until.visibilityOf(heart),MAX_TIME_WAIT,'Lease estimate save heart element taking too long to appear in the DOM');
-//     heart.click();
-// });
 cucumber_1.Then('Save heart should turn active', () => __awaiter(void 0, void 0, void 0, function* () {
     protractor_1.browser.driver.wait(until.visibilityOf(vdpPage.saveHeartActive), MAX_TIME_WAIT, 'Save heart element taking too long to appear in the DOM');
     chai_1.expect((yield vdpPage.saveHeartActive.isPresent()).valueOf()).to.be.true;

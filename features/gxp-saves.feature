@@ -103,3 +103,13 @@ Scenario: Saves - Division Line Count is Correct
   Then "3" Dividers are present
 
 # ====================================================================================
+
+# Saved Estimates Section
+# ====================================================================================
+
+Scenario: Saves - Saved Inventory Section shows saved estimates
+
+  Given User is in Vehicle Details page
+  When User clicks on estimate save heart for all estimates
+  Then Saved Estimates are visible in Saves Page
+  And Saved Estimates match estimate details from VDP

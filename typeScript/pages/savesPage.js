@@ -29,6 +29,9 @@ class SavesPage {
         this.inventoryPaginator = protractor_1.element(protractor_1.by.xpath('//*[@id="dg-section-inv"]/div/div[2]/div[2]'));
         this.inventoryButton = protractor_1.element(protractor_1.by.xpath('//*[@id="dg-inv-button"]'));
         this.inventoryCards = protractor_1.element.all(protractor_1.by.css("#dg-section-inv .dg-card-wrapper"));
+        // Estimates
+        this.viewEstimatesButton = protractor_1.element.all(protractor_1.by.css("#dg-content-frame .dg-estimates-cta .dg-estimates-link-btn"));
+        this.estimatesCards = protractor_1.element.all(protractor_1.by.className('dg-estimate'));
         // Offer Section
         this.offerSection = protractor_1.element(protractor_1.by.xpath('//*[@id="dg-section-offer"]'));
         this.offerSectionHeader = protractor_1.element(protractor_1.by.xpath('//*[@id="dg-section-offer"]/div/div[1]'));

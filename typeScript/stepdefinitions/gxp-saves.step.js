@@ -12,12 +12,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const protractor_1 = require("protractor");
 const cucumber_1 = require("cucumber");
 const savesPage_1 = require("../pages/savesPage");
+const vdpPage_1 = require("../pages/vdpPage");
 const navMenu_1 = require("../pages/navMenu");
 const chai_1 = require("chai");
-let navMenu = new navMenu_1.NavMenu();
 let savesPage = new savesPage_1.SavesPage();
+let vdpPage = new vdpPage_1.VdpPage();
+let navMenu = new navMenu_1.NavMenu();
 let until = protractor_1.protractor.ExpectedConditions;
 let MAX_TIME_WAIT = 5000;
+let vdpEstimateDetails = new Map();
 cucumber_1.When('User loads the Saves page', () => __awaiter(void 0, void 0, void 0, function* () {
     protractor_1.browser.driver.wait(until.visibilityOf(navMenu.profileIcon), MAX_TIME_WAIT, 'Top Nav Profile Icon taking too long to appear in the DOM');
     navMenu.profileIcon.click();
@@ -26,6 +29,36 @@ cucumber_1.When('User loads the Saves page', () => __awaiter(void 0, void 0, voi
     yield navMenu.dgComponentMenuDropdownDesktop.$('#dg-menu-saves-page-linkout').click();
     yield protractor_1.browser.driver.sleep(10 * 1000);
     protractor_1.browser.driver.wait(until.visibilityOf(savesPage.standaloneContainer), MAX_TIME_WAIT, 'Saves Page taking too long to appear in the DOM');
+}));
+cucumber_1.When('User clicks on estimate save heart for all estimates', () => __awaiter(void 0, void 0, void 0, function* () {
+    // Lease
+    var leaseTab = vdpPage.estimateTabs.get(0);
+    protractor_1.browser.driver.wait(until.visibilityOf(leaseTab), MAX_TIME_WAIT, 'Lease estimate tab element taking too long to appear in the DOM');
+    leaseTab.click();
+    vdpPage.estimateAmount.getText().then(function (monthly) {
+        vdpEstimateDetails.set('lease', monthly);
+    });
+    var heart = vdpPage.saveHearts.get(1);
+    protractor_1.browser.driver.wait(until.visibilityOf(heart), MAX_TIME_WAIT, 'Lease estimate save heart element taking too long to appear in the DOM');
+    heart.click();
+    // Finance
+    var financeTab = vdpPage.estimateTabs.get(1);
+    protractor_1.browser.driver.wait(until.visibilityOf(financeTab), MAX_TIME_WAIT, 'Finance estimate tab element taking too long to appear in the DOM');
+    financeTab.click();
+    vdpPage.estimateAmount.getText().then(function (monthly) {
+        vdpEstimateDetails.set('finance', monthly);
+    });
+    protractor_1.browser.driver.wait(until.visibilityOf(heart), MAX_TIME_WAIT, 'Finance estimate save heart element taking too long to appear in the DOM');
+    heart.click();
+    // Cash
+    var cashTab = vdpPage.estimateTabs.get(2);
+    protractor_1.browser.driver.wait(until.visibilityOf(cashTab), MAX_TIME_WAIT, 'Cash estimate tab element taking too long to appear in the DOM');
+    cashTab.click();
+    vdpPage.estimateAmount.getText().then(function (monthly) {
+        vdpEstimateDetails.set('cash', monthly);
+    });
+    protractor_1.browser.driver.wait(until.visibilityOf(heart), MAX_TIME_WAIT, 'Cash estimate save heart element taking too long to appear in the DOM');
+    heart.click();
 }));
 cucumber_1.Given('User is in Saves page', () => __awaiter(void 0, void 0, void 0, function* () {
     // Take no action, saves page already loaded
@@ -194,4 +227,33 @@ cucumber_1.Then('Saved Vehicle is visible in Saves Page', () => __awaiter(void 0
 cucumber_1.Then(/\"(.*?)\" Dividers are present/, (dividerCount) => __awaiter(void 0, void 0, void 0, function* () {
     const count = parseInt(dividerCount);
     chai_1.expect((yield savesPage.divisionLines).length).to.equal(count);
+}));
+cucumber_1.Then('Saved Estimates are visible in Saves Page', () => __awaiter(void 0, void 0, void 0, function* () {
+    yield protractor_1.browser.driver.sleep(30 * 1000); // make sure cash estimate tab is visible and heart icon is active
+    navMenu.profileIcon.click();
+    // Click Saves Linkout, Check the Url, and then Navigate Back
+    protractor_1.browser.driver.wait(until.visibilityOf(navMenu.dgComponentMenuDropdownDesktop), MAX_TIME_WAIT, 'Dropdown Element taking too long to appear in the DOM');
+    yield navMenu.dgComponentMenuDropdownDesktop.$('#dg-menu-saves-page-linkout').click();
+    yield protractor_1.browser.driver.sleep(10 * 1000);
+    const viewEstimates = savesPage.viewEstimatesButton.first();
+    viewEstimates.click();
+    protractor_1.browser.driver.wait(until.visibilityOf(savesPage.estimatesCards.first()), MAX_TIME_WAIT, 'Estimate frame element taking too long to appear in the DOM');
+    chai_1.expect(yield savesPage.estimatesCards.first().isPresent()).to.be.true;
+}));
+cucumber_1.Then('Saved Estimates match estimate details from VDP', () => __awaiter(void 0, void 0, void 0, function* () {
+    var cashEstimate = savesPage.estimatesCards.get(0);
+    var financeEstimate = savesPage.estimatesCards.get(1);
+    var leaseEstimate = savesPage.estimatesCards.get(2);
+    var savesPageEstimateDetails = new Map();
+    cashEstimate.element(protractor_1.by.css('.dg-num-months-label')).getText().then(function (amount) {
+        savesPageEstimateDetails.set('cash', amount);
+    });
+    financeEstimate.element(protractor_1.by.css('.dg-offer-per-month-amount')).getText().then(function (amount) {
+        savesPageEstimateDetails.set('finance', amount);
+    });
+    leaseEstimate.element(protractor_1.by.css('.dg-offer-per-month-amount')).getAttribute('innerHTML').then(function (amount) {
+        savesPageEstimateDetails.set('lease', amount);
+    });
+    yield protractor_1.browser.driver.sleep(MAX_TIME_WAIT);
+    chai_1.expect(vdpEstimateDetails).to.eql(savesPageEstimateDetails);
 }));
