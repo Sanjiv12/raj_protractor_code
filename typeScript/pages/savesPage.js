@@ -31,7 +31,10 @@ class SavesPage {
         this.inventoryCards = protractor_1.element.all(protractor_1.by.css("#dg-section-inv .dg-card-wrapper"));
         // Estimates
         this.viewEstimatesButton = protractor_1.element.all(protractor_1.by.css("#dg-content-frame .dg-estimates-cta .dg-estimates-link-btn"));
+        this.estimatePaymentsButton = protractor_1.element.all(protractor_1.by.css("#dg-content-frame .dg-estimates-cta-no-estimates"));
+        this.estimateFrames = protractor_1.element.all(protractor_1.by.css(".dg-estimate-frame"));
         this.estimatesCards = protractor_1.element.all(protractor_1.by.className('dg-estimate'));
+        this.estimateSaveHearts = protractor_1.element.all(protractor_1.by.css(".dg-heart-icon"));
         // Offer Section
         this.offerSection = protractor_1.element(protractor_1.by.xpath('//*[@id="dg-section-offer"]'));
         this.offerSectionHeader = protractor_1.element(protractor_1.by.xpath('//*[@id="dg-section-offer"]/div/div[1]'));

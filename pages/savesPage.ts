@@ -26,8 +26,11 @@ export class SavesPage {
     public inventoryButton : ElementFinder;
     public inventoryCards : ElementArrayFinder;
 
+    public estimatePaymentsButton : ElementArrayFinder;
     public viewEstimatesButton : ElementArrayFinder;
+    public estimateFrames : ElementArrayFinder;
     public estimatesCards : ElementArrayFinder;
+    public estimateSaveHearts : ElementArrayFinder;
 
     public offerSection : ElementFinder;
     public offerSectionHeader : ElementFinder;
@@ -79,7 +82,10 @@ export class SavesPage {
         
         // Estimates
         this.viewEstimatesButton = element.all(by.css("#dg-content-frame .dg-estimates-cta .dg-estimates-link-btn"));
+        this.estimatePaymentsButton = element.all(by.css("#dg-content-frame .dg-estimates-cta-no-estimates"));
+        this.estimateFrames = element.all(by.css(".dg-estimate-frame"));
         this.estimatesCards = element.all(by.className('dg-estimate'));
+        this.estimateSaveHearts = element.all(by.css(".dg-heart-icon"));
 
         // Offer Section
         this.offerSection = element(by.xpath('//*[@id="dg-section-offer"]'));

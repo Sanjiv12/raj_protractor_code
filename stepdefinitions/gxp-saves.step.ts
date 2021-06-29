@@ -71,6 +71,21 @@ When('User clicks on estimate save heart for all estimates', async () => {
     heart.click();
 });
 
+When('User unsaves estimates on Saves page', async () => {
+    var numCards =  await savesPage.estimatesCards.count();
+
+    for(var i = 0; i < numCards; i++) {
+        var estimate = savesPage.estimatesCards.get(0);
+
+        estimate.element(by.css('.dg-heart-icon')).click();
+        var removeEstimateCta = estimate.element(by.css('.dg-delete-overlay-remove'));
+        browser.driver.wait(until.visibilityOf(removeEstimateCta),MAX_TIME_WAIT,'Remove estimate element taking too long to appear in the DOM');
+        removeEstimateCta.click();
+
+        await browser.driver.sleep(MAX_TIME_WAIT);
+    }
+});
+
 Given('User is in Saves page', async () => {
     // Take no action, saves page already loaded
 });
@@ -339,7 +354,7 @@ Then('Saved Estimates match estimate details from VDP', async () => {
 
     var savesPageEstimateDetails : Map<string, string> = new Map();
 
-    cashEstimate.element(by.css('.dg-num-months-label')).getText().then(function(amount) {
+    cashEstimate.element(by.css('.dg-offer-amount')).getText().then(function(amount) {
         savesPageEstimateDetails.set('cash', amount);
     });
 
@@ -353,4 +368,10 @@ Then('Saved Estimates match estimate details from VDP', async () => {
 
     await browser.driver.sleep(MAX_TIME_WAIT);
     expect(vdpEstimateDetails).to.eql(savesPageEstimateDetails);
+});
+
+Then('Estimates should disappear from inventory card', async () => {
+    browser.driver.wait(until.visibilityOf(savesPage.estimatePaymentsButton.first()),MAX_TIME_WAIT,'View estimates button element taking too long to appear in the DOM');
+
+    expect(await savesPage.estimatePaymentsButton.first().isPresent()).to.be.true;
 });
