@@ -46,6 +46,9 @@ export class SavesPage {
     public buildSectionSubHeader : ElementFinder;
     public buildButton : ElementFinder;
     public buildCards : ElementArrayFinder;
+    public MSRP : ElementFinder; 
+    public vehicleVin : ElementFinder; 
+    public vehicleName : ElementFinder; 
 
     constructor() {
         // Top Level Container
@@ -101,5 +104,11 @@ export class SavesPage {
         this.buildSectionSubHeader = element(by.xpath('//*[@id="dg-section-build"]/div[2]/div[2]/div[1]'));
         this.buildButton = element(by.xpath('//*[@id="dg-build-button"]'));
         this.buildCards = element.all(by.css("#dg-section-build .dg-card-wrapper"));
+
+
+        this.vehicleName = element(by.className('dg-vehicle-title'));
+        this.MSRP = element(by.className('dg-item-val'));
+        this.vehicleVin = element(by.className('dg-vin'));
+
     }
 }

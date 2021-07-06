@@ -50,6 +50,9 @@ class SavesPage {
         this.buildSectionSubHeader = protractor_1.element(protractor_1.by.xpath('//*[@id="dg-section-build"]/div[2]/div[2]/div[1]'));
         this.buildButton = protractor_1.element(protractor_1.by.xpath('//*[@id="dg-build-button"]'));
         this.buildCards = protractor_1.element.all(protractor_1.by.css("#dg-section-build .dg-card-wrapper"));
+        this.vehicleName = protractor_1.element(protractor_1.by.className('dg-vehicle-title'));
+        this.MSRP = protractor_1.element(protractor_1.by.className('dg-item-val'));
+        this.vehicleVin = protractor_1.element(protractor_1.by.className('dg-vin'));
     }
 }
 exports.SavesPage = SavesPage;

@@ -132,7 +132,9 @@ export class VdpPage {
 
     public estimateTabs : ElementArrayFinder;
     public estimateAmount : ElementFinder;
-    
+    public MSRP : ElementFinder; 
+    public vehicleName: ElementFinder; 
+    public vehicleVin : ElementFinder;    
     constructor() {
         this.cashDown = element(by.className('ngx-slider-span ngx-slider-pointer ngx-slider-pointer-min'));
         this.price = element(by.xpath("//div[@class='price']/div[@class='ng-star-inserted']"));
@@ -270,5 +272,10 @@ export class VdpPage {
 
         this.estimateTabs = element.all(by.className('mat-tab-label-content'));
         this.estimateAmount = element(by.className('term ng-star-inserted'));
+
+        this.MSRP = element(by.className('ng-star-inserted'));
+        this.vehicleName = element(by.className('vehicle-title'));
+        this.vehicleVin = element(by.className('vin'));
+
     }
 }

@@ -10,8 +10,10 @@ let vdpPage : VdpPage = new VdpPage();
 let navMenu : NavMenu = new NavMenu();
 let until = protractor.ExpectedConditions;
 
-let MAX_TIME_WAIT = 5000;
+let MAX_TIME_WAIT = 15000;
 let vdpEstimateDetails : Map<string, string> = new Map();
+let vdpVehicleEstimateDetails = {vehicleName: null, vin: null, MSRP: null};
+
 
 When('User loads the Saves page', async () => {
     browser.driver.wait(
@@ -20,9 +22,15 @@ When('User loads the Saves page', async () => {
         'Top Nav Profile Icon taking too long to appear in the DOM'
     );
     navMenu.profileIcon.click();
-    
+    console.log('here');
+    await browser.driver.sleep(MAX_TIME_WAIT);
+
+
     // Click Saves Linkout, Check the Url, and then Navigate Back
     browser.driver.wait(until.visibilityOf(navMenu.dgComponentMenuDropdownDesktop),MAX_TIME_WAIT,'Dropdown Element taking too long to appear in the DOM');
+    if( await navMenu.savesPageLinkOut.isDisplayed() == false){
+        navMenu.profileIcon.click();
+    }
     await navMenu.dgComponentMenuDropdownDesktop.$('#dg-menu-saves-page-linkout').click();
     await browser.driver.sleep(10*1000);
     browser.driver.wait(
@@ -353,4 +361,26 @@ Then('Saved Estimates match estimate details from VDP', async () => {
 
     await browser.driver.sleep(MAX_TIME_WAIT);
     expect(vdpEstimateDetails).to.eql(savesPageEstimateDetails);
+});
+
+When('User clicks on inventory save heart', async () => {
+    browser.driver.sleep(3000);
+    var heart : ElementFinder = vdpPage.saveHearts.get(0);
+    browser.driver.wait(until.visibilityOf(heart),MAX_TIME_WAIT,'Inventory save heart element taking too long to appear in the DOM');
+    await vdpPage.MSRP.getText().then((price) => vdpVehicleEstimateDetails.MSRP = price);
+    await vdpPage.vehicleVin.getText().then((vin) => vdpVehicleEstimateDetails.vin = vin);
+    await vdpPage.vehicleName.getText().then((name) => vdpVehicleEstimateDetails.vehicleName = name);
+    heart.click();
+    browser.driver.sleep(MAX_TIME_WAIT);
+    
+});
+
+Then('Saves page shows correct saved vehicle', async () => {
+    
+
+    savesPage.MSRP.getText().then((price) => expect(vdpVehicleEstimateDetails.MSRP).to.eql(price));
+    savesPage.vehicleName.getText().then((name) => expect(vdpVehicleEstimateDetails.vehicleName).to.eql(name));
+    savesPage.vehicleVin.getText().then((vin) => expect(vdpVehicleEstimateDetails.vin).to.eql(vin));
+
+
 });

@@ -129,6 +129,9 @@ class VdpPage {
         this.saveHeartTooltip = protractor_1.element(protractor_1.by.css('.dg-tooltip'));
         this.estimateTabs = protractor_1.element.all(protractor_1.by.className('mat-tab-label-content'));
         this.estimateAmount = protractor_1.element(protractor_1.by.className('term ng-star-inserted'));
+        this.MSRP = protractor_1.element(protractor_1.by.className('ng-star-inserted'));
+        this.vehicleName = protractor_1.element(protractor_1.by.className('vehicle-title'));
+        this.vehicleVin = protractor_1.element(protractor_1.by.className('vin'));
     }
 }
 exports.VdpPage = VdpPage;
