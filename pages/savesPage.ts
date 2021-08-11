@@ -49,7 +49,9 @@ export class SavesPage {
     public MSRP : ElementFinder; 
     public vehicleVin : ElementFinder; 
     public vehicleName : ElementFinder; 
-
+    public saveHeart : ElementFinder;
+    public confirmRemove : ElementFinder; 
+    public dgInvCard : ElementFinder; 
     constructor() {
         // Top Level Container
         this.standaloneContainer = element(by.xpath('//*[@id="dg-standalone-container"]'));
@@ -109,6 +111,8 @@ export class SavesPage {
         this.vehicleName = element(by.className('dg-vehicle-title'));
         this.MSRP = element(by.className('dg-item-val'));
         this.vehicleVin = element(by.className('dg-vin'));
-
+        this.saveHeart = element(by.className('dg-save-heart'));
+        this.confirmRemove = element(by.className('dg-delete-overlay-button-container'));
+        this.dgInvCard = element(by.className('dg-inv'));
     }
 }

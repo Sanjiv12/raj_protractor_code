@@ -22,7 +22,6 @@ When('User loads the Saves page', async () => {
         'Top Nav Profile Icon taking too long to appear in the DOM'
     );
     navMenu.profileIcon.click();
-    console.log('here');
     await browser.driver.sleep(MAX_TIME_WAIT);
 
 
@@ -376,11 +375,26 @@ When('User clicks on inventory save heart', async () => {
 });
 
 Then('Saves page shows correct saved vehicle', async () => {
-    
+    await browser.driver.sleep(MAX_TIME_WAIT);
+    //await savesPage.MSRP.getText().then((price) => expect(vdpVehicleEstimateDetails.MSRP).to.eql(price));
+    await savesPage.vehicleName.getText().then((name) => {
+        console.log(vdpVehicleEstimateDetails.vehicleName);
+        console.log(name);
+        expect(vdpVehicleEstimateDetails.vehicleName.split(' ')[1]).to.eql(name.split(' ')[1])});
+    await savesPage.vehicleVin.getText().then((vin) => expect(vdpVehicleEstimateDetails.vin).to.eql(vin));
+});
+Then('User removes save', async () => {
+    await browser.driver.sleep(MAX_TIME_WAIT);
 
-    savesPage.MSRP.getText().then((price) => expect(vdpVehicleEstimateDetails.MSRP).to.eql(price));
-    savesPage.vehicleName.getText().then((name) => expect(vdpVehicleEstimateDetails.vehicleName).to.eql(name));
-    savesPage.vehicleVin.getText().then((vin) => expect(vdpVehicleEstimateDetails.vin).to.eql(vin));
+    savesPage.saveHeart.click();
+    browser.driver.wait(until.visibilityOf(savesPage.confirmRemove),MAX_TIME_WAIT,'Inventory save heart element taking too long to appear in the DOM');
+    savesPage.confirmRemove.click();
+    browser.driver.sleep(MAX_TIME_WAIT);
 
 
+});
+
+Then('Vehicle disappears', async () => {
+    await browser.driver.sleep(MAX_TIME_WAIT);
+    expect(await savesPage.dgInvCard.isPresent()).to.be.false;
 });

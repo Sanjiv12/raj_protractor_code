@@ -67,14 +67,14 @@ cucumber_1.Given('User is in Vehicle Details page', () => __awaiter(void 0, void
     yield protractor_1.browser.driver.sleep(5 * 1000);
     protractor_1.browser.executeScript('arguments[0].click()', mspFilterPage.sortDropDown);
     yield protractor_1.browser.driver.sleep(2 * 1000);
-    protractor_1.browser.executeScript('arguments[0].click()', mspFilterPage.sortPriceLowToHigh);
+    // browser.executeScript('arguments[0].click()', mspFilterPage.sortPriceLowToHigh);
     yield protractor_1.browser.driver.sleep(5 * 1000);
     protractor_1.browser.executeScript("window.scrollBy(0,250)");
     protractor_1.browser.executeScript('arguments[0].click()', mspFilterPage.appcardButton.first());
     yield protractor_1.browser.driver.sleep(10 * 1000);
     protractor_1.browser.executeScript('arguments[0].click()', mspFilterPage.sortDropDown);
     yield protractor_1.browser.driver.sleep(2 * 1000);
-    protractor_1.browser.executeScript('arguments[0].click()', mspFilterPage.sortPriceLowToHigh);
+    // browser.executeScript('arguments[0].click()', mspFilterPage.sortPriceLowToHigh);
     yield protractor_1.browser.driver.sleep(5 * 1000);
     protractor_1.browser.executeScript('arguments[0].click()', vlpFilterPage.appCard.first());
 }));

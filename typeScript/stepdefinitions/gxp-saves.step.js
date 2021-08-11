@@ -19,13 +19,18 @@ let savesPage = new savesPage_1.SavesPage();
 let vdpPage = new vdpPage_1.VdpPage();
 let navMenu = new navMenu_1.NavMenu();
 let until = protractor_1.protractor.ExpectedConditions;
-let MAX_TIME_WAIT = 5000;
+let MAX_TIME_WAIT = 15000;
 let vdpEstimateDetails = new Map();
+let vdpVehicleEstimateDetails = { vehicleName: null, vin: null, MSRP: null };
 cucumber_1.When('User loads the Saves page', () => __awaiter(void 0, void 0, void 0, function* () {
     protractor_1.browser.driver.wait(until.visibilityOf(navMenu.profileIcon), MAX_TIME_WAIT, 'Top Nav Profile Icon taking too long to appear in the DOM');
     navMenu.profileIcon.click();
+    yield protractor_1.browser.driver.sleep(MAX_TIME_WAIT);
     // Click Saves Linkout, Check the Url, and then Navigate Back
     protractor_1.browser.driver.wait(until.visibilityOf(navMenu.dgComponentMenuDropdownDesktop), MAX_TIME_WAIT, 'Dropdown Element taking too long to appear in the DOM');
+    if ((yield navMenu.savesPageLinkOut.isDisplayed()) == false) {
+        navMenu.profileIcon.click();
+    }
     yield navMenu.dgComponentMenuDropdownDesktop.$('#dg-menu-saves-page-linkout').click();
     yield protractor_1.browser.driver.sleep(10 * 1000);
     protractor_1.browser.driver.wait(until.visibilityOf(savesPage.standaloneContainer), MAX_TIME_WAIT, 'Saves Page taking too long to appear in the DOM');
@@ -256,4 +261,35 @@ cucumber_1.Then('Saved Estimates match estimate details from VDP', () => __await
     });
     yield protractor_1.browser.driver.sleep(MAX_TIME_WAIT);
     chai_1.expect(vdpEstimateDetails).to.eql(savesPageEstimateDetails);
+}));
+cucumber_1.When('User clicks on inventory save heart', () => __awaiter(void 0, void 0, void 0, function* () {
+    protractor_1.browser.driver.sleep(3000);
+    var heart = vdpPage.saveHearts.get(0);
+    protractor_1.browser.driver.wait(until.visibilityOf(heart), MAX_TIME_WAIT, 'Inventory save heart element taking too long to appear in the DOM');
+    yield vdpPage.MSRP.getText().then((price) => vdpVehicleEstimateDetails.MSRP = price);
+    yield vdpPage.vehicleVin.getText().then((vin) => vdpVehicleEstimateDetails.vin = vin);
+    yield vdpPage.vehicleName.getText().then((name) => vdpVehicleEstimateDetails.vehicleName = name);
+    heart.click();
+    protractor_1.browser.driver.sleep(MAX_TIME_WAIT);
+}));
+cucumber_1.Then('Saves page shows correct saved vehicle', () => __awaiter(void 0, void 0, void 0, function* () {
+    yield protractor_1.browser.driver.sleep(MAX_TIME_WAIT);
+    //await savesPage.MSRP.getText().then((price) => expect(vdpVehicleEstimateDetails.MSRP).to.eql(price));
+    yield savesPage.vehicleName.getText().then((name) => {
+        console.log(vdpVehicleEstimateDetails.vehicleName);
+        console.log(name);
+        chai_1.expect(vdpVehicleEstimateDetails.vehicleName.split(' ')[1]).to.eql(name.split(' ')[1]);
+    });
+    yield savesPage.vehicleVin.getText().then((vin) => chai_1.expect(vdpVehicleEstimateDetails.vin).to.eql(vin));
+}));
+cucumber_1.Then('User removes save', () => __awaiter(void 0, void 0, void 0, function* () {
+    yield protractor_1.browser.driver.sleep(MAX_TIME_WAIT);
+    savesPage.saveHeart.click();
+    protractor_1.browser.driver.wait(until.visibilityOf(savesPage.confirmRemove), MAX_TIME_WAIT, 'Inventory save heart element taking too long to appear in the DOM');
+    savesPage.confirmRemove.click();
+    protractor_1.browser.driver.sleep(MAX_TIME_WAIT);
+}));
+cucumber_1.Then('Vehicle disappears', () => __awaiter(void 0, void 0, void 0, function* () {
+    yield protractor_1.browser.driver.sleep(MAX_TIME_WAIT);
+    chai_1.expect(yield savesPage.dgInvCard.isPresent()).to.be.false;
 }));

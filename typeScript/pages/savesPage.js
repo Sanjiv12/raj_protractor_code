@@ -53,6 +53,9 @@ class SavesPage {
         this.vehicleName = protractor_1.element(protractor_1.by.className('dg-vehicle-title'));
         this.MSRP = protractor_1.element(protractor_1.by.className('dg-item-val'));
         this.vehicleVin = protractor_1.element(protractor_1.by.className('dg-vin'));
+        this.saveHeart = protractor_1.element(protractor_1.by.className('dg-save-heart'));
+        this.confirmRemove = protractor_1.element(protractor_1.by.className('dg-delete-overlay-button-container'));
+        this.dgInvCard = protractor_1.element(protractor_1.by.className('dg-inv'));
     }
 }
 exports.SavesPage = SavesPage;

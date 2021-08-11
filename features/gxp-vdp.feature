@@ -9,5 +9,7 @@ Scenario: VDP - Invetory Save Heart AND Corect on Saves Page
   When User clicks on inventory save heart
   And User loads the Saves page
   Then Saves page shows correct saved vehicle
+  And User removes save
+  And Vehicle disappears 
  
  
