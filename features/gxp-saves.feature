@@ -113,3 +113,11 @@ Scenario: Saves - Saved Inventory Section shows saved estimates
   When User clicks on estimate save heart for all estimates
   Then Saved Estimates are visible in Saves Page
   And Saved Estimates match estimate details from VDP
+
+Scenario: Saves - Unsaved Estimates
+
+  Given User is in Vehicle Details page
+  And User clicks on estimate save heart for all estimates
+  When Saved Estimates are visible in Saves Page
+  And User unsaves estimates on Saves page
+  Then Estimates should disappear from inventory card

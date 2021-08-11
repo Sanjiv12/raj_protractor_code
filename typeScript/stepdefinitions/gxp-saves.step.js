@@ -65,6 +65,17 @@ cucumber_1.When('User clicks on estimate save heart for all estimates', () => __
     protractor_1.browser.driver.wait(until.visibilityOf(heart), MAX_TIME_WAIT, 'Cash estimate save heart element taking too long to appear in the DOM');
     heart.click();
 }));
+cucumber_1.When('User unsaves estimates on Saves page', () => __awaiter(void 0, void 0, void 0, function* () {
+    var numCards = yield savesPage.estimatesCards.count();
+    for (var i = 0; i < numCards; i++) {
+        var estimate = savesPage.estimatesCards.get(0);
+        estimate.element(protractor_1.by.css('.dg-heart-icon')).click();
+        var removeEstimateCta = estimate.element(protractor_1.by.css('.dg-delete-overlay-remove'));
+        protractor_1.browser.driver.wait(until.visibilityOf(removeEstimateCta), MAX_TIME_WAIT, 'Remove estimate element taking too long to appear in the DOM');
+        removeEstimateCta.click();
+        yield protractor_1.browser.driver.sleep(MAX_TIME_WAIT);
+    }
+}));
 cucumber_1.Given('User is in Saves page', () => __awaiter(void 0, void 0, void 0, function* () {
     // Take no action, saves page already loaded
 }));
@@ -250,7 +261,7 @@ cucumber_1.Then('Saved Estimates match estimate details from VDP', () => __await
     var financeEstimate = savesPage.estimatesCards.get(1);
     var leaseEstimate = savesPage.estimatesCards.get(2);
     var savesPageEstimateDetails = new Map();
-    cashEstimate.element(protractor_1.by.css('.dg-num-months-label')).getText().then(function (amount) {
+    cashEstimate.element(protractor_1.by.css('.dg-offer-amount')).getText().then(function (amount) {
         savesPageEstimateDetails.set('cash', amount);
     });
     financeEstimate.element(protractor_1.by.css('.dg-offer-per-month-amount')).getText().then(function (amount) {
@@ -292,4 +303,8 @@ cucumber_1.Then('User removes save', () => __awaiter(void 0, void 0, void 0, fun
 cucumber_1.Then('Vehicle disappears', () => __awaiter(void 0, void 0, void 0, function* () {
     yield protractor_1.browser.driver.sleep(MAX_TIME_WAIT);
     chai_1.expect(yield savesPage.dgInvCard.isPresent()).to.be.false;
+}));
+cucumber_1.Then('Estimates should disappear from inventory card', () => __awaiter(void 0, void 0, void 0, function* () {
+    protractor_1.browser.driver.wait(until.visibilityOf(savesPage.estimatePaymentsButton.first()), MAX_TIME_WAIT, 'View estimates button element taking too long to appear in the DOM');
+    chai_1.expect(yield savesPage.estimatePaymentsButton.first().isPresent()).to.be.true;
 }));
