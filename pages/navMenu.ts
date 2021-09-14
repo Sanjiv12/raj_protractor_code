@@ -8,7 +8,7 @@ export class NavMenu {
     public savesPageLinkOut : ElementFinder;
     constructor() {
         this.profileIcon = element(by.className('dg-menu-dropdown-icon'));
-        this.dgComponentMenuDropdownDesktop = element(by.id('dg-component-nav-menu-desktop'));
+        this.dgComponentMenuDropdownDesktop = element(by.className('dg-component-menu-dropdown'));
         this.savesPageLinkOut= element(by.id('dg-menu-saves-page-linkout'));
     }
 }

@@ -378,7 +378,7 @@ Then('Saved Estimates match estimate details from VDP', async () => {
 });
 
 When('User clicks on inventory save heart', async () => {
-    browser.driver.sleep(3000);
+    await browser.driver.sleep(MAX_TIME_WAIT);
     var heart : ElementFinder = vdpPage.saveHearts.get(0);
     browser.driver.wait(until.visibilityOf(heart),MAX_TIME_WAIT,'Inventory save heart element taking too long to appear in the DOM');
     await vdpPage.MSRP.getText().then((price) => vdpVehicleEstimateDetails.MSRP = price);
@@ -418,3 +418,39 @@ Then('Estimates should disappear from inventory card', async () => {
 
     expect(await savesPage.estimatePaymentsButton.first().isPresent()).to.be.true;
 });
+
+When('User clicks the Start Sharing Button', async () => {
+    browser.driver.wait(until.visibilityOf(savesPage.saveShares),MAX_TIME_WAIT,'Share Saves button element taking too long to appear in the DOM');
+    await savesPage.saveShares.click();
+
+});
+
+When('User fills out Modal', async () => {
+    await browser.sleep(MAX_TIME_WAIT);
+    await fillInput(savesPage.firstNameModal,'test');
+    await fillInput(savesPage.lastNameModal,'test');
+    await fillInput(savesPage.zipCodeModal,'75092');
+    await fillInput(savesPage.emailModal,'test@test.com');
+});
+
+When('User submits form', async () => {
+    await browser.sleep(1000);
+    savesPage.submitModal.click();
+});
+
+Then('Modal success state should appear', async () => {
+    await browser.sleep(1000);
+    expect(await savesPage.successModalText.getText()).to.equal('Save successfully sent!');
+});
+
+
+
+async function fillInput(el: ElementFinder, text: string) {
+    await browser.sleep(3000);
+    await el.click()
+    await browser.sleep(3000);
+    await el.clear();
+    await browser.sleep(3000);
+    await el.sendKeys(text);
+    await browser.sleep(3000);
+  }

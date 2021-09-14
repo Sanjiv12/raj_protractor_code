@@ -1,4 +1,4 @@
-import { browser, ElementFinder, protractor } from "protractor"; 
+import { browser, by, element, ElementFinder, protractor } from "protractor"; 
 import { Then, When } from "cucumber";
 import { CreateAccountPage } from "../pages/createAccountPage";
 import { NavMenu } from "../pages/navMenu";
@@ -8,7 +8,7 @@ let createAccountPage : CreateAccountPage = new CreateAccountPage();
 let navMenu : NavMenu = new NavMenu();
 let until = protractor.ExpectedConditions;
 
-let MAX_TIME_WAIT = 5000;
+let MAX_TIME_WAIT = 10000;
 
 // Signed Out Scenario
 // Uses Given Statement from VDP or VLP
@@ -19,7 +19,7 @@ When('User clicks the Top Nav Dropdown Menu icon', async () => {
         MAX_TIME_WAIT,
         'Top Nav Profile Icon taking too long to appear in the DOM'
     );
-    await navMenu.profileIcon.click();
+    browser.executeScript("arguments[0].click();", navMenu.profileIcon);
 });
 
 Then('The Top Nav Menu Dropdown should be visible', async () => {
@@ -50,7 +50,9 @@ Then(/Top Nav \"(.*?)\" Linkout should link to \"(.*?)\"/, async (section: strin
     // Click Saves Linkout, Check the Url, and then Navigate Back
     await browser.driver.wait(until.visibilityOf(navMenu.dgComponentMenuDropdownDesktop),MAX_TIME_WAIT,'Dropdown Element taking too long to appear in the DOM');
     const originalUrl = await browser.getCurrentUrl();
-    await navMenu.dgComponentMenuDropdownDesktop.$('#dg-menu-'+section.toLowerCase()+'-page-linkout').click();
+    const element =  navMenu.dgComponentMenuDropdownDesktop.$('#dg-menu-'+section.toLowerCase()+'-page-linkout')
+    await browser.executeScript("arguments[0].click();", element);
+
 
     let handles : string[] = await browser.getAllWindowHandles();
     
@@ -58,7 +60,7 @@ Then(/Top Nav \"(.*?)\" Linkout should link to \"(.*?)\"/, async (section: strin
     await browser.driver.switchTo().window(handles[handles.length-1]);
 
     // Check if url is what we expect, sleep to allow for redirects
-    await browser.driver.sleep(10*1000);
+    await browser.driver.sleep(15*1000);
     let currentUrl = await browser.getCurrentUrl();
     expect(currentUrl).to.include(location);
 
@@ -120,7 +122,7 @@ When('User clicks the Top Nav Dropdown Menu icon and Signs In', async () => {
         MAX_TIME_WAIT,
         'Top Nav Profile Icon taking too long to appear in the DOM'
     );
-    await navMenu.profileIcon.click();
+    browser.executeScript("arguments[0].click();", navMenu.profileIcon);
     
     // Sign in User
     const username = "";
@@ -132,7 +134,7 @@ When('User clicks the Top Nav Dropdown Menu icon and Signs In', async () => {
         MAX_TIME_WAIT,
         'Dropdown Element taking too long to appear in the DOM'
     );
-    await navMenu.dgComponentMenuDropdownDesktop.$('#dg-login-btn').click();
+    await browser.executeScript("arguments[0].click();", await element(by.id('dg-login-btn')));
     await browser.driver.wait(until.visibilityOf(createAccountPage.userName), MAX_TIME_WAIT, 'Username Element taking too long to appear in the DOM');
     await createAccountPage.userName.sendKeys(username);
     await createAccountPage.logonBtn.click();

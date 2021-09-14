@@ -114,8 +114,8 @@ export class VlpFilterPage {
         this.unlockSavingsModalreturnToPage = element(by.xpath('//div[@class="return-to-page"]/div[@class="text-button"]'));
         this.unlockSavingsModalSmartPriceTxt = element.all(by.css('.price-section'));
         this.unlockSavingsModalSmartPriceFilterTxt = element(by.css('.filter-price-sub-title'));        
-        this.vehicleSaveHeart = element.all(by.css('.save-icon'));
-        this.vehicleSaveHeartActive = element(by.css('.dg-encircle.active'));
+        this.vehicleSaveHeart = element.all(by.className('save-icon'));
+        this.vehicleSaveHeartActive = element(by.css('.dg-encircle active'));
         this.tooltip = element(by.css('.dg-tooltip'));
     }
 }

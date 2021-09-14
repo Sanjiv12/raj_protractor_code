@@ -55,6 +55,13 @@ export class SavesPage {
     public saveHeart : ElementFinder;
     public confirmRemove : ElementFinder; 
     public dgInvCard : ElementFinder; 
+    public saveShares : ElementFinder;
+    public firstNameModal : ElementFinder; 
+    public lastNameModal : ElementFinder;
+    public zipCodeModal : ElementFinder;
+    public emailModal : ElementFinder; 
+    public submitModal : ElementFinder; 
+    public successModalText: ElementFinder;
     constructor() {
         // Top Level Container
         this.standaloneContainer = element(by.xpath('//*[@id="dg-standalone-container"]'));
@@ -120,5 +127,15 @@ export class SavesPage {
         this.saveHeart = element(by.className('dg-save-heart'));
         this.confirmRemove = element(by.className('dg-delete-overlay-button-container'));
         this.dgInvCard = element(by.className('dg-inv'));
+
+        this.saveShares = element(by.id('dg-start-sharing-button'));
+        this.firstNameModal = element(by.id('dg-contact-first-name'));
+        this.lastNameModal = element(by.id('dg-contact-last-name'));
+        this.zipCodeModal = element(by.id('dg-contact-zip'));
+        this.emailModal = element(by.id('dg-contact-email'));
+        this.submitModal = element(by.id('dg-contact-submit'));
+        this.successModalText = element(by.className('dg-modal-left-title'));
+        
+
     }
 }
