@@ -226,7 +226,9 @@ export class VdpPage {
         this.carouselImgRight = element(by.xpath('//img[@alt="arrowRight"]'));
         this.additionalDealerSavings = element(by.xpath('//div[@class="AdditionalDealerSavings flexBox"]'));
 
-        this.sendEstimateToDealer = element(by.xpath('//div[@class="text-button send-estimate-text"]'));
+        this.sendEstimateToDealer = element(by.xpath('//button[@class="secondary-button large confirm-availability ng-star-inserted"]'));
+        // this.sendEstimateToDealer = element(by.xpath('//span[@class="confirm-text"]'));
+
         this.sendEstimateModal = element(by.xpath('//div[@class="smart-price-modal-container ng-star-inserted"]'));
         this.sendEstimateModalPaymentTerm = element(by.css('div.price-sub-con > .prefix'));
         this.sendEstimateModalFirstName = element(by.xpath('//div[@class="customer-name-field"]/con-textfield[1]/div/mat-form-field/div/div[1]/div[3]/input'));
