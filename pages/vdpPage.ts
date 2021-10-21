@@ -99,6 +99,7 @@ export class VdpPage {
     public carouselImgRight : ElementFinder;
     public additionalDealerSavings : ElementFinder;
     public sendEstimateToDealer : ElementFinder;
+    public sendEstimateToDealerNoUnlock : ElementFinder;
     public sendEstimateModal : ElementFinder;
     public sendEstimateModalPaymentTerm : ElementFinder;
     public sendEstimateModalFirstName : ElementFinder;
@@ -226,9 +227,9 @@ export class VdpPage {
         this.carouselImgRight = element(by.xpath('//img[@alt="arrowRight"]'));
         this.additionalDealerSavings = element(by.xpath('//div[@class="AdditionalDealerSavings flexBox"]'));
 
-        this.sendEstimateToDealer = element(by.xpath('//button[@class="secondary-button large confirm-availability ng-star-inserted"]'));
-        // this.sendEstimateToDealer = element(by.xpath('//span[@class="confirm-text"]'));
-
+        // this.sendEstimateToDealer = element(by.xpath('//button[@class="secondary-button large confirm-availability ng-star-inserted"]'));
+        this.sendEstimateToDealer = element(by.css('.send-estimate-text'));
+        this.sendEstimateToDealerNoUnlock = element(by.css('button.confirm-availability'));
         this.sendEstimateModal = element(by.xpath('//div[@class="smart-price-modal-container ng-star-inserted"]'));
         this.sendEstimateModalPaymentTerm = element(by.css('div.price-sub-con > .prefix'));
         this.sendEstimateModalFirstName = element(by.xpath('//div[@class="customer-name-field"]/con-textfield[1]/div/mat-form-field/div/div[1]/div[3]/input'));
