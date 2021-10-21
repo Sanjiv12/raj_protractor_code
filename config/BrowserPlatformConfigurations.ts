@@ -27,7 +27,7 @@ export const BrowserPlatformConfigurations = {
         "platform": 'Windows 10',
         "screenResolution": '1920x1080',
         "moz:firefoxOptions": {
-            args: ["--incognito"]
+            args: ["--private"]
         },
     },
     Edge: {
