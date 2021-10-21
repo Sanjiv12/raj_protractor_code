@@ -1,4 +1,4 @@
-import { browser, by, By, element, ExpectedConditions, protractor, until } from "protractor"; 
+import { browser, by, By, element, ExpectedConditions, protractor, until } from "protractor";
 import { Then, When, Given, Before, BeforeAll, SummaryFormatter } from "cucumber";
 import { MspFilterPage } from "../pages/mspFilterPage";
 import { VlpFilterPage } from "../pages/vlpFilterPage";
@@ -125,7 +125,10 @@ Then('Price Summary should display additional line item for Additional Dealer Sa
 
 When('User clicks on Send Estimate to Dealer on a Price Summary', async  () =>{
     await browser.driver.sleep(20*1000);
-    browser.executeScript('arguments[0].click()', vdpPage.sendEstimateToDealer);
+    browser.executeScript('arguments[0].click()', vdpPage.sendEstimateToDealer).then(function(){}, function(err) {
+        browser.executeScript('arguments[0].click()', vdpPage.sendEstimateToDealerNoUnlock);
+    });
+
 });
 
 
