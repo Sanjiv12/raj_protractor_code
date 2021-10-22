@@ -130,11 +130,11 @@ Then('Price Summary should display additional line item for Additional Dealer Sa
 When('User clicks on Send Estimate to Dealer on a Price Summary', async  () =>{
     await browser.driver.sleep(20*1000);
     const isMobileDevice = await checkIfIsMobileDevice();
-    browser.executeScript('arguments[0].click()', vdpPage.contactDealer).then(function(){}, function(err) {
+    browser.executeScript('arguments[0].click()', vdpPage.confirmAvailabilityForUnlockDealer).then(function(){}, function(err) {
         if (isMobileDevice) {
-            browser.executeScript('arguments[0].click()', vdpPage.contactDealerNoUnlockMobile);
+            browser.executeScript('arguments[0].click()', vdpPage.confirmAvailabilityForNoUnlockDealer_Mobile);
         } else {
-            browser.executeScript('arguments[0].click()', vdpPage.contactDealerNoUnlock);
+            browser.executeScript('arguments[0].click()', vdpPage.confirmAvailabilityForNoUnlockDealer_Desktop);
         }
     });
 
@@ -143,13 +143,13 @@ When('User clicks on Send Estimate to Dealer on a Price Summary', async  () =>{
 
 Then('System should display Send Estimate modal', async  () =>{
     await browser.driver.sleep(5*1000);
-    return Assertion.expect((await vdpPage.contactDealerModal.isDisplayed()).valueOf()).to.be.true;
+    return Assertion.expect((await vdpPage.leadFormModal.isDisplayed()).valueOf()).to.be.true;
 });
 
  
 Then('Payment term is same as selected in VDP', async  () =>{
     await browser.driver.sleep(5*1000);
-    return Assertion.expect(vdpPage.contactDealerModalPaymentTerm.getText()).to.eventually.equal((await vdpPage.ppTerm.getText()).valueOf());
+    return Assertion.expect(vdpPage.leadFormModalPaymentTerm.getText()).to.eventually.equal((await vdpPage.ppTerm.getText()).valueOf());
 });
 
 
@@ -159,7 +159,7 @@ When('User does not enter valid values for email and zip in Send Estimate modal'
     await browser.driver.sleep(2*1000);
     browser.executeScript("arguments[0].click()", vlpFilterPage.unlockSavingsModalZip);
     await browser.driver.sleep(2*1000);
-    browser.executeScript("arguments[0].click()", vdpPage.contactDealerModalFirstName);
+    browser.executeScript("arguments[0].click()", vdpPage.leadFormModalFirstName);
     await browser.driver.sleep(2*1000);
 });
 
@@ -171,7 +171,7 @@ Then('System should display the email text box in error state for sending estima
 
 Then('System should display the zip text box in error state for sending estimate', async  () =>{
     await browser.driver.sleep(2*1000);
-    return Assertion.expect((await vdpPage.contactDealerModalZipError.isDisplayed()).valueOf()).to.be.true;
+    return Assertion.expect((await vdpPage.leadFormModalZipError.isDisplayed()).valueOf()).to.be.true;
 });
 
 
@@ -183,9 +183,9 @@ Then('Display Submit CTA in Disabled state', async  () =>{
 
 When('User has entered valid values for all fields in Send Estimate modal', async  () =>{
     await browser.driver.sleep(5*1000);
-    vdpPage.contactDealerModalFirstName.sendKeys(browser.params.fname);
+    vdpPage.leadFormModalFirstName.sendKeys(browser.params.fname);
     await browser.driver.sleep(2*1000);
-    vdpPage.contactDealerModalLastName.sendKeys(browser.params.lname);
+    vdpPage.leadFormModalLastName.sendKeys(browser.params.lname);
     await browser.driver.sleep(2*1000);
     vlpFilterPage.unlockSavingsModalEmail.sendKeys(browser.params.seemail);
     await browser.driver.sleep(2*1000);

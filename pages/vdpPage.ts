@@ -98,14 +98,14 @@ export class VdpPage {
     public vehDetailModalDisclosure : ElementFinder;
     public carouselImgRight : ElementFinder;
     public additionalDealerSavings : ElementFinder;
-    public contactDealer : ElementFinder;
-    public contactDealerNoUnlock : ElementFinder;
-    public contactDealerNoUnlockMobile : ElementFinder;
-    public contactDealerModal : ElementFinder;
-    public contactDealerModalPaymentTerm : ElementFinder;
-    public contactDealerModalFirstName : ElementFinder;
-    public contactDealerModalLastName : ElementFinder;
-    public contactDealerModalZipError : ElementFinder;
+    public confirmAvailabilityForUnlockDealer : ElementFinder;
+    public confirmAvailabilityForNoUnlockDealer_Desktop : ElementFinder;
+    public confirmAvailabilityForNoUnlockDealer_Mobile : ElementFinder;
+    public leadFormModal : ElementFinder;
+    public leadFormModalPaymentTerm : ElementFinder;
+    public leadFormModalFirstName : ElementFinder;
+    public leadFormModalLastName : ElementFinder;
+    public leadFormModalZipError : ElementFinder;
     public leadFormModalTitle : ElementFinder;
     public leadFormReturnToPage : ElementFinder;
     public startPurchase : ElementFinder;
@@ -228,15 +228,14 @@ export class VdpPage {
         this.carouselImgRight = element(by.xpath('//img[@alt="arrowRight"]'));
         this.additionalDealerSavings = element(by.xpath('//div[@class="AdditionalDealerSavings flexBox"]'));
 
-        this.contactDealer = element(by.css('.send-estimate-text'));
-        this.contactDealerNoUnlock = element(by.css('button.confirm-availability'));
-        // /html/body/main/app-root/mat-drawer-container/mat-drawer-content/div[1]/app-vehicle-details/div[2]/div/section/vdp-pricing-summary/div/div/div[2]/div[2]/button[2]
-        this.contactDealerNoUnlockMobile = element(by.css('.confirm-availability-btn'));
-        this.contactDealerModal = element(by.xpath('//div[@class="smart-price-modal-container ng-star-inserted"]'));
-        this.contactDealerModalPaymentTerm = element(by.css('div.price-sub-con > .prefix'));
-        this.contactDealerModalFirstName = element(by.xpath('//div[@class="customer-name-field"]/con-textfield[1]/div/mat-form-field/div/div[1]/div[3]/input'));
-        this.contactDealerModalLastName = element(by.xpath('//div[@class="customer-name-field"]/con-textfield[2]/div/mat-form-field/div/div[1]/div[3]/input'));
-        this.contactDealerModalZipError = element(by.css('div.customer-zip-field .mat-error'));
+        this.confirmAvailabilityForUnlockDealer = element(by.css('.send-estimate-text'));
+        this.confirmAvailabilityForNoUnlockDealer_Desktop = element(by.css('button.confirm-availability'));
+        this.confirmAvailabilityForNoUnlockDealer_Mobile = element(by.css('.confirm-availability-btn'));
+        this.leadFormModal = element(by.xpath('//div[@class="smart-price-modal-container ng-star-inserted"]'));
+        this.leadFormModalPaymentTerm = element(by.css('div.price-sub-con > .prefix'));
+        this.leadFormModalFirstName = element(by.xpath('//div[@class="customer-name-field"]/con-textfield[1]/div/mat-form-field/div/div[1]/div[3]/input'));
+        this.leadFormModalLastName = element(by.xpath('//div[@class="customer-name-field"]/con-textfield[2]/div/mat-form-field/div/div[1]/div[3]/input'));
+        this.leadFormModalZipError = element(by.css('div.customer-zip-field .mat-error'));
         this.leadFormModalTitle = element(by.css('.smart-price-modal-header'));
         this.leadFormReturnToPage = element(by.xpath('//div[@class="return-to-page"]/button'));
         this.startPurchase = element(by.xpath('//div[@class="price-details"]/button[2]'));
