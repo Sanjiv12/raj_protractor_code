@@ -54,10 +54,7 @@ export const BrowserPlatformConfigurations = {
         browserVersion: '14.0',
         platformName: 'macOS',
         platformVersion: '11.0',
-        "screenResolution": '1920x1080',
         "sauce:options": {
-            args: ["--inprivate"]
-
         }
     },
     ChromeDesktop: {
