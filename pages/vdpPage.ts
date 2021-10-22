@@ -105,8 +105,8 @@ export class VdpPage {
     public contactDealerModalFirstName : ElementFinder;
     public contactDealerModalLastName : ElementFinder;
     public contactDealerModalZipError : ElementFinder;
-    public sentEstimateModalTitle : ElementFinder;
-    public sentEstimateModalreturnToPage : ElementFinder;
+    public leadFormModalTitle : ElementFinder;
+    public leadFormReturnToPage : ElementFinder;
     public startPurchase : ElementFinder;
     public rightPaneMenu : ElementFinder;
     public signInBtn : ElementFinder;
@@ -235,8 +235,8 @@ export class VdpPage {
         this.contactDealerModalFirstName = element(by.xpath('//div[@class="customer-name-field"]/con-textfield[1]/div/mat-form-field/div/div[1]/div[3]/input'));
         this.contactDealerModalLastName = element(by.xpath('//div[@class="customer-name-field"]/con-textfield[2]/div/mat-form-field/div/div[1]/div[3]/input'));
         this.contactDealerModalZipError = element(by.css('div.customer-zip-field .mat-error'));
-        this.sentEstimateModalTitle = element(by.css('.smart-price-modal-header'));
-        this.sentEstimateModalreturnToPage = element(by.xpath('//div[@class="return-to-page"]/button'));
+        this.leadFormModalTitle = element(by.css('.smart-price-modal-header'));
+        this.leadFormReturnToPage = element(by.xpath('//div[@class="return-to-page"]/button'));
         this.startPurchase = element(by.xpath('//div[@class="price-details"]/button[2]'));
 
         this.rightPaneMenu = element(by.xpath('//div[@class="menu-items ng-star-inserted"]'));    //element(by.css("div.right-pane > div.menu-items"));

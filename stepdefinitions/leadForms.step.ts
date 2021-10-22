@@ -192,12 +192,12 @@ When('User clicks on Submit', async  () =>{
 
 Then('System should display confirmation modal "Estimate sent!"', async  () =>{
     await browser.driver.sleep(10*1000);
-    return Assertion.expect(vdpPage.sentEstimateModalTitle.getText()).to.eventually.contain('Estimate Sent!');
+    return Assertion.expect(vdpPage.leadFormModalTitle.getText()).to.eventually.contain('Estimate Sent!');
 });
 
 When('User clicks on Return to page in Send Estimate confirmation modal', async  () =>{
     await browser.driver.sleep(5*1000);
-    browser.executeScript("arguments[0].click()", vdpPage.sentEstimateModalreturnToPage);
+    browser.executeScript("arguments[0].click()", vdpPage.leadFormReturnToPage);
 });
 
 
