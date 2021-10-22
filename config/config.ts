@@ -23,6 +23,7 @@ let extractBrowserFromCli = function() {
 let browserSupportsBasicAuth = function(browser) {
     return browser !== JENKINS_OPTIONS.SAFARI_DESKTOP && browser !== JENKINS_OPTIONS.SAFARI_IOS;
 }
+
 let generateBrowserConfiguration = function() {
     const selectedBrowser = extractBrowserFromCli();
     let multiCapabilities = [];
@@ -101,7 +102,6 @@ export const config: Config = {
     },
     
     onPrepare: async() => {
-        browser.manage().window().maximize();
         browser.driver.manage().deleteAllCookies();
         browser.waitForAngularEnabled(false);
         reportConfig.createDirectory(jsonPath);
