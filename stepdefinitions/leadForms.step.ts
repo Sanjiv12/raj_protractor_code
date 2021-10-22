@@ -3,13 +3,17 @@ import { Then, When, Given, Before, BeforeAll, SummaryFormatter } from "cucumber
 import { MspFilterPage } from "../pages/mspFilterPage";
 import { VlpFilterPage } from "../pages/vlpFilterPage";
 import {VdpPage} from "../pages/vdpPage"
-import { expect } from "chai";
 import {Assertion} from "../util/assertion"
+import {PLATFORMS} from "../util/Constants";
 
 let mspFilterPage : MspFilterPage = new MspFilterPage();
 let vlpFilterPage : VlpFilterPage = new VlpFilterPage();
 let vdpPage : VdpPage = new VdpPage();
 
+async function checkIfIsMobileDevice() {
+    let capabilities = await browser.getCapabilities();
+    return (capabilities.get(PLATFORMS.PLATFORM_CAPABILITY) === PLATFORMS.ANDROID)
+}
 
 When('User clicks on Unlock Savings on a Vehicle Card', async  () =>{
     await browser.driver.sleep(5*1000);
@@ -125,8 +129,13 @@ Then('Price Summary should display additional line item for Additional Dealer Sa
 
 When('User clicks on Send Estimate to Dealer on a Price Summary', async  () =>{
     await browser.driver.sleep(20*1000);
+    const isMobileDevice = await checkIfIsMobileDevice();
     browser.executeScript('arguments[0].click()', vdpPage.contactDealer).then(function(){}, function(err) {
-        browser.executeScript('arguments[0].click()', vdpPage.contactDealerNoUnlock);
+        if (isMobileDevice) {
+            browser.executeScript('arguments[0].click()', vdpPage.contactDealerNoUnlockMobile);
+        } else {
+            browser.executeScript('arguments[0].click()', vdpPage.contactDealerNoUnlock);
+        }
     });
 
 });

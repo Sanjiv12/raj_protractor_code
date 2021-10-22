@@ -100,6 +100,7 @@ export class VdpPage {
     public additionalDealerSavings : ElementFinder;
     public contactDealer : ElementFinder;
     public contactDealerNoUnlock : ElementFinder;
+    public contactDealerNoUnlockMobile : ElementFinder;
     public contactDealerModal : ElementFinder;
     public contactDealerModalPaymentTerm : ElementFinder;
     public contactDealerModalFirstName : ElementFinder;
@@ -229,7 +230,8 @@ export class VdpPage {
 
         this.contactDealer = element(by.css('.send-estimate-text'));
         this.contactDealerNoUnlock = element(by.css('button.confirm-availability'));
-
+        // /html/body/main/app-root/mat-drawer-container/mat-drawer-content/div[1]/app-vehicle-details/div[2]/div/section/vdp-pricing-summary/div/div/div[2]/div[2]/button[2]
+        this.contactDealerNoUnlockMobile = element(by.css('.confirm-availability-btn'));
         this.contactDealerModal = element(by.xpath('//div[@class="smart-price-modal-container ng-star-inserted"]'));
         this.contactDealerModalPaymentTerm = element(by.css('div.price-sub-con > .prefix'));
         this.contactDealerModalFirstName = element(by.xpath('//div[@class="customer-name-field"]/con-textfield[1]/div/mat-form-field/div/div[1]/div[3]/input'));
