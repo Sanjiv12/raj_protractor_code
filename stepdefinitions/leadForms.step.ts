@@ -1,4 +1,4 @@
-import { browser, by, By, element, ExpectedConditions, protractor, until } from "protractor";
+import { browser, by, By, element, ExpectedConditions, protractor, until } from "protractor"; 
 import { Then, When, Given, Before, BeforeAll, SummaryFormatter } from "cucumber";
 import { MspFilterPage } from "../pages/mspFilterPage";
 import { VlpFilterPage } from "../pages/vlpFilterPage";
@@ -125,8 +125,8 @@ Then('Price Summary should display additional line item for Additional Dealer Sa
 
 When('User clicks on Send Estimate to Dealer on a Price Summary', async  () =>{
     await browser.driver.sleep(20*1000);
-    browser.executeScript('arguments[0].click()', vdpPage.sendEstimateToDealer).then(function(){}, function(err) {
-        browser.executeScript('arguments[0].click()', vdpPage.sendEstimateToDealerNoUnlock);
+    browser.executeScript('arguments[0].click()', vdpPage.contactDealer).then(function(){}, function(err) {
+        browser.executeScript('arguments[0].click()', vdpPage.contactDealerNoUnlock);
     });
 
 });
@@ -134,13 +134,13 @@ When('User clicks on Send Estimate to Dealer on a Price Summary', async  () =>{
 
 Then('System should display Send Estimate modal', async  () =>{
     await browser.driver.sleep(5*1000);
-    return Assertion.expect((await vdpPage.sendEstimateModal.isDisplayed()).valueOf()).to.be.true;
+    return Assertion.expect((await vdpPage.contactDealerModal.isDisplayed()).valueOf()).to.be.true;
 });
 
  
 Then('Payment term is same as selected in VDP', async  () =>{
     await browser.driver.sleep(5*1000);
-    return Assertion.expect(vdpPage.sendEstimateModalPaymentTerm.getText()).to.eventually.equal((await vdpPage.ppTerm.getText()).valueOf());
+    return Assertion.expect(vdpPage.contactDealerModalPaymentTerm.getText()).to.eventually.equal((await vdpPage.ppTerm.getText()).valueOf());
 });
 
 
@@ -150,7 +150,7 @@ When('User does not enter valid values for email and zip in Send Estimate modal'
     await browser.driver.sleep(2*1000);
     browser.executeScript("arguments[0].click()", vlpFilterPage.unlockSavingsModalZip);
     await browser.driver.sleep(2*1000);
-    browser.executeScript("arguments[0].click()", vdpPage.sendEstimateModalFirstName);
+    browser.executeScript("arguments[0].click()", vdpPage.contactDealerModalFirstName);
     await browser.driver.sleep(2*1000);
 });
 
@@ -162,7 +162,7 @@ Then('System should display the email text box in error state for sending estima
 
 Then('System should display the zip text box in error state for sending estimate', async  () =>{
     await browser.driver.sleep(2*1000);
-    return Assertion.expect((await vdpPage.sendEstimateModalZipError.isDisplayed()).valueOf()).to.be.true;
+    return Assertion.expect((await vdpPage.contactDealerModalZipError.isDisplayed()).valueOf()).to.be.true;
 });
 
 
@@ -174,9 +174,9 @@ Then('Display Submit CTA in Disabled state', async  () =>{
 
 When('User has entered valid values for all fields in Send Estimate modal', async  () =>{
     await browser.driver.sleep(5*1000);
-    vdpPage.sendEstimateModalFirstName.sendKeys(browser.params.fname);
+    vdpPage.contactDealerModalFirstName.sendKeys(browser.params.fname);
     await browser.driver.sleep(2*1000);
-    vdpPage.sendEstimateModalLastName.sendKeys(browser.params.lname);
+    vdpPage.contactDealerModalLastName.sendKeys(browser.params.lname);
     await browser.driver.sleep(2*1000);
     vlpFilterPage.unlockSavingsModalEmail.sendKeys(browser.params.seemail);
     await browser.driver.sleep(2*1000);
