@@ -83,6 +83,6 @@ export class MspFilterPage {
         this.contactDealerModalPhone = element(by.css("input[type='tel']"));
         this.contactDealerModalSendBtn = element(by.xpath('//div[@class="customer-submit"]/button'));
         this.contactDealerModalConf = element(by.className('contactDealer-container ng-star-inserted'));
-        this.contactDealerModalreturnToPage = element(by.xpath('//div[@class="return_page"]/button'));        
+        this.contactDealerModalreturnToPage = element(by.className("return_page"));
     }
 }
