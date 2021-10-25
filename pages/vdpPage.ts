@@ -226,7 +226,7 @@ export class VdpPage {
         this.vehDetailModalTab4 = element.all(by.xpath('//div[@class="mat-tab-labels"]/div[4]'));
         this.vehDetailModalDisclosure = element(by.xpath('//div[@class="Disclosure"]'));
         this.carouselImgRight = element(by.xpath('//img[@alt="arrowRight"]'));
-        this.additionalDealerSavings = element(by.xpath('//div[@class="AdditionalDealerSavings flexBox"]'));
+        this.additionalDealerSavings = element(by.xpath('//div[@class="flexBox AdditionalDealerSavings"]'));
 
         this.confirmAvailabilityForUnlockDealer = element(by.css('.send-estimate-text'));
         this.confirmAvailabilityForNoUnlockDealer_Desktop = element(by.css('button.confirm-availability'));

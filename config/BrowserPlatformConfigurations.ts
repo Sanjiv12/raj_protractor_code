@@ -31,7 +31,7 @@ export const BrowserPlatformConfigurations = {
         "screenResolution": '1920x1080',
         "restartBrowserBetweenTests": true,
         "moz:firefoxOptions": {
-            args: ["--incognito"]
+            args: ["--private"]
         },
         "prefs": {
             "browser.cache.disk.enable": false,

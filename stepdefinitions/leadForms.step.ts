@@ -77,12 +77,8 @@ Then('System should display confirmation modal with $ Savings', async  () =>{
 });
 
 Then('System should display confirmation modal with Smart Price for the vehicle', async  () =>{
-    await browser.driver.sleep(2*1000);
-    vlpFilterPage.unlockSavingsModalPrice.getText().then((value) => {
-        console.log('value -- '+value);
-        let savings = (value.replace(' Smart Price: ','')).trim();
-        return Assertion.expect(savings.length).to.be.gt(0);
-    });
+    await browser.driver.sleep(5*1000);
+    return Assertion.expect(await vlpFilterPage.unlockSavingsModalPrice.getText()).to.contain('Smart Price:');
 });
 
 
