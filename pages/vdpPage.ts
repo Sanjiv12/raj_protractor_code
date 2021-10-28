@@ -99,8 +99,8 @@ export class VdpPage {
     public carouselImgRight : ElementFinder;
     public additionalDealerSavings : ElementFinder;
     public confirmAvailabilityForUnlockDealer : ElementFinder;
-    public confirmAvailabilityForNoUnlockDealer_Desktop : ElementFinder;
-    public confirmAvailabilityForNoUnlockDealer_Mobile : ElementFinder;
+    public confirmAvailabilityForNoUnlockDealerOnDesktop : ElementFinder;
+    public confirmAvailabilityForNoUnlockDealerOnMobile : ElementFinder;
     public leadFormModal : ElementFinder;
     public leadFormModalPaymentTerm : ElementFinder;
     public leadFormModalFirstName : ElementFinder;
@@ -229,8 +229,8 @@ export class VdpPage {
         this.additionalDealerSavings = element(by.xpath('//div[@class="AdditionalDealerSavings flexBox"]'));
 
         this.confirmAvailabilityForUnlockDealer = element(by.css('.send-estimate-text'));
-        this.confirmAvailabilityForNoUnlockDealer_Desktop = element(by.css('button.confirm-availability'));
-        this.confirmAvailabilityForNoUnlockDealer_Mobile = element(by.css('.confirm-availability-btn'));
+        this.confirmAvailabilityForNoUnlockDealerOnDesktop = element(by.css('button.confirm-availability'));
+        this.confirmAvailabilityForNoUnlockDealerOnMobile = element(by.css('.confirm-availability-btn'));
         this.leadFormModal = element(by.xpath('//div[@class="smart-price-modal-container ng-star-inserted"]'));
         this.leadFormModalPaymentTerm = element(by.css('div.price-sub-con > .prefix'));
         this.leadFormModalFirstName = element(by.xpath('//div[@class="customer-name-field"]/con-textfield[1]/div/mat-form-field/div/div[1]/div[3]/input'));
