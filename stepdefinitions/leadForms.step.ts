@@ -12,7 +12,7 @@ let vdpPage : VdpPage = new VdpPage();
 
 async function checkIfIsMobileDevice() {
     let capabilities = await browser.getCapabilities();
-    return (capabilities.get(PLATFORMS.PLATFORM_CAPABILITY) === PLATFORMS.ANDROID)
+    return (capabilities.get(PLATFORMS.PLATFORM_CAPABILITY) === PLATFORMS.ANDROID);
 }
 
 When('User clicks on Unlock Savings on a Vehicle Card', async  () =>{
@@ -130,7 +130,7 @@ Then('Price Summary should display additional line item for Additional Dealer Sa
 When('User clicks on Send Estimate to Dealer on a Price Summary', async  () =>{
     await browser.driver.sleep(20*1000);
     const isMobileDevice = await checkIfIsMobileDevice();
-    browser.executeScript('arguments[0].click()', vdpPage.confirmAvailabilityForUnlockDealer).then(function(){}, function(err) {
+    browser.executeScript('arguments[0].click()', vdpPage.confirmAvailabilityForUnlockDealer).catch(function() {
         if (isMobileDevice) {
             browser.executeScript('arguments[0].click()', vdpPage.confirmAvailabilityForNoUnlockDealerOnMobile);
         } else {
