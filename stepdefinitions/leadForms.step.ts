@@ -132,9 +132,9 @@ When('User clicks on Send Estimate to Dealer on a Price Summary', async  () =>{
     const isMobileDevice = await checkIfIsMobileDevice();
     browser.executeScript('arguments[0].click()', vdpPage.confirmAvailabilityForUnlockDealer).then(function(){}, function(err) {
         if (isMobileDevice) {
-            browser.executeScript('arguments[0].click()', vdpPage.confirmAvailabilityForNoUnlockDealer_Mobile);
+            browser.executeScript('arguments[0].click()', vdpPage.confirmAvailabilityForNoUnlockDealerOnMobile);
         } else {
-            browser.executeScript('arguments[0].click()', vdpPage.confirmAvailabilityForNoUnlockDealer_Desktop);
+            browser.executeScript('arguments[0].click()', vdpPage.confirmAvailabilityForNoUnlockDealerOnDesktop);
         }
     });
 
