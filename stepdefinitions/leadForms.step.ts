@@ -143,13 +143,13 @@ When('User clicks on Send Estimate to Dealer on a Price Summary', async  () =>{
 
 Then('System should display Send Estimate modal', async  () =>{
     await browser.driver.sleep(5*1000);
-    return Assertion.expect((await vdpPage.leadFormModal.isDisplayed()).valueOf()).to.be.true;
+    return Assertion.expect((await vdpPage.mstcMultiLeadFormModal.isDisplayed()).valueOf()).to.be.true;
 });
 
  
 Then('Payment term is same as selected in VDP', async  () =>{
     await browser.driver.sleep(5*1000);
-    return Assertion.expect(vdpPage.leadFormModalPaymentTerm.getText()).to.eventually.equal((await vdpPage.ppTerm.getText()).valueOf());
+    return Assertion.expect(vdpPage.mstcMultiLeadFormModalPaymentTerm.getText()).to.eventually.equal((await vdpPage.ppTerm.getText()).valueOf());
 });
 
 
@@ -159,7 +159,7 @@ When('User does not enter valid values for email and zip in Send Estimate modal'
     await browser.driver.sleep(2*1000);
     browser.executeScript("arguments[0].click()", vlpFilterPage.unlockSavingsModalZip);
     await browser.driver.sleep(2*1000);
-    browser.executeScript("arguments[0].click()", vdpPage.leadFormModalFirstName);
+    browser.executeScript("arguments[0].click()", vdpPage.mstcMultiLeadFormModalFirstName);
     await browser.driver.sleep(2*1000);
 });
 
@@ -171,7 +171,7 @@ Then('System should display the email text box in error state for sending estima
 
 Then('System should display the zip text box in error state for sending estimate', async  () =>{
     await browser.driver.sleep(2*1000);
-    return Assertion.expect((await vdpPage.leadFormModalZipError.isDisplayed()).valueOf()).to.be.true;
+    return Assertion.expect((await vdpPage.mstcMultiLeadFormModalZipError.isDisplayed()).valueOf()).to.be.true;
 });
 
 
@@ -183,9 +183,9 @@ Then('Display Submit CTA in Disabled state', async  () =>{
 
 When('User has entered valid values for all fields in Send Estimate modal', async  () =>{
     await browser.driver.sleep(5*1000);
-    vdpPage.leadFormModalFirstName.sendKeys(browser.params.fname);
+    vdpPage.mstcMultiLeadFormModalFirstName.sendKeys(browser.params.fname);
     await browser.driver.sleep(2*1000);
-    vdpPage.leadFormModalLastName.sendKeys(browser.params.lname);
+    vdpPage.mstcMultiLeadFormModalLastName.sendKeys(browser.params.lname);
     await browser.driver.sleep(2*1000);
     vlpFilterPage.unlockSavingsModalEmail.sendKeys(browser.params.seemail);
     await browser.driver.sleep(2*1000);
@@ -201,12 +201,12 @@ When('User clicks on Submit', async  () =>{
 
 Then('System should display confirmation modal "Estimate sent!"', async  () =>{
     await browser.driver.sleep(10*1000);
-    return Assertion.expect(vdpPage.leadFormModalTitle.getText()).to.eventually.contain('Estimate Sent!');
+    return Assertion.expect(vdpPage.mstcMultiLeadFormModalTitle.getText()).to.eventually.contain('Estimate Sent!');
 });
 
 When('User clicks on Return to page in Send Estimate confirmation modal', async  () =>{
     await browser.driver.sleep(5*1000);
-    browser.executeScript("arguments[0].click()", vdpPage.leadFormReturnToPage);
+    browser.executeScript("arguments[0].click()", vdpPage.mstcMultiLeadFormModalReturnToPage);
 });
 
 
