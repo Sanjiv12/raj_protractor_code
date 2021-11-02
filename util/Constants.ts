@@ -1,6 +1,9 @@
 export const PLATFORMS = {
+    PLATFORM_CAPABILITY: 'platformName',
     ANDROID: 'Android'
 };
+
+
 
 export const JENKINS_OPTIONS = {
     CHROME_DESKTOP: 'ChromeDesktop',

@@ -23,6 +23,7 @@ let extractBrowserFromCli = function() {
 let browserSupportsBasicAuth = function(browser) {
     return browser !== JENKINS_OPTIONS.SAFARI_DESKTOP && browser !== JENKINS_OPTIONS.SAFARI_IOS;
 }
+
 let generateBrowserConfiguration = function() {
     const selectedBrowser = extractBrowserFromCli();
     let multiCapabilities = [];
@@ -68,11 +69,13 @@ export const config: Config = {
     // seleniumAddress: "https://ondemand.us-west-1.saucelabs.com:443/wd/hub",
     //  SELENIUM_PROMISE_MANAGER: false,
      
+    sauceUser:"sso-toyota.tcoe-kimberlee.dixon",
+    sauceKey:"aad70988-20cb-4d05-b24e-65bea4dfb0ee",
+
     // sauceUser:"sso-toyota.tcoe-raghunath.goteti",
     // sauceKey:"a1aaa34b-ba44-4bc7-a94c-f79aa068e60f",
 
-    sauceUser:"sso-toyota.tcoe-kimberlee.dixon",
-    sauceKey:"aad70988-20cb-4d05-b24e-65bea4dfb0ee",
+    baseUrl: "https://qa.smartpath.tldealersystems.com/inventory?dealerCd=24022&source=t1",
 
     //baseUrl: 'baseurl',
 
@@ -82,7 +85,7 @@ export const config: Config = {
         require: ["../../typeScript/stepdefinitions/**/*.step.js", "../../typeScript/util/*.js"],
         format: 'json:dist/results.json',
         strict: true,
-        
+
    },
     suites:{
         createaccount: "../../features/**/createAccount.feature",
@@ -91,7 +94,7 @@ export const config: Config = {
         vdpvehicleinfo: "../../features/**/vdpVehicleInformation.feature",
         vdpprotectionproducts: "../../features/**/vdpProtectionProducts.feature",
         vdpaccessory: "../../features/**/vdpAccessory.feature",
-        vdppaymentdefaults: "../../features/**/vdpPaymentDefaults.feature",     
+        vdppaymentdefaults: "../../features/**/vdpPaymentDefaults.feature",
         unlocksavingsleadforms: "../../features/**/unlockSavingsLeadForms.feature",
         sendestimateleadforms: "../../features/**/sendEstimateLeadForms.feature",
         contactdealerleadforms: "../../features/**/contactDealerLeadForms.feature",
@@ -99,7 +102,6 @@ export const config: Config = {
     },
     
     onPrepare: async() => {
-        browser.manage().window().maximize();
         browser.driver.manage().deleteAllCookies();
         browser.waitForAngularEnabled(false);
         reportConfig.createDirectory(jsonPath);
@@ -116,9 +118,9 @@ export const config: Config = {
         }, 100000);
     },
     multiCapabilities: generateBrowserConfiguration(),
-    // capabilities: {            
+    // capabilities: {
     // },
-    
+
     commandTimeout: 10000,
     maxDuration: 12000,
     //maxSessions: 30,
@@ -138,7 +140,7 @@ export const config: Config = {
         usemail:'',
         seemail:'',
         cdemail:''
-    },    
+    },
 };
 
 export class reportConfig {
