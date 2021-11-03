@@ -48,6 +48,7 @@ export class VlpFilterPage {
     public unlockSavingsModalZipError : ElementFinder;
     public unlockSavingsModalRevealBtn : ElementFinder;
     public unlockSavingsModalTitle : ElementFinder;
+    public unlockSavingsModalTitleNoSavings : ElementFinder;
     public unlockSavingsModalPrice : ElementFinder;
     public unlockSavingsModalreturnToPage : ElementFinder;
     public unlockSavingsModalSmartPriceTxt : ElementArrayFinder;
@@ -103,6 +104,7 @@ export class VlpFilterPage {
         this.unlockSavingsModalZipError = element(by.css('con-textfield.form-field .mat-error'));
         this.unlockSavingsModalRevealBtn = element(by.xpath('//div[@class="customer-submit"]/button'));
         this.unlockSavingsModalTitle = element(by.css('.unlock-price-modal-title'));
+        this.unlockSavingsModalTitleNoSavings = element(by.css('.unlock-price-modal-no-savingtitle'));
         this.unlockSavingsModalPrice = element(by.xpath('//*[@id="smart-price-modal-component"]/app-smart-price-modal/app-smart-price-unlock-modal/div/div/div[3]/div[1]/div[2]/div'));
         this.unlockSavingsModalreturnToPage = element(by.xpath('//div[@class="return-to-page"]/div[@class="text-button"]'));
         this.unlockSavingsModalSmartPriceTxt = element.all(by.css('.price-section'));

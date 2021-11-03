@@ -73,7 +73,13 @@ When('User clicks Reveal Price', async  () =>{
 
 Then('System should display confirmation modal with $ Savings', async  () =>{
     await browser.driver.sleep(10*1000);
-    return Assertion.expect(vlpFilterPage.unlockSavingsModalTitle.getText()).to.eventually.contain('savings unlocked!');
+    const savingsUnlockedText = 'savings unlocked!';
+    return vlpFilterPage.unlockSavingsModalTitle.isPresent().then(() => {
+        return Assertion.expect(vlpFilterPage.unlockSavingsModalTitle.getText()).to.eventually.contain(savingsUnlockedText);
+    }).catch(() => {
+        return Assertion.expect(vlpFilterPage.unlockSavingsModalTitleNoSavings.getText()).to.eventually.contain(savingsUnlockedText);
+    })
+
 });
 
 Then('System should display confirmation modal with Smart Price for the vehicle', async  () =>{
