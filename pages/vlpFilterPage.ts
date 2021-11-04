@@ -98,8 +98,8 @@ export class VlpFilterPage {
 
         this.unlockSavingsModalEmail = element(by.css("input[type='email']"));
         this.unlockSavingsModalZip = element(by.css("input[type='number']"));
-        this.unlockSavingsModalFirstName = element(by.xpath('//input[@class="mat-input-element mat-form-field-autofill-control ng-untouched ng-pristine ng-valid cdk-text-field-autofill-monitored ng-star-inserted"][1]'));
-        this.unlockSavingsModalLastName = element(by.xpath('//input[@class="mat-input-element mat-form-field-autofill-control ng-untouched ng-pristine ng-valid cdk-text-field-autofill-monitored ng-star-inserted"][1]'));
+        this.unlockSavingsModalFirstName = element(by.xpath('//div[@class="customer-name-field"]/con-textfield[1]/div/mat-form-field/div/div[1]/div[3]/input'));
+        this.unlockSavingsModalLastName = element(by.xpath('//div[@class="customer-name-field"]/con-textfield[2]/div/mat-form-field/div/div[1]/div[3]/input'));
         this.unlockSavingsModalEmailError = element(by.css('con-textfield.email-form-field .mat-error'));
         this.unlockSavingsModalZipError = element(by.css('con-textfield.form-field .mat-error'));
         this.unlockSavingsModalRevealBtn = element(by.xpath('//div[@class="customer-submit"]/button'));
