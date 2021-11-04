@@ -185,13 +185,14 @@ Then('Display Submit CTA in Disabled state', async  () =>{
 
 When('User has entered valid values for all fields in Send Estimate modal', async  () =>{
     await browser.driver.sleep(5*1000);
-    vdpPage.mstcMultiLeadFormModalFirstName.sendKeys(browser.params.fname);
-    await browser.driver.sleep(2*1000);
-    vdpPage.mstcMultiLeadFormModalLastName.sendKeys(browser.params.lname);
-    await browser.driver.sleep(2*1000);
-    vlpFilterPage.unlockSavingsModalEmail.sendKeys(browser.params.seemail);
-    await browser.driver.sleep(2*1000);
-    vlpFilterPage.unlockSavingsModalZip.sendKeys(browser.params.zipcode);
+    await vdpPage.mstcMultiLeadFormModalFirstName.clear();
+    await vdpPage.mstcMultiLeadFormModalFirstName.sendKeys(browser.params.fname);
+    await vdpPage.mstcMultiLeadFormModalLastName.clear()
+    await vdpPage.mstcMultiLeadFormModalLastName.sendKeys(browser.params.lname);
+    await vlpFilterPage.unlockSavingsModalEmail.clear();
+    await vlpFilterPage.unlockSavingsModalEmail.sendKeys(browser.params.seemail);
+    await vlpFilterPage.unlockSavingsModalTitle.clear();
+    await vlpFilterPage.unlockSavingsModalZip.sendKeys(browser.params.zipcode);
     await browser.driver.sleep(2*1000);
 });
 

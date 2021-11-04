@@ -3,6 +3,7 @@ import { Then, When, Given, Before, BeforeAll, SummaryFormatter } from "cucumber
 import { MspFilterPage } from "../pages/mspFilterPage";
 import { VlpFilterPage } from "../pages/vlpFilterPage";
 import { expect } from "chai";
+import {TIER1_WEBSITE} from "../util/Constants";
 
 let mspFilterPage : MspFilterPage = new MspFilterPage();
 let vlpFilterPage : VlpFilterPage = new VlpFilterPage();
@@ -11,7 +12,10 @@ let p = 0;
 let np = 0;
 
 Given('User is in Vehicle List Page', async () =>{
+    browser.get(TIER1_WEBSITE.TOYOTA);
+    browser.driver.manage().deleteAllCookies();
     await browser.get(browser.params.url+'?dealerCd='+browser.params.dealerCd+'&source='+browser.params.source);
+    browser.driver.manage().deleteAllCookies();
     await browser.driver.sleep(10*1000);
     browser.driver.manage().deleteAllCookies();
     browser.executeScript("arguments[0].click()", mspFilterPage.popUpClose);

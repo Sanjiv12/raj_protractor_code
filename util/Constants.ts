@@ -3,7 +3,9 @@ export const PLATFORMS = {
     ANDROID: 'Android'
 };
 
-
+export const TIER1_WEBSITE = {
+    TOYOTA: 'https://www.toyota.com'
+}
 
 export const JENKINS_OPTIONS = {
     CHROME_DESKTOP: 'ChromeDesktop',

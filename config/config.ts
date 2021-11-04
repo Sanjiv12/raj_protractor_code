@@ -2,7 +2,7 @@ import { browser, Config ,$,by} from "protractor";
 import * as fs from "fs";
 import * as mkdirp from "mkdirp";
 import * as path from "path";
-import {PLATFORMS,JENKINS_OPTIONS,CLI} from "../util/Constants"
+import {PLATFORMS, JENKINS_OPTIONS, CLI, TIER1_WEBSITE} from "../util/Constants"
 import {BrowserPlatformConfigurations} from "./BrowserPlatformConfigurations";
 
 const jsonPath = path.join(process.cwd(), "/dist");
@@ -102,20 +102,26 @@ export const config: Config = {
     },
     
     onPrepare: async() => {
-        browser.driver.manage().deleteAllCookies();
         browser.waitForAngularEnabled(false);
+        browser.get(TIER1_WEBSITE.TOYOTA);
+        browser.driver.manage().deleteAllCookies();
         reportConfig.createDirectory(jsonPath);
         await browser.get(browser.params.url+'?dealerCd='+browser.params.dealerCd+'&source='+browser.params.source);
-        //baseurl = browser.params.url;
-        // 
-        // wait until login is done
-        // that means when we are on summary page
-        //
+        browser.driver.manage().deleteAllCookies();
     
         return await browser.driver.wait(async() => {
             const url = await browser.driver.getCurrentUrl();
             return /inventory/.test(url);
         }, 100000);
+    },
+    beforeEach: async() => {
+        // For Firefox, Edge, and Safari, we need to delete the dgid cookie between tests
+        // Selenium can only delete 1st party cookies, so we need to go to the dgid cookie domain to fix it
+        await browser.get(TIER1_WEBSITE.TOYOTA);
+        browser.driver.manage().deleteAllCookies();
+        await browser.get(browser.params.url+'?dealerCd='+browser.params.dealerCd+'&source='+browser.params.source);
+        browser.driver.manage().deleteAllCookies();
+
     },
     multiCapabilities: generateBrowserConfiguration(),
     // capabilities: {
