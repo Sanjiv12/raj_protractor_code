@@ -12,8 +12,8 @@ let p = 0;
 let np = 0;
 
 Given('User is in Vehicle List Page', async () =>{
-    browser.get(TIER1_WEBSITE.TOYOTA);
-    browser.driver.manage().deleteAllCookies();
+    await browser.get(TIER1_WEBSITE.TOYOTA);
+    await browser.driver.manage().deleteAllCookies();
     await browser.get(browser.params.url+'?dealerCd='+browser.params.dealerCd+'&source='+browser.params.source);
     browser.driver.manage().deleteAllCookies();
     await browser.driver.sleep(10*1000);

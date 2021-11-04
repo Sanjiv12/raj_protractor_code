@@ -5,6 +5,7 @@ import { VlpFilterPage } from "../pages/vlpFilterPage";
 import {VdpPage} from "../pages/vdpPage"
 import { expect } from "chai";
 import {Assertion} from "../util/assertion"
+import {TIER1_WEBSITE} from "../util/Constants";
 
 let mspFilterPage : MspFilterPage = new MspFilterPage();
 let vlpFilterPage : VlpFilterPage = new VlpFilterPage();
@@ -68,20 +69,20 @@ Then('Default Term is selected', async() => {
 
 Given('User is in Vehicle Details page', async() => {
     //await browser.get('?dealerCd='+browser.params.dealerCd+'&source='+browser.params.source);
-    await browser.get('https://www.toyota.com');
-    await browser.driver.manage().deleteCookie('dgid_prod');
+    await browser.get(TIER1_WEBSITE.TOYOTA);
+    await browser.driver.manage().deleteAllCookies();
     await browser.get(browser.params.url+'?dealerCd='+browser.params.dealerCd+'&source='+browser.params.source);
     await browser.driver.manage().deleteAllCookies();
-    await browser.driver.sleep(10*1000);
-    browser.executeScript("arguments[0].click()", mspFilterPage.popUpClose);
     await browser.driver.sleep(5*1000);
+    browser.executeScript("arguments[0].click()", mspFilterPage.popUpClose);
+    await browser.driver.sleep(4*1000);
     browser.executeScript('arguments[0].click()', mspFilterPage.sortDropDown);
     await browser.driver.sleep(2*1000);
     browser.executeScript('arguments[0].click()', mspFilterPage.sortPriceLowToHigh);
     await browser.driver.sleep(5*1000);
     browser.executeScript("window.scrollBy(0,250)");
     browser.executeScript('arguments[0].click()', mspFilterPage.appcardButton.first());
-    await browser.driver.sleep(10*1000);
+    await browser.driver.sleep(5*1000);
     browser.executeScript('arguments[0].click()', mspFilterPage.sortDropDown);
     await browser.driver.sleep(2*1000);
     browser.executeScript('arguments[0].click()', mspFilterPage.sortPriceLowToHigh);
