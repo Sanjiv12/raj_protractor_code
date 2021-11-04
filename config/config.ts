@@ -103,12 +103,8 @@ export const config: Config = {
     
     onPrepare: async() => {
         browser.waitForAngularEnabled(false);
-        browser.get(TIER1_WEBSITE.TOYOTA);
-        browser.driver.manage().deleteAllCookies();
         reportConfig.createDirectory(jsonPath);
         await browser.get(browser.params.url+'?dealerCd='+browser.params.dealerCd+'&source='+browser.params.source);
-        browser.driver.manage().deleteAllCookies();
-    
         return await browser.driver.wait(async() => {
             const url = await browser.driver.getCurrentUrl();
             return /inventory/.test(url);

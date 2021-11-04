@@ -46,10 +46,7 @@ export const BrowserPlatformConfigurations = {
         "maxInstances" : 15,
         "version": '90',
         "platform": 'Windows 10',
-        "screenResolution": '1920x1080',
-        "edgeOptions": {
-            args: ["--InPrivate"]
-        }
+        "screenResolution": '1920x1080'
     },
     SafariDesktop: {
         browserName: 'safari',
