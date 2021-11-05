@@ -13,7 +13,6 @@ Scenario: SSO - User signs in using Google SSO
     And User signs in using the following parameters:
         | method    | username          | pass           |
         | google    | example@gmail.com | passphrase123  |
-    And User loads the Saves page
     Then Correct User is logged in
     # Use After hook to sign out
 
@@ -24,7 +23,6 @@ Scenario: SSO - User signs in using Apple SSO
     And User signs in using the following parameters:
         | method    | username          | pass           |
         | apple    | example@icloud.com | passphrase123  |
-    And User loads the Saves page
     Then Correct User is logged in
     # Use After hook to sign out
 
@@ -35,7 +33,6 @@ Scenario: SSO - User signs in using Facebook SSO
     And User signs in using the following parameters:
         | method    | username          | pass           |
         | facebook    | example@example.com | passphrase123  |
-    And User loads the Saves page
     Then Correct User is logged in
     # Use After hook to sign out
 
@@ -46,8 +43,6 @@ Scenario: SSO - Signed In User Accesses Account Management Page
     And User signs in using the following parameters:
         | method | username          | pass          |
         | google | example@gmail.com | passphrase123 |
-    And Saves a vehicle
     And User loads the Account Management Page
-    And User removes a vehicle using the Account Management Page
-    Then No vehicles are present in the User's Garage
+    Then User can view account information on the Account Management Page
     # Use After hook to sign out
