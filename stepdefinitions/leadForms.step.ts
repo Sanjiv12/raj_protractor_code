@@ -119,7 +119,7 @@ Then('System should display Smart Price with Savings for the vehicle', async  ()
 
 When('User clicks on Unlock Savings on Vehicle info header', async  () =>{
     await browser.driver.sleep(20*1000);
-    browser.executeScript('arguments[0].click()', vdpPage.unlockSavings);
+    await browser.executeScript('arguments[0].click()', vdpPage.unlockSavings);
 });
 
 Then('Price Summary should display additional line item for Additional Dealer Savings', async  () =>{

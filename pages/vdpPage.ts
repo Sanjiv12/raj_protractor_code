@@ -204,7 +204,7 @@ export class VdpPage {
         this.vehicleTitle = element(by.className('vehicle-title'));
         this.dgIcon = element(by.className('dg-inline-save-heart'));
         this.advertisedPrice = element(by.xpath("//div[@class='price']"));
-        this.unlockSavings = element(by.xpath("//div[@class='price']/span[2]"));
+        this.unlockSavings = element(by.css(".unlock-saving"));
         this.extColor = element(by.xpath('//div[@class="vehicle-info"]/div[4]/div[1]/div[1]/div[2]/span[2]'));
         this.intColor = element(by.xpath('//div[@class="vehicle-info"]/div[4]/div[1]/div[2]/div[2]/span[2]'));
         this.engine = element(by.xpath('//div[@class="vehicle-info"]/div[4]/div[2]/div[1]/div[2]'));
