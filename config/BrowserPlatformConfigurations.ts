@@ -31,14 +31,7 @@ export const BrowserPlatformConfigurations = {
         "version": '88.0',
         "platform": 'Windows 10',
         "screenResolution": '1920x1080',
-        "restartBrowserBetweenTests": true,
-        "prefs": {
-            "browser.cache.disk.enable": false,
-            "browser.cache.memory.enable": false,
-            "browser.cache.offline.enable": false,
-            "network.http.use-cache": false,
-            "network.cookie.thirdparty.sessionOnly": true
-        }
+        "restartBrowserBetweenTests": true
     },
     Edge: {
         "browserName": 'MicrosoftEdge',
@@ -62,5 +55,9 @@ export const BrowserPlatformConfigurations = {
         "maxInstances" : 15,
         "version": '88.0',
         "platform": 'Windows 10',
-        "screenResolution": '1920x1080'
+        "screenResolution": '1920x1080',
+        chromeOptions: {
+            args: ["--incognito"]
+        },
+
     }}

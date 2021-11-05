@@ -12,7 +12,9 @@ let p = 0;
 let np = 0;
 
 Given('User is in Vehicle List Page', async () =>{
-    await browser.get(TIER1_WEBSITE.TOYOTA)
+    await browser.get(browser.params.url+'?dealerCd='+browser.params.dealerCd+'&source='+browser.params.source);
+    await browser.driver.manage().deleteAllCookies();
+    await browser.get(TIER1_WEBSITE.TOYOTA);
     await browser.driver.manage().deleteAllCookies();
     await browser.get(browser.params.url+'?dealerCd='+browser.params.dealerCd+'&source='+browser.params.source);
     await browser.driver.manage().deleteAllCookies();
@@ -27,6 +29,9 @@ Given('User is in Vehicle List Page', async () =>{
     browser.executeScript('arguments[0].click()', mspFilterPage.appcardButton.first());
     await browser.driver.sleep(10*1000);
     browser.executeScript('arguments[0].click()', mspFilterPage.sortDropDown);
+    await browser.driver.sleep(2*1000);
+    browser.executeScript('arguments[0].click()', mspFilterPage.sortPriceLowToHigh);
+
 });
     
 
