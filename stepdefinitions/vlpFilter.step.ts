@@ -27,9 +27,6 @@ Given('User is in Vehicle List Page', async () =>{
     browser.executeScript('arguments[0].click()', mspFilterPage.appcardButton.first());
     await browser.driver.sleep(10*1000);
     browser.executeScript('arguments[0].click()', mspFilterPage.sortDropDown);
-    await browser.driver.sleep(2*1000);
-    browser.executeScript('arguments[0].click()', mspFilterPage.sortPriceLowToHigh);
-    
 });
     
 

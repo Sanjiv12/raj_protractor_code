@@ -10,13 +10,16 @@ let baseurl ='';
 
 let extractBrowserFromCli = function() {
     let browser = JENKINS_OPTIONS.ALL; // Default to 'All' if nothing found
-    let foundParam = process.argv.find((arg) => {
+    // Grab the browser parameter from the command line args
+    let foundBrowserParam = process.argv.find((arg) => {
         const parts = arg.split(CLI.valueSplitChar);
         const name = parts[0].trim().replace(CLI.params, '');
         return name == CLI.browserPlatformParam;
     });
-    if (foundParam && foundParam.split(CLI.valueSplitChar)) {
-        browser = foundParam.split(CLI.valueSplitChar)[1];
+    // If browser param set, extract the selected browsers
+    if (foundBrowserParam && foundBrowserParam.split(CLI.valueSplitChar)) {
+        let selectedBrowsers = foundBrowserParam.split(CLI.valueSplitChar)[1];
+        browser = selectedBrowsers.split(',').toString();
     }
     return browser;
 };
