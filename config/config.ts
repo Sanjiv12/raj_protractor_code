@@ -11,12 +11,12 @@ let baseurl ='';
 let extractBrowserFromCli = function() {
     let browser = JENKINS_OPTIONS.ALL; // Default to 'All' if nothing found
     let foundParam = process.argv.find((arg) => {
-        const parts = arg.split(CLI.splitChar);
+        const parts = arg.split(CLI.valueSplitChar);
         const name = parts[0].trim().replace(CLI.params, '');
         return name == CLI.browserPlatformParam;
     });
-    if (foundParam && foundParam.split(CLI.splitChar)) {
-        browser = foundParam.split(CLI.splitChar)[1];
+    if (foundParam && foundParam.split(CLI.valueSplitChar)) {
+        browser = foundParam.split(CLI.valueSplitChar)[1];
     }
     return browser;
 };

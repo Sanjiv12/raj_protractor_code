@@ -68,12 +68,10 @@ Then('Default Term is selected', async() => {
 
 
 Given('User is in Vehicle Details page', async() => {
-    await browser.get(TIER1_WEBSITE.TOYOTA).then(() => {
-        return browser.driver.manage().deleteAllCookies();
-    });
-    await browser.get(browser.params.url+'?dealerCd='+browser.params.dealerCd+'&source='+browser.params.source).then(() => {
-        browser.driver.manage().deleteAllCookies();
-    });
+    await browser.get(TIER1_WEBSITE.TOYOTA)
+    await browser.driver.manage().deleteAllCookies();
+    await browser.get(browser.params.url+'?dealerCd='+browser.params.dealerCd+'&source='+browser.params.source);
+    await browser.driver.manage().deleteAllCookies();
     await browser.driver.sleep(5*1000);
     browser.executeScript("arguments[0].click()", mspFilterPage.popUpClose);
     await browser.driver.sleep(4*1000);

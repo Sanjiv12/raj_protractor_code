@@ -20,5 +20,6 @@ export const JENKINS_OPTIONS = {
 export const CLI = {
     params: '--params',
     browserPlatformParam: '.browserPlatformCombo',
-    splitChar: '='
+    valueSplitChar: '=',
+    browserSplitChar: ','
 }

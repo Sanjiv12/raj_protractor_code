@@ -103,7 +103,7 @@ export class VlpFilterPage {
         this.unlockSavingsModalEmailError = element(by.css('con-textfield.email-form-field .mat-error'));
         this.unlockSavingsModalZipError = element(by.css('con-textfield.form-field .mat-error'));
         this.unlockSavingsModalRevealBtn = element(by.xpath('//div[@class="customer-submit"]/button'));
-        this.unlockSavingsModalTitle = element(by.css('.unlock-price-modal-title'));
+        this.unlockSavingsModalTitle = element(by.css('.smart-price-modal-title'));
         this.unlockSavingsModalTitleNoSavings = element(by.css('.unlock-price-modal-no-savingtitle'));
         this.unlockSavingsModalPrice = element(by.xpath('//*[@id="smart-price-modal-component"]/app-smart-price-modal/app-smart-price-unlock-modal/div/div/div[3]/div[1]/div[2]/div'));
         this.unlockSavingsModalreturnToPage = element(by.xpath('//div[@class="return-to-page"]/div[@class="text-button"]'));

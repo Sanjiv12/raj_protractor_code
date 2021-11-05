@@ -17,12 +17,11 @@ async function checkIfIsMobileDevice() {
 
 When('User clicks on Unlock Savings on a Vehicle Card', async  () =>{
     await browser.driver.sleep(5*1000);
-    vlpFilterPage.unlockSavings.first().click();
+    await vlpFilterPage.unlockSavings.first().click();
 });
 
 
 Then('System should display Unlock Savings modal', async  () =>{
-    await browser.driver.sleep(5*1000);
     return Assertion.expect((await vlpFilterPage.unlockSavingsModal.isDisplayed()).valueOf()).to.be.true;
 });
 
@@ -148,7 +147,7 @@ Then('System should display Send Estimate modal', async  () =>{
     return Assertion.expect((await vdpPage.mstcMultiLeadFormModal.isDisplayed()).valueOf()).to.be.true;
 });
 
- 
+
 Then('Payment term is same as selected in VDP', async  () =>{
     await browser.driver.sleep(5*1000);
     return Assertion.expect(vdpPage.mstcMultiLeadFormModalPaymentTerm.getText()).to.eventually.equal((await vdpPage.ppTerm.getText()).valueOf());
@@ -191,7 +190,7 @@ When('User has entered valid values for all fields in Send Estimate modal', asyn
     await vdpPage.mstcMultiLeadFormModalLastName.sendKeys(browser.params.lname);
     await vlpFilterPage.unlockSavingsModalEmail.clear();
     await vlpFilterPage.unlockSavingsModalEmail.sendKeys(browser.params.seemail);
-    await vlpFilterPage.unlockSavingsModalTitle.clear();
+    await vlpFilterPage.unlockSavingsModalZip.clear();
     await vlpFilterPage.unlockSavingsModalZip.sendKeys(browser.params.zipcode);
     await browser.driver.sleep(2*1000);
 });
