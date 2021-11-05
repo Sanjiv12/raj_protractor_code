@@ -19,13 +19,11 @@ let extractBrowserFromCli = function() {
     // If browser param set, extract the selected browsers
     if (foundBrowserParam && foundBrowserParam.split(CLI.valueSplitChar)) {
         let selectedBrowsers = foundBrowserParam.split(CLI.valueSplitChar)[1];
-        browser = selectedBrowsers.split(',');
+        browser = selectedBrowsers.split(CLI.browserSplitChar);
     }
     return browser;
 };
-let browserSupportsBasicAuth = function(browser) {
-    return browser !== JENKINS_OPTIONS.SAFARI_DESKTOP && browser !== JENKINS_OPTIONS.SAFARI_IOS;
-}
+
 
 let generateBrowserConfiguration = function() {
     const selectedBrowser = extractBrowserFromCli();
