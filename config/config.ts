@@ -9,7 +9,7 @@ const jsonPath = path.join(process.cwd(), "/dist");
 let baseurl ='';
 
 let extractBrowserFromCli = function() {
-    let browser = JENKINS_OPTIONS.ALL; // Default to 'All' if nothing found
+    let browser = [];
     // Grab the browser parameter from the command line args
     let foundBrowserParam = process.argv.find((arg) => {
         const parts = arg.split(CLI.valueSplitChar);
@@ -19,7 +19,7 @@ let extractBrowserFromCli = function() {
     // If browser param set, extract the selected browsers
     if (foundBrowserParam && foundBrowserParam.split(CLI.valueSplitChar)) {
         let selectedBrowsers = foundBrowserParam.split(CLI.valueSplitChar)[1];
-        browser = selectedBrowsers.split(',').toString();
+        browser = selectedBrowsers.split(',');
     }
     return browser;
 };
@@ -30,8 +30,9 @@ let browserSupportsBasicAuth = function(browser) {
 let generateBrowserConfiguration = function() {
     const selectedBrowser = extractBrowserFromCli();
     let multiCapabilities = [];
-    switch(selectedBrowser) {
-        case JENKINS_OPTIONS.CHROME_DESKTOP:
+    selectedBrowser.forEach((browser) => {
+        switch(browser) {
+            case JENKINS_OPTIONS.CHROME_DESKTOP:default:
             multiCapabilities.push(BrowserPlatformConfigurations.ChromeDesktop);
             break;
         case JENKINS_OPTIONS.CHROME_ANDROID:
@@ -49,19 +50,8 @@ let generateBrowserConfiguration = function() {
         case JENKINS_OPTIONS.EDGE:
             multiCapabilities.push(BrowserPlatformConfigurations.Edge);
             break;
-        case JENKINS_OPTIONS.ALL_SUBPROD:
-            for (const [browser, capability] of Object.entries(BrowserPlatformConfigurations)) {
-                if (browserSupportsBasicAuth(browser)) {
-                    multiCapabilities.push(capability);
-                }
             }
-            break;
-        case JENKINS_OPTIONS.ALL:default:
-            for (const [, capability] of Object.entries(BrowserPlatformConfigurations)) {
-                multiCapabilities.push(capability);
-            }
-            break;
-    }
+    })
     return multiCapabilities;
 }
 
