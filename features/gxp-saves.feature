@@ -5,7 +5,6 @@ A MST-C user opens their My Saves page.
 # ====================================================================================
 
 Scenario: Saves - Shared Saves Lead from Saves Page
-
   Given User is in Vehicle Details page
   When User clicks on inventory save heart
   And User loads the Saves page
@@ -18,6 +17,8 @@ Scenario: Saves - Profile Icon is visible
   Given User is in Vehicle List page
   When User loads the Saves page
   Then The Profile Icon should be visible
+
+# The side is also tested in gxp-saves-page-sidebar.feature
 Scenario: Saves - Sidebar Has Correct Structure
   Given User is in Saves page
   When User views the Saves page
