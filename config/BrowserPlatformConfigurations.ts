@@ -22,8 +22,6 @@ export const BrowserPlatformConfigurations = {
         platformVersion: '14.3',
         platformName: 'iOS'
     },
-    // Selenium's delete cookies function doesn't work how we need it to in private browsers for Firefox
-    // Thus, tests are conducted in regular rather than private Firefox
     Firefox:         {
         "browserName": 'firefox',
         "shardTestFiles": true,
@@ -31,7 +29,7 @@ export const BrowserPlatformConfigurations = {
         "version": '88.0',
         "platform": 'Windows 10',
         "screenResolution": '1920x1080',
-        "restartBrowserBetweenTests": true
+        "restartBrowserBetweenTests": true,
     },
     Edge: {
         "browserName": 'MicrosoftEdge',
@@ -39,7 +37,10 @@ export const BrowserPlatformConfigurations = {
         "maxInstances" : 15,
         "version": '90',
         "platform": 'Windows 10',
-        "screenResolution": '1920x1080'
+        "screenResolution": '1920x1080',
+        "edgeOptions": {
+            args: ["--inprivate"]
+        },
     },
     SafariDesktop: {
         browserName: 'safari',

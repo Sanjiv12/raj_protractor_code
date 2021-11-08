@@ -101,15 +101,6 @@ export const config: Config = {
             return /inventory/.test(url);
         }, 100000);
     },
-    beforeEach: async() => {
-        // For Firefox, Edge, and Safari, we need to delete the dgid cookie between tests
-        // Selenium can only delete 1st party cookies, so we need to go to the dgid cookie domain to fix it
-        await browser.get(TIER1_WEBSITE.TOYOTA);
-        browser.driver.manage().deleteAllCookies();
-        await browser.get(browser.params.url+'?dealerCd='+browser.params.dealerCd+'&source='+browser.params.source);
-        browser.driver.manage().deleteAllCookies();
-
-    },
     multiCapabilities: generateBrowserConfiguration(),
     // capabilities: {
     // },

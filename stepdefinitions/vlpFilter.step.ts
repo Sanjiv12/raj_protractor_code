@@ -12,26 +12,13 @@ let p = 0;
 let np = 0;
 
 Given('User is in Vehicle List Page', async () =>{
-    await browser.get(browser.params.url+'?dealerCd='+browser.params.dealerCd+'&source='+browser.params.source);
-    await browser.driver.manage().deleteAllCookies();
-    await browser.get(TIER1_WEBSITE.TOYOTA);
-    await browser.driver.manage().deleteAllCookies();
-    await browser.get(browser.params.url+'?dealerCd='+browser.params.dealerCd+'&source='+browser.params.source);
-    await browser.driver.manage().deleteAllCookies();
-    await browser.driver.sleep(5*1000);
-    browser.executeScript("arguments[0].click()", mspFilterPage.popUpClose);
-    await browser.driver.sleep(5*1000);       
-    browser.executeScript('arguments[0].click()', mspFilterPage.sortDropDown);
-    await browser.driver.sleep(3*1000);
-    browser.executeScript('arguments[0].click()', mspFilterPage.sortPriceLowToHigh);
-    await browser.driver.sleep(2*1000);
+    await mspFilterPage.sortDropDown.isPresent();
+    await mspFilterPage.sortDropDown.click();
+    await mspFilterPage.sortPriceLowToHigh.isPresent();
+    await mspFilterPage.sortPriceLowToHigh.click();
     browser.executeScript("window.scrollBy(0,250)");
-    browser.executeScript('arguments[0].click()', mspFilterPage.appcardButton.first());
-    await browser.driver.sleep(10*1000);
-    browser.executeScript('arguments[0].click()', mspFilterPage.sortDropDown);
-    await browser.driver.sleep(2*1000);
-    browser.executeScript('arguments[0].click()', mspFilterPage.sortPriceLowToHigh);
-
+    await mspFilterPage.appcardButton.isPresent();
+    await mspFilterPage.appcardButton.first().click();
 });
     
 
@@ -42,11 +29,6 @@ When('User selects one or more vehicle series from Model in Filters panel', asyn
     await browser.driver.sleep(5*1000);
     vlpFilterPage.modelDropDown.click();
     await browser.driver.sleep(2*1000);
-    // vlpFilterPage.modelOption1.click();
-    // await browser.driver.sleep(5*1000);
-    // vlpFilterPage.modelOption2.click();
-    // await browser.driver.sleep(5*1000);
-    // vlpFilterPage.modelOption3.click();
     browser.driver.findElement(By.xpath("//body")).click();
 });
 
