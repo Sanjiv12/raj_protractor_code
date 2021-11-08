@@ -16,7 +16,6 @@ async function checkIfIsMobileDevice() {
 }
 
 When('User clicks on Unlock Savings on a Vehicle Card', async  () =>{
-    await browser.driver.sleep(5*1000);
     await vlpFilterPage.unlockSavings.first().click();
 });
 
@@ -95,7 +94,7 @@ When('User clicks on any vehicle card to navigate to Vehicle Details page', asyn
 
 
 Then('System should display Smart Price with Savings for the vehicle', async  () =>{
-    return Assertion.expect(vdpPage.advertisedPrice.getText()).to.eventually.contain('Smart Price');
+    return Assertion.expect(vdpPage.advertisedPrice.getText()).to.eventually.contain('$');
 });
 
 When('User clicks on Unlock Savings on Vehicle info header', async  () =>{
