@@ -5,12 +5,10 @@ import { VlpFilterPage } from "../pages/vlpFilterPage";
 import {VdpPage} from "../pages/vdpPage"
 import { expect } from "chai";
 import {Assertion} from "../util/assertion"
-import {TIER1_WEBSITE} from "../util/Constants";
 
 let mspFilterPage : MspFilterPage = new MspFilterPage();
 let vlpFilterPage : VlpFilterPage = new VlpFilterPage();
 let vdpPage : VdpPage = new VdpPage();
-
 
 When('User selects a vehicle', async  () =>{
     await browser.driver.sleep(10*1000);
@@ -68,14 +66,10 @@ Then('Default Term is selected', async() => {
 
 
 Given('User is in Vehicle Details page', async() => {
-    await mspFilterPage.sortDropDown.isPresent();
     await mspFilterPage.sortDropDown.click();
-    await mspFilterPage.sortPriceLowToHigh.isPresent();
     await mspFilterPage.sortPriceLowToHigh.click();
     browser.executeScript("window.scrollBy(0,250)");
-    await mspFilterPage.appcardButton.isPresent();
     await mspFilterPage.appcardButton.first().click();
-    await vlpFilterPage.appCard.isPresent();
     await vlpFilterPage.appCard.first().click();
 });
 

@@ -3,21 +3,17 @@ import { Then, When, Given, Before, BeforeAll, SummaryFormatter } from "cucumber
 import { MspFilterPage } from "../pages/mspFilterPage";
 import { VlpFilterPage } from "../pages/vlpFilterPage";
 import { expect } from "chai";
-import {TIER1_WEBSITE} from "../util/Constants";
-
 let mspFilterPage : MspFilterPage = new MspFilterPage();
 let vlpFilterPage : VlpFilterPage = new VlpFilterPage();
 
 let p = 0;
 let np = 0;
 
+
 Given('User is in Vehicle List Page', async () =>{
-    await mspFilterPage.sortDropDown.isPresent();
     await mspFilterPage.sortDropDown.click();
-    await mspFilterPage.sortPriceLowToHigh.isPresent();
     await mspFilterPage.sortPriceLowToHigh.click();
     browser.executeScript("window.scrollBy(0,250)");
-    await mspFilterPage.appcardButton.isPresent();
     await mspFilterPage.appcardButton.first().click();
 });
     
@@ -25,7 +21,7 @@ Given('User is in Vehicle List Page', async () =>{
 
 
 When('User selects one or more vehicle series from Model in Filters panel', async  () =>{
-    
+
     await browser.driver.sleep(5*1000);
     vlpFilterPage.modelDropDown.click();
     await browser.driver.sleep(2*1000);
@@ -52,7 +48,7 @@ Given('User is in Vehicle List Page with all filters cleared', async () =>{
     
 
 When('User selects a Year from Filters panel', async  () =>{
-    
+
     await browser.driver.sleep(5*1000);
     vlpFilterPage.filterOptionYear.first().click();
     await browser.driver.sleep(5*1000);

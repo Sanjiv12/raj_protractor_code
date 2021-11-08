@@ -1,16 +1,18 @@
-import {TIER1_WEBSITE} from "./Constants";
+import {TCOM_WEBSITE, WAIT_TIMES} from "./Constants";
 
 const { BeforeAll, Before, After, AfterAll, Status, defineSupportCode,setDefaultTimeout } = require("cucumber");
 import { browser } from "protractor";
+import { constructVlpUrl } from "./constructVlpUrl";
 
-BeforeAll({timeout: 100 * 1000}, async () => {
-    setDefaultTimeout(90 * 1000);
+BeforeAll({timeout: WAIT_TIMES.TEN_SECONDS}, async () => {
+    setDefaultTimeout(WAIT_TIMES.MAX_TEST_TIMEOUT);
 });
 Before(async () => {
+    const vehicleListPage = constructVlpUrl();
     await browser.driver.manage().deleteAllCookies();
-    await browser.get(TIER1_WEBSITE.TOYOTA);
+    await browser.get(TCOM_WEBSITE);
     await browser.driver.manage().deleteAllCookies();
-    await browser.get(browser.params.url+'?dealerCd='+browser.params.dealerCd+'&source='+browser.params.source);
+    await browser.get(vehicleListPage);
     await browser.driver.manage().deleteAllCookies();
 });
 
