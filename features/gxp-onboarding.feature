@@ -3,7 +3,7 @@ Feature: GXP Onboarding Modal
 Scenario: Onboarding Modal - User is on T1 SmartPath for the first time
     Given User is on the T1 home page
     And User is on a SmartPath dealer
-    When User views the T1 home page
+    When User takes no action
     Then Onboarding modal appears
 
 Scenario: Onboarding Modal - User is on T1 SmartPath for the second time
@@ -20,7 +20,7 @@ Scenario: Onboarding Modal - User is on T2 MST-C
 
 Scenario: Onboarding Modal - User is on T3 SmartPath for the first time
     Given User is on a T3 SmartPath home page
-    When User views the T3 home page
+    When User takes no action
     Then Onboarding modal appears
 
 Scenario: Onboarding Modal - User is on T3 SmartPath for the second time
