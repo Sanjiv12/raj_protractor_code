@@ -53,7 +53,7 @@ Feature: Digital Garage Top Nav Dropdown Menu
         # - The shopping cart is not displayed in the top nav
 
         # Important that it's on T2, since the shopping cart will never be shown
-        # This garuantees that the Continue Purchase linkout should be shown in the dropdown
+        # This guarantees that the Continue Purchase linkout should be shown in the dropdown
         Given User is on the Tier 2 Vehicle List Page
         And User is on desktop
         And User is logged in to account <account>
