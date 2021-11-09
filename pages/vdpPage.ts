@@ -228,10 +228,10 @@ export class VdpPage {
         this.carouselImgRight = element(by.xpath('//img[@alt="arrowRight"]'));
         this.additionalDealerSavings = element(by.xpath('//div[@class="flexBox AdditionalDealerSavings"]'));
 
-        this.confirmAvailabilityForUnlockDealer = element(by.css('div.send-estimate-text'));
+        this.confirmAvailabilityForUnlockDealer = element(by.className('send-estimate-text'));
         this.confirmAvailabilityForNoUnlockDealerOnDesktop = element(by.css('button.confirm-availability'));
         this.confirmAvailabilityForNoUnlockDealerOnMobile = element(by.css('.confirm-availability-btn'));
-        this.mstcMultiLeadFormModal = element(by.xpath('//div[@class="smart-price-modal-container ng-star-inserted"]'));
+        this.mstcMultiLeadFormModal = element(by.className('smart-price-modal-container'));
         this.mstcMultiLeadFormModalPaymentTerm = element(by.css('div.price-sub-con > .prefix'));
         this.mstcMultiLeadFormModalFirstName = element(by.xpath('//div[@class="customer-name-field"]/con-textfield[1]/div/mat-form-field/div/div[1]/div[3]/input'));
         this.mstcMultiLeadFormModalLastName = element(by.xpath('//div[@class="customer-name-field"]/con-textfield[2]/div/mat-form-field/div/div[1]/div[3]/input'));

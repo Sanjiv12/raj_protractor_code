@@ -107,8 +107,9 @@ Then('Price Summary should display additional line item for Additional Dealer Sa
 
 
 When('User clicks on Send Estimate to Dealer on a Price Summary', async  () =>{
+    browser.executeScript("window.scrollBy(0,250)");
     const isMobileDevice = await checkIfIsMobileDevice();
-    browser.executeScript('arguments[0].click()', vdpPage.confirmAvailabilityForUnlockDealer).catch(function() {
+    await browser.executeScript('arguments[0].click()', vdpPage.confirmAvailabilityForUnlockDealer).catch(function() {
         if (isMobileDevice) {
             browser.executeScript('arguments[0].click()', vdpPage.confirmAvailabilityForNoUnlockDealerOnMobile);
         } else {
