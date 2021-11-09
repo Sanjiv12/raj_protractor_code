@@ -16,121 +16,100 @@ async function checkIfIsMobileDevice() {
 }
 
 When('User clicks on Unlock Savings on a Vehicle Card', async  () =>{
-    await browser.driver.sleep(5*1000);
-    vlpFilterPage.unlockSavings.first().click();
+    await vlpFilterPage.unlockSavings.first().click();
 });
 
 
 Then('System should display Unlock Savings modal', async  () =>{
-    await browser.driver.sleep(5*1000);
     return Assertion.expect((await vlpFilterPage.unlockSavingsModal.isDisplayed()).valueOf()).to.be.true;
 });
 
 When('User does not enter valid values for email and zip', async  () =>{
-    await browser.driver.sleep(5*1000);
-    browser.executeScript("arguments[0].click()", vlpFilterPage.unlockSavingsModalEmail);
-    await browser.driver.sleep(2*1000);
-    browser.executeScript("arguments[0].click()", vlpFilterPage.unlockSavingsModalZip);
-    await browser.driver.sleep(2*1000);
-    browser.executeScript("arguments[0].click()", vlpFilterPage.unlockSavingsModalFirstName);
-    await browser.driver.sleep(2*1000);
+    await vlpFilterPage.unlockSavingsModalEmail.click();
+    await vlpFilterPage.unlockSavingsModalZip.click();
+    await vlpFilterPage.unlockSavingsModalFirstName.click();
 });
 
 
 Then('System should display the email text box in error state', async  () =>{
-    await browser.driver.sleep(5*1000);
     return Assertion.expect((await vlpFilterPage.unlockSavingsModalEmailError.isDisplayed()).valueOf()).to.be.true;
 });
 
 Then('System should display the zip text box in error state', async  () =>{
-    await browser.driver.sleep(5*1000);
     return Assertion.expect((await vlpFilterPage.unlockSavingsModalZipError.isDisplayed()).valueOf()).to.be.true;
 });
 
 Then('Display Reveal Price CTA in disabled state', async  () =>{
-    await browser.driver.sleep(5*1000);
-    return Assertion.expect((await vlpFilterPage.unlockSavingsModalRevealBtn.isEnabled()).valueOf()).to.be.false;    
+    return Assertion.expect((await vlpFilterPage.unlockSavingsModalRevealBtn.isEnabled()).valueOf()).to.be.false;
 });
 
 
 When('User has entered valid values for all fields', async  () =>{
-    await browser.driver.sleep(5*1000);
-    vlpFilterPage.unlockSavingsModalFirstName.sendKeys(browser.params.fname);
-    await browser.driver.sleep(2*1000);
-    vlpFilterPage.unlockSavingsModalLastName.sendKeys(browser.params.lname);
-    await browser.driver.sleep(2*1000);
-    vlpFilterPage.unlockSavingsModalEmail.sendKeys(browser.params.usemail);
-    await browser.driver.sleep(2*1000);
-    vlpFilterPage.unlockSavingsModalZip.sendKeys(browser.params.zipcode);
-    await browser.driver.sleep(2*1000);
+    await vlpFilterPage.unlockSavingsModalFirstName.sendKeys(browser.params.fname);
+    await vlpFilterPage.unlockSavingsModalLastName.sendKeys(browser.params.lname);
+    await vlpFilterPage.unlockSavingsModalEmail.sendKeys(browser.params.usemail);
+    await vlpFilterPage.unlockSavingsModalZip.sendKeys(browser.params.zipcode);
 });
 
 
 When('User clicks Reveal Price', async  () =>{
-    await browser.driver.sleep(2*1000);
-    browser.executeScript("arguments[0].click()", vlpFilterPage.unlockSavingsModalRevealBtn);
+    await vlpFilterPage.unlockSavingsModalRevealBtn.click();
 });
 
 Then('System should display confirmation modal with $ Savings', async  () =>{
     await browser.driver.sleep(10*1000);
-    return Assertion.expect(vlpFilterPage.unlockSavingsModalTitle.getText()).to.eventually.contain('savings unlocked!');
+    const savingsUnlockedText = 'savings unlocked!';
+    return vlpFilterPage.unlockSavingsModalTitle.isPresent().then(() => {
+        return Assertion.expect(vlpFilterPage.unlockSavingsModalTitle.getText()).to.eventually.contain(savingsUnlockedText);
+    }).catch(() => {
+        return Assertion.expect(vlpFilterPage.unlockSavingsModalTitleNoSavings.getText()).to.eventually.contain(savingsUnlockedText);
+    })
+
 });
 
 Then('System should display confirmation modal with Smart Price for the vehicle', async  () =>{
-    await browser.driver.sleep(2*1000);
-    vlpFilterPage.unlockSavingsModalPrice.getText().then((value) => {
-        console.log('value -- '+value);
-        let savings = (value.replace(' Smart Price: ','')).trim();
-        return Assertion.expect(savings.length).to.be.gt(0);
-    });
+    return Assertion.expect(await vlpFilterPage.unlockSavingsModalPrice.getText()).to.contain('Smart Price:');
 });
 
 
 When('User clicks on Return to page in the confirmation modal', async  () =>{
-    await browser.driver.sleep(10*1000);
-    browser.executeScript("arguments[0].click()", vlpFilterPage.unlockSavingsModalreturnToPage);
+    await vlpFilterPage.unlockSavingsModalreturnToPage.click();
 });
 
 
 Then('System should display all vehicle cards with Smart Price and Savings', async  () =>{
-    await browser.driver.sleep(5*1000);
-    vlpFilterPage.unlockSavingsModalSmartPriceTxt.each((ele, i) => {
+    return vlpFilterPage.unlockSavingsModalSmartPriceTxt.each((ele, i) => {
         return Assertion.expect(ele.getText()).to.eventually.contain('Smart Price');
     });
 });
 
 Then('Price Filter should display Smart Price', async  () =>{
-    await browser.driver.sleep(10*1000);
     return Assertion.expect(vlpFilterPage.unlockSavingsModalSmartPriceFilterTxt.getText()).to.eventually.contain('Smart Price');
 });
 
 
 When('User clicks on any vehicle card to navigate to Vehicle Details page', async  () =>{
-    await browser.driver.sleep(5*1000);
     browser.executeScript('arguments[0].click()', vlpFilterPage.appCard.first());
 });
 
 
 Then('System should display Smart Price with Savings for the vehicle', async  () =>{
-    await browser.driver.sleep(20*1000);
-    return Assertion.expect(vdpPage.advertisedPrice.getText()).to.eventually.contain('Smart Price');
+    return Assertion.expect(vdpPage.advertisedPrice.getText()).to.eventually.contain('$');
 });
 
 When('User clicks on Unlock Savings on Vehicle info header', async  () =>{
-    await browser.driver.sleep(20*1000);
-    browser.executeScript('arguments[0].click()', vdpPage.unlockSavings);
+    await browser.executeScript('arguments[0].click()', vdpPage.unlockSavings);
 });
 
 Then('Price Summary should display additional line item for Additional Dealer Savings', async  () =>{
-    await browser.driver.sleep(5*1000);
     return Assertion.expect((await vdpPage.additionalDealerSavings.isPresent()).valueOf()).to.be.true;
 });
 
 
 When('User clicks on Send Estimate to Dealer on a Price Summary', async  () =>{
-    await browser.driver.sleep(20*1000);
+    browser.executeScript("window.scrollBy(0,250)");
     const isMobileDevice = await checkIfIsMobileDevice();
-    browser.executeScript('arguments[0].click()', vdpPage.confirmAvailabilityForUnlockDealer).catch(function() {
+    await browser.executeScript('arguments[0].click()', vdpPage.confirmAvailabilityForUnlockDealer).catch(function() {
         if (isMobileDevice) {
             browser.executeScript('arguments[0].click()', vdpPage.confirmAvailabilityForNoUnlockDealerOnMobile);
         } else {
@@ -142,70 +121,57 @@ When('User clicks on Send Estimate to Dealer on a Price Summary', async  () =>{
 
 
 Then('System should display Send Estimate modal', async  () =>{
-    await browser.driver.sleep(5*1000);
     return Assertion.expect((await vdpPage.mstcMultiLeadFormModal.isDisplayed()).valueOf()).to.be.true;
 });
 
- 
+
 Then('Payment term is same as selected in VDP', async  () =>{
-    await browser.driver.sleep(5*1000);
     return Assertion.expect(vdpPage.mstcMultiLeadFormModalPaymentTerm.getText()).to.eventually.equal((await vdpPage.ppTerm.getText()).valueOf());
 });
 
 
 When('User does not enter valid values for email and zip in Send Estimate modal', async  () =>{
-    await browser.driver.sleep(5*1000);
-    browser.executeScript("arguments[0].click()", vlpFilterPage.unlockSavingsModalEmail);
-    await browser.driver.sleep(2*1000);
-    browser.executeScript("arguments[0].click()", vlpFilterPage.unlockSavingsModalZip);
-    await browser.driver.sleep(2*1000);
-    browser.executeScript("arguments[0].click()", vdpPage.mstcMultiLeadFormModalFirstName);
-    await browser.driver.sleep(2*1000);
+    await vlpFilterPage.unlockSavingsModalEmail.click();
+    await vlpFilterPage.unlockSavingsModalZip.click();
+    await vdpPage.mstcMultiLeadFormModalFirstName.click();
 });
 
 
 Then('System should display the email text box in error state for sending estimate', async  () =>{
-    await browser.driver.sleep(2*1000);
     return Assertion.expect((await vlpFilterPage.unlockSavingsModalEmailError.isDisplayed()).valueOf()).to.be.true;
 });
 
 Then('System should display the zip text box in error state for sending estimate', async  () =>{
-    await browser.driver.sleep(2*1000);
     return Assertion.expect((await vdpPage.mstcMultiLeadFormModalZipError.isDisplayed()).valueOf()).to.be.true;
 });
 
 
 Then('Display Submit CTA in Disabled state', async  () =>{
-    await browser.driver.sleep(2*1000);
-    return Assertion.expect((await vlpFilterPage.unlockSavingsModalRevealBtn.isEnabled()).valueOf()).to.be.false;    
+    return Assertion.expect((await vlpFilterPage.unlockSavingsModalRevealBtn.isEnabled()).valueOf()).to.be.false;
 });
 
 
 When('User has entered valid values for all fields in Send Estimate modal', async  () =>{
-    await browser.driver.sleep(5*1000);
-    vdpPage.mstcMultiLeadFormModalFirstName.sendKeys(browser.params.fname);
-    await browser.driver.sleep(2*1000);
-    vdpPage.mstcMultiLeadFormModalLastName.sendKeys(browser.params.lname);
-    await browser.driver.sleep(2*1000);
-    vlpFilterPage.unlockSavingsModalEmail.sendKeys(browser.params.seemail);
-    await browser.driver.sleep(2*1000);
-    vlpFilterPage.unlockSavingsModalZip.sendKeys(browser.params.zipcode);
-    await browser.driver.sleep(2*1000);
+    await vdpPage.mstcMultiLeadFormModalFirstName.clear();
+    await vdpPage.mstcMultiLeadFormModalFirstName.sendKeys(browser.params.fname);
+    await vdpPage.mstcMultiLeadFormModalLastName.clear()
+    await vdpPage.mstcMultiLeadFormModalLastName.sendKeys(browser.params.lname);
+    await vlpFilterPage.unlockSavingsModalEmail.clear();
+    await vlpFilterPage.unlockSavingsModalEmail.sendKeys(browser.params.seemail);
+    await vlpFilterPage.unlockSavingsModalZip.clear();
+    await vlpFilterPage.unlockSavingsModalZip.sendKeys(browser.params.zipcode);
 });
 
 When('User clicks on Submit', async  () =>{
-    await browser.driver.sleep(2*1000);
-    browser.executeScript("arguments[0].click()", vlpFilterPage.unlockSavingsModalRevealBtn);
+     await vlpFilterPage.unlockSavingsModalRevealBtn.click();
 });
 
 
 Then('System should display confirmation modal "Estimate sent!"', async  () =>{
-    await browser.driver.sleep(10*1000);
     return Assertion.expect(vdpPage.mstcMultiLeadFormModalTitle.getText()).to.eventually.contain('Estimate Sent!');
 });
 
 When('User clicks on Return to page in Send Estimate confirmation modal', async  () =>{
-    await browser.driver.sleep(5*1000);
     browser.executeScript("arguments[0].click()", vdpPage.mstcMultiLeadFormModalReturnToPage);
 });
 

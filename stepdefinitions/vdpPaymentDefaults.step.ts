@@ -10,7 +10,6 @@ let mspFilterPage : MspFilterPage = new MspFilterPage();
 let vlpFilterPage : VlpFilterPage = new VlpFilterPage();
 let vdpPage : VdpPage = new VdpPage();
 
-
 When('User selects a vehicle', async  () =>{
     await browser.driver.sleep(10*1000);
     // vlpFilterPage.appCard.first().click();        
@@ -67,24 +66,11 @@ Then('Default Term is selected', async() => {
 
 
 Given('User is in Vehicle Details page', async() => {
-    //await browser.get('?dealerCd='+browser.params.dealerCd+'&source='+browser.params.source);
-    browser.driver.manage().deleteAllCookies();
-    await browser.get(browser.params.url+'?dealerCd='+browser.params.dealerCd+'&source='+browser.params.source);
-    await browser.driver.sleep(10*1000);
-    browser.executeScript("arguments[0].click()", mspFilterPage.popUpClose);
-    await browser.driver.sleep(5*1000);
-    browser.executeScript('arguments[0].click()', mspFilterPage.sortDropDown);
-    await browser.driver.sleep(2*1000);
-    browser.executeScript('arguments[0].click()', mspFilterPage.sortPriceLowToHigh);
-    await browser.driver.sleep(5*1000);
+    await mspFilterPage.sortDropDown.click();
+    await mspFilterPage.sortPriceLowToHigh.click();
     browser.executeScript("window.scrollBy(0,250)");
-    browser.executeScript('arguments[0].click()', mspFilterPage.appcardButton.first());
-    await browser.driver.sleep(10*1000);
-    browser.executeScript('arguments[0].click()', mspFilterPage.sortDropDown);
-    await browser.driver.sleep(2*1000);
-    browser.executeScript('arguments[0].click()', mspFilterPage.sortPriceLowToHigh);
-    await browser.driver.sleep(5*1000);
-    browser.executeScript('arguments[0].click()', vlpFilterPage.appCard.first());    
+    await mspFilterPage.appcardButton.first().click();
+    await vlpFilterPage.appCard.first().click();
 });
 
 When('User selects Finance', async  () =>{

@@ -30,16 +30,6 @@ export const BrowserPlatformConfigurations = {
         "platform": 'Windows 10',
         "screenResolution": '1920x1080',
         "restartBrowserBetweenTests": true,
-        "moz:firefoxOptions": {
-            args: ["--incognito"]
-        },
-        "prefs": {
-            "browser.cache.disk.enable": false,
-            "browser.cache.memory.enable": false,
-            "browser.cache.offline.enable": false,
-            "network.http.use-cache": false,
-            "network.cookie.thirdparty.sessionOnly": true
-        }
     },
     Edge: {
         "browserName": 'MicrosoftEdge',
@@ -48,6 +38,9 @@ export const BrowserPlatformConfigurations = {
         "version": '90',
         "platform": 'Windows 10',
         "screenResolution": '1920x1080',
+        "edgeOptions": {
+            args: ["--inprivate"]
+        },
     },
     SafariDesktop: {
         browserName: 'safari',

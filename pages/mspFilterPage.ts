@@ -53,7 +53,7 @@ export class MspFilterPage {
         //this.filterMaxPrice= element(by.css("div.filter-slider-inputs > div:nth-of-type(2)"));
         this.filterPriceReset = element(by.css(".reset-button"));
         this.sortDropDown = element(by.css(".mat-form-field-infix"));
-        this.sortPriceLowToHigh = element(by.xpath('/html/body/div[4]/div[2]/div/div/div/mat-option[3]/span/span')); //element(by.css("mat-option[ng-reflect-value='PriceLowToHigh'] > .mat-option-text > span"));
+        this.sortPriceLowToHigh = element(by.id('mat-option-3')); //element(by.css("mat-option[ng-reflect-value='PriceLowToHigh'] > .mat-option-text > span"));
         
         this.pageHeader = element(by.css('.main-header-available'));
         this.appcardButton = element.all(by.xpath("//app-card-container//button[@class='secondary-button small']"));
@@ -83,6 +83,6 @@ export class MspFilterPage {
         this.contactDealerModalPhone = element(by.css("input[type='tel']"));
         this.contactDealerModalSendBtn = element(by.xpath('//div[@class="customer-submit"]/button'));
         this.contactDealerModalConf = element(by.className('contactDealer-container ng-star-inserted'));
-        this.contactDealerModalreturnToPage = element(by.xpath('//div[@class="return_page"]/button'));        
+        this.contactDealerModalreturnToPage = element(by.className("return_page"));
     }
 }

@@ -2,35 +2,35 @@ import { browser, Config ,$,by} from "protractor";
 import * as fs from "fs";
 import * as mkdirp from "mkdirp";
 import * as path from "path";
-import {PLATFORMS,JENKINS_OPTIONS,CLI} from "../util/Constants"
+import {JENKINS_OPTIONS, CLI, WAIT_TIMES} from "../util/Constants"
 import {BrowserPlatformConfigurations} from "./BrowserPlatformConfigurations";
+import { constructVlpUrl } from "../util/constructVlpUrl";
 
 const jsonPath = path.join(process.cwd(), "/dist");
 let baseurl ='';
 
 let extractBrowserFromCli = function() {
-    let browser = JENKINS_OPTIONS.ALL; // Default to 'All' if nothing found
-    let foundParam = process.argv.find((arg) => {
-        const parts = arg.split(CLI.splitChar);
+    let browser = [];
+    // Grab the browser parameter from the command line args
+    let foundBrowserParam = process.argv.find((arg) => {
+        const parts = arg.split(CLI.valueSplitChar);
         const name = parts[0].trim().replace(CLI.params, '');
         return name == CLI.browserPlatformParam;
     });
-    if (foundParam && foundParam.split(CLI.splitChar)) {
-        browser = foundParam.split(CLI.splitChar)[1];
+    // If browser param set, extract the selected browsers
+    if (foundBrowserParam && foundBrowserParam.split(CLI.valueSplitChar)) {
+        let selectedBrowsers = foundBrowserParam.split(CLI.valueSplitChar)[1];
+        browser = selectedBrowsers.split(CLI.browserSplitChar);
     }
     return browser;
 };
-let browserSupportsBasicAuth = function(browser) {
-    return browser !== JENKINS_OPTIONS.SAFARI_DESKTOP && browser !== JENKINS_OPTIONS.SAFARI_IOS;
-}
+
 
 let generateBrowserConfiguration = function() {
     const selectedBrowser = extractBrowserFromCli();
     let multiCapabilities = [];
-    switch(selectedBrowser) {
-        case JENKINS_OPTIONS.CHROME_DESKTOP:
-            multiCapabilities.push(BrowserPlatformConfigurations.ChromeDesktop);
-            break;
+    selectedBrowser.forEach((browser) => {
+        switch(browser) {
         case JENKINS_OPTIONS.CHROME_ANDROID:
             multiCapabilities.push(BrowserPlatformConfigurations.ChromeAndroid);
             break;
@@ -46,19 +46,11 @@ let generateBrowserConfiguration = function() {
         case JENKINS_OPTIONS.EDGE:
             multiCapabilities.push(BrowserPlatformConfigurations.Edge);
             break;
-        case JENKINS_OPTIONS.ALL_SUBPROD:
-            for (const [browser, capability] of Object.entries(BrowserPlatformConfigurations)) {
-                if (browserSupportsBasicAuth(browser)) {
-                    multiCapabilities.push(capability);
-                }
-            }
+        case JENKINS_OPTIONS.CHROME_DESKTOP:default:
+            multiCapabilities.push(BrowserPlatformConfigurations.ChromeDesktop);
             break;
-        case JENKINS_OPTIONS.ALL:default:
-            for (const [, capability] of Object.entries(BrowserPlatformConfigurations)) {
-                multiCapabilities.push(capability);
-            }
-            break;
-    }
+        }
+    })
     return multiCapabilities;
 }
 
@@ -102,27 +94,25 @@ export const config: Config = {
     },
     
     onPrepare: async() => {
-        browser.driver.manage().deleteAllCookies();
         browser.waitForAngularEnabled(false);
         reportConfig.createDirectory(jsonPath);
-        await browser.get(browser.params.url+'?dealerCd='+browser.params.dealerCd+'&source='+browser.params.source);
-        //baseurl = browser.params.url;
-        // 
-        // wait until login is done
-        // that means when we are on summary page
-        //
-    
+        // Initially set max waiting time to 15 seconds. Selenium applies this globally.
+        // Implicit wait allows the page to poll until an element is present or the duration is reached
+        browser.driver.manage().timeouts().implicitlyWait(WAIT_TIMES.MAX_DURATION);
+        // Load the page
+        const vehicleListPage = constructVlpUrl();
+        await browser.get(vehicleListPage);
         return await browser.driver.wait(async() => {
             const url = await browser.driver.getCurrentUrl();
             return /inventory/.test(url);
-        }, 100000);
+        }, WAIT_TIMES.TEN_SECONDS);
     },
     multiCapabilities: generateBrowserConfiguration(),
     // capabilities: {
     // },
 
-    commandTimeout: 10000,
-    maxDuration: 12000,
+    commandTimeout: WAIT_TIMES.TEN_SECONDS,
+    maxDuration: WAIT_TIMES.MAX_DURATION,
     //maxSessions: 30,
     seleniumVersion: "3.141.59",
     params: {

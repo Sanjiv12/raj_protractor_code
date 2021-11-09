@@ -3,6 +3,7 @@ export const PLATFORMS = {
     ANDROID: 'Android'
 };
 
+export const TCOM_WEBSITE =  'https://www.toyota.com';
 
 
 export const JENKINS_OPTIONS = {
@@ -18,5 +19,13 @@ export const JENKINS_OPTIONS = {
 export const CLI = {
     params: '--params',
     browserPlatformParam: '.browserPlatformCombo',
-    splitChar: '='
+    valueSplitChar: '=',
+    browserSplitChar: ','
+}
+
+export const WAIT_TIMES = {
+    FIVE_SECONDS: 5000,
+    TEN_SECONDS: 10000,
+    MAX_DURATION: 15000,
+    MAX_TEST_TIMEOUT: 90000
 }

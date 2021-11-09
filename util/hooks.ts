@@ -1,8 +1,19 @@
-const { BeforeAll, After, AfterAll, Status, defineSupportCode,setDefaultTimeout } = require("cucumber");
-import { browser } from "protractor";
+import {TCOM_WEBSITE, WAIT_TIMES} from "./Constants";
 
-BeforeAll({timeout: 100 * 1000}, async () => {
-    setDefaultTimeout(90 * 1000);
+const { BeforeAll, Before, After, AfterAll, Status, defineSupportCode,setDefaultTimeout } = require("cucumber");
+import { browser } from "protractor";
+import { constructVlpUrl } from "./constructVlpUrl";
+
+BeforeAll({timeout: WAIT_TIMES.TEN_SECONDS}, async () => {
+    setDefaultTimeout(WAIT_TIMES.MAX_TEST_TIMEOUT);
+});
+Before(async () => {
+    const vehicleListPage = constructVlpUrl();
+    await browser.driver.manage().deleteAllCookies();
+    await browser.get(TCOM_WEBSITE);
+    await browser.driver.manage().deleteAllCookies();
+    await browser.get(vehicleListPage);
+    await browser.driver.manage().deleteAllCookies();
 });
 
 After(async function(scenario) {
