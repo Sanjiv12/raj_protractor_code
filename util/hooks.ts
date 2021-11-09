@@ -5,7 +5,7 @@ import { browser } from "protractor";
 import { constructVlpUrl } from "./constructVlpUrl";
 
 BeforeAll({timeout: WAIT_TIMES.TEN_SECONDS}, async () => {
-    setDefaultTimeout(WAIT_TIMES.MAX_TEST_TIMEOUT);
+    setDefaultTimeout(WAIT_TIMES.MAX_DURATION);
 });
 Before(async () => {
     const vehicleListPage = constructVlpUrl();
