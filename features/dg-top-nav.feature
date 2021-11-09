@@ -18,6 +18,7 @@ Feature: Digital Garage Top Nav Dropdown Menu
     Scenario: Top Nav Dropdown - Logged Out View Saves Linkout In Expected State
         Given User is in Vehicle List Page
         And User is on desktop
+        And User is not logged in
         When User clicks the Top Nav Dropdown Menu icon
         Then Top Nav "Saves" Linkout should be present
         And Top Nav "Saves" Linkout Text should be "My Saves"
@@ -51,23 +52,24 @@ Feature: Digital Garage Top Nav Dropdown Menu
         # - The user has an active deal
         # - The shopping cart is not displayed in the top nav
 
-        Given User is in Vehicle List Page
+        # Important that it's on T2, since the shopping cart will never be shown
+        # This garuantees that the Continue Purchase linkout should be shown in the dropdown
+        Given User is on the Tier 2 Vehicle List Page
         And User is on desktop
         And User is logged in to account <account>
-        And Shopping Cart is "<shopping_cart_visibility>"
         And An active deal is <purchase_available>
         When User clicks the Top Nav Dropdown Menu icon
         Then Top Nav "Continue Purchase" Linkout is <outcome>
-        And Top Nav "Continue Purchase" Linkout should link to "/inventory/review"
 
         Examples:
-            | account  | purchase_available | shopping_cart_visibility  | outcome   |
-            | example1 | available          | hidden                    | shown     |
-            | example2 | available          | shown                     | hidden    |
-            | example3 | unavailable        | shown                     | hidden    |
-            | example4 | unavailable        | hidden                    | hidden    |
+            | account  | purchase_available | outcome   |
+            | example1 | available          | shown     |
+            | example2 | unavailable        | hidden    |
 
 Feature: Digital Garage Top Nav Dropdown Menu - Desktop, Not Logged In
+
+    Background:
+        Given User is not logged in
 
     Scenario: Top Nav Dropdown - Temporary Saves Message is Present
         Given User is in Vehicle List Page
@@ -90,24 +92,16 @@ Feature: Digital Garage Top Nav Dropdown Menu - Desktop, Not Logged In
 Feature: Digital Garage Top Nav Dropdown Menu - Desktop, Logged In
 
     Background:
-        Given User is logged in to account <account>
+        Given User is logged in
     
-    Scenario: Top Nav Dropdown - Create Account Button is Present
+    Scenario: Top Nav Dropdown - Manage Account Button is Present
         Given User is in Vehicle List Page
         And User is on desktop
         When User clicks the Top Nav Dropdown Menu icon
         Then Manage Account Button should be present
-
-        Examples:
-            | account  |
-            | example1 |
     
-    Scenario: Top Nav Dropdown - Sign In Button is Present
+    Scenario: Top Nav Dropdown - Sign Out Button is Present
         Given User is in Vehicle List Page
         And User is on desktop
         When User clicks the Top Nav Dropdown Menu icon
         Then Sign Out Button should be present
-
-        Examples:
-            | account  |
-            | example1 |
