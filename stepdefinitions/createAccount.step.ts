@@ -17,7 +17,6 @@ When('User clicks on Start Purchase', async  () =>{
 
 
 Then('System should navigate to Create Account Page', async  () =>{
-    await browser.driver.sleep(5*1000);
     return Assertion.expect(await browser.getCurrentUrl()).to.contain('account?dealerCd=');
 });
 

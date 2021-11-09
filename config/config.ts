@@ -98,7 +98,7 @@ export const config: Config = {
         reportConfig.createDirectory(jsonPath);
         // Initially set max waiting time to 15 seconds. Selenium applies this globally.
         // Implicit wait allows the page to poll until an element is present or the duration is reached
-        browser.driver.manage().timeouts().implicitlyWait(WAIT_TIMES.MAX_DURATION);
+        browser.driver.manage().timeouts().implicitlyWait(WAIT_TIMES.IMPLICIT_WAIT_TIME);
         // Load the page
         const vehicleListPage = constructVlpUrl();
         await browser.get(vehicleListPage);
@@ -111,7 +111,7 @@ export const config: Config = {
     // capabilities: {
     // },
 
-    commandTimeout: WAIT_TIMES.TEN_SECONDS,
+    commandTimeout: WAIT_TIMES.MAX_COMMAND_TIMEOUT,
     maxDuration: WAIT_TIMES.MAX_DURATION,
     //maxSessions: 30,
     seleniumVersion: "3.141.59",

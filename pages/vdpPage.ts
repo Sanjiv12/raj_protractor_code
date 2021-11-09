@@ -110,6 +110,7 @@ export class VdpPage {
     public mstcMultiLeadFormModalReturnToPage : ElementFinder;
     public startPurchaseForUnlockDealer : ElementFinder;
     public startPurchaseForNoUnlockDealer : ElementFinder;
+    public startPurchaseWaitSpinner : ElementFinder;
     public rightPaneMenu : ElementFinder;
     public signInBtn : ElementFinder;
     public profileIcon : ElementFinder;
@@ -251,7 +252,7 @@ export class VdpPage {
         this.zipTaxDesc = element(by.className('edit_zip_tax_desc'));
         this.chsFinanceBtn = element(by.xpath('//div[@class="finance_buttons"]/button'));
         this.zipCodeModalInput = element(by.id('textInput'));
-        this.zipCodeModalDoneBtn = element(by.xpath('//div[@class="zip-container"]/button'));
+        this.zipCodeModalDoneBtn = element(by.xpath('//*[@id="zip-form"]/div/button'));
         this.reviewDealZipCode = element(by.xpath('//span[@class="text-link custom_zip_button"]'));
         this.editDetailsBtn = element(by.className('text-button edit_Details_button'));
         this.ownFinance = element(by.className('own-finance'));
@@ -261,5 +262,7 @@ export class VdpPage {
         this.acceptApplyFinanceModalBtn = element(by.xpath('//section[@class="apply-finance-modal-body"]/button[1]'));
         this.notNowApplyFinanceModalBtn = element(by.xpath('//section[@class="apply-finance-modal-body"]/button[2]'));
         this.authTfsCb = element(by.xpath('//div[@class="con-checkbox"]/mat-checkbox'))
+
+        this.startPurchaseWaitSpinner = element(by.className('spinner'))
     }
 }
