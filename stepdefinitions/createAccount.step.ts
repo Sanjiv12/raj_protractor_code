@@ -7,16 +7,12 @@ import {CreateAccountPage} from "../pages/createAccountPage"
 import { expect } from "chai";
 import {Assertion} from "../util/assertion"
 
-let mspFilterPage : MspFilterPage = new MspFilterPage();
-let vlpFilterPage : VlpFilterPage = new VlpFilterPage();
 let vdpPage : VdpPage = new VdpPage();
 let caPage : CreateAccountPage = new CreateAccountPage();
 
 
 When('User clicks on Start Purchase', async  () =>{
-    //console.log('Inside step param1 - '+ browser.params.param1);
-    await browser.driver.sleep(15*1000);
-    vdpPage.startPurchase.click();
+    await vdpPage.startPurchaseForUnlockDealer.click();
 });
 
 

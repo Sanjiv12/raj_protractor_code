@@ -1,42 +1,15 @@
 import { browser, by, By, element, ExpectedConditions, protractor, until } from "protractor"; 
 import { Then, When, Given, Before, BeforeAll, SummaryFormatter } from "cucumber";
-import { MspFilterPage } from "../pages/mspFilterPage";
-import { VlpFilterPage } from "../pages/vlpFilterPage";
 import {VdpPage} from "../pages/vdpPage"
-import {CreateAccountPage} from "../pages/createAccountPage"
-import { expect } from "chai";
 import {Assertion} from "../util/assertion"
+import {DigitalGarageTopNav} from "../dg-features/digitalGarageTopNav";
 
-let mspFilterPage : MspFilterPage = new MspFilterPage();
-let vlpFilterPage : VlpFilterPage = new VlpFilterPage();
 let vdpPage : VdpPage = new VdpPage();
-let caPage : CreateAccountPage = new CreateAccountPage();
-
+let topNav : DigitalGarageTopNav = new DigitalGarageTopNav();
 
 When('User Signs In', async  () =>{
-    // await browser.get("https://tcom_user:@1L!gaT0r@qa.smartpath.tldealersystems.com/inventory/details?dealerCd=24022&vin=JTEBU5JR6L5768172&source=t3&zipcode=63141");
-    // await browser.driver.sleep(10*1000);
-    // browser.driver.manage().deleteAllCookies();
-    // browser.executeScript("arguments[0].click()", mspFilterPage.popUpClose);
-    // await browser.driver.sleep(5*1000);
-    await browser.driver.sleep(15*1000);
-    
-    //console.log('text --- '+(await (vdpPage.rightPaneMenu.getText())).valueOf());
-    if((await (vdpPage.rightPaneMenu.getText())).valueOf().toLowerCase().includes('sign in')){
-        console.log('In here');
-        browser.actions().mouseMove(vdpPage.signInBtn).perform();
-        await browser.driver.sleep(2*1000);
-        browser.actions().click(vdpPage.signInBtn).perform();
-        await browser.driver.sleep(7*1000);
-        caPage.userName.sendKeys(browser.params.caemailreg);
-        await browser.driver.sleep(2*1000);
-        browser.executeScript("arguments[0].click()", caPage.logonBtn);
-        await browser.driver.sleep(5*1000);
-        caPage.userPwd.sendKeys(browser.params.capwdreg);
-        await browser.driver.sleep(2*1000);
-        browser.executeScript("arguments[0].click()", caPage.signInBtn);
-        //await browser.driver.sleep(10*1000);
-    }
+    await topNav.dgMan.click();
+    await topNav.desktopSignInLink.click();
 });
 
 

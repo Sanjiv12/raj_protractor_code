@@ -108,7 +108,8 @@ export class VdpPage {
     public mstcMultiLeadFormModalZipError : ElementFinder;
     public mstcMultiLeadFormModalTitle : ElementFinder;
     public mstcMultiLeadFormModalReturnToPage : ElementFinder;
-    public startPurchase : ElementFinder;
+    public startPurchaseForUnlockDealer : ElementFinder;
+    public startPurchaseForNoUnlockDealer : ElementFinder;
     public rightPaneMenu : ElementFinder;
     public signInBtn : ElementFinder;
     public profileIcon : ElementFinder;
@@ -238,7 +239,7 @@ export class VdpPage {
         this.mstcMultiLeadFormModalZipError = element(by.css('div.customer-zip-field .mat-error'));
         this.mstcMultiLeadFormModalTitle = element(by.css('.smart-price-modal-header'));
         this.mstcMultiLeadFormModalReturnToPage = element(by.xpath('//div[@class="return-to-page"]/button'));
-        this.startPurchase = element(by.xpath('//div[@class="price-details"]/button[2]'));
+        this.startPurchaseForUnlockDealer = element(by.xpath('/html/body/main/app-root/mat-drawer-container/mat-drawer-content/div/app-vehicle-details/div[1]/div[2]/div[2]/section/vdp-pricing-summary/div/div[3]/div[2]/button[2]'));
 
         this.rightPaneMenu = element(by.xpath('//div[@class="menu-items ng-star-inserted"]'));    //element(by.css("div.right-pane > div.menu-items"));
         this.signInBtn = element(by.xpath("//div[@class='sign-in menu-button ng-star-inserted']")); //element(by.css('.sign-in'));
