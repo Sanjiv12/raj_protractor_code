@@ -70,8 +70,8 @@ When('User clicks on Done in Zip Code Modal', async  () =>{
 
 Then('System should display updated Zip Code in Review Deal page as part of Taxes & Fees', async  () =>{
     // We have to wait on info from TFS to update already-displayed elements
-    // Tests may fail b/c elements exist but aren't updated yet, so wait on the loading spinner to disappear
-    return Assertion.expect(vdpPage.reviewDealZipCode.getText()).to.eventually.contain(browser.params.zipcode);
+        return Assertion.expect(vdpPage.reviewDealZipCode.getText()).to.eventually.contain(browser.params.zipcode);
+    })
 });
 
 Then('System should NOT display Confirm your residential zip to proceed CTA at the bottom', async  () =>{
