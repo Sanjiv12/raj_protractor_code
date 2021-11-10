@@ -69,8 +69,11 @@ When('User clicks on Done in Zip Code Modal', async  () =>{
 
 
 Then('System should display updated Zip Code in Review Deal page as part of Taxes & Fees', async  () =>{
-    // We have to wait on info from TFS to update already-displayed elements
+    return vdpPage.startPurchaseWaitSpinner.isDisplayed().then(() => {
+        browser.driver.wait(protractor.until.elementIsNotVisible(vdpPage.startPurchaseWaitSpinner));
         return Assertion.expect(vdpPage.reviewDealZipCode.getText()).to.eventually.contain(browser.params.zipcode);
+    }).catch(() => {
+    return Assertion.expect(vdpPage.reviewDealZipCode.getText()).to.eventually.contain(browser.params.zipcode);
     })
 });
 
