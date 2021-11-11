@@ -12,7 +12,16 @@ let caPage : CreateAccountPage = new CreateAccountPage();
 
 
 When('User clicks on Start Purchase', async  () =>{
-    await vdpPage.startPurchaseForUnlockDealer.click();
+    // check the secondary button text
+    await vdpPage.startPurchaseForUnlockDealer.getText().then((txt) => {
+        if (txt === 'Start Purchase') {
+            return  vdpPage.startPurchaseForUnlockDealer.click();
+        } else {
+            vdpPage.startPurchaseForNoUnlockDealer.click();
+        }
+    }).catch(() => {
+        return vdpPage.startPurchaseForNoUnlockDealer.click();
+    });
 });
 
 

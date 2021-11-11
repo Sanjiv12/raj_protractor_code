@@ -87,12 +87,10 @@ Then('Display Next button in enabled state', async  () =>{
 
 When('User clicks on Edit Details CTA', async  () =>{
     await vdpPage.editDetailsBtn.click();
-    browser.executeScript("arguments[0].click()", vdpPage.editDetailsBtn);
 });
 
 When('User clicks on Next: Choose Financing CTA', async  () =>{
     await vdpPage.chsFinanceBtn.click();
-    browser.executeScript("arguments[0].click()", vdpPage.chsFinanceBtn);
 });
 
 Then('System should display Apply for Credit page with I have financing selected by default', async  () =>{
@@ -101,7 +99,6 @@ Then('System should display Apply for Credit page with I have financing selected
 
 When('User clicks on I want financing', async  () =>{
     await vdpPage.tfsFinance.click();
-    browser.executeScript("arguments[0].click()", vdpPage.tfsFinance);
 });
 
 Then('System should display Apply financing modal', async  () =>{
@@ -109,7 +106,7 @@ Then('System should display Apply financing modal', async  () =>{
 });
 
 When('User clicks on Accept in the Apply financing modal', async  () =>{
-    browser.executeScript("arguments[0].click()", vdpPage.acceptApplyFinanceModalBtn);
+    await vdpPage.acceptApplyFinanceModalBtn.click();
 });
 
 Then('System should display authorization disclaimer below I want financing in selected state', async  () =>{
@@ -117,6 +114,7 @@ Then('System should display authorization disclaimer below I want financing in s
 });
 
 When('User clicks on Not now in the Apply financing modal', async  () =>{
+    await vdpPage.notNowApplyFinanceModalBtn.click();
     browser.executeScript("arguments[0].click()", vdpPage.notNowApplyFinanceModalBtn);
 });
 
