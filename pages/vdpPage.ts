@@ -129,7 +129,16 @@ export class VdpPage {
     public acceptApplyFinanceModalBtn : ElementFinder;
     public notNowApplyFinanceModalBtn : ElementFinder;
     public authTfsCb : ElementFinder;
-    
+
+    public saveHearts: ElementArrayFinder;
+    public saveHeartActive : ElementFinder;
+    public saveHeartTooltip : ElementFinder;
+
+    public estimateTabs : ElementArrayFinder;
+    public estimateAmount : ElementFinder;
+    public MSRP : ElementFinder;
+    public vehicleName: ElementFinder;
+    public vehicleVin : ElementFinder;
     constructor() {
         this.cashDown = element(by.className('ngx-slider-span ngx-slider-pointer ngx-slider-pointer-min'));
         this.price = element(by.xpath("//div[@class='price']/div[@class='ng-star-inserted']"));
@@ -262,6 +271,18 @@ export class VdpPage {
         this.acceptApplyFinanceModalBtn = element(by.xpath('//section[@class="apply-finance-modal-body"]/button[1]'));
         this.notNowApplyFinanceModalBtn = element(by.xpath('//section[@class="apply-finance-modal-body"]/button[2]'));
         this.authTfsCb = element(by.xpath('//div[@class="con-checkbox"]/mat-checkbox'))
+
+        this.saveHearts = element.all(by.css('.dg-inline-save-heart'));
+        this.saveHeartActive = element(by.css('.dg-encircle.active'));
+        this.saveHeartTooltip = element(by.css('.dg-tooltip'));
+
+        this.estimateTabs = element.all(by.className('mat-tab-label-content'));
+        this.estimateAmount = element(by.className('term ng-star-inserted'));
+
+        this.MSRP = element(by.className('ng-star-inserted'));
+        this.vehicleName = element(by.className('vehicle-title'));
+        this.vehicleVin = element(by.className('vin'));
+
 
         this.startPurchaseWaitSpinner = element(by.className('spinner'))
     }
