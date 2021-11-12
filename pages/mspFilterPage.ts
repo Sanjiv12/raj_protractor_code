@@ -54,6 +54,7 @@ export class MspFilterPage {
         this.filterPriceReset = element(by.css(".reset-button"));
         this.sortDropDown = element(by.css(".mat-form-field-infix"));
         this.sortPriceLowToHigh = element(by.id('mat-option-3')); //element(by.css("mat-option[ng-reflect-value='PriceLowToHigh'] > .mat-option-text > span"));
+
         
         this.pageHeader = element(by.css('.main-header-available'));
         this.appcardButton = element.all(by.xpath("//app-card-container//button[@class='secondary-button small']"));
