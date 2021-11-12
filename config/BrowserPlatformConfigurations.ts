@@ -7,7 +7,10 @@ export const BrowserPlatformConfigurations = {
         "maxInstances": 15,
         browserName: 'Chrome',
         platformVersion: '8.0',
-        platformName: 'Android'
+        platformName: 'Android',
+        chromeOptions: {
+            args: ["--incognito"]
+        },
     },
    SafariIOS: {
         appiumVersion: '1.20.1',
@@ -26,9 +29,7 @@ export const BrowserPlatformConfigurations = {
         "version": '88.0',
         "platform": 'Windows 10',
         "screenResolution": '1920x1080',
-        "moz:firefoxOptions": {
-            args: ["--incognito"]
-        },
+        "restartBrowserBetweenTests": true,
     },
     Edge: {
         "browserName": 'MicrosoftEdge',
@@ -37,6 +38,9 @@ export const BrowserPlatformConfigurations = {
         "version": '90',
         "platform": 'Windows 10',
         "screenResolution": '1920x1080',
+        "edgeOptions": {
+            args: ["--inprivate"]
+        },
     },
     SafariDesktop: {
         browserName: 'safari',

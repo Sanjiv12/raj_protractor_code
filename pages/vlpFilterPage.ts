@@ -1,4 +1,4 @@
-import { $, ElementFinder, element, by, ElementArrayFinder } from "protractor";
+import { $, ElementFinder, element, by,   ElementArrayFinder } from "protractor";
 
 export class VlpFilterPage {
 
@@ -48,6 +48,7 @@ export class VlpFilterPage {
     public unlockSavingsModalZipError : ElementFinder;
     public unlockSavingsModalRevealBtn : ElementFinder;
     public unlockSavingsModalTitle : ElementFinder;
+    public unlockSavingsModalTitleNoSavings : ElementFinder;
     public unlockSavingsModalPrice : ElementFinder;
     public unlockSavingsModalreturnToPage : ElementFinder;
     public unlockSavingsModalSmartPriceTxt : ElementArrayFinder;
@@ -104,13 +105,14 @@ export class VlpFilterPage {
 
         this.unlockSavingsModalEmail = element(by.css("input[type='email']"));
         this.unlockSavingsModalZip = element(by.css("input[type='number']"));
-        this.unlockSavingsModalFirstName = element(by.xpath('//span[@class="customer-name-field"]/con-textfield[1]/div/mat-form-field/div/div[1]/div[3]/input'));        
-        this.unlockSavingsModalLastName = element(by.xpath('//span[@class="customer-name-field"]/con-textfield[2]/div/mat-form-field/div/div[1]/div[3]/input'));
+        this.unlockSavingsModalFirstName = element(by.xpath('//div[@class="customer-name-field"]/con-textfield[1]/div/mat-form-field/div/div[1]/div[3]/input'));
+        this.unlockSavingsModalLastName = element(by.xpath('//div[@class="customer-name-field"]/con-textfield[2]/div/mat-form-field/div/div[1]/div[3]/input'));
         this.unlockSavingsModalEmailError = element(by.css('con-textfield.email-form-field .mat-error'));
-        this.unlockSavingsModalZipError = element(by.css('span.customer-zip-field .mat-error'));
+        this.unlockSavingsModalZipError = element(by.css('con-textfield.form-field .mat-error'));
         this.unlockSavingsModalRevealBtn = element(by.xpath('//div[@class="customer-submit"]/button'));
         this.unlockSavingsModalTitle = element(by.css('.unlock-price-modal-title'));
-        this.unlockSavingsModalPrice = element(by.css('.unlock-vehicle-smart-price'));
+        this.unlockSavingsModalTitleNoSavings = element(by.css('.unlock-price-modal-no-savingtitle'));
+        this.unlockSavingsModalPrice = element(by.xpath('//*[@id="smart-price-modal-component"]/app-smart-price-modal/app-smart-price-unlock-modal/div/div/div[3]/div[1]/div[2]/div'));
         this.unlockSavingsModalreturnToPage = element(by.xpath('//div[@class="return-to-page"]/div[@class="text-button"]'));
         this.unlockSavingsModalSmartPriceTxt = element.all(by.css('.price-section'));
         this.unlockSavingsModalSmartPriceFilterTxt = element(by.css('.filter-price-sub-title'));        
