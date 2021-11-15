@@ -69,3 +69,21 @@ import { NavMenu } from "../pages/navMenu";
     await createAccountPage.userPwd.sendKeys(password);
     await createAccountPage.signInButton.click();
 });
+
+Given('User is in Saves page', async () => {
+    //Do nothing, page will load automatically
+});
+
+Given('User is on desktop', async () => {
+    //TODO: create function to set window size
+    // setWindowSize(width, height)
+    browser.driver.manage().window().maximize();
+});
+
+Given('User is on tablet', async () => {
+    browser.driver.manage().window().setSize(768, 1024);
+});
+
+Given('User is on mobile', async () => {
+    browser.driver.manage().window().setSize(375, 667);
+});
