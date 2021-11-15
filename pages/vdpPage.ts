@@ -259,7 +259,7 @@ export class VdpPage {
         this.closeZipCodeModal = element(by.xpath('//div[@class="close-btn-container"]'));
         this.confirmZipText = element(by.className('text-button confirm_zip'));
         this.zipTaxDesc = element(by.className('edit_zip_tax_desc'));
-        this.chsFinanceBtn = element(by.xpath('//div[@class="finance_buttons"]/button'));
+        this.chsFinanceBtn = element(by.xpath('/html/body/main/app-root/mat-drawer-container/mat-drawer-content/div/app-vehicle-review/div[2]/app-mstc-stepper/section/div[2]/footer/div/div[2]/button'));
         this.zipCodeModalInput = element(by.id('textInput'));
         this.zipCodeModalDoneBtn = element(by.xpath('//*[@id="zip-form"]/div/button'));
         this.reviewDealZipCode = element(by.xpath('//span[@class="text-link custom_zip_button"]'));
