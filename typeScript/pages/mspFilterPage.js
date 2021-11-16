@@ -15,7 +15,7 @@ class MspFilterPage {
         //this.filterMaxPrice= element(by.css("div.filter-slider-inputs > div:nth-of-type(2)"));
         this.filterPriceReset = protractor_1.element(protractor_1.by.css(".reset-button"));
         this.sortDropDown = protractor_1.element(protractor_1.by.css(".mat-form-field-infix"));
-        this.sortPriceLowToHigh = protractor_1.element(protractor_1.by.xpath('/html/body/div[4]/div[2]/div/div/div/mat-option[3]/span/span')); //element(by.css("mat-option[ng-reflect-value='PriceLowToHigh'] > .mat-option-text > span"));
+        this.sortPriceLowToHigh = protractor_1.element(protractor_1.by.id('mat-option-3')); //element(by.css("mat-option[ng-reflect-value='PriceLowToHigh'] > .mat-option-text > span"));
         this.pageHeader = protractor_1.element(protractor_1.by.css('.main-header-available'));
         this.appcardButton = protractor_1.element.all(protractor_1.by.xpath("//app-card-container//button[@class='secondary-button small']"));
         this.filterButton = protractor_1.element(protractor_1.by.cssContainingText('.tm-dropdown-nav-item-label', 'Last 30 days'));
@@ -41,7 +41,7 @@ class MspFilterPage {
         this.contactDealerModalPhone = protractor_1.element(protractor_1.by.css("input[type='tel']"));
         this.contactDealerModalSendBtn = protractor_1.element(protractor_1.by.xpath('//div[@class="customer-submit"]/button'));
         this.contactDealerModalConf = protractor_1.element(protractor_1.by.className('contactDealer-container ng-star-inserted'));
-        this.contactDealerModalreturnToPage = protractor_1.element(protractor_1.by.xpath('//div[@class="return_page"]/button'));
+        this.contactDealerModalreturnToPage = protractor_1.element(protractor_1.by.className("return_page"));
     }
 }
 exports.MspFilterPage = MspFilterPage;

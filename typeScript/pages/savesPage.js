@@ -59,6 +59,13 @@ class SavesPage {
         this.saveHeart = protractor_1.element(protractor_1.by.className('dg-save-heart'));
         this.confirmRemove = protractor_1.element(protractor_1.by.className('dg-delete-overlay-button-container'));
         this.dgInvCard = protractor_1.element(protractor_1.by.className('dg-inv'));
+        this.saveShares = protractor_1.element(protractor_1.by.id('dg-start-sharing-button'));
+        this.firstNameModal = protractor_1.element(protractor_1.by.id('dg-contact-first-name'));
+        this.lastNameModal = protractor_1.element(protractor_1.by.id('dg-contact-last-name'));
+        this.zipCodeModal = protractor_1.element(protractor_1.by.id('dg-contact-zip'));
+        this.emailModal = protractor_1.element(protractor_1.by.id('dg-contact-email'));
+        this.submitModal = protractor_1.element(protractor_1.by.id('dg-contact-submit'));
+        this.successModalText = protractor_1.element(protractor_1.by.className('dg-modal-left-title'));
     }
 }
 exports.SavesPage = SavesPage;

@@ -17,10 +17,12 @@ class CreateAccountPage {
         this.createAccountError = protractor_1.element(protractor_1.by.id('divAccountError'));
         this.accountAlreadyReg = protractor_1.element(protractor_1.by.id('divAlreadyRegistered'));
         this.checkEmail = protractor_1.element(protractor_1.by.id('divResendEmail'));
+        this.loginLink = protractor_1.element(protractor_1.by.className('sign-in-btn'));
         this.userName = protractor_1.element(protractor_1.by.name('username'));
         this.logonBtn = protractor_1.element(protractor_1.by.id('logonButton'));
         this.userPwd = protractor_1.element(protractor_1.by.name('password'));
-        this.signInBtn = protractor_1.element(protractor_1.by.xpath('//div[@class="button-right"]/button'));
+        this.signInButton = protractor_1.element(protractor_1.by.xpath('//div[@class="button-right"]/button'));
+        this.nextStepButton = protractor_1.element(protractor_1.by.id('logonButton'));
     }
 }
 exports.CreateAccountPage = CreateAccountPage;

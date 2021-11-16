@@ -59,31 +59,16 @@ cucumber_1.Then('Default Term is selected', () => __awaiter(void 0, void 0, void
     return assertion_1.Assertion.expect(vdpPage.termSelectedDefault.getAttribute('class')).to.eventually.contain('mat-radio-checked');
 }));
 cucumber_1.Given('User is in Vehicle Details page', () => __awaiter(void 0, void 0, void 0, function* () {
-    //await browser.get('?dealerCd='+browser.params.dealerCd+'&source='+browser.params.source);
-    protractor_1.browser.driver.manage().deleteAllCookies();
-    yield protractor_1.browser.get(protractor_1.browser.params.url + '?dealerCd=' + protractor_1.browser.params.dealerCd + '&source=' + protractor_1.browser.params.source);
-    yield protractor_1.browser.driver.sleep(10 * 1000);
-    protractor_1.browser.executeScript("arguments[0].click()", mspFilterPage.popUpClose);
-    yield protractor_1.browser.driver.sleep(5 * 1000);
-    protractor_1.browser.executeScript('arguments[0].click()', mspFilterPage.sortDropDown);
-    yield protractor_1.browser.driver.sleep(2 * 1000);
-    // browser.executeScript('arguments[0].click()', mspFilterPage.sortPriceLowToHigh);
-    yield protractor_1.browser.driver.sleep(5 * 1000);
+    yield mspFilterPage.sortDropDown.click();
+    yield mspFilterPage.sortPriceLowToHigh.click();
     protractor_1.browser.executeScript("window.scrollBy(0,250)");
-    protractor_1.browser.executeScript('arguments[0].click()', mspFilterPage.appcardButton.first());
-    yield protractor_1.browser.driver.sleep(10 * 1000);
-    protractor_1.browser.executeScript('arguments[0].click()', mspFilterPage.sortDropDown);
-    yield protractor_1.browser.driver.sleep(2 * 1000);
-    // browser.executeScript('arguments[0].click()', mspFilterPage.sortPriceLowToHigh);
-    yield protractor_1.browser.driver.sleep(5 * 1000);
-    protractor_1.browser.executeScript('arguments[0].click()', vlpFilterPage.appCard.first());
+    yield mspFilterPage.appcardButton.first().click();
+    yield vlpFilterPage.appCard.first().click();
 }));
 cucumber_1.When('User selects Finance', () => __awaiter(void 0, void 0, void 0, function* () {
-    yield protractor_1.browser.driver.sleep(15 * 1000);
     vdpPage.tabFinance.click();
 }));
 cucumber_1.Then('Default Finance Credit Rating is Excellent', () => __awaiter(void 0, void 0, void 0, function* () {
-    yield protractor_1.browser.driver.sleep(5 * 1000);
     return assertion_1.Assertion.expect(vdpPage.creditRatingFinance.getText()).to.eventually.equal('Excellent Credit (720-850)');
 }));
 cucumber_1.Then('Default Finance Terms are displayed', () => __awaiter(void 0, void 0, void 0, function* () {
@@ -99,17 +84,14 @@ cucumber_1.Then('Default Term selected is 60 Months', () => __awaiter(void 0, vo
     return assertion_1.Assertion.expect(vdpPage.termSelectedFinance.getAttribute('class')).to.eventually.contain('mat-radio-checked');
 }));
 cucumber_1.When('User selects Lease', () => __awaiter(void 0, void 0, void 0, function* () {
-    yield protractor_1.browser.driver.sleep(15 * 1000);
+    yield protractor_1.browser.driver.sleep(5 * 1000);
 }));
 cucumber_1.When('User updates Mileage', () => __awaiter(void 0, void 0, void 0, function* () {
-    yield protractor_1.browser.driver.sleep(5 * 1000);
     vdpPage.annualMileageOption1.click();
 }));
 cucumber_1.Then('System should call the Payment service and update the payment terms', () => __awaiter(void 0, void 0, void 0, function* () {
-    yield protractor_1.browser.driver.sleep(15 * 1000);
     return chai_1.expect((yield vdpPage.paymentOptionsList).length).to.be.gt(0);
 }));
 cucumber_1.When('User selects Cash', () => __awaiter(void 0, void 0, void 0, function* () {
-    yield protractor_1.browser.driver.sleep(15 * 1000);
     vdpPage.tabCash.click();
 }));

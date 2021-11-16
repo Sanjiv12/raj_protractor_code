@@ -60,7 +60,7 @@ export const config: Config = {
     // seleniumAddress: "http://127.0.0.1:4444/wd/hub",
     // seleniumAddress: "https://ondemand.us-west-1.saucelabs.com:443/wd/hub",
     //  SELENIUM_PROMISE_MANAGER: false,
-     
+
     sauceUser:"sso-toyota.tcoe-kimberlee.dixon",
     sauceKey:"aad70988-20cb-4d05-b24e-65bea4dfb0ee",
 
@@ -93,9 +93,10 @@ export const config: Config = {
         checkout: "../../features/**/checkOut.feature",
         gxpvlp: "../../features/**/gxp-vlp.feature",
         gxpvdp: "../../features/**/gxp-vdp.feature",
-        gxpsaves: "../../features/**/gxp-saves.feature"
+        gxpsaves: "../../features/**/gxp-saves.feature",
+        dgtopnav: "../../features/dg-top-nav/dg-top-nav-dropdown.feature"
     },
-    
+
     onPrepare: async() => {
         browser.waitForAngularEnabled(false);
         reportConfig.createDirectory(jsonPath);

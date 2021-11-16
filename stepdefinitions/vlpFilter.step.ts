@@ -1,4 +1,4 @@
-import { browser, By, element, ElementFinder, protractor } from "protractor"; 
+import { browser, By, element, ElementFinder, protractor } from "protractor";
 import { Then, When, Given, Before, BeforeAll, SummaryFormatter } from "cucumber";
 import { MspFilterPage } from "../pages/mspFilterPage";
 import { VlpFilterPage } from "../pages/vlpFilterPage";
@@ -13,12 +13,12 @@ let np = 0;
 
 
 Given('User is in Vehicle List Page', async () =>{
-    await mspFilterPage.sortDropDown.click();
-    await mspFilterPage.sortPriceLowToHigh.click();
-    browser.executeScript("window.scrollBy(0,250)");
-    await mspFilterPage.appcardButton.first().click();
+    // await mspFilterPage.sortDropDown.click();
+    // await mspFilterPage.sortPriceLowToHigh.click();
+    // browser.executeScript("window.scrollBy(0,250)");
+    // await mspFilterPage.appcardButton.first().click();
 });
-    
+
 
 
 
@@ -38,7 +38,7 @@ Then('Vehicles List and count should be updated based on users selection', async
             expect((arr.length).toString()).to.eql(c.toString());
         })
     });
-    
+
 });
 
 Given('User is in Vehicle List Page with all filters cleared', async () =>{
@@ -47,7 +47,7 @@ Given('User is in Vehicle List Page with all filters cleared', async () =>{
     await browser.driver.sleep(5*1000);
     mspFilterPage.appCard.first().click();
 });
-    
+
 
 When('User selects a Year from Filters panel', async  () =>{
 
@@ -94,7 +94,7 @@ Then('Filter chip should be displayed for year', async()=> {
                     })
                 })
             }
-        })    
+        })
 });
 
 When('User selects Price range for Advertised / Selling Price from Filters panel', async() => {
@@ -113,7 +113,7 @@ Then('Only the applicable vehicles should be displayed in the page by price', as
         //min = min.replace(',','');
         //console.log('min - '+min);
         let nmin : number = Number((min.replace('$', '')).replace(',',''));
-        //console.log('nmin - '+nmin); 
+        //console.log('nmin - '+nmin);
         vlpFilterPage.filterMaxPrice.getText().then((max) => {
             //console.log('max - '+max);
             let nmax : number = Number((max.replace('$', '')).replace(',',''));
@@ -128,7 +128,7 @@ Then('Only the applicable vehicles should be displayed in the page by price', as
             })
         });
     });
-    
+
 
 });
 
@@ -145,7 +145,7 @@ Then('Filter chip should be displayed for price', async()=> {
                     })
                 })
             }
-        })    
+        })
 });
 
 When('User selects a trim from Filters panel', async() => {
@@ -179,9 +179,9 @@ Then('Filter chip should be displayed for trim', async() => {
                         let trim = trimsel.substring(0, trimsel.lastIndexOf("(")).trim();
                         expect(trim).to.equal(text.trim());
                     })
-                }) 
+                })
             }
-        })   
+        })
 });
 
 When('User selects an Engine option from Filters panel', async() => {
@@ -215,9 +215,9 @@ Then('Filter chip should be displayed for engine', async() => {
                         let trim = engsel.substring(0, engsel.lastIndexOf("(")).trim();
                         expect(trim).to.equal(text.trim());
                     })
-                }) 
+                })
             }
-        })   
+        })
 });
 
 Given('User is in Model Selection page with all filter chips cleared', async() => {
@@ -248,7 +248,7 @@ Then('Filter panel should include Filters for Cab and Bed Length', async () =>{
 });
 
 Given('User has selected a Truck model', async() => {
-    return true;    
+    return true;
 });
 
 
@@ -286,9 +286,9 @@ Then('Filter chip should be displayed for cab', async() => {
                         let cab = cabsel.substring(0, cabsel.lastIndexOf("(")).trim();
                         expect(cab).to.equal(text.trim());
                     })
-                }) 
+                })
             }
-        })   
+        })
 });
 
 
@@ -330,9 +330,9 @@ Then('Filter chip should be displayed for Bed Length', async() => {
                         let bl = blsel.substring(0, blsel.lastIndexOf("(")).trim();
                         expect(bl).to.eql(text.trim());
                     })
-                }) 
+                })
             }
-        })   
+        })
 });
 
 Given('User has applied one or more filters', async() => {
@@ -386,7 +386,7 @@ Then('Navigate to Model Selection page', async() => {
 
 
 Given('User has filters set', async () =>{
-    
+
     await browser.driver.sleep(10*1000);
     browser.executeScript("arguments[0].click()", mspFilterPage.popUpClose);
     await browser.driver.sleep(5*1000);
@@ -397,11 +397,11 @@ Given('User has filters set', async () =>{
     mspFilterPage.appcardButton.each((ele,i) => {
         ele.getText().then((text) =>{
             if(text.includes('Available', 0)){
-                ele.click();                
-            }            
+                ele.click();
+            }
         }).catch((err) => { })
     })
-    await browser.driver.sleep(5*1000); 
+    await browser.driver.sleep(5*1000);
     vlpFilterPage.filterOptionYear.first().click();
     await browser.driver.sleep(5*1000);
 });
@@ -409,7 +409,7 @@ Given('User has filters set', async () =>{
 
 
 When('User unselects a Filter option', async () =>{
-    
+
     vlpFilterPage.filterYearClear.click();
     await browser.driver.sleep(5*1000);
 });
@@ -417,15 +417,15 @@ When('User unselects a Filter option', async () =>{
 
 
 Then('Clear the filter selection', async () =>{
-    
+
     await browser.driver.sleep(5*1000);
     console.log('is selected - '+ (await vlpFilterPage.filterOptionYear.isSelected()).valueOf());
     expect((await vlpFilterPage.filterOptionYear.isSelected()).valueOf()).to.equal([false]);
-    
+
 });
 
 When('User clears model selection', async () =>{
-    
+
     vlpFilterPage.modelDropDown.click();
     await browser.driver.sleep(5*1000);
     vlpFilterPage.modelDropDownClear.click();
@@ -434,7 +434,7 @@ When('User clears model selection', async () =>{
 
 
 // When('User chooses to sort by Price Low to High', async () =>{
-    
+
 //     vlpFilterPage.sortDropDown.click();
 //     await browser.driver.sleep(5*1000);
 //     vlpFilterPage.sortPriceLowToHigh.click();
@@ -442,12 +442,12 @@ When('User clears model selection', async () =>{
 // });
 
 Then('The Vehicle cards should be sorted by Price in ascending order', async () =>{
-    
+
     let sorted = [];
     vlpFilterPage.appCardPrice.then(function (unsorted){
         sorted = unsorted.slice();
         sorted.sort();
         expect(sorted).to.eql(unsorted);
     });
-    
+
 });

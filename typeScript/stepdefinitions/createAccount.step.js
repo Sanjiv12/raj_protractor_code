@@ -11,22 +11,25 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const protractor_1 = require("protractor");
 const cucumber_1 = require("cucumber");
-const mspFilterPage_1 = require("../pages/mspFilterPage");
-const vlpFilterPage_1 = require("../pages/vlpFilterPage");
 const vdpPage_1 = require("../pages/vdpPage");
 const createAccountPage_1 = require("../pages/createAccountPage");
 const assertion_1 = require("../util/assertion");
-let mspFilterPage = new mspFilterPage_1.MspFilterPage();
-let vlpFilterPage = new vlpFilterPage_1.VlpFilterPage();
 let vdpPage = new vdpPage_1.VdpPage();
 let caPage = new createAccountPage_1.CreateAccountPage();
 cucumber_1.When('User clicks on Start Purchase', () => __awaiter(void 0, void 0, void 0, function* () {
-    //console.log('Inside step param1 - '+ browser.params.param1);
-    yield protractor_1.browser.driver.sleep(15 * 1000);
-    vdpPage.startPurchase.click();
+    // check the secondary button text
+    yield vdpPage.startPurchaseForUnlockDealer.getText().then((txt) => {
+        if (txt === 'Start Purchase') {
+            return vdpPage.startPurchaseForUnlockDealer.click();
+        }
+        else {
+            vdpPage.startPurchaseForNoUnlockDealer.click();
+        }
+    }).catch(() => {
+        return vdpPage.startPurchaseForNoUnlockDealer.click();
+    });
 }));
 cucumber_1.Then('System should navigate to Create Account Page', () => __awaiter(void 0, void 0, void 0, function* () {
-    yield protractor_1.browser.driver.sleep(5 * 1000);
     return assertion_1.Assertion.expect(yield protractor_1.browser.getCurrentUrl()).to.contain('account?dealerCd=');
 }));
 cucumber_1.Then('Display the Email text box', () => __awaiter(void 0, void 0, void 0, function* () {

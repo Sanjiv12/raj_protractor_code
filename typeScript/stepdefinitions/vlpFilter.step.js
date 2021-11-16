@@ -21,31 +21,15 @@ let MAX_TIME_WAIT = 5000;
 let p = 0;
 let np = 0;
 cucumber_1.Given('User is in Vehicle List Page', () => __awaiter(void 0, void 0, void 0, function* () {
-    yield protractor_1.browser.get(protractor_1.browser.params.url + '?dealerCd=' + protractor_1.browser.params.dealerCd + '&source=' + protractor_1.browser.params.source);
-    yield protractor_1.browser.driver.sleep(10 * 1000);
-    protractor_1.browser.driver.manage().deleteAllCookies();
-    protractor_1.browser.executeScript("arguments[0].click()", mspFilterPage.popUpClose);
-    yield protractor_1.browser.driver.sleep(5 * 1000);
-    protractor_1.browser.executeScript('arguments[0].click()', mspFilterPage.sortDropDown);
-    yield protractor_1.browser.driver.sleep(3 * 1000);
-    protractor_1.browser.executeScript('arguments[0].click()', mspFilterPage.sortPriceLowToHigh);
-    yield protractor_1.browser.driver.sleep(2 * 1000);
-    protractor_1.browser.executeScript("window.scrollBy(0,250)");
-    protractor_1.browser.executeScript('arguments[0].click()', mspFilterPage.appcardButton.first());
-    yield protractor_1.browser.driver.sleep(10 * 1000);
-    protractor_1.browser.executeScript('arguments[0].click()', mspFilterPage.sortDropDown);
-    yield protractor_1.browser.driver.sleep(2 * 1000);
-    protractor_1.browser.executeScript('arguments[0].click()', mspFilterPage.sortPriceLowToHigh);
+    // await mspFilterPage.sortDropDown.click();
+    // await mspFilterPage.sortPriceLowToHigh.click();
+    // browser.executeScript("window.scrollBy(0,250)");
+    // await mspFilterPage.appcardButton.first().click();
 }));
 cucumber_1.When('User selects one or more vehicle series from Model in Filters panel', () => __awaiter(void 0, void 0, void 0, function* () {
     yield protractor_1.browser.driver.sleep(5 * 1000);
     vlpFilterPage.modelDropDown.click();
     yield protractor_1.browser.driver.sleep(2 * 1000);
-    // vlpFilterPage.modelOption1.click();
-    // await browser.driver.sleep(5*1000);
-    // vlpFilterPage.modelOption2.click();
-    // await browser.driver.sleep(5*1000);
-    // vlpFilterPage.modelOption3.click();
     protractor_1.browser.driver.findElement(protractor_1.By.xpath("//body")).click();
 }));
 cucumber_1.Then('Vehicles List and count should be updated based on users selection', () => __awaiter(void 0, void 0, void 0, function* () {
@@ -120,7 +104,7 @@ cucumber_1.Then('Only the applicable vehicles should be displayed in the page by
         //min = min.replace(',','');
         //console.log('min - '+min);
         let nmin = Number((min.replace('$', '')).replace(',', ''));
-        //console.log('nmin - '+nmin); 
+        //console.log('nmin - '+nmin);
         vlpFilterPage.filterMaxPrice.getText().then((max) => {
             //console.log('max - '+max);
             let nmax = Number((max.replace('$', '')).replace(',', ''));
@@ -401,6 +385,5 @@ cucumber_1.Then('The Vehicle cards should be sorted by Price in ascending order'
         sorted = unsorted.slice();
         sorted.sort();
         chai_1.expect(sorted).to.eql(unsorted);
-        console.log('sorted - ' + sorted);
     });
 }));

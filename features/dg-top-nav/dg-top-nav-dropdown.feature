@@ -8,22 +8,22 @@ Feature: Digital Garage Top Nav Dropdown Menu
         And User is on desktop
         When User clicks the Top Nav Dropdown Menu icon
         Then The Top Nav Menu Dropdown should be visible
-    
+
     Scenario: Top Nav Dropdown - Profile Icon State Changes
         Given User is in Vehicle List Page
         And User is on desktop
         When User clicks the Top Nav Dropdown Menu icon
         Then The Profile Icon should be in Selected state
-        
+
     Scenario: Top Nav Dropdown - Logged Out View Saves Linkout In Expected State
         Given User is in Vehicle List Page
         And User is on desktop
-        And User is not logged in
+        And User is not logged in to account
         When User clicks the Top Nav Dropdown Menu icon
         Then Top Nav "Saves" Linkout should be present
         And Top Nav "Saves" Linkout Text should be "My Saves"
         And Top Nav "Saves" Linkout should link to "/saves"
-        
+
     Scenario Outline: Top Nav Dropdown - Logged In View Saves Linkout In Expected State
         Given User is in Vehicle List Page
         And User is on desktop
@@ -37,7 +37,7 @@ Feature: Digital Garage Top Nav Dropdown Menu
             | account  | number_of_saves    |
             | example1 | 2                  |
             | example1 | 1                  |
-    
+
     Scenario: Top Nav Dropdown - Manage Vehicles Linkout is Present
         Given User is in Vehicle List Page
         And User is on desktop
@@ -66,42 +66,5 @@ Feature: Digital Garage Top Nav Dropdown Menu
             | example1 | available          | shown     |
             | example2 | unavailable        | hidden    |
 
-Feature: Digital Garage Top Nav Dropdown Menu - Desktop, Not Logged In
 
-    Background:
-        Given User is not logged in
 
-    Scenario: Top Nav Dropdown - Temporary Saves Message is Present
-        Given User is in Vehicle List Page
-        And User is on desktop
-        When User clicks the Top Nav Dropdown Menu icon
-        Then Temporary Saved Items Message should be present
-    
-    Scenario: Top Nav Dropdown - Create Account Button is Present
-        Given User is in Vehicle List Page
-        And User is on desktop
-        When User clicks the Top Nav Dropdown Menu icon
-        Then Create Account Button should be present
-    
-    Scenario: Top Nav Dropdown - Sign In Button is Present
-        Given User is in Vehicle List Page
-        And User is on desktop
-        When User clicks the Top Nav Dropdown Menu icon
-        Then Sign In Button Message should be present
-
-Feature: Digital Garage Top Nav Dropdown Menu - Desktop, Logged In
-
-    Background:
-        Given User is logged in
-    
-    Scenario: Top Nav Dropdown - Manage Account Button is Present
-        Given User is in Vehicle List Page
-        And User is on desktop
-        When User clicks the Top Nav Dropdown Menu icon
-        Then Manage Account Button should be present
-    
-    Scenario: Top Nav Dropdown - Sign Out Button is Present
-        Given User is in Vehicle List Page
-        And User is on desktop
-        When User clicks the Top Nav Dropdown Menu icon
-        Then Sign Out Button should be present
