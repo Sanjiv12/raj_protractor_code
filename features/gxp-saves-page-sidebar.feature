@@ -29,7 +29,7 @@ Feature: GXP Saves Page Sidebar
     Scenario Outline: Sidebar - Has Correct Structure
         Given User is in tier "<tier>" Saves page
         And User is on desktop
-        And User is logged in to account <account>
+        And User is logged in to account
         Then Sidebar Component should be visible
         And Sidebar "Saves" Linkout should be in "Active" state
         And Sidebar header should display name "<account_name>"
