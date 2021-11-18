@@ -28,16 +28,6 @@ let navMenu = new navMenu_1.NavMenu();
 let until = protractor_1.protractor.ExpectedConditions;
 let MAX_TIME_WAIT = 10000;
 /**
- * Setup Section
- *
- * steps for consistent setup before features are executed (login included)
- */
-/**
- * Teardown Section
- *
- * steps for consistent tear down once feature execution is complete
- */
-/**
  * Navigations
  *
  * shared navigations to important pages
