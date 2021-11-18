@@ -38,7 +38,7 @@ Then('Vehicles List and count should be updated based on users selection', async
             expect((arr.length).toString()).to.eql(c.toString());
         })
     });
-    
+    await browser.driver.sleep(5*1000); // note: we may be able to avoid this using implicit awaits
 });
 
 Given('User is in Vehicle List Page with all filters cleared', async () =>{
