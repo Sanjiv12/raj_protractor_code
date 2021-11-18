@@ -93,7 +93,8 @@ export const config: Config = {
         checkout: "../../features/**/checkOut.feature",
         gxpvlp: "../../features/**/gxp-vlp.feature",
         gxpvdp: "../../features/**/gxp-vdp.feature",
-        gxpsaves: "../../features/**/gxp-saves.feature"
+        gxpsaves: "../../features/**/gxp-saves.feature",
+        gxpsavepagesidebar: "../../features/**/gxp-saves-page-sidebar.feature"
     },
     
     onPrepare: async() => {

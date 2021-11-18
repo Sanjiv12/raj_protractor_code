@@ -30,3 +30,7 @@ export const WAIT_TIMES = {
     IMPLICIT_WAIT_TIME: 30000,
     MAX_COMMAND_TIMEOUT: 15000
 }
+
+export const BUTTON_LABELS = {
+    START_PURCHASE: 'Start Purchase'
+}

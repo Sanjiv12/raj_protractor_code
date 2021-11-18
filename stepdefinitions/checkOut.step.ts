@@ -28,11 +28,12 @@ When('User Signs In', async  () =>{
 
 
 Then('System should navigate the user to Review Deal page', async  () =>{
+    await vdpPage.reviewDealPageTitle.isDisplayed();
     return Assertion.expect(await browser.getCurrentUrl()).to.contain('inventory/review');
 });
 
 Then('System should display Enter Zip Code modal', async  () =>{
-    return Assertion.expect(vdpPage.zipCodeModal.isDisplayed()).to.eventually.be.true;
+    return Assertion.expect(vdpPage.zipCodeModal.isDisplayed() || vdpPage.zipCodeWarningModal.isDisplayed()).to.eventually.be.true;
 });
 
 
@@ -59,12 +60,19 @@ When('User clicks on Confirm your residential zip to proceed CTA', async  () =>{
 });
 
 When('User enters a valid Zip code in Enter Zip Code modal', async  () =>{
-    await vdpPage.zipCodeModalInput.clear();
-    await vdpPage.zipCodeModalInput.sendKeys(browser.params.zipcode);
+        if (vdpPage.zipCodeWarningDoneButton.isDisplayed()) {
+            await vdpPage.zipCodeWarningDoneButton.click();
+        }
+        await vdpPage.zipCodeModalInput.clear();
+        await vdpPage.zipCodeModalInput.sendKeys(browser.params.zipcode);
 });
 
 When('User clicks on Done in Zip Code Modal', async  () =>{
+    if (vdpPage.zipCodeWarningDoneButton.isDisplayed()) {
+        await vdpPage.zipCodeWarningDoneButton.click();
+    }
     await vdpPage.zipCodeModalDoneBtn.click();
+
 });
 
 
@@ -89,7 +97,10 @@ When('User clicks on Edit Details CTA', async  () =>{
     await vdpPage.editDetailsBtn.click();
 });
 
-When('User clicks on Next: Choose Financing CTA', async  () =>{
+When('User clicks on Next: Choose Financing CTA', async  () => {
+    if (vdpPage.zipCodeWarningModal.isDisplayed()) {
+        await vdpPage.zipCodeWarningDoneButton.click();
+    }
     await vdpPage.chsFinanceBtn.click();
 });
 

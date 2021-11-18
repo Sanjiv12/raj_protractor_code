@@ -6,6 +6,7 @@ import {VdpPage} from "../pages/vdpPage"
 import {CreateAccountPage} from "../pages/createAccountPage"
 import { expect } from "chai";
 import {Assertion} from "../util/assertion"
+import {BUTTON_LABELS} from "../util/Constants";
 
 let vdpPage : VdpPage = new VdpPage();
 let caPage : CreateAccountPage = new CreateAccountPage();
@@ -14,10 +15,10 @@ let caPage : CreateAccountPage = new CreateAccountPage();
 When('User clicks on Start Purchase', async  () =>{
     // check the secondary button text
     await vdpPage.startPurchaseForUnlockDealer.getText().then((txt) => {
-        if (txt === 'Start Purchase') {
-            return  vdpPage.startPurchaseForUnlockDealer.click();
+        if (txt === BUTTON_LABELS.START_PURCHASE) {
+            return vdpPage.startPurchaseForUnlockDealer.click();
         } else {
-            vdpPage.startPurchaseForNoUnlockDealer.click();
+            return vdpPage.startPurchaseForNoUnlockDealer.click();
         }
     }).catch(() => {
         return vdpPage.startPurchaseForNoUnlockDealer.click();
