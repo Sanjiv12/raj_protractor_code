@@ -60,19 +60,25 @@ When('User clicks on Confirm your residential zip to proceed CTA', async  () =>{
 });
 
 When('User enters a valid Zip code in Enter Zip Code modal', async  () =>{
-        if (vdpPage.zipCodeWarningDoneButton.isDisplayed()) {
-            await vdpPage.zipCodeWarningDoneButton.click();
-        }
-        await vdpPage.zipCodeModalInput.clear();
-        await vdpPage.zipCodeModalInput.sendKeys(browser.params.zipcode);
+    // The MST-C warning modal appears
+    await vdpPage.zipCodeWarningModal.isDisplayed().then(() => {
+        vdpPage.zipCodeWarningDoneButton.click();
+        vdpPage.zipCodeModalInput.clear();
+        vdpPage.zipCodeModalInput.sendKeys(browser.params.zipcode);
+    }).catch(() => {
+        vdpPage.zipCodeModalInput.clear();
+        vdpPage.zipCodeModalInput.sendKeys(browser.params.zipcode);
+    });
 });
 
 When('User clicks on Done in Zip Code Modal', async  () =>{
-    if (vdpPage.zipCodeWarningDoneButton.isDisplayed()) {
-        await vdpPage.zipCodeWarningDoneButton.click();
-    }
-    await vdpPage.zipCodeModalDoneBtn.click();
-
+    await vdpPage.zipCodeModalDoneBtn.click().then(() => {
+        if (vdpPage.zipCodeWarningModal.isDisplayed()) {
+            return vdpPage.zipCodeWarningDoneButton.click();
+        }
+    }).catch(() => {
+        return;
+    });
 });
 
 
@@ -94,13 +100,15 @@ Then('Display Next button in enabled state', async  () =>{
 });
 
 When('User clicks on Edit Details CTA', async  () =>{
-    await vdpPage.editDetailsBtn.click();
+    await vdpPage.startPurchaseWaitSpinner.isDisplayed().then(() => {
+        browser.driver.wait(protractor.until.elementIsNotVisible(vdpPage.startPurchaseWaitSpinner));
+        return vdpPage.editDetailsBtn.click();
+    }).catch(() => {
+        return vdpPage.editDetailsBtn.click();
+    })
 });
 
 When('User clicks on Next: Choose Financing CTA', async  () => {
-    if (vdpPage.zipCodeWarningModal.isDisplayed()) {
-        await vdpPage.zipCodeWarningDoneButton.click();
-    }
     await vdpPage.chsFinanceBtn.click();
 });
 
