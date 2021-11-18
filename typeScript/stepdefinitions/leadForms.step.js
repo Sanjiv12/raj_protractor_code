@@ -15,150 +15,130 @@ const mspFilterPage_1 = require("../pages/mspFilterPage");
 const vlpFilterPage_1 = require("../pages/vlpFilterPage");
 const vdpPage_1 = require("../pages/vdpPage");
 const assertion_1 = require("../util/assertion");
+const Constants_1 = require("../util/Constants");
 let mspFilterPage = new mspFilterPage_1.MspFilterPage();
 let vlpFilterPage = new vlpFilterPage_1.VlpFilterPage();
 let vdpPage = new vdpPage_1.VdpPage();
+function checkIfIsMobileDevice() {
+    return __awaiter(this, void 0, void 0, function* () {
+        let capabilities = yield protractor_1.browser.getCapabilities();
+        return (capabilities.get(Constants_1.PLATFORMS.PLATFORM_CAPABILITY) === Constants_1.PLATFORMS.ANDROID);
+    });
+}
 cucumber_1.When('User clicks on Unlock Savings on a Vehicle Card', () => __awaiter(void 0, void 0, void 0, function* () {
-    yield protractor_1.browser.driver.sleep(5 * 1000);
-    vlpFilterPage.unlockSavings.first().click();
+    yield vlpFilterPage.unlockSavings.first().click();
 }));
 cucumber_1.Then('System should display Unlock Savings modal', () => __awaiter(void 0, void 0, void 0, function* () {
-    yield protractor_1.browser.driver.sleep(5 * 1000);
     return assertion_1.Assertion.expect((yield vlpFilterPage.unlockSavingsModal.isDisplayed()).valueOf()).to.be.true;
 }));
 cucumber_1.When('User does not enter valid values for email and zip', () => __awaiter(void 0, void 0, void 0, function* () {
-    yield protractor_1.browser.driver.sleep(5 * 1000);
-    protractor_1.browser.executeScript("arguments[0].click()", vlpFilterPage.unlockSavingsModalEmail);
-    yield protractor_1.browser.driver.sleep(2 * 1000);
-    protractor_1.browser.executeScript("arguments[0].click()", vlpFilterPage.unlockSavingsModalZip);
-    yield protractor_1.browser.driver.sleep(2 * 1000);
-    protractor_1.browser.executeScript("arguments[0].click()", vlpFilterPage.unlockSavingsModalFirstName);
-    yield protractor_1.browser.driver.sleep(2 * 1000);
+    yield vlpFilterPage.unlockSavingsModalEmail.click();
+    yield vlpFilterPage.unlockSavingsModalZip.click();
+    yield vlpFilterPage.unlockSavingsModalFirstName.click();
 }));
 cucumber_1.Then('System should display the email text box in error state', () => __awaiter(void 0, void 0, void 0, function* () {
-    yield protractor_1.browser.driver.sleep(5 * 1000);
     return assertion_1.Assertion.expect((yield vlpFilterPage.unlockSavingsModalEmailError.isDisplayed()).valueOf()).to.be.true;
 }));
 cucumber_1.Then('System should display the zip text box in error state', () => __awaiter(void 0, void 0, void 0, function* () {
-    yield protractor_1.browser.driver.sleep(5 * 1000);
     return assertion_1.Assertion.expect((yield vlpFilterPage.unlockSavingsModalZipError.isDisplayed()).valueOf()).to.be.true;
 }));
 cucumber_1.Then('Display Reveal Price CTA in disabled state', () => __awaiter(void 0, void 0, void 0, function* () {
-    yield protractor_1.browser.driver.sleep(5 * 1000);
     return assertion_1.Assertion.expect((yield vlpFilterPage.unlockSavingsModalRevealBtn.isEnabled()).valueOf()).to.be.false;
 }));
 cucumber_1.When('User has entered valid values for all fields', () => __awaiter(void 0, void 0, void 0, function* () {
-    yield protractor_1.browser.driver.sleep(5 * 1000);
-    vlpFilterPage.unlockSavingsModalFirstName.sendKeys(protractor_1.browser.params.fname);
-    yield protractor_1.browser.driver.sleep(2 * 1000);
-    vlpFilterPage.unlockSavingsModalLastName.sendKeys(protractor_1.browser.params.lname);
-    yield protractor_1.browser.driver.sleep(2 * 1000);
-    vlpFilterPage.unlockSavingsModalEmail.sendKeys(protractor_1.browser.params.usemail);
-    yield protractor_1.browser.driver.sleep(2 * 1000);
-    vlpFilterPage.unlockSavingsModalZip.sendKeys(protractor_1.browser.params.zipcode);
-    yield protractor_1.browser.driver.sleep(2 * 1000);
+    yield vlpFilterPage.unlockSavingsModalFirstName.sendKeys(protractor_1.browser.params.fname);
+    yield vlpFilterPage.unlockSavingsModalLastName.sendKeys(protractor_1.browser.params.lname);
+    yield vlpFilterPage.unlockSavingsModalEmail.sendKeys(protractor_1.browser.params.usemail);
+    yield vlpFilterPage.unlockSavingsModalZip.sendKeys(protractor_1.browser.params.zipcode);
 }));
 cucumber_1.When('User clicks Reveal Price', () => __awaiter(void 0, void 0, void 0, function* () {
-    yield protractor_1.browser.driver.sleep(2 * 1000);
-    protractor_1.browser.executeScript("arguments[0].click()", vlpFilterPage.unlockSavingsModalRevealBtn);
+    yield vlpFilterPage.unlockSavingsModalRevealBtn.click();
 }));
 cucumber_1.Then('System should display confirmation modal with $ Savings', () => __awaiter(void 0, void 0, void 0, function* () {
     yield protractor_1.browser.driver.sleep(10 * 1000);
-    return assertion_1.Assertion.expect(vlpFilterPage.unlockSavingsModalTitle.getText()).to.eventually.contain('savings unlocked!');
-}));
-cucumber_1.Then('System should display confirmation modal with Smart Price for the vehicle', () => __awaiter(void 0, void 0, void 0, function* () {
-    yield protractor_1.browser.driver.sleep(2 * 1000);
-    vlpFilterPage.unlockSavingsModalPrice.getText().then((value) => {
-        console.log('value -- ' + value);
-        let savings = (value.replace(' Smart Price: ', '')).trim();
-        return assertion_1.Assertion.expect(savings.length).to.be.gt(0);
+    const savingsUnlockedText = 'savings unlocked!';
+    return vlpFilterPage.unlockSavingsModalTitle.isPresent().then(() => {
+        return assertion_1.Assertion.expect(vlpFilterPage.unlockSavingsModalTitle.getText()).to.eventually.contain(savingsUnlockedText);
+    }).catch(() => {
+        return assertion_1.Assertion.expect(vlpFilterPage.unlockSavingsModalTitleNoSavings.getText()).to.eventually.contain(savingsUnlockedText);
     });
 }));
+cucumber_1.Then('System should display confirmation modal with Smart Price for the vehicle', () => __awaiter(void 0, void 0, void 0, function* () {
+    return assertion_1.Assertion.expect(yield vlpFilterPage.unlockSavingsModalPrice.getText()).to.contain('Smart Price:');
+}));
 cucumber_1.When('User clicks on Return to page in the confirmation modal', () => __awaiter(void 0, void 0, void 0, function* () {
-    yield protractor_1.browser.driver.sleep(10 * 1000);
-    protractor_1.browser.executeScript("arguments[0].click()", vlpFilterPage.unlockSavingsModalreturnToPage);
+    yield vlpFilterPage.unlockSavingsModalreturnToPage.click();
 }));
 cucumber_1.Then('System should display all vehicle cards with Smart Price and Savings', () => __awaiter(void 0, void 0, void 0, function* () {
-    yield protractor_1.browser.driver.sleep(5 * 1000);
-    vlpFilterPage.unlockSavingsModalSmartPriceTxt.each((ele, i) => {
+    return vlpFilterPage.unlockSavingsModalSmartPriceTxt.each((ele, i) => {
         return assertion_1.Assertion.expect(ele.getText()).to.eventually.contain('Smart Price');
     });
 }));
 cucumber_1.Then('Price Filter should display Smart Price', () => __awaiter(void 0, void 0, void 0, function* () {
-    yield protractor_1.browser.driver.sleep(10 * 1000);
     return assertion_1.Assertion.expect(vlpFilterPage.unlockSavingsModalSmartPriceFilterTxt.getText()).to.eventually.contain('Smart Price');
 }));
 cucumber_1.When('User clicks on any vehicle card to navigate to Vehicle Details page', () => __awaiter(void 0, void 0, void 0, function* () {
-    yield protractor_1.browser.driver.sleep(5 * 1000);
     protractor_1.browser.executeScript('arguments[0].click()', vlpFilterPage.appCard.first());
 }));
 cucumber_1.Then('System should display Smart Price with Savings for the vehicle', () => __awaiter(void 0, void 0, void 0, function* () {
-    yield protractor_1.browser.driver.sleep(20 * 1000);
-    return assertion_1.Assertion.expect(vdpPage.advertisedPrice.getText()).to.eventually.contain('Smart Price');
+    return assertion_1.Assertion.expect(vdpPage.advertisedPrice.getText()).to.eventually.contain('$');
 }));
 cucumber_1.When('User clicks on Unlock Savings on Vehicle info header', () => __awaiter(void 0, void 0, void 0, function* () {
-    yield protractor_1.browser.driver.sleep(20 * 1000);
-    protractor_1.browser.executeScript('arguments[0].click()', vdpPage.unlockSavings);
+    yield protractor_1.browser.executeScript('arguments[0].click()', vdpPage.unlockSavings);
 }));
 cucumber_1.Then('Price Summary should display additional line item for Additional Dealer Savings', () => __awaiter(void 0, void 0, void 0, function* () {
-    yield protractor_1.browser.driver.sleep(5 * 1000);
     return assertion_1.Assertion.expect((yield vdpPage.additionalDealerSavings.isPresent()).valueOf()).to.be.true;
 }));
 cucumber_1.When('User clicks on Send Estimate to Dealer on a Price Summary', () => __awaiter(void 0, void 0, void 0, function* () {
-    yield protractor_1.browser.driver.sleep(20 * 1000);
-    protractor_1.browser.executeScript('arguments[0].click()', vdpPage.sendEstimateToDealer);
+    protractor_1.browser.executeScript("window.scrollBy(0,250)");
+    const isMobileDevice = yield checkIfIsMobileDevice();
+    yield protractor_1.browser.executeScript('arguments[0].click()', vdpPage.confirmAvailabilityForUnlockDealer).catch(function () {
+        if (isMobileDevice) {
+            protractor_1.browser.executeScript('arguments[0].click()', vdpPage.confirmAvailabilityForNoUnlockDealerOnMobile);
+        }
+        else {
+            protractor_1.browser.executeScript('arguments[0].click()', vdpPage.confirmAvailabilityForNoUnlockDealerOnDesktop);
+        }
+    });
 }));
 cucumber_1.Then('System should display Send Estimate modal', () => __awaiter(void 0, void 0, void 0, function* () {
-    yield protractor_1.browser.driver.sleep(5 * 1000);
-    return assertion_1.Assertion.expect((yield vdpPage.sendEstimateModal.isDisplayed()).valueOf()).to.be.true;
+    return assertion_1.Assertion.expect((yield vdpPage.mstcMultiLeadFormModal.isDisplayed()).valueOf()).to.be.true;
 }));
 cucumber_1.Then('Payment term is same as selected in VDP', () => __awaiter(void 0, void 0, void 0, function* () {
-    yield protractor_1.browser.driver.sleep(5 * 1000);
-    return assertion_1.Assertion.expect(vdpPage.sendEstimateModalPaymentTerm.getText()).to.eventually.equal((yield vdpPage.ppTerm.getText()).valueOf());
+    return assertion_1.Assertion.expect(vdpPage.mstcMultiLeadFormModalPaymentTerm.getText()).to.eventually.equal((yield vdpPage.ppTerm.getText()).valueOf());
 }));
 cucumber_1.When('User does not enter valid values for email and zip in Send Estimate modal', () => __awaiter(void 0, void 0, void 0, function* () {
-    yield protractor_1.browser.driver.sleep(5 * 1000);
-    protractor_1.browser.executeScript("arguments[0].click()", vlpFilterPage.unlockSavingsModalEmail);
-    yield protractor_1.browser.driver.sleep(2 * 1000);
-    protractor_1.browser.executeScript("arguments[0].click()", vlpFilterPage.unlockSavingsModalZip);
-    yield protractor_1.browser.driver.sleep(2 * 1000);
-    protractor_1.browser.executeScript("arguments[0].click()", vdpPage.sendEstimateModalFirstName);
-    yield protractor_1.browser.driver.sleep(2 * 1000);
+    yield vlpFilterPage.unlockSavingsModalEmail.click();
+    yield vlpFilterPage.unlockSavingsModalZip.click();
+    yield vdpPage.mstcMultiLeadFormModalFirstName.click();
 }));
 cucumber_1.Then('System should display the email text box in error state for sending estimate', () => __awaiter(void 0, void 0, void 0, function* () {
-    yield protractor_1.browser.driver.sleep(2 * 1000);
     return assertion_1.Assertion.expect((yield vlpFilterPage.unlockSavingsModalEmailError.isDisplayed()).valueOf()).to.be.true;
 }));
 cucumber_1.Then('System should display the zip text box in error state for sending estimate', () => __awaiter(void 0, void 0, void 0, function* () {
-    yield protractor_1.browser.driver.sleep(2 * 1000);
-    return assertion_1.Assertion.expect((yield vdpPage.sendEstimateModalZipError.isDisplayed()).valueOf()).to.be.true;
+    return assertion_1.Assertion.expect((yield vdpPage.mstcMultiLeadFormModalZipError.isDisplayed()).valueOf()).to.be.true;
 }));
 cucumber_1.Then('Display Submit CTA in Disabled state', () => __awaiter(void 0, void 0, void 0, function* () {
-    yield protractor_1.browser.driver.sleep(2 * 1000);
     return assertion_1.Assertion.expect((yield vlpFilterPage.unlockSavingsModalRevealBtn.isEnabled()).valueOf()).to.be.false;
 }));
 cucumber_1.When('User has entered valid values for all fields in Send Estimate modal', () => __awaiter(void 0, void 0, void 0, function* () {
-    yield protractor_1.browser.driver.sleep(5 * 1000);
-    vdpPage.sendEstimateModalFirstName.sendKeys(protractor_1.browser.params.fname);
-    yield protractor_1.browser.driver.sleep(2 * 1000);
-    vdpPage.sendEstimateModalLastName.sendKeys(protractor_1.browser.params.lname);
-    yield protractor_1.browser.driver.sleep(2 * 1000);
-    vlpFilterPage.unlockSavingsModalEmail.sendKeys(protractor_1.browser.params.seemail);
-    yield protractor_1.browser.driver.sleep(2 * 1000);
-    vlpFilterPage.unlockSavingsModalZip.sendKeys(protractor_1.browser.params.zipcode);
-    yield protractor_1.browser.driver.sleep(2 * 1000);
+    yield vdpPage.mstcMultiLeadFormModalFirstName.clear();
+    yield vdpPage.mstcMultiLeadFormModalFirstName.sendKeys(protractor_1.browser.params.fname);
+    yield vdpPage.mstcMultiLeadFormModalLastName.clear();
+    yield vdpPage.mstcMultiLeadFormModalLastName.sendKeys(protractor_1.browser.params.lname);
+    yield vlpFilterPage.unlockSavingsModalEmail.clear();
+    yield vlpFilterPage.unlockSavingsModalEmail.sendKeys(protractor_1.browser.params.seemail);
+    yield vlpFilterPage.unlockSavingsModalZip.clear();
+    yield vlpFilterPage.unlockSavingsModalZip.sendKeys(protractor_1.browser.params.zipcode);
 }));
 cucumber_1.When('User clicks on Submit', () => __awaiter(void 0, void 0, void 0, function* () {
-    yield protractor_1.browser.driver.sleep(2 * 1000);
-    protractor_1.browser.executeScript("arguments[0].click()", vlpFilterPage.unlockSavingsModalRevealBtn);
+    yield vlpFilterPage.unlockSavingsModalRevealBtn.click();
 }));
 cucumber_1.Then('System should display confirmation modal "Estimate sent!"', () => __awaiter(void 0, void 0, void 0, function* () {
-    yield protractor_1.browser.driver.sleep(10 * 1000);
-    return assertion_1.Assertion.expect(vdpPage.sentEstimateModalTitle.getText()).to.eventually.contain('Estimate Sent!');
+    return assertion_1.Assertion.expect(vdpPage.mstcMultiLeadFormModalTitle.getText()).to.eventually.contain('Estimate Sent!');
 }));
 cucumber_1.When('User clicks on Return to page in Send Estimate confirmation modal', () => __awaiter(void 0, void 0, void 0, function* () {
-    yield protractor_1.browser.driver.sleep(5 * 1000);
-    protractor_1.browser.executeScript("arguments[0].click()", vdpPage.sentEstimateModalreturnToPage);
+    protractor_1.browser.executeScript("arguments[0].click()", vdpPage.mstcMultiLeadFormModalReturnToPage);
 }));
 cucumber_1.When('User clicks on Contact Dealer in Footer', () => __awaiter(void 0, void 0, void 0, function* () {
     yield protractor_1.browser.driver.sleep(5 * 1000);

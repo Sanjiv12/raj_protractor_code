@@ -4,6 +4,7 @@ exports.CreateAccountPage = void 0;
 const protractor_1 = require("protractor");
 class CreateAccountPage {
     constructor() {
+        this.createAccountEmailForm = protractor_1.element(protractor_1.by.xpath('//*[@id="createEmailForm"]'));
         this.createAccountFirstName = protractor_1.element(protractor_1.by.xpath('//div[@class="customer-name-field"]/div[1]/con-textfield/div/mat-form-field/div/div[1]/div[3]/input'));
         this.createAccountLastName = protractor_1.element(protractor_1.by.xpath('//div[@class="customer-name-field"]/div[2]/con-textfield/div/mat-form-field/div/div[1]/div[3]/input'));
         this.createAccountEmail = protractor_1.element(protractor_1.by.css("input[type='email']"));

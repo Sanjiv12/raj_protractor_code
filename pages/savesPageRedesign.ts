@@ -10,6 +10,7 @@ export class SavesPageRedesign {
     public createAccountBanner: ElementFinder;
     public createAccountBannerMessage: ElementFinder;
     public createAccountBannerLinks: ElementArrayFinder;
+    public createAccountBannerX: ElementFinder;
 
     public sideBar : ElementFinder;
     public sideBarHeader : ElementFinder;
@@ -31,7 +32,8 @@ export class SavesPageRedesign {
 
         this.createAccountBanner = element(by.xpath('//*[@id="dg-create-account-banner"]'));
         this.createAccountBannerMessage = element(by.xpath('//*[@id="dg-create-account-banner-message"]'));
-        this.createAccountBannerLinks = element(by.xpath('//*[@id="dg-create-account-banner-message"]')).all(by.id('dg-create-account-banner-link'));
+        this.createAccountBannerLinks = element(by.xpath('//*[@id="dg-create-account-banner-message"]')).all(by.xpath('//a[@class="dg-create-account-banner-link"]'));
+        this.createAccountBannerX = element(by.xpath('//*[@id="dg-create-account-banner-close-button"]'));
 
         this.sideBar = element(by.xpath('//*[@id="dg-ui-nav-sidebar"]'));
         this.sideBarHeader = element(by.xpath('//*[@id="dg-nav-sidebar-header"]'));

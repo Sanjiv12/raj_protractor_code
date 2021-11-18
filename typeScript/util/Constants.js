@@ -1,9 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CLI = exports.JENKINS_OPTIONS = exports.PLATFORMS = void 0;
+exports.WAIT_TIMES = exports.CLI = exports.JENKINS_OPTIONS = exports.TCOM_WEBSITE = exports.PLATFORMS = void 0;
 exports.PLATFORMS = {
+    PLATFORM_CAPABILITY: 'platformName',
     ANDROID: 'Android'
 };
+exports.TCOM_WEBSITE = 'https://www.toyota.com';
 exports.JENKINS_OPTIONS = {
     CHROME_DESKTOP: 'ChromeDesktop',
     CHROME_ANDROID: 'ChromeAndroid',
@@ -17,5 +19,12 @@ exports.JENKINS_OPTIONS = {
 exports.CLI = {
     params: '--params',
     browserPlatformParam: '.browserPlatformCombo',
-    splitChar: '='
+    valueSplitChar: '=',
+    browserSplitChar: ','
+};
+exports.WAIT_TIMES = {
+    FIVE_SECONDS: 5000,
+    TEN_SECONDS: 10000,
+    MAX_DURATION: 15000,
+    MAX_TEST_TIMEOUT: 90000
 };

@@ -9,10 +9,20 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const { BeforeAll, After, AfterAll, Status, defineSupportCode, setDefaultTimeout } = require("cucumber");
+const Constants_1 = require("./Constants");
+const { BeforeAll, Before, After, AfterAll, Status, defineSupportCode, setDefaultTimeout } = require("cucumber");
 const protractor_1 = require("protractor");
-BeforeAll({ timeout: 100 * 1000 }, () => __awaiter(void 0, void 0, void 0, function* () {
-    setDefaultTimeout(90 * 1000);
+const constructVlpUrl_1 = require("./constructVlpUrl");
+BeforeAll({ timeout: Constants_1.WAIT_TIMES.TEN_SECONDS }, () => __awaiter(void 0, void 0, void 0, function* () {
+    setDefaultTimeout(Constants_1.WAIT_TIMES.MAX_TEST_TIMEOUT);
+}));
+Before(() => __awaiter(void 0, void 0, void 0, function* () {
+    const vehicleListPage = constructVlpUrl_1.constructVlpUrl();
+    yield protractor_1.browser.driver.manage().deleteAllCookies();
+    yield protractor_1.browser.get(Constants_1.TCOM_WEBSITE);
+    yield protractor_1.browser.driver.manage().deleteAllCookies();
+    yield protractor_1.browser.get(vehicleListPage);
+    yield protractor_1.browser.driver.manage().deleteAllCookies();
 }));
 After(function (scenario) {
     return __awaiter(this, void 0, void 0, function* () {

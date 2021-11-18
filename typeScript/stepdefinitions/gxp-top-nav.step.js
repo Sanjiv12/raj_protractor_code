@@ -17,13 +17,13 @@ const chai_1 = require("chai");
 let createAccountPage = new createAccountPage_1.CreateAccountPage();
 let navMenu = new navMenu_1.NavMenu();
 let until = protractor_1.protractor.ExpectedConditions;
-let MAX_TIME_WAIT = 5000;
+let MAX_TIME_WAIT = 10000;
 // Signed Out Scenario
 // Uses Given Statement from VDP or VLP
 cucumber_1.When('User clicks the Top Nav Dropdown Menu icon', () => __awaiter(void 0, void 0, void 0, function* () {
     // Perform click action
     yield protractor_1.browser.driver.wait(until.visibilityOf(navMenu.profileIcon), MAX_TIME_WAIT, 'Top Nav Profile Icon taking too long to appear in the DOM');
-    yield navMenu.profileIcon.click();
+    protractor_1.browser.executeScript("arguments[0].click();", navMenu.profileIcon);
 }));
 cucumber_1.Then('The Top Nav Menu Dropdown should be visible', () => __awaiter(void 0, void 0, void 0, function* () {
     // dg-component-menu-dropdown has class 'dg-open'
@@ -50,12 +50,13 @@ cucumber_1.Then(/Top Nav \"(.*?)\" Linkout should link to \"(.*?)\"/, (section, 
     // Click Saves Linkout, Check the Url, and then Navigate Back
     yield protractor_1.browser.driver.wait(until.visibilityOf(navMenu.dgComponentMenuDropdownDesktop), MAX_TIME_WAIT, 'Dropdown Element taking too long to appear in the DOM');
     const originalUrl = yield protractor_1.browser.getCurrentUrl();
-    yield navMenu.dgComponentMenuDropdownDesktop.$('#dg-menu-' + section.toLowerCase() + '-page-linkout').click();
+    const element = navMenu.dgComponentMenuDropdownDesktop.$('#dg-menu-' + section.toLowerCase() + '-page-linkout');
+    yield protractor_1.browser.executeScript("arguments[0].click();", element);
     let handles = yield protractor_1.browser.getAllWindowHandles();
     // Switch to Last Tab
     yield protractor_1.browser.driver.switchTo().window(handles[handles.length - 1]);
     // Check if url is what we expect, sleep to allow for redirects
-    yield protractor_1.browser.driver.sleep(10 * 1000);
+    yield protractor_1.browser.driver.sleep(15 * 1000);
     let currentUrl = yield protractor_1.browser.getCurrentUrl();
     chai_1.expect(currentUrl).to.include(location);
     // If there is only 1 tab, navigate back until we reach the original page
@@ -102,12 +103,12 @@ cucumber_1.Then('Sign In Button should be present', () => __awaiter(void 0, void
 cucumber_1.When('User clicks the Top Nav Dropdown Menu icon and Signs In', () => __awaiter(void 0, void 0, void 0, function* () {
     // Click Profile Icon
     yield protractor_1.browser.driver.wait(until.visibilityOf(navMenu.profileIcon), MAX_TIME_WAIT, 'Top Nav Profile Icon taking too long to appear in the DOM');
-    yield navMenu.profileIcon.click();
+    protractor_1.browser.executeScript("arguments[0].click();", navMenu.profileIcon);
     // Sign in User
     const username = "";
     const password = "";
     yield protractor_1.browser.driver.wait(until.visibilityOf(navMenu.dgComponentMenuDropdownDesktop), MAX_TIME_WAIT, 'Dropdown Element taking too long to appear in the DOM');
-    yield navMenu.dgComponentMenuDropdownDesktop.$('#dg-login-btn').click();
+    yield protractor_1.browser.executeScript("arguments[0].click();", yield protractor_1.element(protractor_1.by.id('dg-login-btn')));
     yield protractor_1.browser.driver.wait(until.visibilityOf(createAccountPage.userName), MAX_TIME_WAIT, 'Username Element taking too long to appear in the DOM');
     yield createAccountPage.userName.sendKeys(username);
     yield createAccountPage.logonBtn.click();

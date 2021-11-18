@@ -59,24 +59,11 @@ cucumber_1.Then('Default Term is selected', () => __awaiter(void 0, void 0, void
     return assertion_1.Assertion.expect(vdpPage.termSelectedDefault.getAttribute('class')).to.eventually.contain('mat-radio-checked');
 }));
 cucumber_1.Given('User is in Vehicle Details page', () => __awaiter(void 0, void 0, void 0, function* () {
-    //await browser.get('?dealerCd='+browser.params.dealerCd+'&source='+browser.params.source);
-    protractor_1.browser.driver.manage().deleteAllCookies();
-    yield protractor_1.browser.get(protractor_1.browser.params.url + '?dealerCd=' + protractor_1.browser.params.dealerCd + '&source=' + protractor_1.browser.params.source);
-    yield protractor_1.browser.driver.sleep(10 * 1000);
-    protractor_1.browser.executeScript("arguments[0].click()", mspFilterPage.popUpClose);
-    yield protractor_1.browser.driver.sleep(5 * 1000);
-    protractor_1.browser.executeScript('arguments[0].click()', mspFilterPage.sortDropDown);
-    yield protractor_1.browser.driver.sleep(2 * 1000);
-    // browser.executeScript('arguments[0].click()', mspFilterPage.sortPriceLowToHigh);
-    yield protractor_1.browser.driver.sleep(5 * 1000);
+    yield mspFilterPage.sortDropDown.click();
+    yield mspFilterPage.sortPriceLowToHigh.click();
     protractor_1.browser.executeScript("window.scrollBy(0,250)");
-    protractor_1.browser.executeScript('arguments[0].click()', mspFilterPage.appcardButton.first());
-    yield protractor_1.browser.driver.sleep(10 * 1000);
-    protractor_1.browser.executeScript('arguments[0].click()', mspFilterPage.sortDropDown);
-    yield protractor_1.browser.driver.sleep(2 * 1000);
-    // browser.executeScript('arguments[0].click()', mspFilterPage.sortPriceLowToHigh);
-    yield protractor_1.browser.driver.sleep(5 * 1000);
-    protractor_1.browser.executeScript('arguments[0].click()', vlpFilterPage.appCard.first());
+    yield mspFilterPage.appcardButton.first().click();
+    yield vlpFilterPage.appCard.first().click();
 }));
 cucumber_1.When('User selects Finance', () => __awaiter(void 0, void 0, void 0, function* () {
     yield protractor_1.browser.driver.sleep(15 * 1000);

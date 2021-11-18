@@ -16,69 +16,61 @@ const mkdirp = require("mkdirp");
 const path = require("path");
 const Constants_1 = require("../util/Constants");
 const BrowserPlatformConfigurations_1 = require("./BrowserPlatformConfigurations");
+const constructVlpUrl_1 = require("../util/constructVlpUrl");
 const jsonPath = path.join(process.cwd(), "/dist");
 let baseurl = '';
 let extractBrowserFromCli = function () {
-    let browser = Constants_1.JENKINS_OPTIONS.ALL; // Default to 'All' if nothing found
-    let foundParam = process.argv.find((arg) => {
-        const parts = arg.split(Constants_1.CLI.splitChar);
+    let browser = [];
+    // Grab the browser parameter from the command line args
+    let foundBrowserParam = process.argv.find((arg) => {
+        const parts = arg.split(Constants_1.CLI.valueSplitChar);
         const name = parts[0].trim().replace(Constants_1.CLI.params, '');
         return name == Constants_1.CLI.browserPlatformParam;
     });
-    if (foundParam && foundParam.split(Constants_1.CLI.splitChar)) {
-        browser = foundParam.split(Constants_1.CLI.splitChar)[1];
+    // If browser param set, extract the selected browsers
+    if (foundBrowserParam && foundBrowserParam.split(Constants_1.CLI.valueSplitChar)) {
+        let selectedBrowsers = foundBrowserParam.split(Constants_1.CLI.valueSplitChar)[1];
+        browser = selectedBrowsers.split(Constants_1.CLI.browserSplitChar);
     }
     return browser;
-};
-let browserSupportsBasicAuth = function (browser) {
-    return browser !== Constants_1.JENKINS_OPTIONS.SAFARI_DESKTOP && browser !== Constants_1.JENKINS_OPTIONS.SAFARI_IOS;
 };
 let generateBrowserConfiguration = function () {
     const selectedBrowser = extractBrowserFromCli();
     let multiCapabilities = [];
-    switch (selectedBrowser) {
-        case Constants_1.JENKINS_OPTIONS.CHROME_DESKTOP:
-            multiCapabilities.push(BrowserPlatformConfigurations_1.BrowserPlatformConfigurations.ChromeDesktop);
-            break;
-        case Constants_1.JENKINS_OPTIONS.CHROME_ANDROID:
-            multiCapabilities.push(BrowserPlatformConfigurations_1.BrowserPlatformConfigurations.ChromeAndroid);
-            break;
-        case Constants_1.JENKINS_OPTIONS.SAFARI_DESKTOP:
-            multiCapabilities.push(BrowserPlatformConfigurations_1.BrowserPlatformConfigurations.SafariDesktop);
-            break;
-        case Constants_1.JENKINS_OPTIONS.SAFARI_IOS:
-            multiCapabilities.push(BrowserPlatformConfigurations_1.BrowserPlatformConfigurations.SafariIOS);
-            break;
-        case Constants_1.JENKINS_OPTIONS.FIREFOX:
-            multiCapabilities.push(BrowserPlatformConfigurations_1.BrowserPlatformConfigurations.Firefox);
-            break;
-        case Constants_1.JENKINS_OPTIONS.EDGE:
-            multiCapabilities.push(BrowserPlatformConfigurations_1.BrowserPlatformConfigurations.Edge);
-            break;
-        case Constants_1.JENKINS_OPTIONS.ALL_SUBPROD:
-            for (const [browser, capability] of Object.entries(BrowserPlatformConfigurations_1.BrowserPlatformConfigurations)) {
-                if (browserSupportsBasicAuth(browser)) {
-                    multiCapabilities.push(capability);
-                }
-            }
-            break;
-        case Constants_1.JENKINS_OPTIONS.ALL:
-        default:
-            for (const [, capability] of Object.entries(BrowserPlatformConfigurations_1.BrowserPlatformConfigurations)) {
-                multiCapabilities.push(capability);
-            }
-            break;
-    }
+    selectedBrowser.forEach((browser) => {
+        switch (browser) {
+            case Constants_1.JENKINS_OPTIONS.CHROME_ANDROID:
+                multiCapabilities.push(BrowserPlatformConfigurations_1.BrowserPlatformConfigurations.ChromeAndroid);
+                break;
+            case Constants_1.JENKINS_OPTIONS.SAFARI_DESKTOP:
+                multiCapabilities.push(BrowserPlatformConfigurations_1.BrowserPlatformConfigurations.SafariDesktop);
+                break;
+            case Constants_1.JENKINS_OPTIONS.SAFARI_IOS:
+                multiCapabilities.push(BrowserPlatformConfigurations_1.BrowserPlatformConfigurations.SafariIOS);
+                break;
+            case Constants_1.JENKINS_OPTIONS.FIREFOX:
+                multiCapabilities.push(BrowserPlatformConfigurations_1.BrowserPlatformConfigurations.Firefox);
+                break;
+            case Constants_1.JENKINS_OPTIONS.EDGE:
+                multiCapabilities.push(BrowserPlatformConfigurations_1.BrowserPlatformConfigurations.Edge);
+                break;
+            case Constants_1.JENKINS_OPTIONS.CHROME_DESKTOP:
+            default:
+                multiCapabilities.push(BrowserPlatformConfigurations_1.BrowserPlatformConfigurations.ChromeDesktop);
+                break;
+        }
+    });
     return multiCapabilities;
 };
 exports.config = {
     // seleniumAddress: "http://127.0.0.1:4444/wd/hub",
     // seleniumAddress: "https://ondemand.us-west-1.saucelabs.com:443/wd/hub",
     //  SELENIUM_PROMISE_MANAGER: false,
-    // sauceUser:"sso-toyota.tcoe-raghunath.goteti",
-    // sauceKey:"a1aaa34b-ba44-4bc7-a94c-f79aa068e60f",
     sauceUser: "sso-toyota.tcoe-kimberlee.dixon",
     sauceKey: "aad70988-20cb-4d05-b24e-65bea4dfb0ee",
+    // sauceUser:"sso-toyota.tcoe-raghunath.goteti",
+    // sauceKey:"a1aaa34b-ba44-4bc7-a94c-f79aa068e60f",
+    baseUrl: "https://qa.smartpath.tldealersystems.com/inventory?dealerCd=24022&source=t1",
     //baseUrl: 'baseurl',
     framework: "custom",
     frameworkPath: require.resolve("protractor-cucumber-framework"),
@@ -101,29 +93,28 @@ exports.config = {
         checkout: "../../features/**/checkOut.feature",
         gxpvlp: "../../features/**/gxp-vlp.feature",
         gxpvdp: "../../features/**/gxp-vdp.feature",
-        gxpsaves: "../../features/**/gxp-saves.feature"
+        gxpsaves: "../../features/**/gxp-saves.feature",
+        gxpcreateaccountbanner: "../../features/**/gxp-create-account-banner.feature",
     },
     onPrepare: () => __awaiter(void 0, void 0, void 0, function* () {
-        protractor_1.browser.manage().window().maximize();
-        protractor_1.browser.driver.manage().deleteAllCookies();
         protractor_1.browser.waitForAngularEnabled(false);
         reportConfig.createDirectory(jsonPath);
-        yield protractor_1.browser.get(protractor_1.browser.params.url + '?dealerCd=' + protractor_1.browser.params.dealerCd + '&source=' + protractor_1.browser.params.source);
-        //baseurl = browser.params.url;
-        // 
-        // wait until login is done
-        // that means when we are on summary page
-        //
+        // Initially set max waiting time to 15 seconds. Selenium applies this globally.
+        // Implicit wait allows the page to poll until an element is present or the duration is reached
+        protractor_1.browser.driver.manage().timeouts().implicitlyWait(Constants_1.WAIT_TIMES.MAX_DURATION);
+        // Load the page
+        const vehicleListPage = constructVlpUrl_1.constructVlpUrl();
+        yield protractor_1.browser.get(vehicleListPage);
         return yield protractor_1.browser.driver.wait(() => __awaiter(void 0, void 0, void 0, function* () {
             const url = yield protractor_1.browser.driver.getCurrentUrl();
             return /inventory/.test(url);
-        }), 100000);
+        }), Constants_1.WAIT_TIMES.TEN_SECONDS);
     }),
     multiCapabilities: generateBrowserConfiguration(),
-    // capabilities: {            
+    // capabilities: {
     // },
-    commandTimeout: 10000,
-    maxDuration: 12000,
+    commandTimeout: Constants_1.WAIT_TIMES.TEN_SECONDS,
+    maxDuration: Constants_1.WAIT_TIMES.MAX_DURATION,
     //maxSessions: 30,
     seleniumVersion: "3.141.59",
     params: {

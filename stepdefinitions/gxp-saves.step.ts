@@ -93,10 +93,6 @@ When('User unsaves estimates on Saves page', async () => {
     }
 });
 
-Given('User is in Saves page', async () => {
-    // Take no action, saves page already loaded
-});
-
 When('User views the Saves page', async () => {
     // Take no action, saves page already loaded
 });

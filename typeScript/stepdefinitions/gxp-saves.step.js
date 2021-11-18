@@ -76,9 +76,9 @@ cucumber_1.When('User unsaves estimates on Saves page', () => __awaiter(void 0, 
         yield protractor_1.browser.driver.sleep(MAX_TIME_WAIT);
     }
 }));
-cucumber_1.Given('User is in Saves page', () => __awaiter(void 0, void 0, void 0, function* () {
-    // Take no action, saves page already loaded
-}));
+// Given('User is in Saves page', async () => {
+//     // Take no action, saves page already loaded
+// });
 cucumber_1.When('User views the Saves page', () => __awaiter(void 0, void 0, void 0, function* () {
     // Take no action, saves page already loaded
 }));
@@ -274,7 +274,7 @@ cucumber_1.Then('Saved Estimates match estimate details from VDP', () => __await
     chai_1.expect(vdpEstimateDetails).to.eql(savesPageEstimateDetails);
 }));
 cucumber_1.When('User clicks on inventory save heart', () => __awaiter(void 0, void 0, void 0, function* () {
-    protractor_1.browser.driver.sleep(3000);
+    yield protractor_1.browser.driver.sleep(MAX_TIME_WAIT);
     var heart = vdpPage.saveHearts.get(0);
     protractor_1.browser.driver.wait(until.visibilityOf(heart), MAX_TIME_WAIT, 'Inventory save heart element taking too long to appear in the DOM');
     yield vdpPage.MSRP.getText().then((price) => vdpVehicleEstimateDetails.MSRP = price);
@@ -308,3 +308,33 @@ cucumber_1.Then('Estimates should disappear from inventory card', () => __awaite
     protractor_1.browser.driver.wait(until.visibilityOf(savesPage.estimatePaymentsButton.first()), MAX_TIME_WAIT, 'View estimates button element taking too long to appear in the DOM');
     chai_1.expect(yield savesPage.estimatePaymentsButton.first().isPresent()).to.be.true;
 }));
+cucumber_1.When('User clicks the Start Sharing Button', () => __awaiter(void 0, void 0, void 0, function* () {
+    protractor_1.browser.driver.wait(until.visibilityOf(savesPage.saveShares), MAX_TIME_WAIT, 'Share Saves button element taking too long to appear in the DOM');
+    yield savesPage.saveShares.click();
+}));
+cucumber_1.When('User fills out Modal', () => __awaiter(void 0, void 0, void 0, function* () {
+    yield protractor_1.browser.sleep(MAX_TIME_WAIT);
+    yield fillInput(savesPage.firstNameModal, 'test');
+    yield fillInput(savesPage.lastNameModal, 'test');
+    yield fillInput(savesPage.zipCodeModal, '75092');
+    yield fillInput(savesPage.emailModal, 'test@test.com');
+}));
+cucumber_1.When('User submits form', () => __awaiter(void 0, void 0, void 0, function* () {
+    yield protractor_1.browser.sleep(1000);
+    savesPage.submitModal.click();
+}));
+cucumber_1.Then('Modal success state should appear', () => __awaiter(void 0, void 0, void 0, function* () {
+    yield protractor_1.browser.sleep(1000);
+    chai_1.expect(yield savesPage.successModalText.getText()).to.equal('Save successfully sent!');
+}));
+function fillInput(el, text) {
+    return __awaiter(this, void 0, void 0, function* () {
+        yield protractor_1.browser.sleep(3000);
+        yield el.click();
+        yield protractor_1.browser.sleep(3000);
+        yield el.clear();
+        yield protractor_1.browser.sleep(3000);
+        yield el.sendKeys(text);
+        yield protractor_1.browser.sleep(3000);
+    });
+}

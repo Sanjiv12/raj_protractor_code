@@ -43,18 +43,19 @@ class VlpFilterPage {
         this.unlockSavingsModal = protractor_1.element(protractor_1.by.id('smart-price-modal-component'));
         this.unlockSavingsModalEmail = protractor_1.element(protractor_1.by.css("input[type='email']"));
         this.unlockSavingsModalZip = protractor_1.element(protractor_1.by.css("input[type='number']"));
-        this.unlockSavingsModalFirstName = protractor_1.element(protractor_1.by.xpath('//span[@class="customer-name-field"]/con-textfield[1]/div/mat-form-field/div/div[1]/div[3]/input'));
-        this.unlockSavingsModalLastName = protractor_1.element(protractor_1.by.xpath('//span[@class="customer-name-field"]/con-textfield[2]/div/mat-form-field/div/div[1]/div[3]/input'));
+        this.unlockSavingsModalFirstName = protractor_1.element(protractor_1.by.xpath('//div[@class="customer-name-field"]/con-textfield[1]/div/mat-form-field/div/div[1]/div[3]/input'));
+        this.unlockSavingsModalLastName = protractor_1.element(protractor_1.by.xpath('//div[@class="customer-name-field"]/con-textfield[2]/div/mat-form-field/div/div[1]/div[3]/input'));
         this.unlockSavingsModalEmailError = protractor_1.element(protractor_1.by.css('con-textfield.email-form-field .mat-error'));
-        this.unlockSavingsModalZipError = protractor_1.element(protractor_1.by.css('span.customer-zip-field .mat-error'));
+        this.unlockSavingsModalZipError = protractor_1.element(protractor_1.by.css('con-textfield.form-field .mat-error'));
         this.unlockSavingsModalRevealBtn = protractor_1.element(protractor_1.by.xpath('//div[@class="customer-submit"]/button'));
         this.unlockSavingsModalTitle = protractor_1.element(protractor_1.by.css('.unlock-price-modal-title'));
-        this.unlockSavingsModalPrice = protractor_1.element(protractor_1.by.css('.unlock-vehicle-smart-price'));
+        this.unlockSavingsModalTitleNoSavings = protractor_1.element(protractor_1.by.css('.unlock-price-modal-no-savingtitle'));
+        this.unlockSavingsModalPrice = protractor_1.element(protractor_1.by.xpath('//*[@id="smart-price-modal-component"]/app-smart-price-modal/app-smart-price-unlock-modal/div/div/div[3]/div[1]/div[2]/div'));
         this.unlockSavingsModalreturnToPage = protractor_1.element(protractor_1.by.xpath('//div[@class="return-to-page"]/div[@class="text-button"]'));
         this.unlockSavingsModalSmartPriceTxt = protractor_1.element.all(protractor_1.by.css('.price-section'));
         this.unlockSavingsModalSmartPriceFilterTxt = protractor_1.element(protractor_1.by.css('.filter-price-sub-title'));
-        this.vehicleSaveHeart = protractor_1.element.all(protractor_1.by.css('.save-icon'));
-        this.vehicleSaveHeartActive = protractor_1.element(protractor_1.by.css('.dg-encircle.active'));
+        this.vehicleSaveHeart = protractor_1.element.all(protractor_1.by.className('save-icon'));
+        this.vehicleSaveHeartActive = protractor_1.element(protractor_1.by.css('.dg-encircle active'));
         this.tooltip = protractor_1.element(protractor_1.by.css('.dg-tooltip'));
     }
 }
