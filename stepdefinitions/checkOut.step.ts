@@ -4,6 +4,7 @@ import {VdpPage} from "../pages/vdpPage"
 import {CreateAccountPage} from "../pages/createAccountPage"
 import {Assertion} from "../util/assertion"
 import {DigitalGarageTopNav} from "../dg-features/digitalGarageTopNav";
+import {CSS_CLASSES, INVENTORY_REVIEW_URL, LOGIN_PAGE_URL, ATTRIBUTES} from "../util/Constants";
 
 let vdpPage : VdpPage = new VdpPage();
 let caPage : CreateAccountPage = new CreateAccountPage();
@@ -11,11 +12,12 @@ let topNav : DigitalGarageTopNav = new DigitalGarageTopNav();
 
 async function hasNotPreviouslyLoggedIn() {
    return browser.driver.getCurrentUrl().then((url) => {
-       return url.includes('account.toyota.com');
+       return url.includes(LOGIN_PAGE_URL);
    });
 }
 
 When('User Signs In', async  () =>{
+    await topNav.dgMan.isDisplayed();
     await topNav.dgMan.click();
     await topNav.desktopSignInLink.click();
     if (await hasNotPreviouslyLoggedIn()) {
@@ -29,7 +31,7 @@ When('User Signs In', async  () =>{
 
 Then('System should navigate the user to Review Deal page', async  () =>{
     await vdpPage.reviewDealPageTitle.isDisplayed();
-    return Assertion.expect(await browser.getCurrentUrl()).to.contain('inventory/review');
+    return Assertion.expect(await browser.getCurrentUrl()).to.contain(INVENTORY_REVIEW_URL);
 });
 
 Then('System should display Enter Zip Code modal', async  () =>{
@@ -47,7 +49,7 @@ Then('System should display Confirm your residential zip to proceed CTA at the b
 });
 
 Then('Display Edit Zip in Price details - Taxes & Fees highlighted in Red text', async  () =>{
-    return Assertion.expect(vdpPage.zipTaxDesc.getCssValue('color')).to.eventually.equal('rgba(235, 10, 30, 1)');
+    return Assertion.expect(vdpPage.zipTaxDesc.getCssValue(ATTRIBUTES.COLOR)).to.eventually.equal('rgba(235, 10, 30, 1)');
 });
 
 Then('Display Next button in disabled state', async  () =>{
@@ -99,6 +101,10 @@ Then('Display Next button in enabled state', async  () =>{
     return Assertion.expect((vdpPage.chsFinanceBtn.isEnabled())).to.eventually.be.true;
 });
 
+Then('Display Confirm & Submit button in enabled state', async  () =>{
+    return Assertion.expect((vdpPage.confirmAndSubmitButton.isEnabled())).to.eventually.be.true;
+});
+
 When('User clicks on Edit Details CTA', async  () =>{
     await vdpPage.startPurchaseWaitSpinner.isDisplayed().then(() => {
         browser.driver.wait(protractor.until.elementIsNotVisible(vdpPage.startPurchaseWaitSpinner));
@@ -109,34 +115,46 @@ When('User clicks on Edit Details CTA', async  () =>{
 });
 
 When('User clicks on Next: Choose Financing CTA', async  () => {
-    await vdpPage.chsFinanceBtn.click();
+    await vdpPage.startPurchaseWaitSpinner.isDisplayed().then(() => {
+        browser.driver.wait(protractor.until.elementIsNotVisible(vdpPage.startPurchaseWaitSpinner));
+        return vdpPage.chsFinanceBtn.click();
+    }).catch(() => {
+        return vdpPage.chsFinanceBtn.click();
+    });
 });
 
 Then('System should display Apply for Credit page with I have financing selected by default', async  () =>{
-    return Assertion.expect(vdpPage.ownFinance.getAttribute('class')).to.eventually.contain('selected');
+    return Assertion.expect(vdpPage.ownFinance.getAttribute(ATTRIBUTES.CLASS)).to.eventually.contain(CSS_CLASSES.ANGULAR_RADIO_INPUT_CHECKED);
 });
 
 When('User clicks on I want financing', async  () =>{
-    await vdpPage.tfsFinance.click();
+    await vdpPage.startPurchaseWaitSpinner.isDisplayed().then(() => {
+        browser.driver.wait(protractor.until.elementIsNotVisible(vdpPage.startPurchaseWaitSpinner));
+        vdpPage.tfsFinance.click();
+    }).catch(() => {
+        return vdpPage.tfsFinance.click();
+    });
+
 });
 
 Then('System should display Apply financing modal', async  () =>{
-    return Assertion.expect((await vdpPage.tfsFinance.isDisplayed()).valueOf()).to.be.true;
+    return Assertion.expect((await vdpPage.applyFinanceModal.isDisplayed()).valueOf()).to.be.true;
 });
 
 When('User clicks on Accept in the Apply financing modal', async  () =>{
+    await vdpPage.applyFinanceModal.isDisplayed();
     await vdpPage.acceptApplyFinanceModalBtn.click();
 });
 
 Then('System should display authorization disclaimer below I want financing in selected state', async  () =>{
-    return Assertion.expect(vdpPage.authTfsCb.getAttribute('class')).to.eventually.contain('mat-checkbox-checked');
+    return Assertion.expect(vdpPage.authTfsCb.getAttribute('class')).to.eventually.contain(CSS_CLASSES.ANGULAR_CHECKBOX_INPUT_CHECKED);
 });
 
 When('User clicks on Not now in the Apply financing modal', async  () =>{
+    await vdpPage.applyFinanceModal.isDisplayed();
     await vdpPage.notNowApplyFinanceModalBtn.click();
-    browser.executeScript("arguments[0].click()", vdpPage.notNowApplyFinanceModalBtn);
 });
 
 Then('System should display authorization disclaimer below I want financing in de-selected state', async  () =>{
-    return Assertion.expect(vdpPage.authTfsCb.getAttribute('class')).to.eventually.not.contain('mat-checkbox-checked');
+    return Assertion.expect(vdpPage.authTfsCb.getAttribute(ATTRIBUTES.CLASS)).to.eventually.not.contain(CSS_CLASSES.ANGULAR_CHECKBOX_INPUT_CHECKED);
 });

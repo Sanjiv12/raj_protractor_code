@@ -119,6 +119,7 @@ export class VdpPage {
     public confirmZipText : ElementFinder;
     public zipTaxDesc : ElementFinder;
     public chsFinanceBtn : ElementFinder;
+    public confirmAndSubmitButton : ElementFinder;
     public zipCodeModalInput : ElementFinder;
     public zipCodeModalDoneBtn : ElementFinder;
     public zipCodeWarningModal : ElementFinder;
@@ -126,6 +127,7 @@ export class VdpPage {
     public reviewDealZipCode : ElementFinder;
     public editDetailsBtn : ElementFinder;
     public ownFinance : ElementFinder;
+    public financeOption : ElementArrayFinder;
     public tfsFinance : ElementFinder;
     public applyFinanceModal : ElementFinder;
     public acceptApplyFinanceModalBtn : ElementFinder;
@@ -269,14 +271,14 @@ export class VdpPage {
         this.zipCodeWarningDoneButton = element(by.xpath('//*[@id="zipCode-warning-modal-panel"]/app-zip-code-warning-modal/div[1]/button'));
         this.reviewDealZipCode = element(by.xpath('//span[@class="text-link custom_zip_button"]'));
         this.editDetailsBtn = element(by.className('text-button edit_Details_button'));
-        this.ownFinance = element(by.className('own-finance'));
-        this.tfsFinance = element(by.xpath('/html/body/main/app-root/mat-drawer-container/mat-drawer-content/div/app-vehicle-review/div[2]/app-mstc-stepper/section/div[2]/app-apply-for-credit-options/div/mat-radio-group/div[1]/app-con-box-radiobutton/div/mat-radio-button'));
-
+        this.financeOption = element.all(by.className('mat-radio-button'));
+        this.tfsFinance = this.financeOption.first();
+        this.ownFinance = this.financeOption.last();
         this.applyFinanceModal = element(by.className('apply-finance-modal-container'));
-        this.acceptApplyFinanceModalBtn = element(by.xpath('//section[@class="apply-finance-modal-body"]/button[1]'));
-        this.notNowApplyFinanceModalBtn = element(by.xpath('//section[@class="apply-finance-modal-body"]/button[2]'));
+        this.acceptApplyFinanceModalBtn = element(by.className('primary-button large accept_button'));
+        this.notNowApplyFinanceModalBtn = element(by.className('secondary-button large back_button'));
         this.authTfsCb = element(by.xpath('//div[@class="con-checkbox"]/mat-checkbox'))
-
+        this.confirmAndSubmitButton = element(by.xpath('/html/body/main/app-root/mat-drawer-container/mat-drawer-content/div/app-vehicle-review/div[2]/app-mstc-stepper/section/div[2]/footer/div/div/button'))
         this.saveHearts = element.all(by.css('.dg-inline-save-heart'));
         this.saveHeartActive = element(by.css('.dg-encircle.active'));
         this.saveHeartTooltip = element(by.css('.dg-tooltip'));

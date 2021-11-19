@@ -84,7 +84,7 @@ Scenario: Review Deal - Choose Financing
   And User clicks on Done in Zip Code Modal
   And User clicks on Next: Choose Financing CTA
   Then System should display Apply for Credit page with I have financing selected by default
-  And Display Next button in enabled state
+  And Display Confirm & Submit button in enabled state
 
 Scenario: Review Deal - I want financing
 
@@ -98,7 +98,6 @@ Scenario: Review Deal - I want financing
   Then System should display Apply financing modal
 
 Scenario: Review Deal - User consents for sharing
-
   Given User is in Vehicle Details page
   When User Signs In
   And User clicks on Start Purchase
@@ -108,7 +107,7 @@ Scenario: Review Deal - User consents for sharing
   And User clicks on I want financing
   And User clicks on Accept in the Apply financing modal
   Then System should display authorization disclaimer below I want financing in selected state
-  And Display Next button in enabled state
+  And Display Confirm & Submit button in enabled state
 
 Scenario: Review Deal - User does not give consent
 
@@ -121,4 +120,4 @@ Scenario: Review Deal - User does not give consent
   And User clicks on I want financing
   And User clicks on Not now in the Apply financing modal
   Then System should display authorization disclaimer below I want financing in de-selected state
-  And Display Next button in enabled state
+  And Display Confirm & Submit button in enabled state

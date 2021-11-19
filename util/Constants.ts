@@ -4,7 +4,8 @@ export const PLATFORMS = {
 };
 
 export const TCOM_WEBSITE =  'https://www.toyota.com';
-
+export const LOGIN_PAGE_URL = 'account.toyota.com';
+export const INVENTORY_REVIEW_URL = 'inventory/review';
 
 export const JENKINS_OPTIONS = {
     CHROME_DESKTOP: 'ChromeDesktop',
@@ -33,4 +34,14 @@ export const WAIT_TIMES = {
 
 export const BUTTON_LABELS = {
     START_PURCHASE: 'Start Purchase'
+}
+
+export const CSS_CLASSES = {
+    ANGULAR_RADIO_INPUT_CHECKED: 'mat-radio-checked',
+    ANGULAR_CHECKBOX_INPUT_CHECKED: 'mat-checkbox-checked'
+}
+
+export const ATTRIBUTES = {
+    CLASS: 'class',
+    COLOR: 'color'
 }
