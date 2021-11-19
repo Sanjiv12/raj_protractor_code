@@ -1,7 +1,7 @@
 Feature: Digital Garage Top Nav Dropdown Menu - Desktop, Logged In
 
     Background:
-        Given User is logged in to account
+        Given User Signs In
 
     Scenario: Top Nav Dropdown - Manage Account Button is Present
         Given User is in Vehicle List Page

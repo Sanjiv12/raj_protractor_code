@@ -9,6 +9,8 @@ export class NavMenu {
     public dgLoginButton : ElementFinder;
     public dgCreateAccountButton : ElementFinder;
     public dgMenuMessages : ElementFinder[];
+    public dgManageAccount : ElementFinder;
+    public dgSignOutButton : ElementFinder;
     constructor() {
         this.profileIcon = element(by.className('dg-menu-dropdown-icon'));
         this.dgComponentMenuDropdownDesktop = element(by.className('dg-component-menu-dropdown'));
@@ -16,5 +18,7 @@ export class NavMenu {
         this.dgLoginButton = element(by.id('dg-login-btn'));
         this.dgCreateAccountButton = element(by.id('dg-register-btn'));
         this.dgMenuMessages = [element(by.xpath('//*[@id="dg-component-nav-menu-desktop"]/div[2]/div/div[6]/span')), element(by.xpath('//*[@id="dg-component-nav-menu-desktop"]/div[2]/div/div[6]/div/span[1]'))];
+        this.dgManageAccount = element(by.xpath('//*[@id="dg-account-btn"]'));
+        this.dgSignOutButton = element(by.xpath('//*[@id="dg-logout-btn"]'));
     }
 }

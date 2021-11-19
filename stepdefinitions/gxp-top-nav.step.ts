@@ -62,6 +62,7 @@ Then(/Top Nav \"(.*?)\" Linkout should link to \"(.*?)\"/, async (section: strin
     // Check if url is what we expect, sleep to allow for redirects
     await browser.driver.sleep(15*1000);
     let currentUrl = await browser.getCurrentUrl();
+    console.log("URL is: " + currentUrl);
     expect(currentUrl).to.include(location);
 
     // If there is only 1 tab, navigate back until we reach the original page
@@ -116,44 +117,6 @@ Then('Sign In Button should be present', async() => {
     expect(await navMenu.dgLoginButton.isPresent()).to.be.true;
 });
 
-
-// Signed In Scenario
-// Uses Given Statement from VDP or VLP
-// When('User clicks the Top Nav Dropdown Menu icon and Signs In', async () => {
-//     // Click Profile Icon
-//     await browser.driver.wait(
-//         until.visibilityOf(navMenu.profileIcon),
-//         MAX_TIME_WAIT,
-//         'Top Nav Profile Icon taking too long to appear in the DOM'
-//     );
-//     browser.executeScript("arguments[0].click();", navMenu.profileIcon);
-
-//     // Sign in User
-//     const username = "";
-//     const password = "";
-//     await browser.driver.wait(
-//         until.visibilityOf(
-//             navMenu.dgComponentMenuDropdownDesktop
-//         ),
-//         MAX_TIME_WAIT,
-//         'Dropdown Element taking too long to appear in the DOM'
-//     );
-//     await browser.executeScript("arguments[0].click();", await element(by.id('dg-login-btn')));
-//     await browser.driver.wait(until.visibilityOf(createAccountPage.userName), MAX_TIME_WAIT, 'Username Element taking too long to appear in the DOM');
-//     await createAccountPage.userName.sendKeys(username);
-//     await createAccountPage.logonBtn.click();
-//     await browser.driver.wait(until.visibilityOf(createAccountPage.userPwd), MAX_TIME_WAIT, 'Password Element taking too long to appear in the DOM');
-//     await createAccountPage.userPwd.sendKeys(password);
-//     await createAccountPage.signInButton.click();
-
-//     // Open Dropdown Menu
-//     await browser.driver.wait(
-//         until.visibilityOf(navMenu.profileIcon),
-//         MAX_TIME_WAIT,
-//         'Top Nav Profile Icon taking too long to appear in the DOM'
-//     );
-//     await navMenu.profileIcon.click();
-// });
 Then('Account Button should be present', async() => {
     // dg-account-btn exists
     await browser.driver.wait(until.visibilityOf(navMenu.dgComponentMenuDropdownDesktop),MAX_TIME_WAIT,'Dropdown Element taking too long to appear in the DOM');
@@ -162,6 +125,11 @@ Then('Account Button should be present', async() => {
 Then('Sign Out Button should be present', async() => {
     // dg-logout-btn exists
     await browser.driver.wait(until.visibilityOf(navMenu.dgComponentMenuDropdownDesktop),MAX_TIME_WAIT,'Dropdown Element taking too long to appear in the DOM');
-    expect(await navMenu.dgComponentMenuDropdownDesktop.$('#dg-logout-btn').isPresent()).to.be.true;
-    await navMenu.dgComponentMenuDropdownDesktop.$('#dg-logout-btn').click();
+    expect(await navMenu.dgSignOutButton.isPresent()).to.be.true;
 });
+
+Then('Manage Account Button should be present', async() => {
+    await browser.driver.wait(until.visibilityOf(navMenu.dgComponentMenuDropdownDesktop),MAX_TIME_WAIT,'Dropdown Element taking too long to appear in the DOM');
+    expect(await navMenu.dgManageAccount.isPresent()).to.be.true;
+
+})

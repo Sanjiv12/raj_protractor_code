@@ -58,6 +58,7 @@ cucumber_1.Then(/Top Nav \"(.*?)\" Linkout should link to \"(.*?)\"/, (section, 
     // Check if url is what we expect, sleep to allow for redirects
     yield protractor_1.browser.driver.sleep(15 * 1000);
     let currentUrl = yield protractor_1.browser.getCurrentUrl();
+    console.log("URL is: " + currentUrl);
     chai_1.expect(currentUrl).to.include(location);
     // If there is only 1 tab, navigate back until we reach the original page
     if (handles.length === 1) {
@@ -103,41 +104,6 @@ cucumber_1.Then('Sign In Button should be present', () => __awaiter(void 0, void
     yield protractor_1.browser.driver.wait(until.visibilityOf(navMenu.dgComponentMenuDropdownDesktop), MAX_TIME_WAIT, 'Dropdown Element taking too long to appear in the DOM');
     chai_1.expect(yield navMenu.dgLoginButton.isPresent()).to.be.true;
 }));
-// Signed In Scenario
-// Uses Given Statement from VDP or VLP
-// When('User clicks the Top Nav Dropdown Menu icon and Signs In', async () => {
-//     // Click Profile Icon
-//     await browser.driver.wait(
-//         until.visibilityOf(navMenu.profileIcon),
-//         MAX_TIME_WAIT,
-//         'Top Nav Profile Icon taking too long to appear in the DOM'
-//     );
-//     browser.executeScript("arguments[0].click();", navMenu.profileIcon);
-//     // Sign in User
-//     const username = "";
-//     const password = "";
-//     await browser.driver.wait(
-//         until.visibilityOf(
-//             navMenu.dgComponentMenuDropdownDesktop
-//         ),
-//         MAX_TIME_WAIT,
-//         'Dropdown Element taking too long to appear in the DOM'
-//     );
-//     await browser.executeScript("arguments[0].click();", await element(by.id('dg-login-btn')));
-//     await browser.driver.wait(until.visibilityOf(createAccountPage.userName), MAX_TIME_WAIT, 'Username Element taking too long to appear in the DOM');
-//     await createAccountPage.userName.sendKeys(username);
-//     await createAccountPage.logonBtn.click();
-//     await browser.driver.wait(until.visibilityOf(createAccountPage.userPwd), MAX_TIME_WAIT, 'Password Element taking too long to appear in the DOM');
-//     await createAccountPage.userPwd.sendKeys(password);
-//     await createAccountPage.signInButton.click();
-//     // Open Dropdown Menu
-//     await browser.driver.wait(
-//         until.visibilityOf(navMenu.profileIcon),
-//         MAX_TIME_WAIT,
-//         'Top Nav Profile Icon taking too long to appear in the DOM'
-//     );
-//     await navMenu.profileIcon.click();
-// });
 cucumber_1.Then('Account Button should be present', () => __awaiter(void 0, void 0, void 0, function* () {
     // dg-account-btn exists
     yield protractor_1.browser.driver.wait(until.visibilityOf(navMenu.dgComponentMenuDropdownDesktop), MAX_TIME_WAIT, 'Dropdown Element taking too long to appear in the DOM');
@@ -146,6 +112,9 @@ cucumber_1.Then('Account Button should be present', () => __awaiter(void 0, void
 cucumber_1.Then('Sign Out Button should be present', () => __awaiter(void 0, void 0, void 0, function* () {
     // dg-logout-btn exists
     yield protractor_1.browser.driver.wait(until.visibilityOf(navMenu.dgComponentMenuDropdownDesktop), MAX_TIME_WAIT, 'Dropdown Element taking too long to appear in the DOM');
-    chai_1.expect(yield navMenu.dgComponentMenuDropdownDesktop.$('#dg-logout-btn').isPresent()).to.be.true;
-    yield navMenu.dgComponentMenuDropdownDesktop.$('#dg-logout-btn').click();
+    chai_1.expect(yield navMenu.dgSignOutButton.isPresent()).to.be.true;
+}));
+cucumber_1.Then('Manage Account Button should be present', () => __awaiter(void 0, void 0, void 0, function* () {
+    yield protractor_1.browser.driver.wait(until.visibilityOf(navMenu.dgComponentMenuDropdownDesktop), MAX_TIME_WAIT, 'Dropdown Element taking too long to appear in the DOM');
+    chai_1.expect(yield navMenu.dgManageAccount.isPresent()).to.be.true;
 }));

@@ -15,9 +15,14 @@ const vdpPage_1 = require("../pages/vdpPage");
 const createAccountPage_1 = require("../pages/createAccountPage");
 const assertion_1 = require("../util/assertion");
 const digitalGarageTopNav_1 = require("../dg-features/digitalGarageTopNav");
+const navMenu_1 = require("../pages/navMenu");
 let vdpPage = new vdpPage_1.VdpPage();
 let caPage = new createAccountPage_1.CreateAccountPage();
 let topNav = new digitalGarageTopNav_1.DigitalGarageTopNav();
+let createAccountPage = new createAccountPage_1.CreateAccountPage();
+let navMenu = new navMenu_1.NavMenu();
+let until = protractor_1.protractor.ExpectedConditions;
+let MAX_TIME_WAIT = 10000;
 function hasNotPreviouslyLoggedIn() {
     return __awaiter(this, void 0, void 0, function* () {
         return protractor_1.browser.driver.getCurrentUrl().then((url) => {
@@ -26,8 +31,10 @@ function hasNotPreviouslyLoggedIn() {
     });
 }
 cucumber_1.When('User Signs In', () => __awaiter(void 0, void 0, void 0, function* () {
-    yield topNav.dgMan.click();
-    yield topNav.desktopSignInLink.click();
+    yield protractor_1.browser.driver.wait(until.visibilityOf(navMenu.profileIcon), MAX_TIME_WAIT, 'Top Nav Profile Icon taking too long to appear in the DOM');
+    navMenu.profileIcon.click();
+    yield protractor_1.browser.driver.wait(until.visibilityOf(navMenu.dgComponentMenuDropdownDesktop), MAX_TIME_WAIT, 'Dropdown Element taking too long to appear in the DOM');
+    yield navMenu.dgLoginButton.click();
     if (yield hasNotPreviouslyLoggedIn()) {
         yield caPage.userName.sendKeys(protractor_1.browser.params.caemailreg);
         yield caPage.nextStepButton.click();

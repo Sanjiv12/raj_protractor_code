@@ -1,13 +1,18 @@
-import { browser, by, By, element, ExpectedConditions, protractor, until } from "protractor"; 
+import { browser, by, By, element, ExpectedConditions, protractor } from "protractor";
 import { Then, When, Given, Before, BeforeAll, SummaryFormatter } from "cucumber";
 import {VdpPage} from "../pages/vdpPage"
 import {CreateAccountPage} from "../pages/createAccountPage"
 import {Assertion} from "../util/assertion"
 import {DigitalGarageTopNav} from "../dg-features/digitalGarageTopNav";
+import { NavMenu } from "../pages/navMenu";
 
 let vdpPage : VdpPage = new VdpPage();
 let caPage : CreateAccountPage = new CreateAccountPage();
 let topNav : DigitalGarageTopNav = new DigitalGarageTopNav();
+let createAccountPage : CreateAccountPage = new CreateAccountPage();
+let navMenu : NavMenu = new NavMenu();
+let until = protractor.ExpectedConditions;
+let MAX_TIME_WAIT = 10000;
 
 async function hasNotPreviouslyLoggedIn() {
    return browser.driver.getCurrentUrl().then((url) => {
@@ -16,8 +21,20 @@ async function hasNotPreviouslyLoggedIn() {
 }
 
 When('User Signs In', async  () =>{
-    await topNav.dgMan.click();
-    await topNav.desktopSignInLink.click();
+    await browser.driver.wait(
+        until.visibilityOf(navMenu.profileIcon),
+        MAX_TIME_WAIT,
+        'Top Nav Profile Icon taking too long to appear in the DOM'
+    );
+    navMenu.profileIcon.click();
+    await browser.driver.wait(
+        until.visibilityOf(
+            navMenu.dgComponentMenuDropdownDesktop
+        ),
+        MAX_TIME_WAIT,
+        'Dropdown Element taking too long to appear in the DOM'
+    );
+    await navMenu.dgLoginButton.click();
     if (await hasNotPreviouslyLoggedIn()) {
         await caPage.userName.sendKeys(browser.params.caemailreg);
         await caPage.nextStepButton.click();
