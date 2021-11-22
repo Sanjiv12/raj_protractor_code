@@ -73,7 +73,7 @@ Then(/User is redirected to \"(.*?)\" Page/, async(page: string) => {
     await browser.driver.wait(
         until.visibilityOf(pageInfo.pageDef),
         MAX_TIME_WAIT,
-        `${page} taking too long to appear in the DOM`
+        `${page} page taking too long to appear in the DOM`
     ) 
  
     const currentUrl = await browser.driver.getCurrentUrl();

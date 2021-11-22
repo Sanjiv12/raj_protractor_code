@@ -41,7 +41,7 @@ cucumber_1.When('User Signs In', () => __awaiter(void 0, void 0, void 0, functio
         caPage.userPwd.sendKeys(protractor_1.browser.params.capwdreg);
         yield protractor_1.browser.driver.sleep(2 * 1000);
         protractor_1.browser.executeScript("arguments[0].click()", caPage.signInBtn);
-        //await browser.driver.sleep(10*1000);
+        yield protractor_1.browser.driver.sleep(10 * 1000);
     }
 }));
 cucumber_1.Then('System should navigate the user to Review Deal page', () => __awaiter(void 0, void 0, void 0, function* () {

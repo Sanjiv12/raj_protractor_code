@@ -56,7 +56,7 @@ cucumber_1.When('User loads the Saves page', () => __awaiter(void 0, void 0, voi
 }));
 cucumber_1.Then(/User is redirected to \"(.*?)\" Page/, (page) => __awaiter(void 0, void 0, void 0, function* () {
     const pageInfo = yield getPageInfo_1.getPageInfo(page.toLowerCase());
-    yield protractor_1.browser.driver.wait(until.visibilityOf(pageInfo.pageDef), MAX_TIME_WAIT, `${page} taking too long to appear in the DOM`);
+    yield protractor_1.browser.driver.wait(until.visibilityOf(pageInfo.pageDef), MAX_TIME_WAIT, `${page} page taking too long to appear in the DOM`);
     const currentUrl = yield protractor_1.browser.driver.getCurrentUrl();
     chai_1.expect(pageInfo.urlTest.test(currentUrl));
     chai_1.expect(yield pageInfo.pageDef.isDisplayed());
