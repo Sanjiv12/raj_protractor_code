@@ -13,12 +13,12 @@ Scenario: Close Banner CTA
 
 Scenario: Create Account CTA
     Given User is in Saves page
-    When User clicks "Create An Account"
+    When User clicks "Create An Account" within Create Account Banner
     Then User is redirected to "Create Account" Page
 
 Scenario: Sign In CTA
     Given User is in Saves page
-    When User clicks "Sign In"
+    When User clicks "Sign In" within Create Account Banner
     Then User is redirected to "Login" Page
 
 Scenario: Create Account Banner is not displayed when user logs in

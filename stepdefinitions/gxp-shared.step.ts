@@ -36,6 +36,7 @@ Given('User is in Saves page', async() => {
         await browser.driver.get(savesPage);
     }
 
+    // TODO: create function to reuse
     await browser.driver.wait(
         until.visibilityOf(savesPage.sideBarHeader),
         MAX_TIME_WAIT,
@@ -91,6 +92,7 @@ Then(/User is redirected to \"(.*?)\" Page/, async(page: string) => {
 Given('User is not logged in', async () => {
     //user is logged out by default
     //do nothing
+    //TODO: add validation and potential log out flow from WILL
 });
 
 Given('User is on desktop', async () => {

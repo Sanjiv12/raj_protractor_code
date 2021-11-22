@@ -18,7 +18,7 @@ When('User clicks the X on the Create Account Banner', async() => {
     await savesPage.createAccountBannerX.click();
 });
 
-When(/User clicks \"(.*?)\"/, async(linkout: string) => {
+When(/User clicks \"(.*?)\" within Create Account Banner/, async(linkout: string) => {
     await browser.driver.wait(
         until.visibilityOf(savesPage.createAccountBanner),
         MAX_TIME_WAIT,

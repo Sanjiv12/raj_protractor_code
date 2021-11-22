@@ -20,7 +20,7 @@ cucumber_1.When('User clicks the X on the Create Account Banner', () => __awaite
     yield protractor_1.browser.driver.wait(until.visibilityOf(savesPage.createAccountBanner), MAX_TIME_WAIT, 'Create Account Banner taking too long to appear in DOM');
     yield savesPage.createAccountBannerX.click();
 }));
-cucumber_1.When(/User clicks \"(.*?)\"/, (linkout) => __awaiter(void 0, void 0, void 0, function* () {
+cucumber_1.When(/User clicks \"(.*?)\" within Create Account Banner/, (linkout) => __awaiter(void 0, void 0, void 0, function* () {
     yield protractor_1.browser.driver.wait(until.visibilityOf(savesPage.createAccountBanner), MAX_TIME_WAIT, 'Create Account Banner taking too long to appear in DOM');
     const linkoutToClick = yield savesPage.createAccountBannerLinks.filter((elem) => __awaiter(void 0, void 0, void 0, function* () {
         const elemText = yield elem.getText();

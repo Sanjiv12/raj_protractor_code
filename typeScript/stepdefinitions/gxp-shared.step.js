@@ -39,6 +39,7 @@ cucumber_1.Given('User is in Saves page', () => __awaiter(void 0, void 0, void 0
         const savesPage = constructSavePageUrl_1.constructSavePageUrl();
         yield protractor_1.browser.driver.get(savesPage);
     }
+    // TODO: create function to reuse
     yield protractor_1.browser.driver.wait(until.visibilityOf(savesPage.sideBarHeader), MAX_TIME_WAIT, 'Saves Page taking too long to appear in the DOM');
 }));
 cucumber_1.When('User loads the Saves page', () => __awaiter(void 0, void 0, void 0, function* () {
@@ -69,6 +70,7 @@ cucumber_1.Then(/User is redirected to \"(.*?)\" Page/, (page) => __awaiter(void
 cucumber_1.Given('User is not logged in', () => __awaiter(void 0, void 0, void 0, function* () {
     //user is logged out by default
     //do nothing
+    //TODO: add validation and potential log out flow from WILL
 }));
 cucumber_1.Given('User is on desktop', () => __awaiter(void 0, void 0, void 0, function* () {
     //TODO: create function to set window size
