@@ -14,6 +14,7 @@ const cucumber_1 = require("cucumber");
 const createAccountPage_1 = require("../pages/createAccountPage");
 const navMenu_1 = require("../pages/navMenu");
 const chai_1 = require("chai");
+const console_1 = require("console");
 let createAccountPage = new createAccountPage_1.CreateAccountPage();
 let navMenu = new navMenu_1.NavMenu();
 let until = protractor_1.protractor.ExpectedConditions;
@@ -58,7 +59,6 @@ cucumber_1.Then(/Top Nav \"(.*?)\" Linkout should link to \"(.*?)\"/, (section, 
     // Check if url is what we expect, sleep to allow for redirects
     yield protractor_1.browser.driver.sleep(15 * 1000);
     let currentUrl = yield protractor_1.browser.getCurrentUrl();
-    console.log("URL is: " + currentUrl);
     chai_1.expect(currentUrl).to.include(location);
     // If there is only 1 tab, navigate back until we reach the original page
     if (handles.length === 1) {
@@ -84,12 +84,6 @@ cucumber_1.Then(/Top Nav \"(.*?)\" Linkout should link to \"(.*?)\"/, (section, 
 cucumber_1.Then('Temporary Saved Items Message should be present', () => __awaiter(void 0, void 0, void 0, function* () {
     // dg-menu-message is the correct text
     yield protractor_1.browser.driver.wait(until.visibilityOf(navMenu.dgComponentMenuDropdownDesktop), MAX_TIME_WAIT, 'Dropdown Element taking too long to appear in the DOM');
-    // await navMenu.dgComponentMenuDropdownDesktop.$$('.dg-menu-dropdown-login .dg-menu-message').then(
-    //     async (messages: ElementFinder[]) => {
-    //         expect(await messages[0].getText()).to.equal('These saved items are temporary.')
-    //         expect(await messages[1].getText()).to.equal('Create an account to permanently save your selections.')
-    //     }
-    // );
     yield navMenu.dgComponentMenuDropdownDesktop.$$('.dg-menu-dropdown-login .dg-menu-message');
     chai_1.expect(yield navMenu.dgMenuMessages[0].getText()).to.equal('These saved items are temporary.');
     chai_1.expect(yield navMenu.dgMenuMessages[1].getText()).to.equal('Create an account to permanently save your selections.');
@@ -117,4 +111,20 @@ cucumber_1.Then('Sign Out Button should be present', () => __awaiter(void 0, voi
 cucumber_1.Then('Manage Account Button should be present', () => __awaiter(void 0, void 0, void 0, function* () {
     yield protractor_1.browser.driver.wait(until.visibilityOf(navMenu.dgComponentMenuDropdownDesktop), MAX_TIME_WAIT, 'Dropdown Element taking too long to appear in the DOM');
     chai_1.expect(yield navMenu.dgManageAccount.isPresent()).to.be.true;
+}));
+cucumber_1.Given(/An active deal is (.*?)/, (deal) => __awaiter(void 0, void 0, void 0, function* () {
+}));
+cucumber_1.Then(/Top Nav Continue Purchase Linkout is \"(.*?)\"/, (display) => __awaiter(void 0, void 0, void 0, function* () {
+    yield protractor_1.browser.driver.wait(until.visibilityOf(navMenu.dgComponentMenuDropdownDesktop), MAX_TIME_WAIT, 'Dropdown Element taking too long to appear in the DOM');
+    console.log(display);
+    if (display == 'hidden') {
+        chai_1.expect(yield navMenu.continuePurchaseButton.isPresent()).to.be.false;
+    }
+    else if (display == 'shown') {
+        chai_1.expect(yield navMenu.continuePurchaseButton.isPresent()).to.be.true;
+    }
+    else {
+        console_1.assert(false);
+        console.log('Invalid data in example');
+    }
 }));

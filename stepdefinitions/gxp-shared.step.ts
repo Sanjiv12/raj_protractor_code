@@ -41,15 +41,19 @@
   * things like save a vehicle, create a deal, etc.
   */
 
-  Given('User is logged in to account', async () => {
+  async function hasNotPreviouslyLoggedIn() {
+    return browser.driver.getCurrentUrl().then((url) => {
+        return url.includes('account.toyota.com');
+    });
+ }
+
+ When(/User Signs In \"?(.*?)\" \"?(.*?)\"/, async  (email?: string, password?: string) =>{
      await browser.driver.wait(
          until.visibilityOf(navMenu.profileIcon),
          MAX_TIME_WAIT,
          'Top Nav Profile Icon taking too long to appear in the DOM'
      );
-     // browser.executeScript("arguments[0].click();", navMenu.profileIcon);
      navMenu.profileIcon.click();
-
      await browser.driver.wait(
          until.visibilityOf(
              navMenu.dgComponentMenuDropdownDesktop
@@ -57,23 +61,14 @@
          MAX_TIME_WAIT,
          'Dropdown Element taking too long to appear in the DOM'
      );
-     // await browser.executeScript("arguments[0].click();", navMenu.dgLoginButton);
      await navMenu.dgLoginButton.click();
-
-     const username = "maferap486@idrct.com";
-     const password = "Bddtest1!";
-
-     await browser.driver.wait(until.visibilityOf(createAccountPage.userName), MAX_TIME_WAIT, 'Username Element taking too long to appear in the DOM');
-     await createAccountPage.userName.sendKeys(username);
-     await createAccountPage.logonBtn.click();
-     await browser.driver.wait(until.visibilityOf(createAccountPage.userPwd), MAX_TIME_WAIT, 'Password Element taking too long to appear in the DOM');
-     await createAccountPage.userPwd.sendKeys(password);
-     await createAccountPage.signInButton.click();
+     if (await hasNotPreviouslyLoggedIn()) {
+         await createAccountPage.userName.sendKeys(email ? email : browser.params.caemailreg);
+         await createAccountPage.nextStepButton.click();
+         await createAccountPage.userPwd.sendKeys(password ? password : browser.params.capwdreg);
+         await createAccountPage.signInButton.click();
+     }
  });
-
-//  Given('User is in Saves page', async () => {
-//      //Do nothing, page will load automatically
-//  });
 
  Given('User is not logged in to account', async () => {
     await browser.driver.wait(

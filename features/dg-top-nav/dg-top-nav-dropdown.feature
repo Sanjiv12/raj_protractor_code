@@ -24,19 +24,19 @@ Feature: Digital Garage Top Nav Dropdown Menu
         And Top Nav "Saves" Linkout Text should be "View Saves"
         And Top Nav "Saves" Linkout should link to "/saves"
 
-    # Scenario Outline: Top Nav Dropdown - Logged In View Saves Linkout In Expected State
-    #     Given User is in Vehicle List Page
-    #     And User is on desktop
-    #     And User Signs In <account>
-    #     When User clicks the Top Nav Dropdown Menu icon
-    #     Then Top Nav "Saves" Linkout should be present
-    #     And Top Nav "Saves" Linkout Text should be "View Saves (<number_of_saves>)"
-    #     And Top Nav "Saves" Linkout should link to "/saves"
+    Scenario Outline: Top Nav Dropdown - Logged In View Saves Linkout In Expected State
+        Given User is in Vehicle List Page
+        And User is on desktop
+        And User Signs In "<email>" "<password>"
+        When User clicks the Top Nav Dropdown Menu icon
+        Then Top Nav "Saves" Linkout should be present
+        And Top Nav "Saves" Linkout Text should be "View Saves (<number_of_saves>)"
+        And Top Nav "Saves" Linkout should link to "/saves"
 
-    #     Examples:
-    #         | account  | number_of_saves    |
-    #         | example1 | 2                  |
-    #         | example1 | 1                  |
+        Examples:
+            | email                  | password        | number_of_saves |
+            | maferap486@idrct.com   | Bddtest1!       |       1         |
+            # | gxp.bdd.test@gmail.com | B3havi0rDrIV3n! |       2         |
 
     Scenario: Top Nav Dropdown - Manage Vehicles Linkout is Present
         Given User is in Vehicle List Page
@@ -46,25 +46,37 @@ Feature: Digital Garage Top Nav Dropdown Menu
         And Top Nav "Owners" Linkout Text should be "Manage Vehicles"
         And Top Nav "Owners" Linkout should link to "/owners"
 
-    # Scenario Outline: Top Nav Dropdown - Continue Purchase Linkout in Correct State
-    #     # The continue purchase link only shows in the top nav if the following conditions hold true:
-    #     # - The user is logged in
-    #     # - The user has an active deal
-    #     # - The shopping cart is not displayed in the top nav
+    Scenario Outline: Top Nav Dropdown - Continue Purchase Linkout in Correct State
+        # The continue purchase link only shows in the top nav if the following conditions hold true:
+        # - The user is logged in
+        # - The user has an active deal
+        # - The shopping cart is not displayed in the top nav
 
-    #     # Important that it's on T2, since the shopping cart will never be shown
-    #     # This guarantees that the Continue Purchase linkout should be shown in the dropdown
-    #     Given User is on the Tier 2 Vehicle List Page
-    #     And User is on desktop
-    #     And User Signs In <account>
-    #     And An active deal is <purchase_available>
-    #     When User clicks the Top Nav Dropdown Menu icon
-    #     Then Top Nav "Continue Purchase" Linkout is <outcome>
+        # Important that it's on T2, since the shopping cart will never be shown
+        # This guarantees that the Continue Purchase linkout should be shown in the dropdown
+        # Given User is on the Tier 2 Vehicle List Page
+        # And User is on desktop
+        # And User Signs In <email> <password>
+        # And An active deal is <purchase_available>
+        # When User clicks the Top Nav Dropdown Menu icon
+        # Then Top Nav "Continue Purchase" Linkout is <outcome>
 
-    #     Examples:
-    #         | account  | purchase_available | outcome   |
-    #         | example1 | available          | shown     |
-    #         | example2 | unavailable        | hidden    |
+        # Examples:
+        #     | account  | purchase_available | outcome   |
+        #     | example1 | available          | shown     |
+        #     | example2 | unavailable        | hidden    |
+
+        Given User is in Vehicle List Page
+        And User is on desktop
+        And User Signs In "<email>" "<password>"
+        And An active deal is "<purchase_available>"
+        When User clicks the Top Nav Dropdown Menu icon
+        Then Top Nav Continue Purchase Linkout is will
+
+        Examples:
+            | email                  | password        | purchase_available | outcome |
+            | maferap486@idrct.com   | BddTest1!       | available          | shown |
+    #       | gxp.bdd.test@gmail.com | B3havi0rDrIV3n! |       2         | hidden |
 
 
 

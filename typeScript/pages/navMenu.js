@@ -12,6 +12,7 @@ class NavMenu {
         this.dgMenuMessages = [protractor_1.element(protractor_1.by.xpath('//*[@id="dg-component-nav-menu-desktop"]/div[2]/div/div[6]/span')), protractor_1.element(protractor_1.by.xpath('//*[@id="dg-component-nav-menu-desktop"]/div[2]/div/div[6]/div/span[1]'))];
         this.dgManageAccount = protractor_1.element(protractor_1.by.xpath('//*[@id="dg-account-btn"]'));
         this.dgSignOutButton = protractor_1.element(protractor_1.by.xpath('//*[@id="dg-logout-btn"]'));
+        this.continuePurchaseButton = protractor_1.element(protractor_1.by.id('dg-menu-deals-page-linkout'));
     }
 }
 exports.NavMenu = NavMenu;

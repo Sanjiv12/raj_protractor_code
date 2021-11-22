@@ -3,6 +3,7 @@ import { Then, When, Given } from "cucumber";
 import { CreateAccountPage } from "../pages/createAccountPage";
 import { NavMenu } from "../pages/navMenu";
 import { expect } from "chai";
+import { assert } from "console";
 
 let createAccountPage : CreateAccountPage = new CreateAccountPage();
 let navMenu : NavMenu = new NavMenu();
@@ -62,7 +63,6 @@ Then(/Top Nav \"(.*?)\" Linkout should link to \"(.*?)\"/, async (section: strin
     // Check if url is what we expect, sleep to allow for redirects
     await browser.driver.sleep(15*1000);
     let currentUrl = await browser.getCurrentUrl();
-    console.log("URL is: " + currentUrl);
     expect(currentUrl).to.include(location);
 
     // If there is only 1 tab, navigate back until we reach the original page
@@ -95,12 +95,6 @@ Then(/Top Nav \"(.*?)\" Linkout should link to \"(.*?)\"/, async (section: strin
 Then('Temporary Saved Items Message should be present', async () => {
     // dg-menu-message is the correct text
     await browser.driver.wait(until.visibilityOf(navMenu.dgComponentMenuDropdownDesktop),MAX_TIME_WAIT,'Dropdown Element taking too long to appear in the DOM');
-    // await navMenu.dgComponentMenuDropdownDesktop.$$('.dg-menu-dropdown-login .dg-menu-message').then(
-    //     async (messages: ElementFinder[]) => {
-    //         expect(await messages[0].getText()).to.equal('These saved items are temporary.')
-    //         expect(await messages[1].getText()).to.equal('Create an account to permanently save your selections.')
-    //     }
-    // );
     await navMenu.dgComponentMenuDropdownDesktop.$$('.dg-menu-dropdown-login .dg-menu-message');
     expect (await navMenu.dgMenuMessages[0].getText()).to.equal('These saved items are temporary.');
     expect (await navMenu.dgMenuMessages[1].getText()).to.equal('Create an account to permanently save your selections.');
@@ -131,5 +125,24 @@ Then('Sign Out Button should be present', async() => {
 Then('Manage Account Button should be present', async() => {
     await browser.driver.wait(until.visibilityOf(navMenu.dgComponentMenuDropdownDesktop),MAX_TIME_WAIT,'Dropdown Element taking too long to appear in the DOM');
     expect(await navMenu.dgManageAccount.isPresent()).to.be.true;
+})
+
+Given(/An active deal is (.*?)/ , async(deal: string) => {
+
+})
+
+Then(/Top Nav Continue Purchase Linkout is \"(.*?)\"/, async(display: string) => {
+    await browser.driver.wait(until.visibilityOf(navMenu.dgComponentMenuDropdownDesktop),MAX_TIME_WAIT,'Dropdown Element taking too long to appear in the DOM');
+    console.log(display);
+    if (display == 'hidden') {
+        expect(await navMenu.continuePurchaseButton.isPresent()).to.be.false;
+    }
+    else if (display == 'shown') {
+        expect(await navMenu.continuePurchaseButton.isPresent()).to.be.true;
+    }
+    else {
+        assert(false);
+        console.log('Invalid data in example')
+    }
 
 })

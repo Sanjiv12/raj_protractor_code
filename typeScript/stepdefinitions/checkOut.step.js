@@ -30,15 +30,15 @@ function hasNotPreviouslyLoggedIn() {
         });
     });
 }
-cucumber_1.When('User Signs In', () => __awaiter(void 0, void 0, void 0, function* () {
+cucumber_1.When(/User Signs In \"?(.*?)\" \"?(.*?)\"/, (email, password) => __awaiter(void 0, void 0, void 0, function* () {
     yield protractor_1.browser.driver.wait(until.visibilityOf(navMenu.profileIcon), MAX_TIME_WAIT, 'Top Nav Profile Icon taking too long to appear in the DOM');
     navMenu.profileIcon.click();
     yield protractor_1.browser.driver.wait(until.visibilityOf(navMenu.dgComponentMenuDropdownDesktop), MAX_TIME_WAIT, 'Dropdown Element taking too long to appear in the DOM');
     yield navMenu.dgLoginButton.click();
     if (yield hasNotPreviouslyLoggedIn()) {
-        yield caPage.userName.sendKeys(protractor_1.browser.params.caemailreg);
+        yield caPage.userName.sendKeys(email ? email : protractor_1.browser.params.caemailreg);
         yield caPage.nextStepButton.click();
-        yield caPage.userPwd.sendKeys(protractor_1.browser.params.capwdreg);
+        yield caPage.userPwd.sendKeys(password ? password : protractor_1.browser.params.capwdreg);
         yield caPage.signInButton.click();
     }
 }));
