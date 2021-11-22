@@ -84,7 +84,9 @@ Then('Filter chip should be displayed for year', async()=> {
 });
 
 When('User selects Price range for Advertised / Selling Price from Filters panel', async() => {
-    await mspFilterPage.filterMinPrice.clear(); //.then(() => {
+    await mspFilterPage.filterMinPrice.isDisplayed();
+    await mspFilterPage.filterMinPrice.click();
+    await mspFilterPage.filterMinPrice.clear();
     await mspFilterPage.filterMinPrice.sendKeys(42000);
 });
 
