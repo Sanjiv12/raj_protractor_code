@@ -17,47 +17,45 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const chai_1 = require("chai");
 const cucumber_1 = require("cucumber");
 const protractor_1 = require("protractor");
-const createAccountPage_1 = require("../pages/createAccountPage");
 const navMenu_1 = require("../pages/navMenu");
 const savesPageRedesign_1 = require("../pages/savesPageRedesign");
 const constructSavePageUrl_1 = require("../util/constructSavePageUrl");
 const getPageInfo_1 = require("../util/getPageInfo");
-let createAccountPage = new createAccountPage_1.CreateAccountPage();
-let savesPage = new savesPageRedesign_1.SavesPageRedesign();
-let navMenu = new navMenu_1.NavMenu();
-let until = protractor_1.protractor.ExpectedConditions;
-let MAX_TIME_WAIT = 10000;
+const waitForVisibilityOf_1 = require("../util/waitForVisibilityOf");
+const savesPage = new savesPageRedesign_1.SavesPageRedesign();
+const navMenu = new navMenu_1.NavMenu();
+const until = protractor_1.protractor.ExpectedConditions;
+const MAX_TIME_WAIT = 10000;
 /**
  * Navigations
  *
  * shared navigations to important pages
  */
 cucumber_1.Given('User is in Saves page', () => __awaiter(void 0, void 0, void 0, function* () {
+    const savesPageInfo = yield getPageInfo_1.getPageInfo('saves');
     const currentUrl = yield protractor_1.browser.getCurrentUrl();
-    const onSavesPage = /saves/.test(currentUrl);
+    const onSavesPage = savesPageInfo.urlTest.test(currentUrl);
     if (!onSavesPage) {
         const savesPage = constructSavePageUrl_1.constructSavePageUrl();
         yield protractor_1.browser.driver.get(savesPage);
     }
-    // TODO: create function to reuse
-    yield protractor_1.browser.driver.wait(until.visibilityOf(savesPage.sideBarHeader), MAX_TIME_WAIT, 'Saves Page taking too long to appear in the DOM');
+    yield waitForVisibilityOf_1.waitForVisibilityOf(savesPageInfo.pageDef, savesPageInfo.title);
 }));
 cucumber_1.When('User loads the Saves page', () => __awaiter(void 0, void 0, void 0, function* () {
-    yield protractor_1.browser.driver.wait(until.visibilityOf(navMenu.profileIcon), MAX_TIME_WAIT, 'Top Nav Profile Icon taking too long to appear in the DOM');
+    yield waitForVisibilityOf_1.waitForVisibilityOf(navMenu.profileIcon, 'Top Nav Profile Icon');
     yield navMenu.profileIcon.element(protractor_1.by.xpath('//*[@id="dg-component-nav-menu-desktop"]/div[1]/img')).click();
-    yield protractor_1.browser.driver.sleep(MAX_TIME_WAIT);
     // Click Saves Linkout, Check the Url, and then Navigate Back
     protractor_1.browser.driver.wait(until.visibilityOf(navMenu.dgComponentMenuDropdownDesktop), MAX_TIME_WAIT, 'Dropdown Element taking too long to appear in the DOM');
     if ((yield navMenu.savesPageLinkOut.isDisplayed()) == false) {
         navMenu.profileIcon.click();
     }
     yield navMenu.dgComponentMenuDropdownDesktop.$('#dg-menu-saves-page-linkout').click();
-    yield protractor_1.browser.driver.sleep(10 * 1000);
-    yield protractor_1.browser.driver.wait(until.visibilityOf(savesPage.savePageTitle), MAX_TIME_WAIT, 'Saves Page taking too long to appear in the DOM');
+    yield protractor_1.browser.driver.sleep(MAX_TIME_WAIT);
+    yield waitForVisibilityOf_1.waitForVisibilityOf(savesPage.savePageTitle, 'Saves Page');
 }));
 cucumber_1.Then(/User is redirected to \"(.*?)\" Page/, (page) => __awaiter(void 0, void 0, void 0, function* () {
     const pageInfo = yield getPageInfo_1.getPageInfo(page.toLowerCase());
-    yield protractor_1.browser.driver.wait(until.visibilityOf(pageInfo.pageDef), MAX_TIME_WAIT, `${page} page taking too long to appear in the DOM`);
+    yield waitForVisibilityOf_1.waitForVisibilityOf(pageInfo.pageDef, pageInfo.title);
     const currentUrl = yield protractor_1.browser.driver.getCurrentUrl();
     chai_1.expect(pageInfo.urlTest.test(currentUrl));
     chai_1.expect(yield pageInfo.pageDef.isDisplayed());
@@ -73,8 +71,6 @@ cucumber_1.Given('User is not logged in', () => __awaiter(void 0, void 0, void 0
     //TODO: add validation and potential log out flow from WILL
 }));
 cucumber_1.Given('User is on desktop', () => __awaiter(void 0, void 0, void 0, function* () {
-    //TODO: create function to set window size
-    // setWindowSize(width, height)
     protractor_1.browser.driver.manage().window().maximize();
 }));
 cucumber_1.Given('User is on tablet', () => __awaiter(void 0, void 0, void 0, function* () {

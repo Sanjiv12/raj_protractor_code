@@ -19,7 +19,7 @@ const createAccountPage = new createAccountPage_1.CreateAccountPage();
 const pages = [
     {
         title: 'saves',
-        urlTest: /saves/,
+        urlTest: /\/saves/,
         pageDef: savesPage.savePageTitle
     },
     {
