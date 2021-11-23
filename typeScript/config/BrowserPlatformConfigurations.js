@@ -46,10 +46,10 @@ exports.BrowserPlatformConfigurations = {
         },
     },
     SafariDesktop: {
-        browserName: 'safari',
-        browserVersion: '14.0',
+        browserName: 'Safari',
+        browserVersion: '14.1',
         platformName: 'macOS',
-        platformVersion: '11.0',
+        platformVersion: '11.3.1',
         "sauce:options": {}
     },
     ChromeDesktop: {

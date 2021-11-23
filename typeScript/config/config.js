@@ -94,14 +94,15 @@ exports.config = {
         gxpvlp: "../../features/**/gxp-vlp.feature",
         gxpvdp: "../../features/**/gxp-vdp.feature",
         gxpsaves: "../../features/**/gxp-saves.feature",
-        dgtopnav: "../../features/dg-top-nav/dg-top-nav-dropdown.feature"
+        dgtopnav: "../../features/dg-top-nav/dg-top-nav-dropdown.feature",
+        gxpcreateaccountbanner: "../../features/**/gxp-create-account-banner.feature",
     },
     onPrepare: () => __awaiter(void 0, void 0, void 0, function* () {
         protractor_1.browser.waitForAngularEnabled(false);
         reportConfig.createDirectory(jsonPath);
         // Initially set max waiting time to 15 seconds. Selenium applies this globally.
         // Implicit wait allows the page to poll until an element is present or the duration is reached
-        protractor_1.browser.driver.manage().timeouts().implicitlyWait(Constants_1.WAIT_TIMES.IMPLICIT_WAIT_TIME);
+        protractor_1.browser.driver.manage().timeouts().implicitlyWait(Constants_1.WAIT_TIMES.MAX_DURATION);
         // Load the page
         const vehicleListPage = constructVlpUrl_1.constructVlpUrl();
         yield protractor_1.browser.get(vehicleListPage);
@@ -113,7 +114,7 @@ exports.config = {
     multiCapabilities: generateBrowserConfiguration(),
     // capabilities: {
     // },
-    commandTimeout: Constants_1.WAIT_TIMES.MAX_COMMAND_TIMEOUT,
+    commandTimeout: Constants_1.WAIT_TIMES.TEN_SECONDS,
     maxDuration: Constants_1.WAIT_TIMES.MAX_DURATION,
     //maxSessions: 30,
     seleniumVersion: "3.141.59",

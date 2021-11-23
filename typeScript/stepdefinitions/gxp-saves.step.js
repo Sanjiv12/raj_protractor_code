@@ -76,9 +76,6 @@ cucumber_1.When('User unsaves estimates on Saves page', () => __awaiter(void 0, 
         yield protractor_1.browser.driver.sleep(MAX_TIME_WAIT);
     }
 }));
-cucumber_1.Given('User is in Saves page', () => __awaiter(void 0, void 0, void 0, function* () {
-    // Take no action, saves page already loaded
-}));
 cucumber_1.When('User views the Saves page', () => __awaiter(void 0, void 0, void 0, function* () {
     // Take no action, saves page already loaded
 }));

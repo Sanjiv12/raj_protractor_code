@@ -40,8 +40,6 @@ cucumber_1.When(/User Signs In \"?(.*?)\" \"?(.*?)\"/, (email, password) => __aw
         yield caPage.nextStepButton.click();
         yield caPage.userPwd.sendKeys(password ? password : protractor_1.browser.params.capwdreg);
         yield caPage.signInButton.click();
-    }
-}));
 cucumber_1.Then('System should navigate the user to Review Deal page', () => __awaiter(void 0, void 0, void 0, function* () {
     return assertion_1.Assertion.expect(yield protractor_1.browser.getCurrentUrl()).to.contain('inventory/review');
 }));

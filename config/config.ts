@@ -94,7 +94,8 @@ export const config: Config = {
         gxpvlp: "../../features/**/gxp-vlp.feature",
         gxpvdp: "../../features/**/gxp-vdp.feature",
         gxpsaves: "../../features/**/gxp-saves.feature",
-        dgtopnav: "../../features/dg-top-nav/dg-top-nav-dropdown.feature"
+        dgtopnav: "../../features/dg-top-nav/dg-top-nav-dropdown.feature",
+        gxpcreateaccountbanner: "../../features/**/gxp-create-account-banner.feature",
     },
 
     onPrepare: async() => {

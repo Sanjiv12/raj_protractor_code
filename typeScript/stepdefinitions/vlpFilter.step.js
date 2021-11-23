@@ -21,10 +21,10 @@ let MAX_TIME_WAIT = 5000;
 let p = 0;
 let np = 0;
 cucumber_1.Given('User is in Vehicle List Page', () => __awaiter(void 0, void 0, void 0, function* () {
-    // await mspFilterPage.sortDropDown.click();
-    // await mspFilterPage.sortPriceLowToHigh.click();
-    // browser.executeScript("window.scrollBy(0,250)");
-    // await mspFilterPage.appcardButton.first().click();
+    yield mspFilterPage.sortDropDown.click();
+    yield mspFilterPage.sortPriceLowToHigh.click();
+    protractor_1.browser.executeScript("window.scrollBy(0,250)");
+    yield mspFilterPage.appcardButton.first().click();
 }));
 cucumber_1.When('User selects one or more vehicle series from Model in Filters panel', () => __awaiter(void 0, void 0, void 0, function* () {
     yield protractor_1.browser.driver.sleep(5 * 1000);

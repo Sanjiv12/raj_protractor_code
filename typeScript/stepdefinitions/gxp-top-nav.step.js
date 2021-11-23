@@ -96,7 +96,28 @@ cucumber_1.Then('Create Account Button should be present', () => __awaiter(void 
 cucumber_1.Then('Sign In Button should be present', () => __awaiter(void 0, void 0, void 0, function* () {
     // dg-login-btn exists
     yield protractor_1.browser.driver.wait(until.visibilityOf(navMenu.dgComponentMenuDropdownDesktop), MAX_TIME_WAIT, 'Dropdown Element taking too long to appear in the DOM');
-    chai_1.expect(yield navMenu.dgLoginButton.isPresent()).to.be.true;
+    chai_1.expect(yield navMenu.dgComponentMenuDropdownDesktop.$('#dg-login-btn').isPresent()).to.be.true;
+}));
+// Signed In Scenario
+// Uses Given Statement from VDP or VLP
+cucumber_1.When('User clicks the Top Nav Dropdown Menu icon and Signs In', () => __awaiter(void 0, void 0, void 0, function* () {
+    // Click Profile Icon
+    yield protractor_1.browser.driver.wait(until.visibilityOf(navMenu.profileIcon), MAX_TIME_WAIT, 'Top Nav Profile Icon taking too long to appear in the DOM');
+    protractor_1.browser.executeScript("arguments[0].click();", navMenu.profileIcon);
+    // Sign in User
+    const username = "";
+    const password = "";
+    yield protractor_1.browser.driver.wait(until.visibilityOf(navMenu.dgComponentMenuDropdownDesktop), MAX_TIME_WAIT, 'Dropdown Element taking too long to appear in the DOM');
+    yield protractor_1.browser.executeScript("arguments[0].click();", yield protractor_1.element(protractor_1.by.id('dg-login-btn')));
+    yield protractor_1.browser.driver.wait(until.visibilityOf(createAccountPage.userName), MAX_TIME_WAIT, 'Username Element taking too long to appear in the DOM');
+    yield createAccountPage.userName.sendKeys(username);
+    yield createAccountPage.logonBtn.click();
+    yield protractor_1.browser.driver.wait(until.visibilityOf(createAccountPage.userPwd), MAX_TIME_WAIT, 'Password Element taking too long to appear in the DOM');
+    yield createAccountPage.userPwd.sendKeys(password);
+    yield createAccountPage.signInBtn.click();
+    // Open Dropdown Menu
+    yield protractor_1.browser.driver.wait(until.visibilityOf(navMenu.profileIcon), MAX_TIME_WAIT, 'Top Nav Profile Icon taking too long to appear in the DOM');
+    yield navMenu.profileIcon.click();
 }));
 cucumber_1.Then('Account Button should be present', () => __awaiter(void 0, void 0, void 0, function* () {
     // dg-account-btn exists
