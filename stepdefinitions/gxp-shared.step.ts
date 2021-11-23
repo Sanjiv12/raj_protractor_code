@@ -6,20 +6,18 @@
 
 import { expect } from "chai";
 import { Given, When, Then } from "cucumber";
-import { browser, by, element, protractor } from "protractor";
-import { CreateAccountPage } from "../pages/createAccountPage";
+import { browser, by, protractor } from "protractor";
 import { NavMenu } from "../pages/navMenu";
 import { SavesPageRedesign } from "../pages/savesPageRedesign";
 import { constructSavePageUrl } from "../util/constructSavePageUrl";
 import { getPageInfo } from "../util/getPageInfo";
+import { waitForVisibilityOf } from "../util/waitForVisibilityOf";
 
-
- let createAccountPage : CreateAccountPage = new CreateAccountPage();
- let savesPage : SavesPageRedesign = new SavesPageRedesign();
- let navMenu : NavMenu = new NavMenu();
- let until = protractor.ExpectedConditions;
+ const savesPage : SavesPageRedesign = new SavesPageRedesign();
+ const navMenu : NavMenu = new NavMenu();
+ const until = protractor.ExpectedConditions;
  
- let MAX_TIME_WAIT = 10000;
+ const MAX_TIME_WAIT = 10000;
 
 /**
  * Navigations 
@@ -28,31 +26,22 @@ import { getPageInfo } from "../util/getPageInfo";
  */
 
 Given('User is in Saves page', async() => {
+    const savesPageInfo = await getPageInfo('saves');
     const currentUrl = await browser.getCurrentUrl();
-    const onSavesPage = /saves/.test(currentUrl);
+
+    const onSavesPage = savesPageInfo.urlTest.test(currentUrl);
     
     if(!onSavesPage){
         const savesPage = constructSavePageUrl();
         await browser.driver.get(savesPage);
     }
 
-    // TODO: create function to reuse
-    await browser.driver.wait(
-        until.visibilityOf(savesPage.sideBarHeader),
-        MAX_TIME_WAIT,
-        'Saves Page taking too long to appear in the DOM'
-    );
+    await waitForVisibilityOf(savesPageInfo.pageDef, savesPageInfo.title);
 });
 
 When('User loads the Saves page', async () => {
-    await browser.driver.wait(
-        until.visibilityOf(navMenu.profileIcon),
-        MAX_TIME_WAIT,
-        'Top Nav Profile Icon taking too long to appear in the DOM'
-    );
+    await waitForVisibilityOf(navMenu.profileIcon, 'Top Nav Profile Icon')
     await navMenu.profileIcon.element(by.xpath('//*[@id="dg-component-nav-menu-desktop"]/div[1]/img')).click();
-    await browser.driver.sleep(MAX_TIME_WAIT);
-
 
     // Click Saves Linkout, Check the Url, and then Navigate Back
     browser.driver.wait(until.visibilityOf(navMenu.dgComponentMenuDropdownDesktop),MAX_TIME_WAIT,'Dropdown Element taking too long to appear in the DOM');
@@ -60,22 +49,14 @@ When('User loads the Saves page', async () => {
         navMenu.profileIcon.click();
     }
     await navMenu.dgComponentMenuDropdownDesktop.$('#dg-menu-saves-page-linkout').click();
-    await browser.driver.sleep(10*1000);
-    await browser.driver.wait(
-        until.visibilityOf(savesPage.savePageTitle),
-        MAX_TIME_WAIT,
-        'Saves Page taking too long to appear in the DOM'
-    );
+    await browser.driver.sleep(MAX_TIME_WAIT);
+    await waitForVisibilityOf(savesPage.savePageTitle, 'Saves Page');
 });
 
 Then(/User is redirected to \"(.*?)\" Page/, async(page: string) => {
     const pageInfo = await getPageInfo(page.toLowerCase());
 
-    await browser.driver.wait(
-        until.visibilityOf(pageInfo.pageDef),
-        MAX_TIME_WAIT,
-        `${page} page taking too long to appear in the DOM`
-    ) 
+    await waitForVisibilityOf(pageInfo.pageDef, pageInfo.title);
  
     const currentUrl = await browser.driver.getCurrentUrl();
     expect(pageInfo.urlTest.test(currentUrl));
@@ -96,8 +77,6 @@ Given('User is not logged in', async () => {
 });
 
 Given('User is on desktop', async () => {
-    //TODO: create function to set window size
-    // setWindowSize(width, height)
     browser.driver.manage().window().maximize();
 });
 

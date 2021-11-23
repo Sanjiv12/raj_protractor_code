@@ -11,7 +11,7 @@ let MAX_TIME_WAIT = 10000;
 
 When('User clicks the X on the Create Account Banner', async() => {
     await browser.driver.wait(
-        until.visibilityOf(savesPage.createAccountBanner),
+        until.visibilityOf(savesPage.createAccountBannerX),
         MAX_TIME_WAIT,
         'Create Account Banner taking too long to appear in DOM'
     );

@@ -1,4 +1,3 @@
-import { throws } from "assert";
 import { $, ElementFinder, element, by, ElementArrayFinder } from "protractor";
 
 export class CreateAccountPage {

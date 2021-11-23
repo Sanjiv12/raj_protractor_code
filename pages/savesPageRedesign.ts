@@ -1,50 +1,25 @@
-import { $, ElementFinder, element, by, ElementArrayFinder } from "protractor";
+import { element, by } from "protractor";
 
 export class SavesPageRedesign {
-    public standaloneContainer: ElementFinder;
+    standaloneContainer = element(by.xpath('//*[@id="dg-standalone-container"]'));
 
-    public savePageHeader: ElementFinder; 
-    public savePageTitle: ElementFinder;
-    public savePageHeaderLogo: ElementFinder;
+    savePageHeader = element(by.xpath('//*[@id="dg-saves-page-header"]'));
+    savePageTitle = element(by.xpath('//*[@id="dg-header-my-saves-container"]'));
+    savePageHeaderLogo = element(by.xpath('//*[@id="dg-header-logo"]'));
 
-    public createAccountBanner: ElementFinder;
-    public createAccountBannerMessage: ElementFinder;
-    public createAccountBannerLinks: ElementArrayFinder;
-    public createAccountBannerX: ElementFinder;
+    public createAccountBanner = element(by.xpath('//*[@id="dg-create-account-banner"]'));
+    public createAccountBannerMessage = element(by.xpath('//*[@id="dg-create-account-banner-message"]'));
+    public createAccountBannerLinks = element(by.xpath('//*[@id="dg-create-account-banner-message"]')).all(by.xpath('//a[@class="dg-create-account-banner-link"]'));
+    public createAccountBannerX = element(by.xpath('//*[@id="dg-create-account-banner-close-button"]'));
 
-    public sideBar : ElementFinder;
-    public sideBarHeader : ElementFinder;
-    public sideBarLinks : ElementFinder;
-    public sideBarSavesLink : ElementFinder;
-    public sideBarVehiclesLink : ElementFinder;
-    public sideBarBottomLinks : ElementFinder;
-    public sideBarCreateAccountLink : ElementFinder;
-    public sideBarManageAccountLink : ElementFinder;
-    public sideBarSignInLink: ElementFinder;
-    public sideBarSignOutLink: ElementFinder;
-
-    constructor() {
-        this.standaloneContainer = element(by.xpath('//*[@id="dg-standalone-container"]'));
-
-        this.savePageHeader = element(by.xpath('//*[@id="dg-saves-page-header"]'));
-        this.savePageTitle = element(by.xpath('//*[@id="dg-header-my-saves-container"]'));
-        this.savePageHeaderLogo = element(by.xpath('//*[@id="dg-header-logo"]'));
-
-        this.createAccountBanner = element(by.xpath('//*[@id="dg-create-account-banner"]'));
-        this.createAccountBannerMessage = element(by.xpath('//*[@id="dg-create-account-banner-message"]'));
-        this.createAccountBannerLinks = element(by.xpath('//*[@id="dg-create-account-banner-message"]')).all(by.xpath('//a[@class="dg-create-account-banner-link"]'));
-        this.createAccountBannerX = element(by.xpath('//*[@id="dg-create-account-banner-close-button"]'));
-
-        this.sideBar = element(by.xpath('//*[@id="dg-ui-nav-sidebar"]'));
-        this.sideBarHeader = element(by.xpath('//*[@id="dg-nav-sidebar-header"]'));
-        this.sideBarLinks = element(by.xpath('//*[@id="dg-nav-sidebar-links"]'));
-        this.sideBarSavesLink = element(by.xpath('//*[@id="dg-nav-sidebar-saves"]'));
-        this.sideBarVehiclesLink = element(by.xpath('//*[@id="dg-nav-sidebar-owners"]'));
-        this.sideBarBottomLinks = element(by.xpath('//*[@id="dg-bottom-sidebar-links-container"]'));
-        this.sideBarCreateAccountLink = element(by.xpath('//*[@id="dg-nav-sidebar-manage-account"]'));
-        this.sideBarManageAccountLink = this.sideBarCreateAccountLink;
-        this.sideBarSignInLink = element(by.xpath('//*[@id="dg-nav-sidebar-log-in"]'));
-        this.sideBarSignOutLink = element(by.xpath('//*[@id="dg-nav-sidebar-log-out"]'));
-
-    }
+    public sideBar = element(by.xpath('//*[@id="dg-ui-nav-sidebar"]'));
+    public sideBarHeader = element(by.xpath('//*[@id="dg-nav-sidebar-header"]'));
+    public sideBarLinks = element(by.xpath('//*[@id="dg-nav-sidebar-links"]'));
+    public sideBarSavesLink = element(by.xpath('//*[@id="dg-nav-sidebar-saves"]'));
+    public sideBarVehiclesLink = element(by.xpath('//*[@id="dg-nav-sidebar-owners"]'));
+    public sideBarBottomLinks = element(by.xpath('//*[@id="dg-bottom-sidebar-links-container"]'));
+    public sideBarCreateAccountLink = element(by.xpath('//*[@id="dg-nav-sidebar-manage-account"]'));
+    public sideBarManageAccountLink = this.sideBarCreateAccountLink;
+    public sideBarSignInLink = element(by.xpath('//*[@id="dg-nav-sidebar-log-in"]'));
+    public sideBarSignOutLink = element(by.xpath('//*[@id="dg-nav-sidebar-log-out"]'));
 };

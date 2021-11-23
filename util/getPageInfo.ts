@@ -9,7 +9,7 @@ const createAccountPage : CreateAccountPage = new CreateAccountPage();
 const pages = [
     {
         title: 'saves', 
-        urlTest: /saves/,
+        urlTest: /\/saves/,
         pageDef: savesPage.savePageTitle
     },
     {
