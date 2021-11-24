@@ -1,6 +1,7 @@
 import { $, ElementFinder, element, by, ElementArrayFinder } from "protractor";
 
 export class CreateAccountPage {
+    public createAccountEmailForm: ElementFinder;
     public createAccountFirstName: ElementFinder;
     public createAccountLastName: ElementFinder;
     public createAccountEmail: ElementFinder;
@@ -20,6 +21,7 @@ export class CreateAccountPage {
     public signInBtn: ElementFinder;
 
     constructor() {
+        this.createAccountEmailForm = element(by.xpath('//*[@id="createEmailForm"]'));
         this.createAccountFirstName = element(by.xpath('//div[@class="customer-name-field"]/div[1]/con-textfield/div/mat-form-field/div/div[1]/div[3]/input'));
         this.createAccountLastName = element(by.xpath('//div[@class="customer-name-field"]/div[2]/con-textfield/div/mat-form-field/div/div[1]/div[3]/input'));
         this.createAccountEmail = element(by.css("input[type='email']"));

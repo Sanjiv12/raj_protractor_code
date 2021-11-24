@@ -35,7 +35,7 @@ When('User Signs In', async  () =>{
         caPage.userPwd.sendKeys(browser.params.capwdreg);
         await browser.driver.sleep(2*1000);
         browser.executeScript("arguments[0].click()", caPage.signInBtn);
-        //await browser.driver.sleep(10*1000);
+        await browser.driver.sleep(10*1000);
     }
 });
 
