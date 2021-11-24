@@ -8,12 +8,12 @@ import { getPageInfo } from "../util/getPageInfo";
 import { waitForVisibilityOf } from "../util/waitForVisibilityOf";
 import { OWNERS_URL_REDIRECT } from "../util/Constants";
 
-let createAccountPage : CreateAccountPage = new CreateAccountPage();
-let navMenu : NavMenu = new NavMenu();
-let until = protractor.ExpectedConditions;
-let ownersPath = '/owners'
+const createAccountPage : CreateAccountPage = new CreateAccountPage();
+const navMenu : NavMenu = new NavMenu();
+const until = protractor.ExpectedConditions;
+const ownersPath = '/owners'
 
-let MAX_TIME_WAIT = 10000;
+const MAX_TIME_WAIT = 10000;
 
 // Signed Out Scenario
 // Uses Given Statement from VDP or VLP
@@ -154,7 +154,7 @@ Then(/Top Nav Continue Purchase Linkout is \"(.*?)\"/, async(display: string) =>
     }
     else {
         assert(false);
-        console.log('Invalid data in example')
+        console.log(`Please implement condition for Top Nav Continue Purchase Linkout is "${display}"`)
     }
 
 })

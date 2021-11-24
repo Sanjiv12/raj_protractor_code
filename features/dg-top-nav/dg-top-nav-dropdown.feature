@@ -62,7 +62,7 @@ Feature: Digital Garage Top Nav Dropdown Menu
         Examples:
             | email                  | password        | purchase_available | outcome |
             | maferap486@idrct.com   | Bddtest1!       | available          | shown |
-    #       | gxp.bdd.test@gmail.com | B3havi0rDrIV3n! |       2         | hidden |
+    #       | gxp.bdd.test@gmail.com | B3havi0rDrIV3n! |       unavailable         | hidden |
 
 
 

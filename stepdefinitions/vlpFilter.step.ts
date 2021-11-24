@@ -13,10 +13,10 @@ let np = 0;
 
 
 Given('User is in Vehicle List Page', async () =>{
-    // await mspFilterPage.sortDropDown.click();
-    // await mspFilterPage.sortPriceLowToHigh.click();
-    // browser.executeScript("window.scrollBy(0,250)");
-    // await mspFilterPage.appcardButton.first().click();
+    await mspFilterPage.sortDropDown.click();
+    await mspFilterPage.sortPriceLowToHigh.click();
+    browser.executeScript("window.scrollBy(0,250)");
+    await mspFilterPage.appcardButton.first().click();
 });
 
 
