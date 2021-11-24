@@ -137,7 +137,6 @@ Then(/User is redirected to \"(.*?)\" Page/, async(page: string) => {
     const pageInfo = await getPageInfo(page.toLowerCase());
 
     await waitForVisibilityOf(pageInfo.pageDef, pageInfo.title);
-
     const currentUrl = await browser.driver.getCurrentUrl();
     expect(pageInfo.urlTest.test(currentUrl));
 
@@ -146,9 +145,11 @@ Then(/User is redirected to \"(.*?)\" Page/, async(page: string) => {
 
 /**
  * Common Actions? / Common Accounts?
+
  *
  * things like save a vehicle, create a deal, etc.
  */
+
 
 Given('User is on desktop', async () => {
     browser.driver.manage().window().maximize();
@@ -161,3 +162,4 @@ Given('User is on tablet', async () => {
 Given('User is on mobile', async () => {
     browser.driver.manage().window().setSize(375, 667);
 });
+
