@@ -21,25 +21,6 @@ let caPage = new createAccountPage_1.CreateAccountPage();
 let topNav = new digitalGarageTopNav_1.DigitalGarageTopNav();
 let createAccountPage = new createAccountPage_1.CreateAccountPage();
 let navMenu = new navMenu_1.NavMenu();
-let until = protractor_1.protractor.ExpectedConditions;
-let MAX_TIME_WAIT = 10000;
-function hasNotPreviouslyLoggedIn() {
-    return __awaiter(this, void 0, void 0, function* () {
-        return protractor_1.browser.driver.getCurrentUrl().then((url) => {
-            return url.includes('account.toyota.com');
-        });
-    });
-}
-cucumber_1.When(/User Signs In \"?(.*?)\" \"?(.*?)\"/, (email, password) => __awaiter(void 0, void 0, void 0, function* () {
-    yield protractor_1.browser.driver.wait(until.visibilityOf(navMenu.profileIcon), MAX_TIME_WAIT, 'Top Nav Profile Icon taking too long to appear in the DOM');
-    navMenu.profileIcon.click();
-    yield protractor_1.browser.driver.wait(until.visibilityOf(navMenu.dgComponentMenuDropdownDesktop), MAX_TIME_WAIT, 'Dropdown Element taking too long to appear in the DOM');
-    yield navMenu.dgLoginButton.click();
-    if (yield hasNotPreviouslyLoggedIn()) {
-        yield caPage.userName.sendKeys(email ? email : protractor_1.browser.params.caemailreg);
-        yield caPage.nextStepButton.click();
-        yield caPage.userPwd.sendKeys(password ? password : protractor_1.browser.params.capwdreg);
-        yield caPage.signInButton.click();
 cucumber_1.Then('System should navigate the user to Review Deal page', () => __awaiter(void 0, void 0, void 0, function* () {
     return assertion_1.Assertion.expect(yield protractor_1.browser.getCurrentUrl()).to.contain('inventory/review');
 }));

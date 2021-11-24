@@ -19,7 +19,7 @@ class CreateAccountPage {
         this.accountAlreadyReg = protractor_1.element(protractor_1.by.id('divAlreadyRegistered'));
         this.checkEmail = protractor_1.element(protractor_1.by.id('divResendEmail'));
         this.loginLink = protractor_1.element(protractor_1.by.className('sign-in-btn'));
-        this.userName = protractor_1.element(protractor_1.by.name('username'));
+        this.userName = protractor_1.element(protractor_1.by.id('logonUsername__TO'));
         this.logonBtn = protractor_1.element(protractor_1.by.id('logonButton'));
         this.userPwd = protractor_1.element(protractor_1.by.name('password'));
         this.signInButton = protractor_1.element(protractor_1.by.xpath('//div[@class="button-right"]/button'));

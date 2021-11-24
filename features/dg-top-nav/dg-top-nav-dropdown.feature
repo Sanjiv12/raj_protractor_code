@@ -35,7 +35,7 @@ Feature: Digital Garage Top Nav Dropdown Menu
 
         Examples:
             | email                  | password        | number_of_saves |
-            | maferap486@idrct.com   | Bddtest1!       |       1         |
+            | maferap486@idrct.com   | Bddtest1!       |       2         |
             # | gxp.bdd.test@gmail.com | B3havi0rDrIV3n! |       2         |
 
     Scenario: Top Nav Dropdown - Manage Vehicles Linkout is Present
@@ -52,30 +52,16 @@ Feature: Digital Garage Top Nav Dropdown Menu
         # - The user has an active deal
         # - The shopping cart is not displayed in the top nav
 
-        # Important that it's on T2, since the shopping cart will never be shown
-        # This guarantees that the Continue Purchase linkout should be shown in the dropdown
-        # Given User is on the Tier 2 Vehicle List Page
-        # And User is on desktop
-        # And User Signs In <email> <password>
-        # And An active deal is <purchase_available>
-        # When User clicks the Top Nav Dropdown Menu icon
-        # Then Top Nav "Continue Purchase" Linkout is <outcome>
-
-        # Examples:
-        #     | account  | purchase_available | outcome   |
-        #     | example1 | available          | shown     |
-        #     | example2 | unavailable        | hidden    |
-
         Given User is in Vehicle List Page
         And User is on desktop
         And User Signs In "<email>" "<password>"
         And An active deal is "<purchase_available>"
         When User clicks the Top Nav Dropdown Menu icon
-        Then Top Nav Continue Purchase Linkout is will
+        Then Top Nav Continue Purchase Linkout is "<outcome>"
 
         Examples:
             | email                  | password        | purchase_available | outcome |
-            | maferap486@idrct.com   | BddTest1!       | available          | shown |
+            | maferap486@idrct.com   | Bddtest1!       | available          | shown |
     #       | gxp.bdd.test@gmail.com | B3havi0rDrIV3n! |       2         | hidden |
 
 

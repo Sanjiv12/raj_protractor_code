@@ -47,12 +47,13 @@ let MAX_TIME_WAIT = 10000;
   */
 
   async function hasNotPreviouslyLoggedIn() {
+    await browser.driver.sleep(15*1000);
     return browser.driver.getCurrentUrl().then((url) => {
         return url.includes('account.toyota.com');
     });
  }
 
- When(/User Signs In \"?(.*?)\" \"?(.*?)\"/, async  (email?: string, password?: string) =>{
+ When(/User Signs In(\s\"(.*?)\")?(\s\"(.*?)\")?/, async(email?: string, password?: string) =>{
      await browser.driver.wait(
          until.visibilityOf(navMenu.profileIcon),
          MAX_TIME_WAIT,
@@ -92,10 +93,8 @@ let MAX_TIME_WAIT = 10000;
         'Dropdown Element taking too long to appear in the DOM'
     );
     if (!Assertion.expect(await navMenu.dgLoginButton.isDisplayed())) {
-        console.log('we are logged in');
     }
     else {
-        console.log('we are logged out')
         await navMenu.profileIcon.click();
     }
  });

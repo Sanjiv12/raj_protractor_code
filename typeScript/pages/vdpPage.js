@@ -17,10 +17,10 @@ class VdpPage {
         this.creditRatingFinance = protractor_1.element(protractor_1.by.xpath('/html/body/main/app-root/mat-drawer-container/mat-drawer-content/div/app-vehicle-details/div[1]/div[2]/div[1]/section/div[1]/vdp-payment-estimation/div/mat-tab-group/div/mat-tab-body[2]/div/app-finance/div/div[2]/app-credit-score/div/div/con-slim-combobox/div/mat-form-field/div/div[1]/div/mat-select/div/div[1]/span'));
         this.paymentOptionsList = protractor_1.element.all(protractor_1.by.xpath('/html/body/main/app-root/mat-drawer-container/mat-drawer-content/div/app-vehicle-details/div[1]/div[2]/div[1]/section/div[1]/vdp-payment-estimation/div/mat-tab-group/div/mat-tab-body[1]/div/app-lease/div/div[4]/app-payment-option-list/div/mat-radio-group/div/con-payment-radiobutton-list/div/mat-radio-group/mat-radio-button'));
         this.annualMileageOption1 = protractor_1.element(protractor_1.by.xpath("//span[.='10,000']"));
-        this.financeOrOwnButton = protractor_1.element(protractor_1.by.css('.trade-in-container .action-buttons .finance-vehicle-button')); //*[@id="trade-in-container"]/div[2]/div[1]
+        this.financeOrOwnButton = protractor_1.element(protractor_1.by.css('.trade-in-container .action-buttons .finance-vehicle-button')); //*[@id="trade-in-container"]/div[2]/div[1] 
         //kbb modal elements -- start
         this.kbbModal = protractor_1.element(protractor_1.by.xpath('//*[@id="kbb-modal-component"]/app-kbb-modal'));
-        this.kbbModalYear = protractor_1.element(protractor_1.by.xpath("//select[@id='Vehicle_Selection_YearId']")); //element(by.css("#Vehicle_Selection_YearId"));
+        this.kbbModalYear = protractor_1.element(protractor_1.by.xpath("//select[@id='Vehicle_Selection_YearId']")); //element(by.css("#Vehicle_Selection_YearId")); 
         this.kbbModalBrand = protractor_1.element(protractor_1.by.xpath('//select[@id="Vehicle_Selection_ManufacturerId"]'));
         this.kbbModalModel = protractor_1.element(protractor_1.by.xpath("//select[@id='Vehicle_Selection_ModelId']"));
         this.kbbModalStyle = protractor_1.element(protractor_1.by.xpath("//select[@id='Vehicle_Configuration_VehicleId']"));
@@ -109,7 +109,6 @@ class VdpPage {
         this.mstcMultiLeadFormModalReturnToPage = protractor_1.element(protractor_1.by.xpath('//div[@class="return-to-page"]/button'));
         this.startPurchaseForUnlockDealer = protractor_1.element(protractor_1.by.xpath('/html/body/main/app-root/mat-drawer-container/mat-drawer-content/div/app-vehicle-details/div[1]/div[2]/div[2]/section/vdp-pricing-summary/div/div[3]/div[2]/button[2]'));
         this.startPurchaseForNoUnlockDealer = protractor_1.element(protractor_1.by.xpath('/html/body/main/app-root/mat-drawer-container/mat-drawer-content/div/app-vehicle-details/div[1]/div[2]/div[2]/section/vdp-pricing-summary/div/div[3]/div[2]/button[1]'));
-        this.startPurchase = protractor_1.element(protractor_1.by.xpath('//div[@class="price-details"]/button[2]'));
         this.rightPaneMenu = protractor_1.element(protractor_1.by.xpath('//div[@class="menu-items ng-star-inserted"]')); //element(by.css("div.right-pane > div.menu-items"));
         this.signInBtn = protractor_1.element(protractor_1.by.xpath("//div[@class='sign-in menu-button ng-star-inserted']")); //element(by.css('.sign-in'));
         this.profileIcon = protractor_1.element(protractor_1.by.xpath('//*[@id="dg-component-nav-menu-desktop"]'));

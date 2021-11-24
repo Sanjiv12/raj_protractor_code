@@ -14,7 +14,7 @@ const { BeforeAll, Before, After, AfterAll, Status, defineSupportCode, setDefaul
 const protractor_1 = require("protractor");
 const constructVlpUrl_1 = require("./constructVlpUrl");
 BeforeAll({ timeout: Constants_1.WAIT_TIMES.TEN_SECONDS }, () => __awaiter(void 0, void 0, void 0, function* () {
-    setDefaultTimeout(Constants_1.WAIT_TIMES.MAX_TEST_TIMEOUT);
+    setDefaultTimeout(Constants_1.WAIT_TIMES.MAX_DURATION);
 }));
 Before(() => __awaiter(void 0, void 0, void 0, function* () {
     const vehicleListPage = constructVlpUrl_1.constructVlpUrl();

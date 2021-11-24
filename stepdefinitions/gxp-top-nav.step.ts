@@ -4,10 +4,14 @@ import { CreateAccountPage } from "../pages/createAccountPage";
 import { NavMenu } from "../pages/navMenu";
 import { expect } from "chai";
 import { assert } from "console";
+import { getPageInfo } from "../util/getPageInfo";
+import { waitForVisibilityOf } from "../util/waitForVisibilityOf";
+import { OWNERS_URL_REDIRECT } from "../util/Constants";
 
 let createAccountPage : CreateAccountPage = new CreateAccountPage();
 let navMenu : NavMenu = new NavMenu();
 let until = protractor.ExpectedConditions;
+let ownersPath = '/owners'
 
 let MAX_TIME_WAIT = 10000;
 
@@ -30,6 +34,7 @@ Then('The Top Nav Menu Dropdown should be visible', async () => {
 });
 Then('The Profile Icon should be in Selected state', async () => {
     // dg-menu-dropdown-icon has class 'dg-selected-icon'
+    await browser.driver.wait(until.visibilityOf(navMenu.dgComponentMenuDropdownDesktop),MAX_TIME_WAIT,'Dropdown Element taking too long to appear in the DOM');
     expect(await navMenu.profileIcon.$('.dg-menu-dropdown-icon img').getAttribute('class')).to.contain('dg-selected-icon');
 });
 Then(/Top Nav \"(.*?)\" Linkout should be present/, async (section: string) => {
@@ -60,10 +65,18 @@ Then(/Top Nav \"(.*?)\" Linkout should link to \"(.*?)\"/, async (section: strin
     // Switch to Last Tab
     await browser.driver.switchTo().window(handles[handles.length-1]);
 
-    // Check if url is what we expect, sleep to allow for redirects
-    await browser.driver.sleep(15*1000);
-    let currentUrl = await browser.getCurrentUrl();
-    expect(currentUrl).to.include(location);
+    let currentUrl = undefined
+    if (location === ownersPath)  { //This is temporary until a better way around the owners page login redirect is found
+        browser.driver.sleep(15*1000);
+        currentUrl = await browser.getCurrentUrl();
+        expect( currentUrl.includes(location) || currentUrl.includes(OWNERS_URL_REDIRECT)).to.be.true;
+    }
+    else { // this is the ideal format for getting the current url and checking the page
+        const pageInfo = await getPageInfo(section.toLowerCase());
+        await waitForVisibilityOf(pageInfo.pageDef, pageInfo.title);
+        currentUrl = await browser.getCurrentUrl();
+        expect(currentUrl).to.include(location);
+    }
 
     // If there is only 1 tab, navigate back until we reach the original page
     if (handles.length === 1) {
@@ -133,7 +146,6 @@ Given(/An active deal is (.*?)/ , async(deal: string) => {
 
 Then(/Top Nav Continue Purchase Linkout is \"(.*?)\"/, async(display: string) => {
     await browser.driver.wait(until.visibilityOf(navMenu.dgComponentMenuDropdownDesktop),MAX_TIME_WAIT,'Dropdown Element taking too long to appear in the DOM');
-    console.log(display);
     if (display == 'hidden') {
         expect(await navMenu.continuePurchaseButton.isPresent()).to.be.false;
     }

@@ -10,7 +10,7 @@ export class CreateAccountPage {
     public createAccountGoogleButton: ElementFinder;
     public createAccountFbButton: ElementFinder;
     public createAccountAppleButton: ElementFinder;
-    public createAccountButton: ElementFinder;    
+    public createAccountButton: ElementFinder;
     public passwordError: ElementFinder;
     public createAccountError: ElementFinder;
     public accountAlreadyReg: ElementFinder;
@@ -31,14 +31,14 @@ export class CreateAccountPage {
         this.createAccountPassword = element(by.css("input[type='password']"));
         this.createAccountGoogleButton = element(by.css('button.google-icon'));
         this.createAccountFbButton = element(by.css('button.facebook-icon'));
-        this.createAccountAppleButton = element(by.css('button.apple-icon')); 
+        this.createAccountAppleButton = element(by.css('button.apple-icon'));
         this.createAccountButton = element(by.css('button.primary-button'));
         this.passwordError = element(by.css('img.password-error'));
         this.createAccountError = element(by.id('divAccountError'));
         this.accountAlreadyReg = element(by.id('divAlreadyRegistered'));
         this.checkEmail = element(by.id('divResendEmail'));
         this.loginLink = element(by.className('sign-in-btn'));
-        this.userName = element(by.name('username'));
+        this.userName = element(by.id('logonUsername__TO'));
         this.logonBtn = element(by.id('logonButton'));
         this.userPwd = element(by.name('password'));
         this.signInButton = element(by.xpath('//div[@class="button-right"]/button'));
