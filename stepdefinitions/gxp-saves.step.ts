@@ -14,31 +14,6 @@ let MAX_TIME_WAIT = 15000;
 let vdpEstimateDetails : Map<string, string> = new Map();
 let vdpVehicleEstimateDetails = {vehicleName: null, vin: null, MSRP: null};
 
-
-When('User loads the Saves page', async () => {
-    browser.driver.wait(
-        until.visibilityOf(navMenu.profileIcon),
-        MAX_TIME_WAIT,
-        'Top Nav Profile Icon taking too long to appear in the DOM'
-    );
-    navMenu.profileIcon.click();
-    await browser.driver.sleep(MAX_TIME_WAIT);
-
-
-    // Click Saves Linkout, Check the Url, and then Navigate Back
-    browser.driver.wait(until.visibilityOf(navMenu.dgComponentMenuDropdownDesktop),MAX_TIME_WAIT,'Dropdown Element taking too long to appear in the DOM');
-    if( await navMenu.savesPageLinkOut.isDisplayed() == false){
-        navMenu.profileIcon.click();
-    }
-    await navMenu.dgComponentMenuDropdownDesktop.$('#dg-menu-saves-page-linkout').click();
-    await browser.driver.sleep(10*1000);
-    browser.driver.wait(
-        until.visibilityOf(savesPage.standaloneContainer),
-        MAX_TIME_WAIT,
-        'Saves Page taking too long to appear in the DOM'
-    );
-});
-
 When('User clicks on estimate save heart for all estimates', async () => {
     // Lease
     var leaseTab : ElementFinder = vdpPage.estimateTabs.get(0);
@@ -107,11 +82,6 @@ Then('The Profile Icon should be visible', async () => {
     expect(await navMenu.profileIcon.isPresent()).to.be.true;
 });
 
-// Scenario: Saves - Sidebar Has Correct Structure
-Then('Sidebar Component should be visible', async () => {
-    await browser.waitForAngular();
-    expect(await savesPage.sideBar.isPresent()).to.be.true;
-});
 Then(/Sidebar \"(.*?)\" Linkout should be present/, async (section: string) => {
     await browser.waitForAngular();
     const linkout : ElementFinder = savesPage[section.toLowerCase()+"Link"];
@@ -122,18 +92,7 @@ Then(/Sidebar \"(.*?)\" Linkout should be present/, async (section: string) => {
     );
     expect(await linkout.isPresent()).to.be.true;
 });
-Then(/Sidebar \"(.*?)\" Linkout should be in \"(.*?)\" state/, async (section: string, value: string) => {
-    await browser.waitForAngular();
-    const linkout : ElementFinder = savesPage[section.toLowerCase()+"Link"];
-    browser.driver.wait(
-        until.visibilityOf(linkout),
-        MAX_TIME_WAIT,
-        section + ' Section Linkout taking too long to appear in the DOM'
-    );
-    value.toLowerCase() === "active" ?
-    expect(await linkout.getAttribute('class')).to.include('dg-nav-sidebar-active') :
-    expect(await linkout.getAttribute('class')).to.not.include('dg-nav-sidebar-active');
-});
+
 Then(/Sidebar \"(.*?)\" Linkout should be \"(.*?)\"/, async (section: string, value: string) => {
     await browser.waitForAngular();
     const linkout : ElementFinder = savesPage[section.toLowerCase()+"Link"];

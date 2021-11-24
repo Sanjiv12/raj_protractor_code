@@ -70,6 +70,11 @@ Then(/User is redirected to \"(.*?)\" Page/, async(page: string) => {
  * things like save a vehicle, create a deal, etc.
  */
 
+Given(/User is in tier \"(.*?)\" Saves page/, async (tierNo: string) => {
+    const tierXSavesPageUrl = await constructSavePageUrl(browser.params[`tier${tierNo}url`]);
+    await browser.driver.get(tierXSavesPageUrl);
+});
+
 Given('User is not logged in', async () => {
     //user is logged out by default
     //do nothing

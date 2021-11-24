@@ -140,7 +140,7 @@ When('User clicks the Top Nav Dropdown Menu icon and Signs In', async () => {
     await createAccountPage.logonBtn.click();
     await browser.driver.wait(until.visibilityOf(createAccountPage.userPwd), MAX_TIME_WAIT, 'Password Element taking too long to appear in the DOM');
     await createAccountPage.userPwd.sendKeys(password);
-    await createAccountPage.signInBtn.click();
+    await createAccountPage.signInButton.click();
 
     // Open Dropdown Menu
     await browser.driver.wait(
