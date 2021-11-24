@@ -1,41 +1,16 @@
-import { browser, by, By, element, ExpectedConditions, protractor } from "protractor";
+import { browser, by, By, element, ExpectedConditions, protractor, until } from "protractor";
 import { Then, When, Given, Before, BeforeAll, SummaryFormatter } from "cucumber";
 import {VdpPage} from "../pages/vdpPage"
 import {CreateAccountPage} from "../pages/createAccountPage"
 import {Assertion} from "../util/assertion"
+import {DigitalGarageTopNav} from "../dg-features/digitalGarageTopNav";
 import { NavMenu } from "../pages/navMenu";
-import { waitForVisibilityOf } from "../util/waitForVisibilityOf";
 
 let vdpPage : VdpPage = new VdpPage();
 let caPage : CreateAccountPage = new CreateAccountPage();
+let topNav : DigitalGarageTopNav = new DigitalGarageTopNav();
+let createAccountPage : CreateAccountPage = new CreateAccountPage();
 let navMenu : NavMenu = new NavMenu();
-let MAX_TIME_WAIT = 10000;
-
-async function hasNotPreviouslyLoggedIn() {
-   return await browser.driver.getCurrentUrl().then((url) => {
-       return url.includes('account.toyota.com');
-   });
-}
-
-// Matches both 'User Signs In' and 'User Signs In "Email" "Password"
-// When (User Signs In OPTIONAL: email OPTIONAL: password)
-When(/User Signs In(\s\"(.*?)\")?(\s\"(.*?)\")?/ , async  (email? : string, pwd? : string) =>{
-    await waitForVisibilityOf(navMenu.profileIcon, 'Top Nav Profile Icon');
-    await navMenu.profileIcon.click();
-    await waitForVisibilityOf(navMenu.dgComponentMenuDropdownDesktop, 'Dropdown Element');
-    
-    const useEmail = email || browser.params.caemailreg;
-    const usePwd = pwd || browser.params.capwdreg
-    await navMenu.desktopSignInLink.click();
-    if (await hasNotPreviouslyLoggedIn()) {
-        await caPage.userName.sendKeys(useEmail);
-        await caPage.nextStepButton.click();
-        await caPage.userPwd.sendKeys(usePwd);
-        await caPage.signInButton.click();
-        await browser.driver.sleep(MAX_TIME_WAIT);
-    }
-});
-
 
 Then('System should navigate the user to Review Deal page', async  () =>{
     return Assertion.expect(await browser.getCurrentUrl()).to.contain('inventory/review');

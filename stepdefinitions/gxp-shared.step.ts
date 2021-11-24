@@ -12,16 +12,96 @@ import { SavesPageRedesign } from "../pages/savesPageRedesign";
 import { constructSavePageUrl } from "../util/constructSavePageUrl";
 import { getPageInfo } from "../util/getPageInfo";
 import { waitForVisibilityOf } from "../util/waitForVisibilityOf";
+import { Assertion } from "../util/Assertion";
+import { CreateAccountPage } from "../pages/createAccountPage";
 
- const savesPage : SavesPageRedesign = new SavesPageRedesign();
- const navMenu : NavMenu = new NavMenu();
- const until = protractor.ExpectedConditions;
- 
- const MAX_TIME_WAIT = 10000;
+let createAccountPage : CreateAccountPage = new CreateAccountPage();
+const savesPage : SavesPageRedesign = new SavesPageRedesign();
+let navMenu : NavMenu = new NavMenu();
+let until = protractor.ExpectedConditions;
+
+let MAX_TIME_WAIT = 10000;
+
+ /**
+  * Setup Section
+  *
+  * steps for consistent setup before features are executed (login included)
+  */
+
+ /**
+  * Teardown Section
+  *
+  * steps for consistent tear down once feature execution is complete
+  */
+
+ /**
+  * Navigations
+  *
+  * shared navigations to important pages
+  */
+
+ /**
+  * Common Actions? / Common Accounts?
+  *
+  * things like save a vehicle, create a deal, etc.
+  */
+
+  async function hasNotPreviouslyLoggedIn() {
+    await browser.driver.sleep(15*1000);
+    return browser.driver.getCurrentUrl().then((url) => {
+        return url.includes('account.toyota.com');
+    });
+ }
+
+ When(/User Signs In(\s\"(.*?)\")?(\s\"(.*?)\")?/, async(email?: string, password?: string) =>{
+     await browser.driver.wait(
+         until.visibilityOf(navMenu.profileIcon),
+         MAX_TIME_WAIT,
+         'Top Nav Profile Icon taking too long to appear in the DOM'
+     );
+     navMenu.profileIcon.click();
+     await browser.driver.wait(
+         until.visibilityOf(
+             navMenu.dgComponentMenuDropdownDesktop
+         ),
+         MAX_TIME_WAIT,
+         'Dropdown Element taking too long to appear in the DOM'
+     );
+     await navMenu.dgLoginButton.click();
+     if (await hasNotPreviouslyLoggedIn()) {
+         await createAccountPage.userName.sendKeys(email ? email : browser.params.caemailreg);
+         await createAccountPage.nextStepButton.click();
+         await createAccountPage.userPwd.sendKeys(password ? password : browser.params.capwdreg);
+         await createAccountPage.signInButton.click();
+     }
+ });
+
+ Given('User is not logged in to account', async () => {
+    await browser.driver.wait(
+        until.visibilityOf(navMenu.profileIcon),
+        MAX_TIME_WAIT,
+        'Top Nav Profile Icon taking too long to appear in the DOM'
+    );
+    // browser.executeScript("arguments[0].click();", navMenu.profileIcon);
+    navMenu.profileIcon.click();
+
+    await browser.driver.wait(
+        until.visibilityOf(
+            navMenu.dgComponentMenuDropdownDesktop
+        ),
+        MAX_TIME_WAIT,
+        'Dropdown Element taking too long to appear in the DOM'
+    );
+    if (!Assertion.expect(await navMenu.dgLoginButton.isDisplayed())) {
+    }
+    else {
+        await navMenu.profileIcon.click();
+    }
+ });
 
 /**
- * Navigations 
- * 
+ * Navigations
+ *
  * shared navigations to important pages
  */
 
@@ -30,7 +110,7 @@ Given('User is in Saves page', async() => {
     const currentUrl = await browser.getCurrentUrl();
 
     const onSavesPage = savesPageInfo.urlTest.test(currentUrl);
-    
+
     if(!onSavesPage){
         const savesPage = constructSavePageUrl();
         await browser.driver.get(savesPage);
@@ -57,7 +137,6 @@ Then(/User is redirected to \"(.*?)\" Page/, async(page: string) => {
     const pageInfo = await getPageInfo(page.toLowerCase());
 
     await waitForVisibilityOf(pageInfo.pageDef, pageInfo.title);
- 
     const currentUrl = await browser.driver.getCurrentUrl();
     expect(pageInfo.urlTest.test(currentUrl));
 
@@ -66,7 +145,8 @@ Then(/User is redirected to \"(.*?)\" Page/, async(page: string) => {
 
 /**
  * Common Actions? / Common Accounts?
- * 
+
+ *
  * things like save a vehicle, create a deal, etc.
  */
 
@@ -92,3 +172,4 @@ Given('User is on tablet', async () => {
 Given('User is on mobile', async () => {
     browser.driver.manage().window().setSize(375, 667);
 });
+

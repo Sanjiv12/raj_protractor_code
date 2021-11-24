@@ -4,6 +4,7 @@ export const PLATFORMS = {
 };
 
 export const TCOM_WEBSITE =  'https://www.toyota.com';
+export const OWNERS_URL_REDIRECT = 'stg-aem-tcom.origin.cepo-proxy.tms.aws.toyota.com';
 
 
 export const JENKINS_OPTIONS = {
