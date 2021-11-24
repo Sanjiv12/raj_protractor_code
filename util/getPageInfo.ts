@@ -21,6 +21,14 @@ const pages = [
         title: 'create account',
         urlTest: /register/,
         pageDef: createAccountPage.createAccountEmailForm
+    },
+    {
+        title: 'manage account',
+        urlTest: /\/garage\/si\/pages\/settings/
+    },
+    {
+        title: 'vehicles',
+        urlTest: /\/owners/
     }
 ];
 

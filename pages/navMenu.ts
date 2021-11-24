@@ -13,8 +13,10 @@ export class NavMenu {
     public dgSignOutButton : ElementFinder;
     public continuePurchaseButton : ElementFinder;
 
+    public desktopSignInLink : ElementFinder;
+    public desktopCreateAccountLink : ElementFinder;
     constructor() {
-        this.profileIcon = element(by.className('dg-menu-dropdown-icon'));
+        this.profileIcon = element(by.xpath('//*[contains(@class, "dg-menu-dropdown-icon")]/img[@alt="Select to display the Digital Garage menu options"]'));
         this.dgComponentMenuDropdownDesktop = element(by.className('dg-component-menu-dropdown'));
         this.savesPageLinkOut= element(by.id('dg-menu-saves-page-linkout'));
         this.dgLoginButton = element(by.id('dg-login-btn'));
@@ -23,5 +25,7 @@ export class NavMenu {
         this.dgManageAccount = element(by.xpath('//*[@id="dg-account-btn"]'));
         this.dgSignOutButton = element(by.xpath('//*[@id="dg-logout-btn"]'));
         this.continuePurchaseButton = element(by.id('dg-menu-deals-page-linkout'))
+        this.desktopSignInLink = element(by.id('dg-login-btn'));
+        this.desktopCreateAccountLink = element(by.id('dg-register-btn'));
     }
 }

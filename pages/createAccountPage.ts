@@ -39,6 +39,7 @@ export class CreateAccountPage {
         this.checkEmail = element(by.id('divResendEmail'));
         this.loginLink = element(by.className('sign-in-btn'));
         this.userName = element(by.id('logonUsername__TO'));
+        this.userName = element(by.name('username'));
         this.logonBtn = element(by.id('logonButton'));
         this.userPwd = element(by.name('password'));
         this.signInButton = element(by.xpath('//div[@class="button-right"]/button'));

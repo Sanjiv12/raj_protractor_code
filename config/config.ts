@@ -97,6 +97,11 @@ export const config: Config = {
         dgtopnav: [ "../../features/dg-top-nav/dg-top-nav-dropdown.feature",
                     "../../features/dg-top-nav/dg-top-nav-logged-in.feature",
                     "../../features/dg-top-nav/dg-top-nav-logged-out.feature" ],
+        gxpsavepagesidebar: [
+            "../../features/**/gxp-save-page-sidebar/gxp-saves-page-sidebar.feature",
+            "../../features/**/gxp-save-page-sidebar/gxp-saves-page-sidebar-logged-in.feature",
+            "../../features/**/gxp-save-page-sidebar/gxp-saves-page-sidebar-logged-out.feature",
+        ],
         gxpcreateaccountbanner: "../../features/**/gxp-create-account-banner.feature",
     },
 
