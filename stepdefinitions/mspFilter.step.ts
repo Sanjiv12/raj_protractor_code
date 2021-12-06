@@ -10,16 +10,14 @@ let np = 0;
 
 Given('User is in Model Selection page', async () =>{
     await browser.get(browser.params.url+'?dealerCd='+browser.params.dealerCd+'&source='+browser.params.source);
-    await browser.driver.sleep(10*1000);
-    browser.driver.manage().deleteAllCookies();
-    browser.executeScript("arguments[0].click()", mspFilterPage.popUpClose);
+    await browser.driver.manage().deleteAllCookies();
+    await browser.executeScript("arguments[0].click()", mspFilterPage.popUpClose);
 });
     
 
 When('User selects one or more options under Vehicle Type in Filters panel', async  () =>{
     
-    await browser.driver.sleep(5*1000);
-    browser.executeScript("arguments[0].click()", mspFilterPage.filtercheckBoxCar);
+    await browser.executeScript("arguments[0].click()", mspFilterPage.filtercheckBoxCar);
     
 });
 

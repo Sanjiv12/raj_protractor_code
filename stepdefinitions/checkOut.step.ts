@@ -10,7 +10,7 @@ let vdpPage : VdpPage = new VdpPage();
 let caPage : CreateAccountPage = new CreateAccountPage();
 let topNav : DigitalGarageTopNav = new DigitalGarageTopNav();
 
-async function hasNotPreviouslyLoggedIn() {
+function hasNotPreviouslyLoggedIn() {
    return browser.driver.getCurrentUrl().then((url) => {
        return url.includes(LOGIN_PAGE_URL);
    });
@@ -62,15 +62,15 @@ When('User clicks on Confirm your residential zip to proceed CTA', async  () =>{
 });
 
 When('User enters a valid Zip code in Enter Zip Code modal', async  () =>{
-    // The MST-C warning modal appears
-    await vdpPage.zipCodeWarningModal.isDisplayed().then(() => {
-        vdpPage.zipCodeWarningDoneButton.click();
-        vdpPage.zipCodeModalInput.clear();
-        vdpPage.zipCodeModalInput.sendKeys(browser.params.zipcode);
-    }).catch(() => {
-        vdpPage.zipCodeModalInput.clear();
-        vdpPage.zipCodeModalInput.sendKeys(browser.params.zipcode);
-    });
+    try {
+        await vdpPage.zipCodeWarningModal.isDisplayed();
+        await vdpPage.zipCodeWarningDoneButton.click();
+        await vdpPage.zipCodeModalInput.clear();
+        await vdpPage.zipCodeModalInput.sendKeys(browser.params.zipcode);
+    } catch {
+        await vdpPage.zipCodeModalInput.clear();
+        await vdpPage.zipCodeModalInput.sendKeys(browser.params.zipcode);
+    }
 });
 
 When('User clicks on Done in Zip Code Modal', async  () =>{
