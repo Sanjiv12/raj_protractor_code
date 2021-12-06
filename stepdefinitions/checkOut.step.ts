@@ -13,26 +13,6 @@ let vdpPage : VdpPage = new VdpPage();
 let caPage : CreateAccountPage = new CreateAccountPage();
 let topNav : DigitalGarageTopNav = new DigitalGarageTopNav();
 
-function hasNotPreviouslyLoggedIn() {
-   return browser.driver.getCurrentUrl().then((url) => {
-       return url.includes(LOGIN_PAGE_URL);
-   });
-}
-
-When('User Signs In', async  () =>{
-    await topNav.dgMan.isDisplayed();
-    await topNav.dgMan.click();
-    await topNav.desktopSignInLink.click();
-    if (await hasNotPreviouslyLoggedIn()) {
-        await caPage.userName.sendKeys(browser.params.caemailreg);
-        await caPage.nextStepButton.click();
-        await caPage.userPwd.sendKeys(browser.params.capwdreg);
-        await caPage.signInButton.click();
-    }
-});
-
-
-
 Then('System should navigate the user to Review Deal page', async  () =>{
     await vdpPage.reviewDealPageTitle.isDisplayed();
     return Assertion.expect(await browser.getCurrentUrl()).to.contain(INVENTORY_REVIEW_URL);

@@ -27,5 +27,5 @@ export class NavMenu {
         this.continuePurchaseButton = element(by.id('dg-menu-deals-page-linkout'))
         this.desktopSignInLink = element(by.id('dg-login-btn'));
         this.desktopCreateAccountLink = element(by.id('dg-register-btn'));
-=    }
+    }
 }
