@@ -1,11 +1,14 @@
-import { browser, by, By, element, ExpectedConditions, protractor, until } from "protractor"; 
+import { browser, by, By, element, ExpectedConditions, protractor, until } from "protractor";
 import { Then, When, Given, Before, BeforeAll, SummaryFormatter } from "cucumber";
 import {VdpPage} from "../pages/vdpPage"
 import {CreateAccountPage} from "../pages/createAccountPage"
 import {Assertion} from "../util/assertion"
 import {DigitalGarageTopNav} from "../dg-features/digitalGarageTopNav";
+import { NavMenu } from "../pages/navMenu";
 import {CSS_CLASSES, INVENTORY_REVIEW_URL, LOGIN_PAGE_URL, ATTRIBUTES} from "../util/Constants";
 
+let createAccountPage : CreateAccountPage = new CreateAccountPage();
+let navMenu : NavMenu = new NavMenu();
 let vdpPage : VdpPage = new VdpPage();
 let caPage : CreateAccountPage = new CreateAccountPage();
 let topNav : DigitalGarageTopNav = new DigitalGarageTopNav();
@@ -27,6 +30,7 @@ When('User Signs In', async  () =>{
         await caPage.signInButton.click();
     }
 });
+
 
 
 Then('System should navigate the user to Review Deal page', async  () =>{

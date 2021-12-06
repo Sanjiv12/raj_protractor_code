@@ -4,86 +4,180 @@
  * -Setup, Teardown, Navigations, Common Actions?
  */
 
+import { expect } from "chai";
 import { Given, When, Then } from "cucumber";
-import { browser, by, element, protractor } from "protractor";
-import { CreateAccountPage } from "../pages/createAccountPage";
+import { browser, by, protractor } from "protractor";
 import { NavMenu } from "../pages/navMenu";
+import { SavesPageRedesign } from "../pages/savesPageRedesign";
+import { constructSavePageUrl } from "../util/constructSavePageUrl";
+import { getPageInfo } from "../util/getPageInfo";
+import { waitForVisibilityOf } from "../util/waitForVisibilityOf";
+import { Assertion } from "../util/assertion";
+import { CreateAccountPage } from "../pages/createAccountPage";
 
+let createAccountPage: CreateAccountPage = new CreateAccountPage();
+const savesPage: SavesPageRedesign = new SavesPageRedesign();
+let navMenu: NavMenu = new NavMenu();
+let until = protractor.ExpectedConditions;
 
- let createAccountPage : CreateAccountPage = new CreateAccountPage();
- let navMenu : NavMenu = new NavMenu();
- let until = protractor.ExpectedConditions;
- 
- let MAX_TIME_WAIT = 10000;
+let MAX_TIME_WAIT = 10000;
 
 /**
  * Setup Section
- * 
+ *
  * steps for consistent setup before features are executed (login included)
  */
 
 /**
  * Teardown Section
- * 
+ *
  * steps for consistent tear down once feature execution is complete
  */
 
 /**
- * Navigations 
- * 
+ * Navigations
+ *
  * shared navigations to important pages
  */
 
 /**
  * Common Actions? / Common Accounts?
- * 
+ *
  * things like save a vehicle, create a deal, etc.
  */
 
- Given('User is logged in to account', async () => {
+async function hasNotPreviouslyLoggedIn() {
+    await browser.driver.sleep(15 * 1000);
+    return browser.driver.getCurrentUrl().then((url) => {
+        return url.includes("account.toyota.com");
+    });
+}
+
+When(/User Signs In(\s\"(.*?)\")?(\s\"(.*?)\")?/, async (email?: string, password?: string) => {
+        await browser.driver.wait(
+            until.visibilityOf(navMenu.profileIcon),
+            MAX_TIME_WAIT,
+            "Top Nav Profile Icon taking too long to appear in the DOM"
+        );
+        navMenu.profileIcon.click();
+        await browser.driver.wait(
+            until.visibilityOf(navMenu.dgComponentMenuDropdownDesktop),
+            MAX_TIME_WAIT,
+            "Dropdown Element taking too long to appear in the DOM"
+        );
+        await navMenu.dgLoginButton.click();
+        if (await hasNotPreviouslyLoggedIn()) {
+            await createAccountPage.userName.sendKeys(
+                email ? email : browser.params.caemailreg
+            );
+            await createAccountPage.nextStepButton.click();
+            await createAccountPage.userPwd.sendKeys(
+                password ? password : browser.params.capwdreg
+            );
+            await createAccountPage.signInButton.click();
+        }
+    }
+);
+
+Given("User is not logged in to account", async () => {
     await browser.driver.wait(
         until.visibilityOf(navMenu.profileIcon),
         MAX_TIME_WAIT,
-        'Top Nav Profile Icon taking too long to appear in the DOM'
+        "Top Nav Profile Icon taking too long to appear in the DOM"
     );
-    // browser.executeScript("arguments[0].click();", navMenu.profileIcon);
-    await navMenu.profileIcon.click();
+    navMenu.profileIcon.click();
 
     await browser.driver.wait(
-        until.visibilityOf(
-            navMenu.dgComponentMenuDropdownDesktop
-        ),
+        until.visibilityOf(navMenu.dgComponentMenuDropdownDesktop),
         MAX_TIME_WAIT,
-        'Dropdown Element taking too long to appear in the DOM'
+        "Dropdown Element taking too long to appear in the DOM"
     );
-    // await browser.executeScript("arguments[0].click();", navMenu.dgLoginButton);
-    await navMenu.dgLoginButton.click();
-
-    const username = "";
-    const password = "";
-
-    await browser.driver.wait(until.visibilityOf(createAccountPage.userName), MAX_TIME_WAIT, 'Username Element taking too long to appear in the DOM');
-    await createAccountPage.userName.sendKeys(username);
-    await createAccountPage.logonBtn.click();
-    await browser.driver.wait(until.visibilityOf(createAccountPage.userPwd), MAX_TIME_WAIT, 'Password Element taking too long to appear in the DOM');
-    await createAccountPage.userPwd.sendKeys(password);
-    await createAccountPage.signInButton.click();
+    if (!Assertion.expect(await navMenu.dgLoginButton.isDisplayed())) {
+    } else {
+        await navMenu.profileIcon.click();
+    }
 });
 
-Given('User is in Saves page', async () => {
-    //Do nothing, page will load automatically
+/**
+ * Navigations
+ *
+ * shared navigations to important pages
+ */
+
+Given("User is in Saves page", async () => {
+    const savesPageInfo = await getPageInfo("saves");
+    const currentUrl = await browser.getCurrentUrl();
+
+    const onSavesPage = savesPageInfo.urlTest.test(currentUrl);
+
+    if (!onSavesPage) {
+        const savesPage = constructSavePageUrl();
+        await browser.driver.get(savesPage);
+    }
+
+    await waitForVisibilityOf(savesPageInfo.pageDef, savesPageInfo.title);
 });
 
-Given('User is on desktop', async () => {
-    //TODO: create function to set window size
-    // setWindowSize(width, height)
+When("User loads the Saves page", async () => {
+    await waitForVisibilityOf(navMenu.profileIcon, "Top Nav Profile Icon");
+    await navMenu.profileIcon
+        .element(by.xpath('//*[@id="dg-component-nav-menu-desktop"]/div[1]/img'))
+        .click();
+
+    // Click Saves Linkout, Check the Url, and then Navigate Back
+    browser.driver.wait(
+        until.visibilityOf(navMenu.dgComponentMenuDropdownDesktop),
+        MAX_TIME_WAIT,
+        "Dropdown Element taking too long to appear in the DOM"
+    );
+    if ((await navMenu.savesPageLinkOut.isDisplayed()) == false) {
+        navMenu.profileIcon.click();
+    }
+    await navMenu.dgComponentMenuDropdownDesktop
+        .$("#dg-menu-saves-page-linkout")
+        .click();
+    await browser.driver.sleep(MAX_TIME_WAIT);
+    await waitForVisibilityOf(savesPage.savePageTitle, "Saves Page");
+});
+
+Then(/User is redirected to \"(.*?)\" Page/, async (page: string) => {
+    const pageInfo = await getPageInfo(page.toLowerCase());
+
+    await waitForVisibilityOf(pageInfo.pageDef, pageInfo.title);
+    const currentUrl = await browser.driver.getCurrentUrl();
+    expect(pageInfo.urlTest.test(currentUrl));
+
+    expect(await pageInfo.pageDef.isDisplayed());
+});
+
+/**
+ * Common Actions? / Common Accounts?
+
+ *
+ * things like save a vehicle, create a deal, etc.
+ */
+
+Given(/User is in tier \"(.*?)\" Saves page/, async (tierNo: string) => {
+    const tierXSavesPageUrl = await constructSavePageUrl(
+        browser.params[`tier${tierNo}url`]
+    );
+    await browser.driver.get(tierXSavesPageUrl);
+});
+
+Given("User is not logged in", async () => {
+    //user is logged out by default
+    //do nothing
+    //TODO: add validation and potential log out flow from WILL
+});
+
+Given("User is on desktop", async () => {
     browser.driver.manage().window().maximize();
 });
 
-Given('User is on tablet', async () => {
+Given("User is on tablet", async () => {
     browser.driver.manage().window().setSize(768, 1024);
 });
 
-Given('User is on mobile', async () => {
+Given("User is on mobile", async () => {
     browser.driver.manage().window().setSize(375, 667);
 });

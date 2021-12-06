@@ -6,6 +6,8 @@ export const PLATFORMS = {
 export const TCOM_WEBSITE =  'https://www.toyota.com';
 export const LOGIN_PAGE_URL = 'account.toyota.com';
 export const INVENTORY_REVIEW_URL = 'inventory/review';
+export const OWNERS_URL_REDIRECT = 'stg-aem-tcom.origin.cepo-proxy.tms.aws.toyota.com';
+
 
 export const JENKINS_OPTIONS = {
     CHROME_DESKTOP: 'ChromeDesktop',
