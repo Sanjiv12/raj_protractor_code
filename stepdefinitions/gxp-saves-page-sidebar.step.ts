@@ -5,6 +5,7 @@ import { expect } from "chai";
 import { NavMenu } from "../pages/navMenu";
 import { getPageInfo } from "../util/getPageInfo";
 import { waitForVisibilityOf } from "../util/waitForVisibilityOf";
+import { selectMostRecentTab } from "../util/selectMostRecentTab";
 
 let savesPage : SavesPageRedesign = new SavesPageRedesign();
 let navMenu : NavMenu = new NavMenu();
@@ -70,10 +71,7 @@ Then(/\"(.*?)\" page opens in \"(.*?)\" tab/, async(page: string, sameOrNew: str
     const pageInfo = await getPageInfo(page.toLowerCase());
 
     if (sameOrNew.toLowerCase() === 'new') {
-        await browser.getAllWindowHandles().then(function (handles) {
-            const newestWindow = handles[handles.length - 1];
-            browser.switchTo().window(newestWindow);
-        });
+        await selectMostRecentTab();
     }
     if(pageInfo.pageDef) {
         await waitForVisibilityOf(pageInfo.pageDef, pageInfo.title);

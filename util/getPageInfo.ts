@@ -1,10 +1,14 @@
+import { AccountManagementPage } from "../pages/accountManagementPage";
 import { CreateAccountPage } from "../pages/createAccountPage";
+import { OwnersPage } from "../pages/ownersPage";
 import { SavesPageRedesign } from "../pages/savesPageRedesign";
 import { SignInPage } from "../pages/signInPage";
 
 const savesPage : SavesPageRedesign = new SavesPageRedesign();
 const signInPage : SignInPage = new SignInPage();
 const createAccountPage : CreateAccountPage = new CreateAccountPage();
+const ownersPage : OwnersPage = new OwnersPage();
+const accountManagementPage : AccountManagementPage = new AccountManagementPage(); 
 
 const pages = [
     {
@@ -24,11 +28,13 @@ const pages = [
     },
     {
         title: 'manage account',
-        urlTest: /\/garage\/si\/pages\/settings/
+        urlTest: /\/garage\/si\/pages\/settings/,
+        pageDef: accountManagementPage.accountWrapper
     },
     {
-        title: 'vehicles',
-        urlTest: /\/owners/
+        title: 'owners',
+        urlTest: /\/owners/,
+        pageDef: ownersPage.ownersHeaderLogo,
     }
 ];
 
