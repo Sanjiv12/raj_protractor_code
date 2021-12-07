@@ -1,9 +1,10 @@
 Feature: Digital Garage Contact Dealer
-    A user contacts their local dealer for an existing purchase
+    A user contacts their local dealer for a submitted purchase
 
+    @signIn
+    @submitPurchase
     Scenario: Contact Dealer - Modal is Visible
         Given User is in Saves Page
-        And User Signs In <email> <password>
         When User clicks on Contact Dealer
         Then The Contact Dealer Modal should be visible
         And Display Send in disabled state
