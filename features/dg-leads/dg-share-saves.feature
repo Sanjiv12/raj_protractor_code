@@ -5,7 +5,6 @@ Feature: Digital Garage Share Saves
         Given User is in Saves Page
         And User has at least one saved vehicle
 
-    @saveVehicle
     Scenario: Share Saves - Modal is Visible
         And User is not logged in to account
         When User clicks on Start Sharing

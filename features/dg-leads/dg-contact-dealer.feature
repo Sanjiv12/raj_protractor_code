@@ -2,9 +2,9 @@ Feature: Digital Garage Contact Dealer
     A user contacts their local dealer for a submitted purchase
 
     Background:
-    Given User is in Saves Page
-    And User Signs In
-    And User has a purchase with status Pending Dealer Review
+        Given User is in Saves Page
+        And User Signs In
+        And User has a purchase with status Pending Dealer Review
 
     Scenario: Contact Dealer - Modal is Visible
         When User clicks on Contact Dealer
