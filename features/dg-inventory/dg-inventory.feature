@@ -33,7 +33,7 @@ Feature: Digital Garage Inventory
     Scenario: Inventory - Save Used Vehicle
     Given User is in Vehicle List Page
     And Used Filter is selected
-    When User clicks on a vehicles inventory save heart
+    When User clicks on a used vehicles inventory save heart
     Then Save Page shows correct saved vehicle
 
     @keepCookies
@@ -54,7 +54,7 @@ Feature: Digital Garage Inventory
     Scenario: Inventory - Save CPO Vehicle
     Given User is in Vehicle List Page
     And Used Filter is selected
-    When User clicks on a vehicles inventory save heart
+    When User clicks on a CPO vehicles inventory save heart
     Then Save Page shows correct saved vehicle
 
     @keepCookies
