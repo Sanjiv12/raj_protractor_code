@@ -17,7 +17,7 @@ Feature: Digital Garage Inventory Used Vehicles
 
     @keepCookies
     Scenario: Inventory - Signing In Brings Inventory
-        And User is not logged in to account
+        Given User is not logged in to account
         When User Signs In
         Then Saves from signed out garage are brought into signed in garage
 

@@ -6,12 +6,6 @@ Feature: Digital Garage Inventory New Vehicles
         Given User is in Saves Page
         And User has a new vehicle saved
 
-    Scenario: Inventory - Search Inventory
-        And User has no saved inventory
-        When User clicks on Search Inventory
-        Then Then User should be navigated to the Vehicle List Page
-
-    @keepCookies
     Scenario: Inventory - New Vehicle Links to VDP
         When User clicks on a saved vehicle image
         Then The User should be navigated to the Vehicle Details Page
@@ -23,7 +17,7 @@ Feature: Digital Garage Inventory New Vehicles
 
     @keepCookies
     Scenario: Inventory - Signing In Brings Inventory
-        And User is not logged in to account
+        Given User is not logged in to account
         When User Signs In
         Then Saves from signed out garage are brought into signed in garage
 

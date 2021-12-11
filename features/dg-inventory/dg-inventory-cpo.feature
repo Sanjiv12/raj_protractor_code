@@ -17,7 +17,7 @@ Feature: Digital Garage Inventory CPO Vehicles
 
     @keepCookies
     Scenario: Inventory - Signing In Brings Inventory
-        And User is not logged in to account
+        Given User is not logged in to account
         When User Signs In
         Then Saves from signed out garage are brought into signed in garage
 
@@ -25,4 +25,4 @@ Feature: Digital Garage Inventory CPO Vehicles
     Scenario: Inventory - Remove Vehicle from Inventory
         When User clicks on saved vehicle save heart
         And User Clicks Remove
-        Then Vehicle disappers
+        Then Vehicle is removed from the Users Inventory
