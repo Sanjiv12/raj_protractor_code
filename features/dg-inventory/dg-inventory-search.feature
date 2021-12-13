@@ -1,4 +1,4 @@
-Feature: Digital Garage Inventory New Vehicles
+Feature: Digital Garage Inventory Search Inventory
 
     A user wants to search for a vehicle to add to their inventory
 
