@@ -60,10 +60,10 @@ export const config: Config = {
     // seleniumAddress: "http://127.0.0.1:4444/wd/hub",
     // seleniumAddress: "https://ondemand.us-west-1.saucelabs.com:443/wd/hub",
     //  SELENIUM_PROMISE_MANAGER: false,
-     
+
     sauceUser:"sso-toyota.tcoe-kimberlee.dixon",
     sauceKey:"aad70988-20cb-4d05-b24e-65bea4dfb0ee",
-
+    
     // sauceUser:"sso-toyota.tcoe-raghunath.goteti",
     // sauceKey:"a1aaa34b-ba44-4bc7-a94c-f79aa068e60f",
 
@@ -93,15 +93,31 @@ export const config: Config = {
         checkout: "../../features/**/checkOut.feature",
         gxpvlp: "../../features/**/gxp-vlp.feature",
         gxpvdp: "../../features/**/gxp-vdp.feature",
-        gxpsaves: "../../features/**/gxp-saves.feature"
+        gxpsaves: "../../features/**/gxp-saves.feature",
+        dgtopnav: [ 
+            "../../features/dg-top-nav/dg-top-nav-dropdown.feature",
+            "../../features/dg-top-nav/dg-top-nav-logged-in.feature",
+            "../../features/dg-top-nav/dg-top-nav-logged-out.feature",
+        ],
+        gxpsavepagesidebar: [
+            "../../features/**/gxp-save-page-sidebar/gxp-saves-page-sidebar.feature",
+            "../../features/**/gxp-save-page-sidebar/gxp-saves-page-sidebar-logged-in.feature",
+            "../../features/**/gxp-save-page-sidebar/gxp-saves-page-sidebar-logged-out.feature",
+        ],
+        gxpcreateaccountbanner: "../../features/**/gxp-create-account-banner.feature",
+        gxpsso: [
+            "../../features/**/gxp-sso/gxp-sso-smartpath-to-owners.feature",
+            "../../features/**/gxp-sso/gxp-sso-owners-to-smartpath.feature",
+        ],
+        gxpaccountmanagement: "../../features/**/gxp-account-management.feature",
     },
-    
+
     onPrepare: async() => {
         browser.waitForAngularEnabled(false);
         reportConfig.createDirectory(jsonPath);
         // Initially set max waiting time to 15 seconds. Selenium applies this globally.
         // Implicit wait allows the page to poll until an element is present or the duration is reached
-        browser.driver.manage().timeouts().implicitlyWait(WAIT_TIMES.MAX_DURATION);
+        browser.driver.manage().timeouts().implicitlyWait(WAIT_TIMES.IMPLICIT_WAIT_TIME);
         // Load the page
         const vehicleListPage = constructVlpUrl();
         await browser.get(vehicleListPage);
@@ -114,7 +130,7 @@ export const config: Config = {
     // capabilities: {
     // },
 
-    commandTimeout: WAIT_TIMES.TEN_SECONDS,
+    commandTimeout: WAIT_TIMES.MAX_COMMAND_TIMEOUT,
     maxDuration: WAIT_TIMES.MAX_DURATION,
     //maxSessions: 30,
     seleniumVersion: "3.141.59",

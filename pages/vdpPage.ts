@@ -108,7 +108,9 @@ export class VdpPage {
     public mstcMultiLeadFormModalZipError : ElementFinder;
     public mstcMultiLeadFormModalTitle : ElementFinder;
     public mstcMultiLeadFormModalReturnToPage : ElementFinder;
-    public startPurchase : ElementFinder;
+    public startPurchaseForUnlockDealer : ElementFinder;
+    public startPurchaseForNoUnlockDealer : ElementFinder;
+    public startPurchaseWaitSpinner : ElementFinder;
     public rightPaneMenu : ElementFinder;
     public signInBtn : ElementFinder;
     public profileIcon : ElementFinder;
@@ -130,13 +132,13 @@ export class VdpPage {
 
     public saveHearts: ElementArrayFinder;
     public saveHeartActive : ElementFinder;
-    public saveHeartTooltip : ElementFinder; 
+    public saveHeartTooltip : ElementFinder;
 
     public estimateTabs : ElementArrayFinder;
     public estimateAmount : ElementFinder;
-    public MSRP : ElementFinder; 
-    public vehicleName: ElementFinder; 
-    public vehicleVin : ElementFinder;    
+    public MSRP : ElementFinder;
+    public vehicleName: ElementFinder;
+    public vehicleVin : ElementFinder;
     constructor() {
         this.cashDown = element(by.className('ngx-slider-span ngx-slider-pointer ngx-slider-pointer-min'));
         this.price = element(by.xpath("//div[@class='price']/div[@class='ng-star-inserted']"));
@@ -247,8 +249,8 @@ export class VdpPage {
         this.mstcMultiLeadFormModalZipError = element(by.css('div.customer-zip-field .mat-error'));
         this.mstcMultiLeadFormModalTitle = element(by.css('.smart-price-modal-header'));
         this.mstcMultiLeadFormModalReturnToPage = element(by.xpath('//div[@class="return-to-page"]/button'));
-        this.startPurchase = element(by.xpath('//div[@class="price-details"]/button[2]'));
-
+        this.startPurchaseForUnlockDealer = element(by.xpath('/html/body/main/app-root/mat-drawer-container/mat-drawer-content/div/app-vehicle-details/div[1]/div[2]/div[2]/section/vdp-pricing-summary/div/div[3]/div[2]/button[2]'));
+        this.startPurchaseForNoUnlockDealer = element(by.xpath('/html/body/main/app-root/mat-drawer-container/mat-drawer-content/div/app-vehicle-details/div[1]/div[2]/div[2]/section/vdp-pricing-summary/div/div[3]/div[2]/button[1]'));
         this.rightPaneMenu = element(by.xpath('//div[@class="menu-items ng-star-inserted"]'));    //element(by.css("div.right-pane > div.menu-items"));
         this.signInBtn = element(by.xpath("//div[@class='sign-in menu-button ng-star-inserted']")); //element(by.css('.sign-in'));
         
@@ -259,7 +261,7 @@ export class VdpPage {
         this.zipTaxDesc = element(by.className('edit_zip_tax_desc'));
         this.chsFinanceBtn = element(by.xpath('//div[@class="finance_buttons"]/button'));
         this.zipCodeModalInput = element(by.id('textInput'));
-        this.zipCodeModalDoneBtn = element(by.xpath('//div[@class="zip-container"]/button'));
+        this.zipCodeModalDoneBtn = element(by.xpath('//*[@id="zip-form"]/div/button'));
         this.reviewDealZipCode = element(by.xpath('//span[@class="text-link custom_zip_button"]'));
         this.editDetailsBtn = element(by.className('text-button edit_Details_button'));
         this.ownFinance = element(by.className('own-finance'));
@@ -281,5 +283,7 @@ export class VdpPage {
         this.vehicleName = element(by.className('vehicle-title'));
         this.vehicleVin = element(by.className('vin'));
 
+
+        this.startPurchaseWaitSpinner = element(by.className('spinner'))
     }
 }

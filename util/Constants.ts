@@ -4,6 +4,8 @@ export const PLATFORMS = {
 };
 
 export const TCOM_WEBSITE =  'https://www.toyota.com';
+export const OWNERS_URL = 'https://www.toyota.com/owners';
+export const OWNERS_URL_REDIRECT = 'stg-aem-tcom.origin.cepo-proxy.tms.aws.toyota.com';
 
 
 export const JENKINS_OPTIONS = {
@@ -26,6 +28,7 @@ export const CLI = {
 export const WAIT_TIMES = {
     FIVE_SECONDS: 5000,
     TEN_SECONDS: 10000,
-    MAX_DURATION: 15000,
-    MAX_TEST_TIMEOUT: 90000
+    MAX_DURATION: 90000,
+    IMPLICIT_WAIT_TIME: 30000,
+    MAX_COMMAND_TIMEOUT: 15000
 }
