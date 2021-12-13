@@ -26,8 +26,14 @@ When('User clicks on Start Purchase', async  () =>{
 });
 
 
-Then('System should navigate to Create Account Page', async  () =>{
-    return Assertion.expect(await browser.getCurrentUrl()).to.contain('account?dealerCd=');
+Then('System should navigate to Create Account Page', async  () => {
+    try {
+        await vdpPage.startPurchaseWaitSpinner.isDisplayed();
+        await browser.driver.wait(protractor.until.elementIsNotVisible(vdpPage.startPurchaseWaitSpinner));
+        return Assertion.expect(await browser.getCurrentUrl()).to.contain('account?dealerCd=');
+    } catch {
+        return Assertion.expect(await browser.getCurrentUrl()).to.contain('account?dealerCd=');
+    }
 });
 
 Then('Display the Email text box', async  () =>{
