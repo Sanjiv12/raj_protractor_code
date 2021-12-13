@@ -1,6 +1,6 @@
 Feature: Digital Garage Inventory New Vehicles
 
-    A user wants to search for a new vehicle to add to their inventory
+    A user wants to search for a vehicle to add to their inventory
 
     Scenario: Inventory - Search Inventory
         Given User is in Saves Page
