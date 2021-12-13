@@ -25,4 +25,4 @@ Feature: Digital Garage Inventory Used Vehicles
     Scenario: Inventory - Remove Vehicle from Inventory
         When User clicks on saved vehicle save heart
         And User Clicks Remove
-        Then Vehicle disappers
+        Then Vehicle is removed from the Users Inventory
