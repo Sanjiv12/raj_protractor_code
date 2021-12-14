@@ -111,7 +111,7 @@ export const config: Config = {
         ],
         gxpaccountmanagement: "../../features/**/gxp-account-management.feature",
     },
-
+    
     onPrepare: async() => {
         browser.waitForAngularEnabled(false);
         reportConfig.createDirectory(jsonPath);

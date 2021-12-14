@@ -29,21 +29,21 @@ Scenario: Create Account - Field validation 
   And Display Create Account CTA as disabled
 
 
-Scenario: Create Account - Password validation 
+Scenario: Create Account - Password validation
 
   Given User is in Vehicle Details page
   When User clicks on Start Purchase
   And User starts entering password
   Then System should validate the mandatory conditions and display ones which are satisfied with a tick mark
- 
-Scenario: Create Account - Account already registered 
+
+Scenario: Create Account - Account already registered
 
   Given User is in Vehicle Details page
   When User clicks on Start Purchase
   And User enters an email id registered previously
   And User enters First and Last name registered previously
   And User enters Phone registered previously
-  And User enters a valid password   
+  And User enters a valid password
   And User clicks on Create Account
   Then System should display Sign In page
 
@@ -54,6 +54,6 @@ Scenario: Create Account - Check your email
   And User enters an email id not registered previously
   And User enters First and Last name not registered previously
   And User enters Phone not registered previously
-  And User enters a valid password   
+  And User enters a valid password
   And User clicks on Create Account
   Then System should display Check your mail page

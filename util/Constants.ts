@@ -4,6 +4,8 @@ export const PLATFORMS = {
 };
 
 export const TCOM_WEBSITE =  'https://www.toyota.com';
+export const LOGIN_PAGE_URL = 'account.toyota.com';
+export const INVENTORY_REVIEW_URL = 'inventory/review';
 export const OWNERS_URL = 'https://www.toyota.com/owners';
 export const OWNERS_URL_REDIRECT = 'stg-aem-tcom.origin.cepo-proxy.tms.aws.toyota.com';
 
@@ -31,4 +33,18 @@ export const WAIT_TIMES = {
     MAX_DURATION: 90000,
     IMPLICIT_WAIT_TIME: 30000,
     MAX_COMMAND_TIMEOUT: 15000
+}
+
+export const BUTTON_LABELS = {
+    START_PURCHASE: 'Start Purchase'
+}
+
+export const CSS_CLASSES = {
+    ANGULAR_RADIO_INPUT_CHECKED: 'mat-radio-checked',
+    ANGULAR_CHECKBOX_INPUT_CHECKED: 'mat-checkbox-checked'
+}
+
+export const ATTRIBUTES = {
+    CLASS: 'class',
+    COLOR: 'color'
 }

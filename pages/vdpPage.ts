@@ -119,11 +119,15 @@ export class VdpPage {
     public confirmZipText : ElementFinder;
     public zipTaxDesc : ElementFinder;
     public chsFinanceBtn : ElementFinder;
+    public confirmAndSubmitButton : ElementFinder;
     public zipCodeModalInput : ElementFinder;
     public zipCodeModalDoneBtn : ElementFinder;
+    public zipCodeWarningModal : ElementFinder;
+    public zipCodeWarningDoneButton : ElementFinder;
     public reviewDealZipCode : ElementFinder;
     public editDetailsBtn : ElementFinder;
     public ownFinance : ElementFinder;
+    public financeOption : ElementArrayFinder;
     public tfsFinance : ElementFinder;
     public applyFinanceModal : ElementFinder;
     public acceptApplyFinanceModalBtn : ElementFinder;
@@ -139,6 +143,7 @@ export class VdpPage {
     public MSRP : ElementFinder;
     public vehicleName: ElementFinder;
     public vehicleVin : ElementFinder;
+    public reviewDealPageTitle : ElementFinder;
     constructor() {
         this.cashDown = element(by.className('ngx-slider-span ngx-slider-pointer ngx-slider-pointer-min'));
         this.price = element(by.xpath("//div[@class='price']/div[@class='ng-star-inserted']"));
@@ -259,19 +264,21 @@ export class VdpPage {
         this.closeZipCodeModal = element(by.xpath('//div[@class="close-btn-container"]'));
         this.confirmZipText = element(by.className('text-button confirm_zip'));
         this.zipTaxDesc = element(by.className('edit_zip_tax_desc'));
-        this.chsFinanceBtn = element(by.xpath('//div[@class="finance_buttons"]/button'));
+        this.chsFinanceBtn = element(by.xpath('/html/body/main/app-root/mat-drawer-container/mat-drawer-content/div/app-vehicle-review/div[2]/app-mstc-stepper/section/div[2]/footer/div/div[2]/button'));
         this.zipCodeModalInput = element(by.id('textInput'));
         this.zipCodeModalDoneBtn = element(by.xpath('//*[@id="zip-form"]/div/button'));
+        this.zipCodeWarningModal = element(by.id('zipCode-warning-modal-panel'));
+        this.zipCodeWarningDoneButton = element(by.xpath('//*[@id="zipCode-warning-modal-panel"]/app-zip-code-warning-modal/div[1]/button'));
         this.reviewDealZipCode = element(by.xpath('//span[@class="text-link custom_zip_button"]'));
         this.editDetailsBtn = element(by.className('text-button edit_Details_button'));
-        this.ownFinance = element(by.className('own-finance'));
-        this.tfsFinance = element(by.className('tfs-finance'));
-
+        this.financeOption = element.all(by.className('mat-radio-button'));
+        this.tfsFinance = this.financeOption.first();
+        this.ownFinance = this.financeOption.last();
         this.applyFinanceModal = element(by.className('apply-finance-modal-container'));
-        this.acceptApplyFinanceModalBtn = element(by.xpath('//section[@class="apply-finance-modal-body"]/button[1]'));
-        this.notNowApplyFinanceModalBtn = element(by.xpath('//section[@class="apply-finance-modal-body"]/button[2]'));
+        this.acceptApplyFinanceModalBtn = element(by.className('primary-button large accept_button'));
+        this.notNowApplyFinanceModalBtn = element(by.className('secondary-button large back_button'));
         this.authTfsCb = element(by.xpath('//div[@class="con-checkbox"]/mat-checkbox'))
-
+        this.confirmAndSubmitButton = element(by.xpath('/html/body/main/app-root/mat-drawer-container/mat-drawer-content/div/app-vehicle-review/div[2]/app-mstc-stepper/section/div[2]/footer/div/div/button'))
         this.saveHearts = element.all(by.css('.dg-inline-save-heart'));
         this.saveHeartActive = element(by.css('.dg-encircle.active'));
         this.saveHeartTooltip = element(by.css('.dg-tooltip'));
@@ -283,7 +290,7 @@ export class VdpPage {
         this.vehicleName = element(by.className('vehicle-title'));
         this.vehicleVin = element(by.className('vin'));
 
-
-        this.startPurchaseWaitSpinner = element(by.className('spinner'))
+        this.startPurchaseWaitSpinner = element(by.className('spinner'));
+        this.reviewDealPageTitle = element(by.className('review-deal-header-content'));
     }
 }

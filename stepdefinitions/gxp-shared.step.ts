@@ -25,7 +25,7 @@ let MAX_TIME_WAIT = 10000;
 
 
 When(/User Signs In(\s\"(.*?)\")?(\s\"(.*?)\")?/, async(email?: string, password?: string) =>{
-    await waitForVisibilityOf(navMenu.profileIcon, 'Top Nav Profile Icon'); 
+    await waitForVisibilityOf(navMenu.profileIcon, 'Top Nav Profile Icon');
     await navMenu.profileIcon.click();
 
     await waitForVisibilityOf(navMenu.dgComponentMenuDropdownDesktop, 'Dropdown Element');

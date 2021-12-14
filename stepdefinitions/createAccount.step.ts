@@ -6,6 +6,7 @@ import {VdpPage} from "../pages/vdpPage"
 import {CreateAccountPage} from "../pages/createAccountPage"
 import { expect } from "chai";
 import {Assertion} from "../util/assertion"
+import {BUTTON_LABELS} from "../util/Constants";
 
 let vdpPage : VdpPage = new VdpPage();
 let caPage : CreateAccountPage = new CreateAccountPage();
@@ -14,10 +15,10 @@ let caPage : CreateAccountPage = new CreateAccountPage();
 When('User clicks on Start Purchase', async  () =>{
     // check the secondary button text
     await vdpPage.startPurchaseForUnlockDealer.getText().then((txt) => {
-        if (txt === 'Start Purchase') {
-            return  vdpPage.startPurchaseForUnlockDealer.click();
+        if (txt === BUTTON_LABELS.START_PURCHASE) {
+            return vdpPage.startPurchaseForUnlockDealer.click();
         } else {
-            vdpPage.startPurchaseForNoUnlockDealer.click();
+            return vdpPage.startPurchaseForNoUnlockDealer.click();
         }
     }).catch(() => {
         return vdpPage.startPurchaseForNoUnlockDealer.click();
@@ -25,8 +26,14 @@ When('User clicks on Start Purchase', async  () =>{
 });
 
 
-Then('System should navigate to Create Account Page', async  () =>{
-    return Assertion.expect(await browser.getCurrentUrl()).to.contain('account?dealerCd=');
+Then('System should navigate to Create Account Page', async  () => {
+    try {
+        await vdpPage.startPurchaseWaitSpinner.isDisplayed();
+        await browser.driver.wait(protractor.until.elementIsNotVisible(vdpPage.startPurchaseWaitSpinner));
+        return Assertion.expect(await browser.getCurrentUrl()).to.contain('account?dealerCd=');
+    } catch {
+        return Assertion.expect(await browser.getCurrentUrl()).to.contain('account?dealerCd=');
+    }
 });
 
 Then('Display the Email text box', async  () =>{
