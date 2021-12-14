@@ -8,6 +8,7 @@ export class NavMenu {
     public savesPageLinkOut : ElementFinder;
     public dgLoginButton : ElementFinder;
     public dgCreateAccountButton : ElementFinder;
+    public dgOwnersLinkout : ElementFinder;
     public dgMenuMessages : ElementFinder[];
     public dgManageAccount : ElementFinder;
     public dgSignOutButton : ElementFinder;
@@ -21,6 +22,7 @@ export class NavMenu {
         this.savesPageLinkOut= element(by.id('dg-menu-saves-page-linkout'));
         this.dgLoginButton = element(by.id('dg-login-btn'));
         this.dgCreateAccountButton = element(by.id('dg-register-btn'));
+        this.dgOwnersLinkout = element(by.id('dg-menu-owners-page-linkout'));
         this.dgMenuMessages = [element(by.xpath('//*[@id="dg-component-nav-menu-desktop"]/div[2]/div/div[6]/span')), element(by.xpath('//*[@id="dg-component-nav-menu-desktop"]/div[2]/div/div[6]/div/span[1]'))];
         this.dgManageAccount = element(by.xpath('//*[@id="dg-account-btn"]'));
         this.dgSignOutButton = element(by.xpath('//*[@id="dg-logout-btn"]'));

@@ -23,44 +23,34 @@ Given('User is in Vehicle List Page', async () =>{
 
 
 When('User selects one or more vehicle series from Model in Filters panel', async  () =>{
-
-    await browser.driver.sleep(5*1000);
-    vlpFilterPage.modelDropDown.click();
+    await vlpFilterPage.modelDropDown.click();
     await browser.driver.sleep(2*1000);
     browser.driver.findElement(By.xpath("//body")).click();
 });
 
 Then('Vehicles List and count should be updated based on users selection', async () => {
-    await browser.driver.sleep(5*1000);
-    vlpFilterPage.countText.getText().then((count) => {
+    return vlpFilterPage.countText.getText().then((count) => {
         let c = count.split(' ',1);
         mspFilterPage.appCard.then((arr) =>{
             expect((arr.length).toString()).to.eql(c.toString());
         })
     });
-
 });
 
 Given('User is in Vehicle List Page with all filters cleared', async () =>{
-    await browser.driver.sleep(1*1000);
-    vlpFilterPage.filterClear.click();
-    await browser.driver.sleep(5*1000);
-    mspFilterPage.appCard.first().click();
+    await vlpFilterPage.filterClear.click();
+    await mspFilterPage.appCard.first().click();
 });
 
 
 When('User selects a Year from Filters panel', async  () =>{
 
-    await browser.driver.sleep(5*1000);
-    vlpFilterPage.filterOptionYear.first().click();
-    await browser.driver.sleep(5*1000);
-    //vlpFilterPage.filterOptionYear.last().click();
+    await vlpFilterPage.filterOptionYear.first().click();
 
 });
 
 Then('Only the applicable vehicles should be displayed in the page', async () => {
-    await browser.driver.sleep(1*1000);
-    vlpFilterPage.filterOptionYearText.first().getText().then((yearsel) => {
+    return vlpFilterPage.filterOptionYearText.first().getText().then((yearsel) => {
         let year = yearsel.substring(0, yearsel.lastIndexOf("(")).trim();
         vlpFilterPage.appCardVehName.each((ele, i) => {
             ele.getText().then((name) => {
@@ -72,8 +62,7 @@ Then('Only the applicable vehicles should be displayed in the page', async () =>
 });
 
 Then('Count of options under all filter categories should be updated', async()=> {
-    await browser.driver.sleep(1*1000);
-    vlpFilterPage.countText.getText().then((count) => {
+    return vlpFilterPage.countText.getText().then((count) => {
         let c =  count.split(' ',1);
         mspFilterPage.appCard.then((arr) =>{
             expect((arr.length).toString()).to.eql(c.toString());
@@ -82,12 +71,9 @@ Then('Count of options under all filter categories should be updated', async()=>
 });
 
 Then('Filter chip should be displayed for year', async()=> {
-    await browser.driver.sleep(1*1000);
-        vlpFilterPage.filterChip.each((ele,i) => {
-            console.log('i = '+i);
+        return vlpFilterPage.filterChip.each((ele,i) => {
             if(i === 1){
                 ele.getText().then((text) => {
-                    console.log('filterchip text - '+ text);
                     vlpFilterPage.filterOptionYearText.first().getText().then((yearsel) => {
                         let year = yearsel.substring(0, yearsel.lastIndexOf("(")).trim();
                         expect(year).to.equal(text.trim());
@@ -98,19 +84,14 @@ Then('Filter chip should be displayed for year', async()=> {
 });
 
 When('User selects Price range for Advertised / Selling Price from Filters panel', async() => {
-    await browser.driver.sleep(10*1000);
-    mspFilterPage.filterMinPrice.clear(); //.then(() => {
-    await browser.driver.sleep(5*1000);
-    mspFilterPage.filterMinPrice.sendKeys(42000);
-    await browser.driver.sleep(10*1000);
-    //})
+    await mspFilterPage.filterMinPrice.isDisplayed();
+    await mspFilterPage.filterMinPrice.click();
+    await mspFilterPage.filterMinPrice.clear();
+    await mspFilterPage.filterMinPrice.sendKeys(42000);
 });
 
 Then('Only the applicable vehicles should be displayed in the page by price', async() => {
-    await browser.driver.sleep(2*1000);
-    vlpFilterPage.filterMinPrice.getText().then((min) => {
-        //min = (min.replace('$', '')).replace(',','');
-        //min = min.replace(',','');
+    return vlpFilterPage.filterMinPrice.getText().then((min) => {
         //console.log('min - '+min);
         let nmin : number = Number((min.replace('$', '')).replace(',',''));
         //console.log('nmin - '+nmin);
@@ -134,9 +115,7 @@ Then('Only the applicable vehicles should be displayed in the page by price', as
 
 
 Then('Filter chip should be displayed for price', async()=> {
-    await browser.driver.sleep(1*1000);
-        vlpFilterPage.filterChip.each((ele,i) => {
-            console.log('i = '+i);
+        return vlpFilterPage.filterChip.each((ele,i) => {
             if(i === 1){
                 ele.getText().then((text) => {
                     console.log('filterchip text - '+ text);
@@ -149,19 +128,15 @@ Then('Filter chip should be displayed for price', async()=> {
 });
 
 When('User selects a trim from Filters panel', async() => {
-    await browser.driver.sleep(5*1000);
-    vlpFilterPage.filterOptionTrim.first().click();
-    await browser.driver.sleep(5*1000);
+    await vlpFilterPage.filterOptionTrim.first().click();
 });
 
 Then('Only the applicable vehicles should be displayed in the page by trim', async() => {
-    await browser.driver.sleep(5*1000);
-    vlpFilterPage.filterOptionTrimText.first().getText().then((trimsel) => {
+    return vlpFilterPage.filterOptionTrimText.first().getText().then((trimsel) => {
         let trim = trimsel.substring(0, trimsel.lastIndexOf("(")).trim();
         vlpFilterPage.appCardVehName.each((ele, i) => {
             ele.getText().then((name) => {
                 let trimname = name.slice(5, name.length).toString().trim();
-                console.log('trimname - '+ trimname);
                 expect(trimname).to.equal(trim);
             });
         })
@@ -169,9 +144,7 @@ Then('Only the applicable vehicles should be displayed in the page by trim', asy
 });
 
 Then('Filter chip should be displayed for trim', async() => {
-    await browser.driver.sleep(1*1000);
-        vlpFilterPage.filterChip.each((ele,i) => {
-            console.log('i = '+i);
+        return vlpFilterPage.filterChip.each((ele,i) => {
             if(i === 1){
                 ele.getText().then((text) => {
                     console.log('filterchip text - '+ text);
@@ -185,19 +158,15 @@ Then('Filter chip should be displayed for trim', async() => {
 });
 
 When('User selects an Engine option from Filters panel', async() => {
-    await browser.driver.sleep(5*1000);
     vlpFilterPage.filterOptionEngine.first().click();
-    await browser.driver.sleep(5*1000);
 });
 
 Then('Only the applicable vehicles should be displayed in the page by engine', async() => {
-    await browser.driver.sleep(5*1000);
-    vlpFilterPage.filterOptionEngineText.first().getText().then((engsel) => {
+    return vlpFilterPage.filterOptionEngineText.first().getText().then((engsel) => {
         let eng = engsel.substring(0, engsel.lastIndexOf("(")).trim();
         vlpFilterPage.appCardVehDesc.each((ele, i) => {
             ele.getText().then((name) => {
                 let desc = name.slice(0, eng.length).toString().trim();
-                console.log('desc - '+ desc);
                 expect(desc).to.equal(eng);
             });
         })
@@ -205,8 +174,7 @@ Then('Only the applicable vehicles should be displayed in the page by engine', a
 });
 
 Then('Filter chip should be displayed for engine', async() => {
-    await browser.driver.sleep(1*1000);
-        vlpFilterPage.filterChip.each((ele,i) => {
+        return vlpFilterPage.filterChip.each((ele,i) => {
             console.log('i = '+i);
             if(i === 1){
                 ele.getText().then((text) => {
@@ -221,28 +189,23 @@ Then('Filter chip should be displayed for engine', async() => {
 });
 
 Given('User is in Model Selection page with all filter chips cleared', async() => {
-
-    await browser.driver.sleep(1*1000);
-    vlpFilterPage.filterClear.click();
-    await browser.driver.sleep(5*1000);
+    await vlpFilterPage.filterClear.isDisplayed();
+    await vlpFilterPage.filterClear.click();
 });
 
 When('User selects model as Truck', async () =>{
-    await browser.driver.sleep(5*1000);
-    vlpFilterPage.filtercheckBoxTruck.click();
-    await browser.driver.sleep(5*1000);
+    await vlpFilterPage.filtercheckBoxTruck.click();
 });
 
 When('User navigates to Vehicle List Page', async () =>{
-    mspFilterPage.appCard.first().click();
-    await browser.driver.sleep(5*1000);
+    await mspFilterPage.appCard.first().click();
 });
 
 Then('Filter panel should include Filters for Cab and Bed Length', async () =>{
-    vlpFilterPage.filterOptionCab.isDisplayed().then((value)=>{
+    await vlpFilterPage.filterOptionCab.isDisplayed().then((value)=>{
         expect(value).to.eql([true]);
     });
-    vlpFilterPage.filterOptionBL.isDisplayed().then((blvalue)=>{
+    await vlpFilterPage.filterOptionBL.isDisplayed().then((blvalue)=>{
         expect(blvalue).to.eql([true]);
     });
 });
@@ -253,20 +216,16 @@ Given('User has selected a Truck model', async() => {
 
 
 When('User selects a cab option from Filters panel', async() => {
-    await browser.driver.sleep(5*1000);
-    vlpFilterPage.filterOptionCab.first().click();
-    await browser.driver.sleep(5*1000);
+    await vlpFilterPage.filterOptionCab.first().click();
 });
 
 Then('Only the applicable vehicles should be displayed in the page by cab', async() => {
-    await browser.driver.sleep(5*1000);
-    vlpFilterPage.filterOptionCabText.first().getText().then((cabsel) => {
+    return vlpFilterPage.filterOptionCabText.first().getText().then((cabsel) => {
         let cab = cabsel.substring(0, cabsel.lastIndexOf("(")).trim();
         vlpFilterPage.appCardVehDesc.each((ele, i) => {
             ele.getText().then((name) => {
                 let desc = name.slice(0, cab.length).toString().trim();
-                console.log('desc - '+ desc);
-                expect(desc).to.equal(cab);
+                return expect(desc).to.equal(cab);
             });
         })
     })
@@ -276,8 +235,7 @@ Then('Only the applicable vehicles should be displayed in the page by cab', asyn
 
 
 Then('Filter chip should be displayed for cab', async() => {
-    await browser.driver.sleep(1*1000);
-        vlpFilterPage.filterChip.each((ele,i) => {
+        return vlpFilterPage.filterChip.each((ele,i) => {
             //console.log('i = '+i);
             if(i === 1){
                 ele.getText().then((text) => {
@@ -293,21 +251,17 @@ Then('Filter chip should be displayed for cab', async() => {
 
 
 When('User selects a Bed Length option from Filters panel', async() => {
-    await browser.driver.sleep(5*1000);
-    vlpFilterPage.filterChip.each((ele,i) => {
+    await vlpFilterPage.filterChip.each((ele,i) => {
         // console.log('i = '+i);
         if(i === 1){
             ele.click();
         }
     });
-    await browser.driver.sleep(5*1000);
-    vlpFilterPage.filterOptionBL.first().click();
-    await browser.driver.sleep(5*1000);
+    await vlpFilterPage.filterOptionBL.first().click();
 });
 
 Then('Only the applicable vehicles should be displayed in the page by Bed Length', async() => {
-    await browser.driver.sleep(5*1000);
-    vlpFilterPage.filterOptionBLText.first().getText().then((blsel) => {
+    return vlpFilterPage.filterOptionBLText.first().getText().then((blsel) => {
         let bl = blsel.substring(0, blsel.lastIndexOf("(")).trim();
         vlpFilterPage.appCardVehDesc.each((ele, i) => {
             ele.getText().then((name) => {
@@ -320,8 +274,7 @@ Then('Only the applicable vehicles should be displayed in the page by Bed Length
 });
 
 Then('Filter chip should be displayed for Bed Length', async() => {
-    await browser.driver.sleep(1*1000);
-        vlpFilterPage.filterChip.each((ele,i) => {
+        return vlpFilterPage.filterChip.each((ele,i) => {
             //console.log('i = '+i);
             if(i === 1){
                 ele.getText().then((text) => {
@@ -340,24 +293,22 @@ Given('User has applied one or more filters', async() => {
 });
 
 When('User clicks on a Filter Chip', async() => {
-    await browser.driver.sleep(5*1000);
-    vlpFilterPage.filterChip.each((ele,i) => {
+    await vlpFilterPage.filterChip.each((ele,i) => {
         // console.log('i = '+i);
         if(i !== 0){
             ele.click();
         }
     });
-    await browser.driver.sleep(5*1000);
 });
 
 Then('System should remove the Filter chip', async() => {
-    vlpFilterPage.filterChip.then((arr) => {
+    return vlpFilterPage.filterChip.then((arr) => {
         expect(arr.length).to.equal(1);
     })
 });
 
 Then('Reload the page to display updated list of vehicles and Filters', async() => {
-    vlpFilterPage.countText.getText().then((count) => {
+    return vlpFilterPage.countText.getText().then((count) => {
         let c = count.split(' ',1);
         mspFilterPage.appCard.then((arr) =>{
             expect((arr.length).toString()).to.eql(c.toString());
@@ -366,19 +317,17 @@ Then('Reload the page to display updated list of vehicles and Filters', async() 
 });
 
 When('User clicks on Clear All in Filter chip area', async() => {
-    await browser.driver.sleep(5*1000);
-    vlpFilterPage.filterClear.click();
-    await browser.driver.sleep(5*1000);
+    await vlpFilterPage.filterClear.click();
 });
 
 Then('System should remove all filters', async() => {
-    vlpFilterPage.filterChip.isDisplayed().then((value) => {
+    return vlpFilterPage.filterChip.isDisplayed().then((value) => {
         expect(value).to.be.false;
     })
 });
 
 Then('Navigate to Model Selection page', async() => {
-    mspFilterPage.pageHeader.getText().then((value) => {
+    return mspFilterPage.pageHeader.getText().then((value) => {
         expect(value).to.include('Available models at');
     })
 });
@@ -386,15 +335,13 @@ Then('Navigate to Model Selection page', async() => {
 
 
 Given('User has filters set', async () =>{
-
     await browser.driver.sleep(10*1000);
     browser.executeScript("arguments[0].click()", mspFilterPage.popUpClose);
     await browser.driver.sleep(5*1000);
     // mspFilterPage.appCard.first().click();
     // await browser.driver.sleep(5*1000);
     await browser.get(browser.params.url+'?dealerCd='+browser.params.dealerCd+'&source='+browser.params.source);
-    await browser.driver.sleep(10*1000);
-    mspFilterPage.appcardButton.each((ele,i) => {
+    await mspFilterPage.appcardButton.each((ele,i) => {
         ele.getText().then((text) =>{
             if(text.includes('Available', 0)){
                 ele.click();
@@ -409,26 +356,23 @@ Given('User has filters set', async () =>{
 
 
 When('User unselects a Filter option', async () =>{
-
-    vlpFilterPage.filterYearClear.click();
+    await vlpFilterPage.filterYearClear.click();
+    await vlpFilterPage.filterYearClear.click();
     await browser.driver.sleep(5*1000);
 });
 
 
 
 Then('Clear the filter selection', async () =>{
-
     await browser.driver.sleep(5*1000);
     console.log('is selected - '+ (await vlpFilterPage.filterOptionYear.isSelected()).valueOf());
     expect((await vlpFilterPage.filterOptionYear.isSelected()).valueOf()).to.equal([false]);
-
 });
 
 When('User clears model selection', async () =>{
-
-    vlpFilterPage.modelDropDown.click();
+    await vlpFilterPage.modelDropDown.click();
     await browser.driver.sleep(5*1000);
-    vlpFilterPage.modelDropDownClear.click();
+    await vlpFilterPage.modelDropDownClear.click();
     await browser.driver.sleep(5*1000);
 });
 
@@ -444,7 +388,7 @@ When('User clears model selection', async () =>{
 Then('The Vehicle cards should be sorted by Price in ascending order', async () =>{
 
     let sorted = [];
-    vlpFilterPage.appCardPrice.then(function (unsorted){
+    await vlpFilterPage.appCardPrice.then(function (unsorted){
         sorted = unsorted.slice();
         sorted.sort();
         expect(sorted).to.eql(unsorted);

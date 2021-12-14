@@ -2,28 +2,17 @@ import { browser, ElementFinder, protractor } from "protractor";
 import { When, Then } from "cucumber";
 import { SavesPageRedesign } from "../pages/savesPageRedesign";
 import { expect } from "chai";
-import { link } from "fs";
+import { waitForVisibilityOf } from "../util/waitForVisibilityOf";
 
 let savesPage : SavesPageRedesign = new SavesPageRedesign();
-let until = protractor.ExpectedConditions;
-
-let MAX_TIME_WAIT = 10000;
 
 When('User clicks the X on the Create Account Banner', async() => {
-    await browser.driver.wait(
-        until.visibilityOf(savesPage.createAccountBannerX),
-        MAX_TIME_WAIT,
-        'Create Account Banner taking too long to appear in DOM'
-    );
+    await waitForVisibilityOf(savesPage.createAccountBannerX, 'Create Account Banner X');
     await savesPage.createAccountBannerX.click();
 });
 
 When(/User clicks \"(.*?)\" within Create Account Banner/, async(linkout: string) => {
-    await browser.driver.wait(
-        until.visibilityOf(savesPage.createAccountBanner),
-        MAX_TIME_WAIT,
-        'Create Account Banner taking too long to appear in DOM'
-    );
+    await waitForVisibilityOf(savesPage.createAccountBanner, 'Create Account Banner');
 
     const linkoutToClick: ElementFinder = await savesPage.createAccountBannerLinks.filter(async (elem) => {
         const elemText = await elem.getText();
@@ -34,12 +23,7 @@ When(/User clicks \"(.*?)\" within Create Account Banner/, async(linkout: string
 });
 
 Then('Create Account Banner is shown', async () => {
-    await browser.driver.wait(
-        until.visibilityOf(savesPage.createAccountBanner),
-        MAX_TIME_WAIT,
-        'Create Account Banner taking too long to appear in DOM'
-    );
-
+    await waitForVisibilityOf(savesPage.createAccountBanner, 'Create Account Banner');
     expect(await savesPage.createAccountBannerMessage.isDisplayed());
 });
 

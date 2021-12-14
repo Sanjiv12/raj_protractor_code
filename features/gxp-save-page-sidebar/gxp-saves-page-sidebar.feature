@@ -12,7 +12,7 @@ Feature: GXP Saves Page Sidebar
     Scenario: Sidebar - My Vehicles
         Given User is on desktop
         When User clicks "Vehicles" Linkout
-        Then "Vehicles" page opens in "new" tab
+        Then "Owners" page opens in "new" tab
 
     # # Assumes another test (saves page) will test that the "My Vehicles" link shows up on the page
     Scenario: Sidebar - Hidden - Tablet
