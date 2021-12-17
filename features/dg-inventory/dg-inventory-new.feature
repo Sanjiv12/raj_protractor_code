@@ -11,15 +11,16 @@ Feature: Digital Garage Inventory New Vehicles
         Then The User should be navigated to the Vehicle Details Page
 
     @keepCookies
-    Scenario: Inventory - New Vehicle Vehicle Details
+    Scenario: Inventory - New Vehicle Details
         When User clicks on "Vehicle Details"
         Then The Vehicle Details Modal should be displayed
 
     @keepCookies
     Scenario: Inventory - Signing In Brings Inventory
         Given User is not logged in to account
+        And User views a new vehicle's VDP without saving it
         When User Signs In
-        Then Saves from signed out garage are brought into signed in garage
+        Then Saves and recently viewed from signed out garage are brought into signed in garage
 
     @keepCookies
     Scenario: Inventory - Remove Vehicle from Inventory
