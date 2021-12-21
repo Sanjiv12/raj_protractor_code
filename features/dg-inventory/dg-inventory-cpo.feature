@@ -11,18 +11,26 @@ Feature: Digital Garage Inventory CPO Vehicles
         Then The User should be navigated to the Vehicle Details Page
 
     @keepCookies
-    Scenario: Inventory - CPO Vehicle Vehicle Details
+    Scenario: Inventory - CPO Vehicle Details
         When User clicks on "Vehicle Details"
         Then The Vehicle Details Modal should be displayed
 
     @keepCookies
-    Scenario: Inventory - Signing In Brings Inventory
-        Given User is not logged in to account
-        When User Signs In
-        Then Saves from signed out garage are brought into signed in garage
+    Scenario: Inventory - Recently Viewed CPO Vehicle
+        Given User is in Vehicle Details Page
+        And User is not logged in to account
+        When User views a CPO vehicle's VDP without saving it
+        Then Recently Viewed new vehicle should appear in garage
 
     @keepCookies
-    Scenario: Inventory - Remove Vehicle from Inventory
+    Scenario: Inventory - Signing In Brings CPO Inventory
+        Given User is not logged in to account
+        And User wants their inventory to persist after this browser session
+        When User Signs In
+        Then All inventory from signed out garage are brought into signed in garage
+
+    @keepCookies
+    Scenario: Inventory - Remove CPO Vehicle from Inventory
         When User clicks on saved vehicle save heart
         And User Clicks Remove
         Then Vehicle is removed from the Users Inventory
