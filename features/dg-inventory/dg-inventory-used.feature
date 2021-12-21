@@ -20,7 +20,7 @@ Feature: Digital Garage Inventory Used Vehicles
         Given User is in Vehicle Details Page
         And User is not logged in to account
         When User views a used vehicle's VDP without saving it
-        Then Recently Viewed new vehcile should appear in garage
+        Then Recently Viewed new vehicle should appear in garage
 
     @keepCookies
     Scenario: Inventory - Signing In Brings Used Inventory
