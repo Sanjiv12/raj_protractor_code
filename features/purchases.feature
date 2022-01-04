@@ -1,4 +1,3 @@
-
 Feature: Purchases/Purchase Banner
 A MST-C user has started a purchase
 
@@ -21,11 +20,10 @@ Scenario: Purchase Banner - Continue Purchase CTA
 Scenario: Purchase Banner - Edit CTA
     Given User is in Saves page and logged in
     When User clicks the More dropdown
-    and User clicks Edit
+    And User clicks Edit
     Then a confirmation modal appears
     And User confirms they want to edit purchase
-    And User is redirected back to the VDP where they can adjust purchase options
-    And save their changes
+    And User is redirected back to the VDP
 
 Scenario: Purchase Banner - Cancel CTA
     Given User is in Saves page and logged in
