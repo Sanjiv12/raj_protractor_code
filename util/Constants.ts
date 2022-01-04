@@ -35,6 +35,10 @@ export const WAIT_TIMES = {
     MAX_COMMAND_TIMEOUT: 15000
 }
 
+export const ZIP_CODES = {
+    WILSON: 50010
+}
+
 export const BUTTON_LABELS = {
     START_PURCHASE: 'Start Purchase'
 }

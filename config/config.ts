@@ -63,7 +63,7 @@ export const config: Config = {
 
     sauceUser:"sso-toyota.tcoe-kimberlee.dixon",
     sauceKey:"aad70988-20cb-4d05-b24e-65bea4dfb0ee",
-    
+
     // sauceUser:"sso-toyota.tcoe-raghunath.goteti",
     // sauceKey:"a1aaa34b-ba44-4bc7-a94c-f79aa068e60f",
 
@@ -94,7 +94,7 @@ export const config: Config = {
         gxpvlp: "../../features/**/gxp-vlp.feature",
         gxpvdp: "../../features/**/gxp-vdp.feature",
         gxpsaves: "../../features/**/gxp-saves.feature",
-        dgtopnav: [ 
+        dgtopnav: [
             "../../features/dg-top-nav/dg-top-nav-dropdown.feature",
             "../../features/dg-top-nav/dg-top-nav-logged-in.feature",
             "../../features/dg-top-nav/dg-top-nav-logged-out.feature",
@@ -110,6 +110,7 @@ export const config: Config = {
             "../../features/**/gxp-sso/gxp-sso-owners-to-smartpath.feature",
         ],
         gxpaccountmanagement: "../../features/**/gxp-account-management.feature",
+        gxponboarding: "../../features/**/gxp-onboarding.feature",
     },
     
     onPrepare: async() => {
