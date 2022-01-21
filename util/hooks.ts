@@ -7,13 +7,11 @@ import { constructVlpUrl } from "./constructVlpUrl";
 BeforeAll({timeout: WAIT_TIMES.TEN_SECONDS}, async () => {
     setDefaultTimeout(WAIT_TIMES.MAX_DURATION);
 });
-Before(async () => {
+Before({tags: 'not @keepCookies'}, async () => {
+    await browser.driver.manage().deleteAllCookies();
     const vehicleListPage = constructVlpUrl();
-    await browser.driver.manage().deleteAllCookies();
-    await browser.get(TCOM_WEBSITE);
-    await browser.driver.manage().deleteAllCookies();
-    await browser.get(vehicleListPage);
-    await browser.driver.manage().deleteAllCookies();
+    const sitesToRemoveCookies = [vehicleListPage, TCOM_WEBSITE];
+    await deleteAllCookies(sitesToRemoveCookies);
 });
 
 After(async function(scenario) {
@@ -23,3 +21,10 @@ After(async function(scenario) {
          this.attach(screenShot, "image/png");
     }
 });
+
+async function deleteAllCookies(sitesToRemoveCookies: string[]) {
+    for (const site of sitesToRemoveCookies) {
+        await browser.driver.get(site);
+        await browser.driver.manage().deleteAllCookies();
+    }
+}
