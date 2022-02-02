@@ -111,6 +111,12 @@ export const config: Config = {
         ],
         gxpaccountmanagement: "../../features/**/gxp-account-management.feature",
         gxponboarding: "../../features/**/gxp-onboarding.feature",
+        gxpinventory: [
+            "../../features/dg-inventory/dg-inventory-cpo.feature",
+            "../../features/**/dg-inventory-new.feature",
+            "../../features/**/dg-inventory-search.feature",
+            "../../features/**/dg-inventory-used.feature",   
+        ],
     },
     
     onPrepare: async() => {

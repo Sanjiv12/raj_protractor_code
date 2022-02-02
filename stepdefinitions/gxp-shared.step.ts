@@ -15,9 +15,14 @@ import { waitForVisibilityOf } from "../util/waitForVisibilityOf";
 import { Assertion } from "../util/assertion";
 import { CreateAccountPage } from "../pages/createAccountPage";
 import { hasNotPreviouslyLoggedIn } from "../util/hasNotPreviouslyLoggedIn";
+import { constructVlpUrl } from "../util/constructVlpUrl";
+import { VlpFilterPage } from "../pages/vlpFilterPage";
+import { MspFilterPage } from "../pages/mspFilterPage";
 
 let createAccountPage: CreateAccountPage = new CreateAccountPage();
 const savesPage: SavesPageRedesign = new SavesPageRedesign();
+const vlpFilterPage = new VlpFilterPage();
+const mspFilterPage = new MspFilterPage();
 let navMenu: NavMenu = new NavMenu();
 let until = protractor.ExpectedConditions;
 
@@ -64,17 +69,14 @@ Given("User is not logged in to account", async () => {
  */
 
 Given("User is in Saves page", async () => {
-  const savesPageInfo = await getPageInfo("saves");
-  const currentUrl = await browser.getCurrentUrl();
+  await navigateToSavesPage();
+});
 
-  const onSavesPage = savesPageInfo.urlTest.test(currentUrl);
+Given('User is in Vehicle List page GXP', async () => {
+    const mspPageUrl = constructVlpUrl();
+    await browser.get(mspPageUrl);
 
-  if (!onSavesPage) {
-    const savesPage = constructSavePageUrl();
-    await browser.driver.get(savesPage);
-  }
-
-  await waitForVisibilityOf(savesPageInfo.pageDef, savesPageInfo.title);
+    await waitForVisibilityOf(mspFilterPage.sortDropDown, 'Model Card');
 });
 
 When("User loads the Saves page", async () => {
@@ -140,3 +142,17 @@ Given("User is on tablet", async () => {
 Given("User is on mobile", async () => {
   browser.driver.manage().window().setSize(375, 667);
 });
+
+export async function navigateToSavesPage() {
+  const savesPageInfo = await getPageInfo("saves");
+  const currentUrl = await browser.getCurrentUrl();
+
+  const onSavesPage = savesPageInfo.urlTest.test(currentUrl);
+
+  if (!onSavesPage) {
+    const savesPage = constructSavePageUrl();
+    await browser.driver.get(savesPage);
+  }
+
+  await waitForVisibilityOf(savesPageInfo.pageDef, savesPageInfo.title);
+}

@@ -3,24 +3,23 @@ Feature: Digital Garage Inventory New Vehicles
     A user manages new vehicles in their inventory
 
     Background:
-        Given User is in Saves Page
-        And User has a new vehicle saved
+        Given User has a "new" vehicle saved
+        And User is in Saves page
 
     Scenario: Inventory - New Vehicle Links to VDP
-        When User clicks on a saved vehicle image
-        Then The User should be navigated to the Vehicle Details Page
+        When User clicks on a saved "new" vehicle image
+        Then "Vehicle Details" page opens in "same" tab
 
     @keepCookies
     Scenario: Inventory - New Vehicle Details
-        When User clicks on "Vehicle Details"
+        When User clicks on "Vehicle Details" on Vehicle Card
         Then The Vehicle Details Modal should be displayed
 
     @keepCookies
     Scenario: Inventory - Recently Viewed New Vehicle
-        Given User is in Vehicle Details Page
-        And User is not logged in to account
-        When User views a new vehicle's VDP without saving it
-        Then Recently Viewed new vehicle should appear in garage
+        Given User is in Vehicle List page GXP
+        When User views an unsaved "new" vehicle's VDP without saving it
+        Then Recently Viewed "new" vehicle should appear in garage
 
     @keepCookies
     Scenario: Inventory - Signing In Brings New Inventory
@@ -31,6 +30,6 @@ Feature: Digital Garage Inventory New Vehicles
 
     @keepCookies
     Scenario: Inventory - Remove New Vehicle from Inventory
-        When User clicks on saved vehicle save heart
+        When User clicks on saved "new" vehicle save heart
         And User Clicks Remove
-        Then Vehicle is removed from the Users Inventory
+        Then Vehicle is removed from the Users inventory

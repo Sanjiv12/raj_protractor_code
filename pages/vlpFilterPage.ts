@@ -2,6 +2,7 @@ import { $, ElementFinder, element, by,   ElementArrayFinder } from "protractor"
 
 export class VlpFilterPage {
 
+    public vlpHeader : ElementFinder;
     public modelDropDown : ElementFinder;
     public modelOption1 : ElementFinder;
     public modelOption2 : ElementFinder;
@@ -34,6 +35,7 @@ export class VlpFilterPage {
     public sortDropDown : ElementFinder;
 
     public appCard : ElementArrayFinder;
+    public usedVehicleCards : ElementArrayFinder;
     public filterPriceReset : ElementFinder;
     public sortPriceLowToHigh : ElementFinder;
 
@@ -63,6 +65,7 @@ export class VlpFilterPage {
 
 
     constructor() {
+        this.vlpHeader = element(by.xpath('//div[@class="header-panel"][1]'));
         this.modelDropDown = element(by.css(".model-name"));
         this.modelOption1 = element(by.xpath("//div[@class='checkbox-container']/div[4]//div[@class='mat-checkbox-inner-container']"));
         this.modelOption2 = element(by.xpath("//div[@class='checkbox-container']/div[7]//div[@class='mat-checkbox-inner-container']"));
@@ -98,6 +101,7 @@ export class VlpFilterPage {
         this.sortPriceLowToHigh = element(by.css("mat-option[ng-reflect-value='PriceLowToHigh'] > .mat-option-text > span"));
         
         this.appCard = element.all(by.css("div.card-panel-content > app-card-container"));
+        this.usedVehicleCards = element.all(by.xpath('//div[@class="vehicle-card-wrapper"]/div/div[1][not(contains(@class, "certified-used-badge"))]'));
         this.filterPriceReset = element(by.css(".reset-button"));
 
         this.unlockSavings = element.all(by.xpath('//app-card-container[1]//div[@class="text-underscore-link unlock-saving ng-star-inserted"]'));
@@ -116,8 +120,8 @@ export class VlpFilterPage {
         this.unlockSavingsModalreturnToPage = element(by.xpath('//div[@class="return-to-page"]/div[@class="text-button"]'));
         this.unlockSavingsModalSmartPriceTxt = element.all(by.css('.price-section'));
         this.unlockSavingsModalSmartPriceFilterTxt = element(by.css('.filter-price-sub-title'));        
-        this.vehicleSaveHeart = element.all(by.className('save-icon'));
-        this.vehicleSaveHeartActive = element(by.css('.dg-encircle active'));
+        this.vehicleSaveHeart = element.all(by.xpath('.//div[contains(@class, "dg-inline-save-heart")]'));
+        this.vehicleSaveHeartActive = element(by.css('.//div[contains(@class, "dg-inline-save-heart active")]'));
         this.tooltip = element(by.css('.dg-tooltip'));
     }
 }

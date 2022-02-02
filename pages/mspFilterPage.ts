@@ -12,6 +12,11 @@ export class MspFilterPage {
     public filterPriceReset : ElementFinder;
     public sortDropDown : ElementFinder;
     public sortPriceLowToHigh : ElementFinder;
+    public salesClassFilters : ElementArrayFinder;
+    public newVehicleFilter : ElementFinder;
+    public usedVehicleFilter : ElementFinder;
+    public certifiedUsedToggle : ElementFinder;
+
     public pageHeader : ElementFinder;
     public appcardButton : ElementArrayFinder;
 
@@ -54,6 +59,10 @@ export class MspFilterPage {
         this.filterPriceReset = element(by.css(".reset-button"));
         this.sortDropDown = element(by.css(".mat-form-field-infix"));
         this.sortPriceLowToHigh = element(by.id('mat-option-3')); //element(by.css("mat-option[ng-reflect-value='PriceLowToHigh'] > .mat-option-text > span"));
+        this.salesClassFilters = element.all(by.xpath('//button[contains(@class, "mat-button-toggle-button")]'));
+        this.newVehicleFilter = this.salesClassFilters.get(0);
+        this.usedVehicleFilter = this.salesClassFilters.get(1);
+        this.certifiedUsedToggle = element(by.xpath('//div[contains(@class, "mat-slide-toggle-bar")]'));
 
         
         this.pageHeader = element(by.css('.main-header-available'));

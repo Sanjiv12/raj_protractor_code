@@ -1,11 +1,16 @@
 import { browser, ElementFinder, protractor } from "protractor";
-const MAX_TIME_WAIT = 100000;
+import { WAIT_TIMES } from "./Constants";
 const until = protractor.ExpectedConditions;
 
 export async function waitForVisibilityOf(pageProperty: ElementFinder, propertyName: string) {
-    await browser.driver.wait(
-        until.visibilityOf(pageProperty),
-        MAX_TIME_WAIT,
-        `${propertyName} took too long to appear in the DOM`
-    );
+    try {
+        await browser.driver.wait(
+            until.visibilityOf(pageProperty),
+            // keep from timing out on command timeout
+            WAIT_TIMES.IMPLICIT_WAIT_TIME - 500,
+            `${propertyName} took too long to appear in the DOM`
+        );
+    } catch (e) {
+        console.error(e.message);
+    }
 }

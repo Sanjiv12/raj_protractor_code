@@ -2,6 +2,7 @@ import { $, ElementFinder, element, by, ElementArrayFinder } from "protractor";
 
 
 export class VdpPage {
+    public loadingContainer : ElementFinder;
 
     public cashDown : ElementFinder;
     public price : ElementFinder;
@@ -145,6 +146,7 @@ export class VdpPage {
     public vehicleVin : ElementFinder;
     public reviewDealPageTitle : ElementFinder;
     constructor() {
+        this.loadingContainer = element(by.xpath('//div[@class="loader-container"]'));
         this.cashDown = element(by.className('ngx-slider-span ngx-slider-pointer ngx-slider-pointer-min'));
         this.price = element(by.xpath("//div[@class='price']/div[@class='ng-star-inserted']"));
         this.annualMileageDefault = element(by.xpath('/html/body/main/app-root/mat-drawer-container/mat-drawer-content/div/app-vehicle-details/div[1]/div[2]/div[1]/section/div[1]/vdp-payment-estimation/div/mat-tab-group/div/mat-tab-body[1]/div/app-lease/div/div[2]/app-annual-mileage/div/con-radiobutton-list/div/mat-radio-group/mat-radio-button[2]'));
