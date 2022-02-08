@@ -23,7 +23,7 @@
     "clean-build": "npm run clean && npm run build",
     "init-contributors": "all-contributors init",
     "add-contributors": "all-contributors add",
-    "test" : "protractor typeScript/config/config.js --suite=gxpinventory --params.url=https://smartpath.toyota.com/inventory --params.dealerCd=14046 --params.source=t1 --params.fname=mickey --params.lname=mouse --params.caemailreg=maferap486@idrct.com --params.capwdreg=Bddtest1! --params.zipcode=50010 --params.tier1url=https://tcom_user:@1L!gaT0r@qa.smartpath.toyota.com/inventory --params.tier3url=https://tcom_user:@1L!gaT0r@qa.smartpath.tldealersystems.com/inventory --params.browserPlatformCombo=ChromeDesktop",
+    "test" : "protractor typeScript/config/config.js",
     "generate-contributors": "all-contributors generate",
     "bdd": "npm run clean-build && protractor typeScript/config/config.js",
     "webdriver-update": "webdriver-manager update --ignore_ssl",
