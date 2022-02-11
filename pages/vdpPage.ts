@@ -42,6 +42,7 @@ export class VdpPage {
     public accessoriesDetailModal : ElementFinder;
     public accessoriesDetailModalSelect : ElementFinder;
     public accessoriesCardWrapper : ElementArrayFinder;
+    public accessoriesCardWrapper_elem : ElementArrayFinder;
     public accessoriesPrice : ElementArrayFinder;
     public accessoriesSelectedCount : ElementFinder;
     public accessoriesSelectedTotal : ElementFinder;
@@ -179,15 +180,16 @@ export class VdpPage {
         this.kbbModalBrandSelect = element(by.xpath('//*[@id="Vehicle_Selection_ManufacturerId"]/option[13]')); 
         //kbb modal elements -- end
 
-        this.selectAccessories = element(by.xpath('//*[@id="accessories-summary-container"]/div[2]'));
+        this.selectAccessories = element(by.xpath("//div[text()=' Select Accessories ']"));
         this.accessoriesModal = element(by.className('accessory-model'));
         this.accessoriesViewDetail = element.all(by.css('div.accessory-model-list > div .text-button'));
         this.accessoriesDetailModal = element(by.className('accessory-detail-content'));
         this.accessoriesDetailModalSelect = element(by.className('accessory-detail-content-header-select'));
-        this.accessoriesCardWrapper = element.all(by.className('card-wrapper'));
-        this.accessoriesPrice = element.all(by.className('accessory-price'));
+        this.accessoriesCardWrapper = element.all(by.xpath("//div[contains(@class,'card-wrapper')]"));
+        this.accessoriesCardWrapper_elem = element.all(by.xpath("//div[contains(@class,'card-highlight')]"));
+        this.accessoriesPrice = element(by.xpath("(//span[contains(@class,'accessory-price')])[1]"));
         this.accessoriesSelectedCount = element(by.className('accessory-model-header-selected'));
-        this.accessoriesSelectedTotal = element(by.className('accessory-model-header-total'));
+        this.accessoriesSelectedTotal = element(by.xpath("//div[contains(@class,'accessory-model-header-total')]"));
         this.accessoriesCheckBox = element.all(by.className('accessory-checkbox'));
         this.accessoriesDoneButton = element(by.xpath('//*[@id="accessories-list-model"]/accessories-list-model/div/div[2]/div/div[3]/span/span'));
         this.accessoriesList = element(by.className('accessory-display'));

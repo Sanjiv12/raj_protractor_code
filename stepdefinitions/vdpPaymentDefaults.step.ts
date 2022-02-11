@@ -66,10 +66,14 @@ Then('Default Term is selected', async() => {
 
 
 Given('User is in Vehicle Details page', async() => {
+    await browser.driver.sleep(3*1000);
     await mspFilterPage.sortDropDown.click();
     await mspFilterPage.sortPriceLowToHigh.click();
+    await browser.driver.sleep(3*1000);
     browser.executeScript("window.scrollBy(0,250)");
     await mspFilterPage.appcardButton.first().click();
+    await browser.driver.sleep(3*1000);
+     browser.executeScript("window.scrollBy(0,250)");
     await vlpFilterPage.appCard.first().click();
 });
 

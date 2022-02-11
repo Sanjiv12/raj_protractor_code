@@ -12,7 +12,9 @@ let vdpPage : VdpPage = new VdpPage();
 
 
 When('User clicks Select Accessories in Step 3', async  () =>{
-    await browser.driver.sleep(20*1000);
+
+    await browser.driver.sleep(15*1000);
+    browser.executeScript("window.scrollBy(0,250)");
     vdpPage.selectAccessories.click();
 });
 
@@ -44,21 +46,49 @@ Then('The Accessory should be displayed as selected', async () => {
 
 Then('Count of accessories selected and Total value should be updated', async () => {
     //console.log('+++Inside Count of accessories selected and Total value should be updated ');
-    await browser.driver.sleep(5*1000);
+    await browser.driver.sleep(6*1000);
     vdpPage.accessoriesSelectedCount.getText().then( async (value) => {
         //console.log('+++value - '+value);
         let count :number = Number(value.substring(value.lastIndexOf(':')+1, value.length).replace(' Remove All',''));
         //console.log('+++count - '+count);
-        expect((await vdpPage.accessoriesCardWrapper.getAttribute('ng-reflect-ng-class')).length).to.equal(count);
+        expect((await vdpPage.accessoriesCardWrapper_elem.getAttribute('class')).length).to.equal(count);
+      //  expect((await vdpPage.accessoriesCardWrapper.getAttribute('ng-reflect-ng-class')).length).to.equal(count);
     }).catch((err) => console.log('+++errorr - '+ err));
-
+    await browser.driver.sleep(6*1000);
+    // let Exp = await vdpPage.accessoriesSelectedTotal.getText();  
+    let Exp = await vdpPage.accessoriesSelectedTotal.getText();  
+    let Act = await vdpPage.accessoriesPrice.getText();     
+    let Exp_Total =((Exp.replace('Total: $', '')).replace('Done', '').replace('\nPrice includes parts and labor','')).trim();
+    
+    if (Exp_Total != "0"){
+        Assertion.expect(((Exp.replace('Total: $', '')).replace('Done', '').replace('\nPrice includes parts and labor','')).trim()).to.equal(Act.replace('$','').trim());
+    }else if (Exp_Total == "0"){
+        Assertion.expect(Exp_Total).to.equal("0");
+    }
     //Assertion.expect(vdpPage.accessoriesSelectedTotal.getText()).to.eventually.equal(vdpPage.accessoriesPrice.getText());
-    vdpPage.accessoriesSelectedTotal.getText().then((value) => {
-        let total = ((value.replace('Total: $', '')).replace('Done','')).trim();
-        Assertion.expect(vdpPage.accessoriesPrice.getText()).to.eventually.equal(total);
-    })
+    // vdpPage.accessoriesSelectedTotal.getText().then((value) => {
+    //     let total = ((value.replace('Total: $', '')).replace('Done','')).trim();
+    //     Assertion.expect(vdpPage.accessoriesPrice.getText()).to.eventually.equal(total);
+   // })
     
 });
+
+// await browser.driver.sleep(6*1000);
+// vdpPage.accessoriesSelectedCount.getText().then( async (value) => {
+//     let count :number = Number(value.substring(value.lastIndexOf(':')+1, value.length).replace(' Remove All',''));
+//     expect((await vdpPage.accessoriesCardWrapper_elem.getAttribute('class')).length).to.equal(count);
+// }).catch((err) => console.log('+++errorr - '+ err));
+// await browser.driver.sleep(6*1000); 
+
+// let Exp = await vdpPage.accessoriesSelectedTotal.getText();  
+// let Act = await vdpPage.accessoriesPrice.getText();     
+// let Exp_Total =((Exp.replace('Total: $', '')).replace('Done', '').replace('\nPrice includes parts and labor','')).trim();
+
+// if (Exp_Total != "0"){
+//     Assertion.expect(((Exp.replace('Total: $', '')).replace('Done', '').replace('\nPrice includes parts and labor','')).trim()).to.equal(Act.replace('$','').trim());
+// }else if (Exp_Total == "0"){
+//     Assertion.expect(Exp_Total).to.equal("0");
+// }
 
 
 When('User clicks on Select check box for an accessory', async  () =>{
