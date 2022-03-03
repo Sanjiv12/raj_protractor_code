@@ -187,7 +187,8 @@ export class VdpPage {
         this.accessoriesDetailModalSelect = element(by.className('accessory-detail-content-header-select'));
         this.accessoriesCardWrapper = element.all(by.xpath("//div[contains(@class,'card-wrapper')]"));
         this.accessoriesCardWrapper_elem = element.all(by.xpath("//div[contains(@class,'card-highlight')]"));
-        this.accessoriesPrice = element(by.xpath("(//span[contains(@class,'accessory-price')])[1]"));
+       // this.accessoriesPrice = element(by.xpath("(//span[contains(@class,'accessory-price')])[1]"));
+        this.accessoriesPrice = element(by.xpath('(//div[@class="accessory-card-price-select"])[1]/span[contains(text(),"$")]'));
         this.accessoriesSelectedCount = element(by.className('accessory-model-header-selected'));
         this.accessoriesSelectedTotal = element(by.xpath("//div[contains(@class,'accessory-model-header-total')]"));
         this.accessoriesCheckBox = element.all(by.className('accessory-checkbox'));
