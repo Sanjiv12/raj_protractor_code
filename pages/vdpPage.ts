@@ -43,7 +43,7 @@ export class VdpPage {
     public accessoriesDetailModalSelect : ElementFinder;
     public accessoriesCardWrapper : ElementArrayFinder;
     public accessoriesCardWrapper_elem : ElementArrayFinder;
-    public accessoriesPrice : ElementArrayFinder;
+    public accessoriesPrice : ElementFinder;
     public accessoriesSelectedCount : ElementFinder;
     public accessoriesSelectedTotal : ElementFinder;
     public accessoriesCheckBox : ElementArrayFinder;

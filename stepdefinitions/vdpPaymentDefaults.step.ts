@@ -5,7 +5,7 @@ import { VlpFilterPage } from "../pages/vlpFilterPage";
 import {VdpPage} from "../pages/vdpPage"
 import { expect } from "chai";
 import {Assertion} from "../util/assertion"
-import { waitForElement, waitForVisibilityOf } from "../util/waitForVisibilityOf";
+import { waitForVisibilityOf } from "../util/waitForVisibilityOf";
 let mspFilterPage : MspFilterPage = new MspFilterPage();
 let vlpFilterPage : VlpFilterPage = new VlpFilterPage();
 let vdpPage : VdpPage = new VdpPage();
@@ -66,15 +66,15 @@ Then('Default Term is selected', async() => {
 
 
 Given('User is in Vehicle Details page', async() => {
-    await waitForElement(mspFilterPage.sortDropDown,"sortdropdown")
+    await waitForVisibilityOf(mspFilterPage.sortDropDown,"sortdropdown")
     await mspFilterPage.sortDropDown.click();
-    await waitForElement(mspFilterPage.sortPriceLowToHigh,"sortLowToHigh");        
+    await waitForVisibilityOf(mspFilterPage.sortPriceLowToHigh,"sortLowToHigh");        
     await mspFilterPage.sortPriceLowToHigh.click(); 
     await browser.driver.sleep(5*1000);
     await browser.executeScript("arguments[0].scrollIntoView();",mspFilterPage.appcardButton.get(0).getWebElement());
     await mspFilterPage.appcardButton.first().click();        
     browser.executeScript("arguments[0].scrollIntoView();",mspFilterPage.appCard.get(0).getWebElement());
-    await waitForElement(mspFilterPage.appCard.first(),"appCard")
+    await waitForVisibilityOf(mspFilterPage.appCard.first(),"appCard")
     await mspFilterPage.appCard.first().click();
 });
 
