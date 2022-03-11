@@ -76,7 +76,7 @@ Then('Personalize with Accessories should display the list of accessories select
 });
 
 When('User clicks on Remove CTA for an accessory', async  () =>{
-    await browser.driver.sleep(5*1000);
+    await browser.driver.sleep(15*1000);
      // await waitForVisibilityOf(vdpPage.accessoriesRemove,"accessoriesRemove");
     vdpPage.accessoriesRemove.click();
 });
@@ -109,7 +109,8 @@ Then('System should navigate back to Accessories modal', async () => {
 
 
 When('User clicks on Remove All CTA', async  () =>{
-    await waitForVisibilityOf(vdpPage.accessoriesRemoveAll,"accessoriesRemoveAll");
+    await browser.driver.sleep(5*1000);
+   // await waitForVisibilityOf(vdpPage.accessoriesRemoveAll,"accessoriesRemoveAll");
     vdpPage.accessoriesRemoveAll.click();
 });
 

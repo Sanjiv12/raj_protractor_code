@@ -70,7 +70,7 @@ Given('User is in Vehicle Details page', async() => {
     await mspFilterPage.sortDropDown.click();
     await waitForVisibilityOf(mspFilterPage.sortPriceLowToHigh,"sortLowToHigh");        
     await mspFilterPage.sortPriceLowToHigh.click(); 
-    await browser.driver.sleep(5*1000);
+    await browser.driver.sleep(10*1000);
     await browser.executeScript("arguments[0].scrollIntoView();",mspFilterPage.appcardButton.get(0).getWebElement());
     await mspFilterPage.appcardButton.first().click();        
     browser.executeScript("arguments[0].scrollIntoView();",mspFilterPage.appCard.get(0).getWebElement());
