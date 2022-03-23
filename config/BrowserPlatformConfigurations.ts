@@ -54,7 +54,7 @@ export const BrowserPlatformConfigurations = {
         "browserName": 'chrome',
         "shardTestFiles": true,
         "maxInstances" : 15,
-        "version": '88.0',
+        "version": '98.0',
         "platform": 'Windows 10',
         "screenResolution": '1920x1080',
         chromeOptions: {

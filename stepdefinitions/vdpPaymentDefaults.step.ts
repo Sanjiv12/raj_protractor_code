@@ -71,10 +71,16 @@ Given('User is in Vehicle Details page', async() => {
     await waitForVisibilityOf(mspFilterPage.sortPriceLowToHigh,"sortLowToHigh");        
     await mspFilterPage.sortPriceLowToHigh.click(); 
     await browser.driver.sleep(10*1000);
+    //await waitForElement(mspFilterPage.dropdownAfterSelect,"dropdownAfterSelect");
+   // await browser.wait( async()=>(await mspFilterPage.appcardButton.count()) > 5,5000,"element not display");
     await browser.executeScript("arguments[0].scrollIntoView();",mspFilterPage.appcardButton.get(0).getWebElement());
+   // browser.executeScript("window.scrollBy(0,250)");
+    //await waitForElement(mspFilterPage.appcardButton.first(),"appcardButton");
     await mspFilterPage.appcardButton.first().click();        
     browser.executeScript("arguments[0].scrollIntoView();",mspFilterPage.appCard.get(0).getWebElement());
+   // browser.executeScript("window.scrollBy(0,250)");
     await waitForVisibilityOf(mspFilterPage.appCard.first(),"appCard")
+   // browser.executeScript("window.scrollBy(0,250)");
     await mspFilterPage.appCard.first().click();
 });
 

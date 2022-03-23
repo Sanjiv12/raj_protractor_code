@@ -12,13 +12,9 @@ export class MspFilterPage {
     public filterPriceReset : ElementFinder;
     public sortDropDown : ElementFinder;
     public sortPriceLowToHigh : ElementFinder;
-    public salesClassFilters : ElementArrayFinder;
-    public newVehicleFilter : ElementFinder;
-    public usedVehicleFilter : ElementFinder;
-    public certifiedUsedToggle : ElementFinder;
-
     public pageHeader : ElementFinder;
     public appcardButton : ElementArrayFinder;
+    public dropdownAfterSelect : ElementFinder
 
     public filterButton : ElementFinder;
     public filterByStatusDropDown: ElementFinder;
@@ -43,14 +39,21 @@ export class MspFilterPage {
     public contactDealerModalPhone: ElementFinder;
     public contactDealerModalSendBtn: ElementFinder;
     public contactDealerModalConf: ElementFinder;
-    public contactDealerModalreturnToPage: ElementFinder;    
+    public contactDealerModalreturnToPage: ElementFinder;  
+    public filterLabel: ElementFinder;  
+    public vehiclesList:ElementArrayFinder
 
     constructor() {
 
         //this.popUpClose = element(by.className('dg-close-x'));
+        this.filterLabel = element(by.xpath('//div[text()="Filters"]'));
+        this.dropdownAfterSelect = element(by.xpath('//span[contains(@class,"mat-select-min") and text()="Sort by Price: Low to High"]'));
         this.popUpClose = element(by.className('dg-mstc-close-x'));
-        this.filtercheckBoxCar = element(by.id('mat-checkbox-1-input'));
-        this.appCard = element.all(by.css("div.card-panel-content > app-card-container"));
+        //this.filtercheckBoxCar = element(by.id('mat-checkbox-1-input'));
+        this.filtercheckBoxCar = element(by.xpath('//span[text()="Cars & Minivan"]/parent::span/preceding-sibling::span/input'));
+        this.appCard = element.all(by.xpath('//div[contains(text(),"Estimate Payment")]'));
+        //this.appCard = element.all(by.css("div.card-panel-content > app-card-container"));
+        this.vehiclesList = element.all(by.xpath('//div[@class="vehicle-name"]'));
         this.appCardPrice = element.all(by.css("div.card-panel-content > app-card-container div:nth-of-type(3) > div:nth-of-type(1) > div:nth-of-type(1)"));
         this.filterClear = element(by.xpath("//div[@class='title-container']/div[@class='reset-button ng-star-inserted']"));
         this.filterMinPrice = element(by.css("div.filter-slider-inputs > div:nth-of-type(1) > .filter-slider-input"));
@@ -58,12 +61,8 @@ export class MspFilterPage {
         //this.filterMaxPrice= element(by.css("div.filter-slider-inputs > div:nth-of-type(2)"));
         this.filterPriceReset = element(by.css(".reset-button"));
         this.sortDropDown = element(by.css(".mat-form-field-infix"));
-        this.sortPriceLowToHigh = element(by.id('mat-option-3')); //element(by.css("mat-option[ng-reflect-value='PriceLowToHigh'] > .mat-option-text > span"));
-        this.salesClassFilters = element.all(by.xpath('//button[contains(@class, "mat-button-toggle-button")]'));
-        this.newVehicleFilter = this.salesClassFilters.get(0);
-        this.usedVehicleFilter = this.salesClassFilters.get(1);
-        this.certifiedUsedToggle = element(by.xpath('//div[contains(@class, "mat-slide-toggle-bar")]'));
-
+        this.sortPriceLowToHigh = element(by.xpath('//span[text()="Sort by Price: Low to High"]')); 
+       // this.sortPriceLowToHigh = element(by.id('mat-option-3')); //element(by.css("mat-option[ng-reflect-value='PriceLowToHigh'] > .mat-option-text > span"));
         
         this.pageHeader = element(by.css('.main-header-available'));
         this.appcardButton = element.all(by.xpath("//app-card-container//button[@class='secondary-button small']"));

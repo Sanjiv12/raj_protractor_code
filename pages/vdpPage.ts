@@ -2,7 +2,6 @@ import { $, ElementFinder, element, by, ElementArrayFinder } from "protractor";
 
 
 export class VdpPage {
-    public loadingContainer : ElementFinder;
 
     public cashDown : ElementFinder;
     public price : ElementFinder;
@@ -44,6 +43,7 @@ export class VdpPage {
     public accessoriesCardWrapper : ElementArrayFinder;
     public accessoriesCardWrapper_elem : ElementArrayFinder;
     public accessoriesPrice : ElementFinder;
+    public accessoriesPrice_1: ElementFinder;
     public accessoriesSelectedCount : ElementFinder;
     public accessoriesSelectedTotal : ElementFinder;
     public accessoriesCheckBox : ElementArrayFinder;
@@ -147,7 +147,6 @@ export class VdpPage {
     public vehicleVin : ElementFinder;
     public reviewDealPageTitle : ElementFinder;
     constructor() {
-        this.loadingContainer = element(by.xpath('//div[@class="loader-container"]'));
         this.cashDown = element(by.className('ngx-slider-span ngx-slider-pointer ngx-slider-pointer-min'));
         this.price = element(by.xpath("//div[@class='price']/div[@class='ng-star-inserted']"));
         this.annualMileageDefault = element(by.xpath('/html/body/main/app-root/mat-drawer-container/mat-drawer-content/div/app-vehicle-details/div[1]/div[2]/div[1]/section/div[1]/vdp-payment-estimation/div/mat-tab-group/div/mat-tab-body[1]/div/app-lease/div/div[2]/app-annual-mileage/div/con-radiobutton-list/div/mat-radio-group/mat-radio-button[2]'));
@@ -187,14 +186,15 @@ export class VdpPage {
         this.accessoriesDetailModalSelect = element(by.className('accessory-detail-content-header-select'));
         this.accessoriesCardWrapper = element.all(by.xpath("//div[contains(@class,'card-wrapper')]"));
         this.accessoriesCardWrapper_elem = element.all(by.xpath("//div[contains(@class,'card-highlight')]"));
-       // this.accessoriesPrice = element(by.xpath("(//span[contains(@class,'accessory-price')])[1]"));
-        this.accessoriesPrice = element(by.xpath('(//div[@class="accessory-card-price-select"])[1]/span[contains(text(),"$")]'));
+        //this.accessoriesPrice = element(by.xpath("(//span[contains(@class,'accessory-price')])[1]")); 
+        this.accessoriesPrice = element(by.xpath('(//div[@class="accessory-card-price-select"])[1]/span[contains(text(),"$")]')); 
         this.accessoriesSelectedCount = element(by.className('accessory-model-header-selected'));
         this.accessoriesSelectedTotal = element(by.xpath("//div[contains(@class,'accessory-model-header-total')]"));
         this.accessoriesCheckBox = element.all(by.className('accessory-checkbox'));
         this.accessoriesDoneButton = element(by.xpath('//*[@id="accessories-list-model"]/accessories-list-model/div/div[2]/div/div[3]/span/span'));
         this.accessoriesList = element(by.className('accessory-display'));
-        this.accessoriesRemove = element(by.xpath('//*[@id="accessories-summary-container"]/div[3]/div/div[2]/div[2]'));
+        //this.accessoriesRemove = element(by.xpath('//*[@id="accessories-summary-container"]/div[3]/div/div[2]/div[2]'));
+        this.accessoriesRemove = element(by.xpath('//div[@class="accessory-display ng-star-inserted"]//div[text()="Remove"]'));
         this.accessoriesRemoveAll = element(by.xpath('//*[@id="accessories-list-model"]/accessories-list-model/div/div[2]/div/div[2]/span[2]/span'));
         
         this.ppLearnMore = element(by.xpath('//*[@id="product-container"]/div/div[2]/vdp-product-list/div/div[2]/div[1]/span[2]'));
@@ -223,17 +223,17 @@ export class VdpPage {
 
         this.vin = element(by.className('vin'));
         this.vehicleTitle = element(by.className('vehicle-title'));
-        this.dgIcon = element(by.className('dg-inline-save-heart'));
+        this.dgIcon = element(by.xpath("//div[@class='vehicle-info-item display-block']//span[@class='save-icon']"));
         this.advertisedPrice = element(by.xpath("//div[@class='price']"));
-        this.unlockSavings = element(by.className("unlock-saving"));
-        this.extColor = element(by.xpath('//div[@class="vehicle-info"]/div[4]/div[1]/div[1]/div[2]/span[2]'));
-        this.intColor = element(by.xpath('//div[@class="vehicle-info"]/div[4]/div[1]/div[2]/div[2]/span[2]'));
-        this.engine = element(by.xpath('//div[@class="vehicle-info"]/div[4]/div[2]/div[1]/div[2]'));
-        this.estMpg = element(by.xpath('//div[@class="vehicle-info"]/div[4]/div[2]/div[2]/div[2]'));
-        this.packageAcc = element(by.xpath('//div[@class="vehicle-info"]/div[4]/div[2]/div[3]/div[2]'));
-        this.viewVehDetails = element(by.xpath('//div[@class="vehicle-info"]/div[4]/div[2]/div[3]/div[3]/div/span'));
-        this.toyotaCareImg = element(by.xpath('//div[@class="vehicle-info"]/div[4]/div[3]/div[1]/img'));
-        this.toyotaSafetySense = element(by.xpath('//div[@class="vehicle-info"]/div[4]/div[3]/div[2]'));
+        this.unlockSavings = element(by.xpath("//div[@class='vehicle-info-item pricePadding']//span[text()='Unlock Savings']"));
+        this.extColor = element(by.xpath("//div[@class='vehicle-info']//span[normalize-space()='Exterior']"));
+        this.intColor = element(by.xpath("//div[@class='vehicle-info']//span[normalize-space()='Interior']"));
+        this.engine = element(by.xpath("//div[@class='vehicle-info']//div[@class='description limitToTwoLines']"));
+        this.estMpg = element(by.xpath("//span[text()=' est.mpg ']//preceding-sibling::span"));
+        this.packageAcc = element(by.xpath("//span[contains(text(),'package')]"));
+        this.viewVehDetails = element(by.xpath("//a[text()='View All Vehicle Details']"));
+        this.toyotaCareImg = element(by.xpath("//div[@class='care-view']"));
+        this.toyotaSafetySense = element(by.xpath("//div[@class='vehicle-info-item ng-star-inserted']//a[text()='Toyota Safety Sense']//parent::span//preceding-sibling::img"));
         this.carousel = element(by.className('carousel'));
         this.vehDetailModalVin = element(by.xpath('//div[@id="vehicle-detail-vin"]'));
         this.vehDetailModalVehicleTitle = element(by.xpath('//div[@id="vehicle-detail-title"]'));
