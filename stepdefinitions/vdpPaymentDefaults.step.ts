@@ -1,4 +1,4 @@
-import { browser, By, protractor } from "protractor"; 
+import { browser, By, ExpectedConditions, protractor } from "protractor"; 
 import { Then, When, Given, Before, BeforeAll, SummaryFormatter } from "cucumber";
 import { MspFilterPage } from "../pages/mspFilterPage";
 import { VlpFilterPage } from "../pages/vlpFilterPage";
@@ -6,6 +6,7 @@ import {VdpPage} from "../pages/vdpPage"
 import { expect } from "chai";
 import {Assertion} from "../util/assertion"
 import { waitForVisibilityOf } from "../util/waitForVisibilityOf";
+
 let mspFilterPage : MspFilterPage = new MspFilterPage();
 let vlpFilterPage : VlpFilterPage = new VlpFilterPage();
 let vdpPage : VdpPage = new VdpPage();
@@ -16,17 +17,22 @@ When('User selects a vehicle', async  () =>{
 });
 
 Then('User should be navigated to Vehicle Details page', async () => {
-    await browser.driver.sleep(15*1000);
-    expect(await browser.getCurrentUrl()).to.contain('vin=');    
+   // await browser.driver.sleep(15*1000);
+    browser.wait(ExpectedConditions.urlContains("vin="),15000).then(function(result){
+        expect(result).to.contain('vin='); 
+    })
+      
 });
 
 Then('Default tab is Lease', async () => {
-    await browser.driver.sleep(15*1000);
+    await waitForVisibilityOf(vdpPage.tabDefault,"tabDefault");
+    //await browser.driver.sleep(15*1000);
     return Assertion.expect(vdpPage.tabDefault.getAttribute('aria-selected')).to.eventually.equal('true');
 });
 
 Then('Cash down is 10% of listed price', async () => {
-    await browser.driver.sleep(5*1000);
+    await waitForVisibilityOf(vdpPage.price,"price");
+    //await browser.driver.sleep(5*1000);
     vdpPage.price.getText().then(async (value) => {
         let cprice : number = parseInt((value.replace('$','')).replace(',','')) * .1;
         //console.log('cprice = '+ cprice);
@@ -66,22 +72,72 @@ Then('Default Term is selected', async() => {
 
 
 Given('User is in Vehicle Details page', async() => {
-    await waitForVisibilityOf(mspFilterPage.sortDropDown,"sortdropdown")
-    await mspFilterPage.sortDropDown.click();
-    await waitForVisibilityOf(mspFilterPage.sortPriceLowToHigh,"sortLowToHigh");        
-    await mspFilterPage.sortPriceLowToHigh.click(); 
-    await browser.driver.sleep(10*1000);
-    //await waitForElement(mspFilterPage.dropdownAfterSelect,"dropdownAfterSelect");
-   // await browser.wait( async()=>(await mspFilterPage.appcardButton.count()) > 5,5000,"element not display");
-    await browser.executeScript("arguments[0].scrollIntoView();",mspFilterPage.appcardButton.get(0).getWebElement());
-   // browser.executeScript("window.scrollBy(0,250)");
-    //await waitForElement(mspFilterPage.appcardButton.first(),"appcardButton");
-    await mspFilterPage.appcardButton.first().click();        
-    browser.executeScript("arguments[0].scrollIntoView();",mspFilterPage.appCard.get(0).getWebElement());
-   // browser.executeScript("window.scrollBy(0,250)");
-    await waitForVisibilityOf(mspFilterPage.appCard.first(),"appCard")
-   // browser.executeScript("window.scrollBy(0,250)");
-    await mspFilterPage.appCard.first().click();
+    // //await browser.driver.sleep(3*1000);
+    // if(await waitForVisibilityOf(mspFilterPage.sortDropDown,"sortdropdown")){
+    //     await waitForElement(mspFilterPage.sortDropDown,"sortdropdown");
+    //     await mspFilterPage.sortDropDown.click();
+    // }   
+    // await waitForVisibilityOf(mspFilterPage.sortPriceLowToHigh,"sortLowToHigh");
+    // await waitForElement(mspFilterPage.sortPriceLowToHigh,"sortLowToHigh");
+    // await mspFilterPage.sortPriceLowToHigh.click(); 
+    // if( await waitForVisibilityOf(mspFilterPage.dropdownAfterSelect,"dropdownAfterSelect")){
+    //     await waitForElement(mspFilterPage.dropdownAfterSelect,"dropdownAfterSelect");
+    //     browser.executeScript("window.scrollBy(0,250)");
+    //     await waitForVisibilityOf(mspFilterPage.appcardButton.first(),"appcardButton");
+    //     await mspFilterPage.appcardButton.first().click();
+    // }  
+    // //await browser.driver.sleep(3*1000);     
+    // //await browser.driver.sleep(3*1000);
+    // await waitForElement(mspFilterPage.appCard.first(),"Appcard");
+    // if(await waitForVisibilityOf(mspFilterPage.filterLabel,"filterlabel")){
+    //     await waitForElement(mspFilterPage.appCard.first(),"Appcard");
+    //     browser.executeScript("window.scrollBy(0,250)");
+    //     await vlpFilterPage.appCard.first().click();
+    // } 
+    
+     
+        await waitForVisibilityOf(mspFilterPage.sortDropDown,"sortdropdown")
+        await mspFilterPage.sortDropDown.click();
+        await waitForVisibilityOf(mspFilterPage.sortPriceLowToHigh,"sortLowToHigh");        
+        await mspFilterPage.sortPriceLowToHigh.click(); 
+        await browser.driver.sleep(10*1000);
+        //await waitForElement(mspFilterPage.dropdownAfterSelect,"dropdownAfterSelect");
+       // await browser.wait( async()=>(await mspFilterPage.appcardButton.count()) > 5,5000,"element not display");
+        await browser.executeScript("arguments[0].scrollIntoView();",mspFilterPage.appcardButton.get(0).getWebElement());
+       // browser.executeScript("window.scrollBy(0,250)");
+        //await waitForElement(mspFilterPage.appcardButton.first(),"appcardButton");
+        await mspFilterPage.appcardButton.first().click();        
+        browser.executeScript("arguments[0].scrollIntoView();",mspFilterPage.appCard.get(0).getWebElement());
+       // browser.executeScript("window.scrollBy(0,250)");
+        await waitForVisibilityOf(mspFilterPage.appCard.first(),"appCard")
+       // browser.executeScript("window.scrollBy(0,250)");
+        await mspFilterPage.appCard.first().click();
+      
+        // await browser.driver.sleep(3*1000);
+        // await mspFilterPage.sortDropDown.click();
+        // await browser.driver.sleep(3*1000);
+        // await mspFilterPage.sortPriceLowToHigh.click(); 
+        // browser.executeScript("window.scrollBy(0,250)");
+        // await mspFilterPage.appcardButton.first().click();
+        // await browser.driver.sleep(3*1000);
+        // await browser.driver.sleep(3*1000);     
+        // browser.executeScript("window.scrollBy(0,250)");
+        // await vlpFilterPage.appCard.first().click();
+    
+    
+
+    // await browser.driver.sleep(3*1000);
+    // await mspFilterPage.sortDropDown.click();
+    // await mspFilterPage.sortPriceLowToHigh.click();
+    // await browser.driver.sleep(3*1000);
+    // browser.executeScript("window.scrollBy(0,250)");
+    // await mspFilterPage.appcardButton.first().click();
+    // await browser.driver.sleep(3*1000);
+    //  browser.executeScript("window.scrollBy(0,250)");
+    // await vlpFilterPage.appCard.first().click();
+
+
+
 });
 
 When('User selects Finance', async  () =>{
@@ -94,7 +150,13 @@ Then('Default Finance Credit Rating is Excellent', async() => {
 });
 
 Then('Default Finance Terms are displayed', async() => {
-    await browser.driver.sleep(5*1000);
+    // await browser.driver.sleep(5*1000);
+    browser.wait(async function(){
+        const tCount = await vdpPage.termsDefault.count();
+        if (tCount > 0) {
+            return ExpectedConditions.visibilityOf(vdpPage.termsDefault.get(0));
+        }
+    },5000);
     return vdpPage.termsDefault.each((ele,i) => {
         // ele.getText().then((val) => {
         //     console.log('Term['+i+'] - '+val);

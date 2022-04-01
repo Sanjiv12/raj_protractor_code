@@ -2,6 +2,7 @@ import { $, ElementFinder, element, by, ElementArrayFinder } from "protractor";
 
 
 export class VdpPage {
+    public loadingContainer : ElementFinder;
 
     public cashDown : ElementFinder;
     public price : ElementFinder;
@@ -42,8 +43,8 @@ export class VdpPage {
     public accessoriesDetailModalSelect : ElementFinder;
     public accessoriesCardWrapper : ElementArrayFinder;
     public accessoriesCardWrapper_elem : ElementArrayFinder;
+  //public accessoriesPrice : ElementArrayFinder;
     public accessoriesPrice : ElementFinder;
-    public accessoriesPrice_1: ElementFinder;
     public accessoriesSelectedCount : ElementFinder;
     public accessoriesSelectedTotal : ElementFinder;
     public accessoriesCheckBox : ElementArrayFinder;
@@ -140,6 +141,9 @@ export class VdpPage {
     public saveHeartActive : ElementFinder;
     public saveHeartTooltip : ElementFinder;
 
+    public preferredContacts : ElementArrayFinder;
+    public submitToDealerButton : ElementFinder;
+
     public estimateTabs : ElementArrayFinder;
     public estimateAmount : ElementFinder;
     public MSRP : ElementFinder;
@@ -147,6 +151,7 @@ export class VdpPage {
     public vehicleVin : ElementFinder;
     public reviewDealPageTitle : ElementFinder;
     constructor() {
+        this.loadingContainer = element(by.xpath('//div[@class="loader-container"]'));
         this.cashDown = element(by.className('ngx-slider-span ngx-slider-pointer ngx-slider-pointer-min'));
         this.price = element(by.xpath("//div[@class='price']/div[@class='ng-star-inserted']"));
         this.annualMileageDefault = element(by.xpath('/html/body/main/app-root/mat-drawer-container/mat-drawer-content/div/app-vehicle-details/div[1]/div[2]/div[1]/section/div[1]/vdp-payment-estimation/div/mat-tab-group/div/mat-tab-body[1]/div/app-lease/div/div[2]/app-annual-mileage/div/con-radiobutton-list/div/mat-radio-group/mat-radio-button[2]'));
@@ -179,22 +184,24 @@ export class VdpPage {
         this.kbbModalBrandSelect = element(by.xpath('//*[@id="Vehicle_Selection_ManufacturerId"]/option[13]')); 
         //kbb modal elements -- end
 
+        //this.selectAccessories = element(by.xpath('//*[@id="accessories-summary-container"]/div[2]'));
         this.selectAccessories = element(by.xpath("//div[text()=' Select Accessories ']"));
         this.accessoriesModal = element(by.className('accessory-model'));
         this.accessoriesViewDetail = element.all(by.css('div.accessory-model-list > div .text-button'));
         this.accessoriesDetailModal = element(by.className('accessory-detail-content'));
         this.accessoriesDetailModalSelect = element(by.className('accessory-detail-content-header-select'));
+       // this.accessoriesCardWrapper = element.all(by.className('card-wrapper'));
         this.accessoriesCardWrapper = element.all(by.xpath("//div[contains(@class,'card-wrapper')]"));
-        this.accessoriesCardWrapper_elem = element.all(by.xpath("//div[contains(@class,'card-highlight')]"));
-        //this.accessoriesPrice = element(by.xpath("(//span[contains(@class,'accessory-price')])[1]")); 
-        this.accessoriesPrice = element(by.xpath('(//div[@class="accessory-card-price-select"])[1]/span[contains(text(),"$")]')); 
+		this.accessoriesCardWrapper_elem = element.all(by.xpath("//div[contains(@class,'card-highlight')]"));
+       // this.accessoriesPrice = element.all(by.className('accessory-price'));
+		this.accessoriesPrice = element(by.xpath('(//div[@class="accessory-card-price-select"])[1]/span[contains(text(),"$")]'));
         this.accessoriesSelectedCount = element(by.className('accessory-model-header-selected'));
+     //   this.accessoriesSelectedTotal = element(by.className('accessory-model-header-total'));
         this.accessoriesSelectedTotal = element(by.xpath("//div[contains(@class,'accessory-model-header-total')]"));
         this.accessoriesCheckBox = element.all(by.className('accessory-checkbox'));
         this.accessoriesDoneButton = element(by.xpath('//*[@id="accessories-list-model"]/accessories-list-model/div/div[2]/div/div[3]/span/span'));
         this.accessoriesList = element(by.className('accessory-display'));
-        //this.accessoriesRemove = element(by.xpath('//*[@id="accessories-summary-container"]/div[3]/div/div[2]/div[2]'));
-        this.accessoriesRemove = element(by.xpath('//div[@class="accessory-display ng-star-inserted"]//div[text()="Remove"]'));
+        this.accessoriesRemove = element(by.xpath('//*[@id="accessories-summary-container"]/div[3]/div/div[2]/div[2]'));
         this.accessoriesRemoveAll = element(by.xpath('//*[@id="accessories-list-model"]/accessories-list-model/div/div[2]/div/div[2]/span[2]/span'));
         
         this.ppLearnMore = element(by.xpath('//*[@id="product-container"]/div/div[2]/vdp-product-list/div/div[2]/div[1]/span[2]'));
@@ -223,17 +230,17 @@ export class VdpPage {
 
         this.vin = element(by.className('vin'));
         this.vehicleTitle = element(by.className('vehicle-title'));
-        this.dgIcon = element(by.xpath("//div[@class='vehicle-info-item display-block']//span[@class='save-icon']"));
+        this.dgIcon = element(by.className('dg-inline-save-heart'));
         this.advertisedPrice = element(by.xpath("//div[@class='price']"));
-        this.unlockSavings = element(by.xpath("//div[@class='vehicle-info-item pricePadding']//span[text()='Unlock Savings']"));
-        this.extColor = element(by.xpath("//div[@class='vehicle-info']//span[normalize-space()='Exterior']"));
-        this.intColor = element(by.xpath("//div[@class='vehicle-info']//span[normalize-space()='Interior']"));
-        this.engine = element(by.xpath("//div[@class='vehicle-info']//div[@class='description limitToTwoLines']"));
-        this.estMpg = element(by.xpath("//span[text()=' est.mpg ']//preceding-sibling::span"));
-        this.packageAcc = element(by.xpath("//span[contains(text(),'package')]"));
-        this.viewVehDetails = element(by.xpath("//a[text()='View All Vehicle Details']"));
-        this.toyotaCareImg = element(by.xpath("//div[@class='care-view']"));
-        this.toyotaSafetySense = element(by.xpath("//div[@class='vehicle-info-item ng-star-inserted']//a[text()='Toyota Safety Sense']//parent::span//preceding-sibling::img"));
+        this.unlockSavings = element(by.className("unlock-saving"));
+        this.extColor = element(by.xpath('//div[@class="vehicle-info"]/div[4]/div[1]/div[1]/div[2]/span[2]'));
+        this.intColor = element(by.xpath('//div[@class="vehicle-info"]/div[4]/div[1]/div[2]/div[2]/span[2]'));
+        this.engine = element(by.xpath('//div[@class="vehicle-info"]/div[4]/div[2]/div[1]/div[2]'));
+        this.estMpg = element(by.xpath('//div[@class="vehicle-info"]/div[4]/div[2]/div[2]/div[2]'));
+        this.packageAcc = element(by.xpath('//div[@class="vehicle-info"]/div[4]/div[2]/div[3]/div[2]'));
+        this.viewVehDetails = element(by.xpath('//div[@class="vehicle-info"]/div[4]/div[2]/div[3]/div[3]/div/span'));
+        this.toyotaCareImg = element(by.xpath('//div[@class="vehicle-info"]/div[4]/div[3]/div[1]/img'));
+        this.toyotaSafetySense = element(by.xpath('//div[@class="vehicle-info"]/div[4]/div[3]/div[2]'));
         this.carousel = element(by.className('carousel'));
         this.vehDetailModalVin = element(by.xpath('//div[@id="vehicle-detail-vin"]'));
         this.vehDetailModalVehicleTitle = element(by.xpath('//div[@id="vehicle-detail-title"]'));
@@ -259,8 +266,8 @@ export class VdpPage {
         this.mstcMultiLeadFormModalZipError = element(by.css('div.customer-zip-field .mat-error'));
         this.mstcMultiLeadFormModalTitle = element(by.css('.smart-price-modal-header'));
         this.mstcMultiLeadFormModalReturnToPage = element(by.xpath('//div[@class="return-to-page"]/button'));
-        this.startPurchaseForUnlockDealer = element(by.xpath('/html/body/main/app-root/mat-drawer-container/mat-drawer-content/div/app-vehicle-details/div[1]/div[2]/div[2]/section/vdp-pricing-summary/div/div[3]/div[2]/button[2]'));
-        this.startPurchaseForNoUnlockDealer = element(by.xpath('/html/body/main/app-root/mat-drawer-container/mat-drawer-content/div/app-vehicle-details/div[1]/div[2]/div[2]/section/vdp-pricing-summary/div/div[3]/div[2]/button[1]'));
+        this.startPurchaseForUnlockDealer = element(by.xpath('//div[@class="price-details"]/button[2]'));
+        this.startPurchaseForNoUnlockDealer = element(by.xpath('//div[@class="price-details"]/button[1]'));
         this.rightPaneMenu = element(by.xpath('//div[@class="menu-items ng-star-inserted"]'));    //element(by.css("div.right-pane > div.menu-items"));
         this.signInBtn = element(by.xpath("//div[@class='sign-in menu-button ng-star-inserted']")); //element(by.css('.sign-in'));
         
@@ -269,7 +276,7 @@ export class VdpPage {
         this.closeZipCodeModal = element(by.xpath('//div[@class="close-btn-container"]'));
         this.confirmZipText = element(by.className('text-button confirm_zip'));
         this.zipTaxDesc = element(by.className('edit_zip_tax_desc'));
-        this.chsFinanceBtn = element(by.xpath('/html/body/main/app-root/mat-drawer-container/mat-drawer-content/div/app-vehicle-review/div[2]/app-mstc-stepper/section/div[2]/footer/div/div[2]/button'));
+        this.chsFinanceBtn = element(by.xpath('//div[@class="finance_buttons"]/button'));
         this.zipCodeModalInput = element(by.id('textInput'));
         this.zipCodeModalDoneBtn = element(by.xpath('//*[@id="zip-form"]/div/button'));
         this.zipCodeWarningModal = element(by.id('zipCode-warning-modal-panel'));
@@ -283,7 +290,7 @@ export class VdpPage {
         this.acceptApplyFinanceModalBtn = element(by.className('primary-button large accept_button'));
         this.notNowApplyFinanceModalBtn = element(by.className('secondary-button large back_button'));
         this.authTfsCb = element(by.xpath('//div[@class="con-checkbox"]/mat-checkbox'))
-        this.confirmAndSubmitButton = element(by.xpath('/html/body/main/app-root/mat-drawer-container/mat-drawer-content/div/app-vehicle-review/div[2]/app-mstc-stepper/section/div[2]/footer/div/div/button'))
+        this.confirmAndSubmitButton = element(by.xpath('//div[@class="finance_buttons"]/button'));
         this.saveHearts = element.all(by.css('.dg-inline-save-heart'));
         this.saveHeartActive = element(by.css('.dg-encircle.active'));
         this.saveHeartTooltip = element(by.css('.dg-tooltip'));
@@ -294,6 +301,9 @@ export class VdpPage {
         this.MSRP = element(by.className('ng-star-inserted'));
         this.vehicleName = element(by.className('vehicle-title'));
         this.vehicleVin = element(by.className('vin'));
+
+        this.preferredContacts = element.all(by.xpath('//div[@class="preferred-contact-selection"]/con-checkbox'));
+        this.submitToDealerButton = element(by.xpath('//div[@class="finance_buttons"]/button'));
 
         this.startPurchaseWaitSpinner = element(by.className('spinner'));
         this.reviewDealPageTitle = element(by.className('review-deal-header-content'));
