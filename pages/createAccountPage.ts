@@ -36,7 +36,8 @@ export class CreateAccountPage {
         this.passwordError = element(by.css('img.password-error'));
         this.createAccountError = element(by.id('divAccountError'));
         this.accountAlreadyReg = element(by.id('divAlreadyRegistered'));
-        this.checkEmail = element(by.id('divResendEmail'));
+      //this.checkEmail = element(by.id('divResendEmail'));
+        this.checkEmail = element(by.xpath('//*[@id="divResendEmail"]/div/div[1]/span'));
         this.loginLink = element(by.className('sign-in-btn'));
         this.userName = element(by.id('logonUsername__TO'));
         this.userName = element(by.name('username'));

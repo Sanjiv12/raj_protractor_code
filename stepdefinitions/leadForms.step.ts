@@ -16,6 +16,7 @@ async function checkIfIsMobileDevice() {
 }
 
 When('User clicks on Unlock Savings on a Vehicle Card', async  () =>{
+    await browser.driver.sleep(10*1000);
     await vlpFilterPage.unlockSavings.first().click();
 });
 
@@ -107,6 +108,7 @@ Then('Price Summary should display additional line item for Additional Dealer Sa
 
 
 When('User clicks on Send Estimate to Dealer on a Price Summary', async  () =>{
+    await browser.driver.sleep(5*1000);
     browser.executeScript("window.scrollBy(0,250)");
     const isMobileDevice = await checkIfIsMobileDevice();
     await browser.executeScript('arguments[0].click()', vdpPage.confirmAvailabilityForUnlockDealer).catch(function() {
@@ -121,11 +123,14 @@ When('User clicks on Send Estimate to Dealer on a Price Summary', async  () =>{
 
 
 Then('System should display Send Estimate modal', async  () =>{
-    return Assertion.expect((await vdpPage.mstcMultiLeadFormModal.isDisplayed()).valueOf()).to.be.true;
+    await browser.driver.sleep(2*1000);
+  //  return Assertion.expect((await vdpPage.mstcMultiLeadFormModal.isDisplayed()).valueOf()).to.be.true;
+    return Assertion.expect((await vdpPage.mstcMultiLeadFormModal.isDisplayed())).to.be.true;
 });
 
 
 Then('Payment term is same as selected in VDP', async  () =>{
+    await browser.driver.sleep(2*1000);
     return Assertion.expect(vdpPage.mstcMultiLeadFormModalPaymentTerm.getText()).to.eventually.equal((await vdpPage.ppTerm.getText()).valueOf());
 });
 
@@ -168,11 +173,13 @@ When('User clicks on Submit', async  () =>{
 
 
 Then('System should display confirmation modal "Estimate sent!"', async  () =>{
-    return Assertion.expect(vdpPage.mstcMultiLeadFormModalTitle.getText()).to.eventually.contain('Estimate Sent!');
+    return Assertion.expect(vdpPage.mstcMultiLeadFormModalTitle.getText()).to.eventually.contain('Availability Sent!');
 });
 
 When('User clicks on Return to page in Send Estimate confirmation modal', async  () =>{
-    browser.executeScript("arguments[0].click()", vdpPage.mstcMultiLeadFormModalReturnToPage);
+    await browser.driver.sleep(3*1000);
+    //browser.executeScript("arguments[0].click()", vdpPage.mstcMultiLeadFormModalReturnToPage);
+    await vdpPage.mstcMultiLeadFormModalReturnToPage.click();
 });
 
 

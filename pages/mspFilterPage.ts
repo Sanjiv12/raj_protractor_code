@@ -51,18 +51,19 @@ export class MspFilterPage {
 
         //this.popUpClose = element(by.className('dg-close-x'));
         this.popUpClose = element(by.className('dg-mstc-close-x'));
-    //    this.filtercheckBoxCar = element(by.id('mat-checkbox-1-input'));
+    //  this.filtercheckBoxCar = element(by.id('mat-checkbox-1-input'));
         this.filtercheckBoxCar = element(by.xpath('//span[text()="Cars & Minivan"]/parent::span/preceding-sibling::span/input'));
-        this.appCard = element.all(by.css("div.card-panel-content > app-card-container"));
+    //  this.appCard = element.all(by.css("div.card-panel-content > app-card-container"));
+        this.appCard = element.all(by.xpath('//div[contains(text(),"Estimate Payment")]'));
         this.appCardPrice = element.all(by.css("div.card-panel-content > app-card-container div:nth-of-type(3) > div:nth-of-type(1) > div:nth-of-type(1)"));
         this.filterClear = element(by.xpath("//div[@class='title-container']/div[@class='reset-button ng-star-inserted']"));
         this.filterMinPrice = element(by.css("div.filter-slider-inputs > div:nth-of-type(1) > .filter-slider-input"));
         this.filterMaxPrice= element(by.css("div.filter-slider-inputs > div:nth-of-type(2) > .filter-slider-input"));
-        //this.filterMaxPrice= element(by.css("div.filter-slider-inputs > div:nth-of-type(2)"));
+    //  this.filterMaxPrice= element(by.css("div.filter-slider-inputs > div:nth-of-type(2)"));
         this.filterPriceReset = element(by.css(".reset-button"));
         this.sortDropDown = element(by.css(".mat-form-field-infix"));
-        //this.sortPriceLowToHigh = element(by.id('mat-option-3')); //element(by.css("mat-option[ng-reflect-value='PriceLowToHigh'] > .mat-option-text > span"));
-	this.sortPriceLowToHigh = element(by.xpath('//span[text()="Sort by Price: Low to High"]')); 
+    //  this.sortPriceLowToHigh = element(by.id('mat-option-3')); //element(by.css("mat-option[ng-reflect-value='PriceLowToHigh'] > .mat-option-text > span"));
+	    this.sortPriceLowToHigh = element(by.xpath('//span[text()="Sort by Price: Low to High"]')); 
         this.salesClassFilters = element.all(by.xpath('//button[contains(@class, "mat-button-toggle-button")]'));
         this.newVehicleFilter = this.salesClassFilters.get(0);
         this.usedVehicleFilter = this.salesClassFilters.get(1);

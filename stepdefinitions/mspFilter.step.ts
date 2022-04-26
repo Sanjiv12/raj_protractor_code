@@ -3,6 +3,7 @@ import { Then, When, Given, Before, BeforeAll, SummaryFormatter } from "cucumber
 import { MspFilterPage } from "../pages/mspFilterPage";
 import {expect } from "chai";
 import {Assertion} from "../util/assertion"
+import { waitForVisibilityOf } from "../util/waitForVisibilityOf";
 
 let mspFilterPage : MspFilterPage = new MspFilterPage();
 let p = 0;
@@ -16,15 +17,16 @@ Given('User is in Model Selection page', async () =>{
     
 
 When('User selects one or more options under Vehicle Type in Filters panel', async  () =>{
-    
+    await waitForVisibilityOf(mspFilterPage.filtercheckBoxCar,"select Car checkbox");
+    browser.executeScript("window.scrollBy(0,250)");
     await browser.executeScript("arguments[0].click()", mspFilterPage.filtercheckBoxCar);
-    
 });
 
 Then('Only the applicable Model cards should be displayed in the page', async () => {
-    await browser.driver.sleep(5*1000);
+    await browser.driver.sleep(2*1000);
+    browser.executeScript("window.scrollBy(0,250)");
     //console.log('app card length---'+(await mspFilterPage.appCard).length);
-    return Assertion.expect((await mspFilterPage.appCard).length).to.equal(12);
+    return Assertion.expect((await mspFilterPage.vehiclesList).length).to.equal(13);
 });
 
 Given('User is in Model Selection page with all filters cleared', async () =>{
@@ -34,17 +36,19 @@ Given('User is in Model Selection page with all filters cleared', async () =>{
     
 
 When('User selects a Price Range for MSRP in Filters panel', async  () =>{
-    
-    await browser.driver.sleep(5*1000);
+    browser.executeScript("window.scrollBy(0,250)");
+    await waitForVisibilityOf(mspFilterPage.filterMinPrice,"Filter min price");
+   // await browser.driver.sleep(5*1000);
     mspFilterPage.filterMinPrice.clear();
-    await browser.driver.sleep(5*1000);
-    mspFilterPage.filterMaxPrice.clear();   
+    await waitForVisibilityOf(mspFilterPage.filterMaxPrice,"Filter max price");
+    //await browser.driver.sleep(5*1000);
+    mspFilterPage.filterMaxPrice.clear(); 
 });
 
 Then('Only the applicable priced Model cards should be displayed in the page', async () => {
-    await browser.driver.sleep(5*1000);
+    await browser.driver.sleep(2*1000);
     //console.log('app card length---'+(await mspFilterPage.appCard).length);
-    return Assertion.expect((await mspFilterPage.appCard).length).to.equal(1);
+    return Assertion.expect((await mspFilterPage.vehiclesList).length).to.equal(1);
 });
 
 
@@ -54,9 +58,11 @@ Given('User is in Model Selection page with price filter reset', async () => {
 });
 
 When('User chooses to sort by Price Low to High', async() => {
-    await browser.driver.sleep(5*1000);
+    await waitForVisibilityOf(mspFilterPage.sortDropDown,"sort dropdown");
+    //await browser.driver.sleep(5*1000);
     browser.executeScript('arguments[0].click()', mspFilterPage.sortDropDown);
-    await browser.driver.sleep(10*1000);
+    //await browser.driver.sleep(10*1000);
+    await waitForVisibilityOf(mspFilterPage.sortPriceLowToHigh,"sort lowtohigh option");
     browser.executeScript('arguments[0].click()', mspFilterPage.sortPriceLowToHigh);
 
 });
