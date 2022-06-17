@@ -89,22 +89,27 @@ When('User does not enter valid values for Email, Name, Phone and Password', as
 
 Then('System should display the first name text box in error state for create account', async  () =>{
     await browser.driver.sleep(2*1000);
-    return Assertion.expect(caPage.createAccountFirstName.getAttribute('aria-invalid')).to.eventually.equal('true');
+ //   return Assertion.expect(caPage.createAccountFirstName.getAttribute('aria-invalid')).to.eventually.equal('true');
+return Assertion.expect(caPage.createAccountFirstName.getCssValue('color')).to.eventually.equal('rgba(235, 10, 30, 1)');
 });
+
 
 Then('System should display the last name text box in error state for create account', async  () =>{
     await browser.driver.sleep(2*1000);
-    return Assertion.expect(caPage.createAccountLastName.getAttribute('aria-invalid')).to.eventually.equal('true');
+    return Assertion.expect(caPage.createAccountLastName.getCssValue('color')).to.eventually.equal('rgba(235, 10, 30, 1)');
+   // return Assertion.expect(caPage.createAccountLastName.getAttribute('aria-invalid')).to.eventually.equal('true');
 });
 
 Then('System should display the email text box in error state for create account', async  () =>{
     await browser.driver.sleep(2*1000);
-    return Assertion.expect(caPage.createAccountEmail.getAttribute('aria-invalid')).to.eventually.equal('true');
+    return Assertion.expect(caPage.createAccountEmail.getCssValue('color')).to.eventually.equal('rgba(235, 10, 30, 1)');
+   // return Assertion.expect(caPage.createAccountEmail.getAttribute('aria-invalid')).to.eventually.equal('true');
 });
 
 Then('System should display the phone text box in error state for create account', async  () =>{
     await browser.driver.sleep(2*1000);
-    return Assertion.expect(caPage.createAccountPhone.getAttribute('aria-invalid')).to.eventually.equal('true');
+    return Assertion.expect(caPage.createAccountPhone.getCssValue('color')).to.eventually.equal('rgba(235, 10, 30, 1)');
+  //  return Assertion.expect(caPage.createAccountPhone.getAttribute('aria-invalid')).to.eventually.equal('true');
 });
 
 When('User starts entering password', async  () =>{

@@ -80,12 +80,12 @@ When('User clicks on Return to page in the confirmation modal', async  () =>{
 
 Then('System should display all vehicle cards with Smart Price and Savings', async  () =>{
     return vlpFilterPage.unlockSavingsModalSmartPriceTxt.each((ele, i) => {
-        return Assertion.expect(ele.getText()).to.eventually.contain('Smart Price');
+        return Assertion.expect(ele.getText()).to.eventually.contain('SmartPath Price');
     });
 });
 
 Then('Price Filter should display Smart Price', async  () =>{
-    return Assertion.expect(vlpFilterPage.unlockSavingsModalSmartPriceFilterTxt.getText()).to.eventually.contain('Smart Price');
+    return Assertion.expect(vlpFilterPage.unlockSavingsModalSmartPriceFilterTxt.getText()).to.eventually.contain('SmartPath Price');
 });
 
 
@@ -173,7 +173,7 @@ When('User clicks on Submit', async  () =>{
 
 
 Then('System should display confirmation modal "Estimate sent!"', async  () =>{
-    return Assertion.expect(vdpPage.mstcMultiLeadFormModalTitle.getText()).to.eventually.contain('Availability Sent!');
+    return Assertion.expect(vdpPage.mstcMultiLeadFormModalTitle.getText()).to.eventually.contain('Availability Requested!');
 });
 
 When('User clicks on Return to page in Send Estimate confirmation modal', async  () =>{
