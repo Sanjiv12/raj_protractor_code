@@ -69,7 +69,7 @@ Then('System should display confirmation modal with $ Savings', async  () =>{
 });
 
 Then('System should display confirmation modal with Smart Price for the vehicle', async  () =>{
-    return Assertion.expect(await vlpFilterPage.unlockSavingsModalPrice.getText()).to.contain('Smart Price:');
+    return Assertion.expect(await vlpFilterPage.unlockSavingsModalPrice.getText()).to.contain('SmartPath Price:');
 });
 
 
