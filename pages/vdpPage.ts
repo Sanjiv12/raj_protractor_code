@@ -269,7 +269,8 @@ export class VdpPage {
         this.mstcMultiLeadFormModalTitle = element(by.xpath('//span[text()="Availability Requested!"]'));
     // this.mstcMultiLeadFormModalReturnToPage = element(by.xpath('//div[@class="return-to-page"]/button'));
         this.mstcMultiLeadFormModalReturnToPage = element(by.css(".return-to-page > .primary-button"));
-        this.startPurchaseForUnlockDealer = element(by.xpath('/html/body/main/app-root/mat-drawer-container/mat-drawer-content/div/app-vehicle-details/div[1]/div[2]/div[2]/section/vdp-pricing-summary/div/div[3]/div[2]/button[2]'));
+      //  this.startPurchaseForUnlockDealer = element(by.xpath('/html/body/main/app-root/mat-drawer-container/mat-drawer-content/div/app-vehicle-details/div[1]/div[2]/div[2]/section/vdp-pricing-summary/div/div[3]/div[2]/button[2]'));
+        this.startPurchaseForUnlockDealer = element(by.xpath("//div[contains(@class,'price-details')]//button[contains(text(),'Start Purchase')]"));
         this.startPurchaseForNoUnlockDealer = element(by.xpath('/html/body/main/app-root/mat-drawer-container/mat-drawer-content/div/app-vehicle-details/div[1]/div[2]/div[2]/section/vdp-pricing-summary/div/div[3]/div[2]/button[1]'));
        // this.startPurchaseForUnlockDealer = element(by.xpath('//div[@class="price-details"]/button[2]'));
        // this.startPurchaseForNoUnlockDealer = element(by.xpath('//div[@class="price-details"]/button[1]'));
