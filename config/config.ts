@@ -155,7 +155,8 @@ export const config: Config = {
         zipcode:'',
         usemail:'',
         seemail:'',
-        cdemail:''
+        cdemail:'',
+        browserPlatformCombo:''
     },
 };
 

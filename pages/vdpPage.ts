@@ -99,6 +99,7 @@ export class VdpPage {
     public vehDetailModalTab2 : ElementArrayFinder;
     public vehDetailModalTab3 : ElementArrayFinder;
     public vehDetailModalTab4 : ElementArrayFinder;
+    public vehDetailModalTab4mobile : ElementFinder;
     public vehDetailModalDisclosure : ElementFinder;
     public carouselImgRight : ElementFinder;
     public additionalDealerSavings : ElementFinder;
@@ -151,6 +152,8 @@ export class VdpPage {
     public vehicleName: ElementFinder;
     public vehicleVin : ElementFinder;
     public reviewDealPageTitle : ElementFinder;
+    public vehDetailModalArrow : ElementFinder;
+    public vehDetailModalArrowcloseimage : ElementFinder;
     constructor() {
         this.loadingContainer = element(by.xpath('//div[@class="loader-container"]'));
         this.cashDown = element(by.className('ngx-slider-span ngx-slider-pointer ngx-slider-pointer-min'));
@@ -164,7 +167,8 @@ export class VdpPage {
         this.tabCash = element(by.xpath('/html/body/main/app-root/mat-drawer-container/mat-drawer-content/div/app-vehicle-details/div[1]/div[2]/div[1]/section/div[1]/vdp-payment-estimation/div/mat-tab-group/mat-tab-header/div[2]/div/div/div[3]')); 
         this.termSelectedFinance = element(by.xpath('/html/body/main/app-root/mat-drawer-container/mat-drawer-content/div/app-vehicle-details/div[1]/div[2]/div[1]/section/div[1]/vdp-payment-estimation/div/mat-tab-group/div/mat-tab-body[2]/div/app-finance/div/div[3]/app-payment-option-list/div/mat-radio-group/div/con-payment-radiobutton-list/div/mat-radio-group/mat-radio-button[4]'));
         this.creditRatingFinance = element(by.xpath('/html/body/main/app-root/mat-drawer-container/mat-drawer-content/div/app-vehicle-details/div[1]/div[2]/div[1]/section/div[1]/vdp-payment-estimation/div/mat-tab-group/div/mat-tab-body[2]/div/app-finance/div/div[2]/app-credit-score/div/div/con-slim-combobox/div/mat-form-field/div/div[1]/div/mat-select/div/div[1]/span'));
-        this.paymentOptionsList = element.all(by.xpath('/html/body/main/app-root/mat-drawer-container/mat-drawer-content/div/app-vehicle-details/div[1]/div[2]/div[1]/section/div[1]/vdp-payment-estimation/div/mat-tab-group/div/mat-tab-body[1]/div/app-lease/div/div[4]/app-payment-option-list/div/mat-radio-group/div/con-payment-radiobutton-list/div/mat-radio-group/mat-radio-button'));
+      //  this.paymentOptionsList = element.all(by.xpath('/html/body/main/app-root/mat-drawer-container/mat-drawer-content/div/app-vehicle-details/div[1]/div[2]/div[1]/section/div[1]/vdp-payment-estimation/div/mat-tab-group/div/mat-tab-body[1]/div/app-lease/div/div[4]/app-payment-option-list/div/mat-radio-group/div/con-payment-radiobutton-list/div/mat-radio-group/mat-radio-button'));
+        this.paymentOptionsList = element.all(by.xpath('/html/body/main/app-root/mat-drawer-container/mat-drawer-content/div[2]/app-vehicle-details/div[1]/div[2]/div[1]/section/div[1]/vdp-payment-estimation/div/mat-tab-group/div/mat-tab-body[1]/div/app-lease/div/div[4]/app-payment-option-list/div/mat-radio-group/div/con-payment-radiobutton-list/div/fieldset/mat-radio-group/mat-radio-button'));
         this.annualMileageOption1 = element(by.xpath("//span[.='10,000']"));
         this.financeOrOwnButton = element(by.css('.trade-in-container .action-buttons .finance-vehicle-button')); //*[@id="trade-in-container"]/div[2]/div[1] 
         //kbb modal elements -- start
@@ -232,8 +236,10 @@ export class VdpPage {
         this.vin = element(by.className('vin'));
         this.vehicleTitle = element(by.className('vehicle-title'));
         this.dgIcon = element(by.className('dg-inline-save-heart'));
+        
         this.advertisedPrice = element(by.xpath("//div[@class='price']"));
-        this.unlockSavings = element(by.className("unlock-saving"));
+      //  this.unlockSavings = element(by.className("unlock-saving"));
+        this.unlockSavings = element(by.xpath("//div[@class='vehicle-info-item pricePadding']//span[text()='Unlock Savings']"));
         this.extColor = element(by.xpath("//div[@class='vehicle-info']//span[normalize-space()='Exterior']"));
         this.intColor = element(by.xpath("//div[@class='vehicle-info']//span[normalize-space()='Interior']"));
         this.engine = element(by.xpath("//div[@class='vehicle-info']//div[@class='description limitToTwoLines']"));
@@ -251,8 +257,10 @@ export class VdpPage {
         this.vehDetailModalEngine = element(by.xpath('//div[@class="vehicleDetailLeftDescriptionContainer"]/div[2]/div[2]'));
         this.vehDetailModalTab1 = element.all(by.xpath('//div[@class="mat-tab-labels"]/div[1]'));
         this.vehDetailModalTab2 = element.all(by.xpath('//div[@class="mat-tab-labels"]/div[2]'));
-        this.vehDetailModalTab3 = element.all(by.xpath('//div[@class="mat-tab-labels"]/div[3]'));
+        this.vehDetailModalTab3 = element.all(by.xpath("//div[@class='mat-tab-labels']//div[contains(text(),'Safety Features')]"));
+        this.vehDetailModalArrow = element(by.xpath('//div[@class="rightArrowContainer"]'));
         this.vehDetailModalTab4 = element.all(by.xpath('//div[@class="mat-tab-labels"]/div[4]'));
+        this.vehDetailModalTab4mobile = element(by.xpath("//div[@class='mat-tab-labels']//div[contains(text(),'Package & Accessories')]"));
         this.vehDetailModalDisclosure = element(by.xpath('//div[@class="Disclosure"]'));
         this.carouselImgRight = element(by.xpath('//img[@alt="arrowRight"]'));
         this.additionalDealerSavings = element(by.xpath('//div[@class="flexBox AdditionalDealerSavings"]'));
@@ -272,7 +280,7 @@ export class VdpPage {
       //  this.startPurchaseForUnlockDealer = element(by.xpath('/html/body/main/app-root/mat-drawer-container/mat-drawer-content/div/app-vehicle-details/div[1]/div[2]/div[2]/section/vdp-pricing-summary/div/div[3]/div[2]/button[2]'));
         this.startPurchaseForUnlockDealer = element(by.xpath("//div[contains(@class,'price-details')]//button[contains(text(),'Start Purchase')]"));
         this.startPurchaseForNoUnlockDealer = element(by.xpath('/html/body/main/app-root/mat-drawer-container/mat-drawer-content/div/app-vehicle-details/div[1]/div[2]/div[2]/section/vdp-pricing-summary/div/div[3]/div[2]/button[1]'));
-       // this.startPurchaseForUnlockDealer = element(by.xpath('//div[@class="price-details"]/button[2]'));
+        // this.startPurchaseForUnlockDealer = element(by.xpath('//div[@class="price-details"]/button[2]'));
        // this.startPurchaseForNoUnlockDealer = element(by.xpath('//div[@class="price-details"]/button[1]'));
         this.rightPaneMenu = element(by.xpath('//div[@class="menu-items ng-star-inserted"]'));    //element(by.css("div.right-pane > div.menu-items"));
         this.signInBtn = element(by.xpath("//div[@class='sign-in menu-button ng-star-inserted']")); //element(by.css('.sign-in'));
