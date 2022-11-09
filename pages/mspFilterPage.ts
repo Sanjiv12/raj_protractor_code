@@ -46,7 +46,9 @@ export class MspFilterPage {
     public contactDealerModalConf: ElementFinder;
     public contactDealerModalreturnToPage: ElementFinder;    
     public filterLabel: ElementFinder;  
-    public vehiclesList:ElementArrayFinder
+    public vehiclesList:ElementArrayFinder;
+    public filtersButtonMobile: ElementFinder;
+    public applyfiltersMobile:ElementFinder;
     constructor() {
 
         //this.popUpClose = element(by.className('dg-close-x'));
@@ -102,5 +104,7 @@ export class MspFilterPage {
         this.contactDealerModalreturnToPage = element(by.className("return_page"));
 	this.filterLabel = element(by.xpath('//div[text()="Filters"]'));
 	this.vehiclesList = element.all(by.xpath('//div[@class="vehicle-name"]'));
+    this.filtersButtonMobile=element(by.xpath('//div//button[@class="secondary-button small filter-button-sm ng-star-inserted"][contains(text()," Filters ")]'));
+        this.applyfiltersMobile=element(by.xpath('//div//button[@class="primary-button large ng-tns-c133-34"][contains(text()," Apply Filters ")]'));
     }
 }

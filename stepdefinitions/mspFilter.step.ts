@@ -26,7 +26,7 @@ Then('Only the applicable Model cards should be displayed in the page', async ()
     await browser.driver.sleep(2*1000);
     browser.executeScript("window.scrollBy(0,250)");
     //console.log('app card length---'+(await mspFilterPage.appCard).length);
-    return Assertion.expect((await mspFilterPage.vehiclesList).length).to.equal(12);
+    return Assertion.expect((await mspFilterPage.vehiclesList).length).to.equal(11);
 });
 
 Given('User is in Model Selection page with all filters cleared', async () =>{

@@ -192,9 +192,9 @@ export class VdpPage {
         //this.selectAccessories = element(by.xpath('//*[@id="accessories-summary-container"]/div[2]'));
         this.selectAccessories = element(by.xpath("//div[text()=' Select Accessories ']"));
         this.accessoriesModal = element(by.className('accessory-model'));
-        this.accessoriesViewDetail = element.all(by.css('div.accessory-model-list > div .text-button'));
-        this.accessoriesDetailModal = element(by.className('accessory-detail-content'));
-        this.accessoriesDetailModalSelect = element(by.className('accessory-detail-content-header-select'));
+        this.accessoriesViewDetail = element.all(by.xpath('//div[@class="accessory-card-view-part"]//span[@class="text-button view-details"][contains(text(),"View details")]'));
+        this.accessoriesDetailModal = element(by.xpath('//accessories-list-model//div[@class="accessory-detail-content"]'));
+        this.accessoriesDetailModalSelect = element(by.xpath('//div[@class="accessory-detail-content-header-select ng-star-inserted"]//span[@class="primary-button large right-align ng-star-inserted"][contains(text(),"Remove") or contains(text(),"Select")]'));
        // this.accessoriesCardWrapper = element.all(by.className('card-wrapper'));
         this.accessoriesCardWrapper = element.all(by.xpath("//div[contains(@class,'card-wrapper')]"));
 		this.accessoriesCardWrapper_elem = element.all(by.xpath("//div[contains(@class,'card-highlight')]"));
@@ -203,12 +203,11 @@ export class VdpPage {
         this.accessoriesSelectedCount = element(by.className('accessory-model-header-selected'));
      //   this.accessoriesSelectedTotal = element(by.className('accessory-model-header-total'));
         this.accessoriesSelectedTotal = element(by.xpath("//div[contains(@class,'accessory-model-header-total')]"));
-        this.accessoriesCheckBox = element.all(by.className('accessory-checkbox'));
-        this.accessoriesDoneButton = element(by.xpath('//*[@id="accessories-list-model"]/accessories-list-model/div/div[2]/div/div[3]/span/span'));
+        this.accessoriesCheckBox = element.all(by.xpath('//div[@class="accessory-card-price-select"]//div[contains(@class,"accessory-checkbox ng-star-inserted")]//mat-checkbox//span[@class="mat-checkbox-inner-container"]'));
+        this.accessoriesDoneButton = element(by.xpath('//div//span[@class="accessory-model-header-done"]//span[contains(text(),"Done")]'));
         this.accessoriesList = element(by.className('accessory-display'));
-        this.accessoriesRemove = element(by.xpath('//*[@id="accessories-summary-container"]/div[3]/div/div[2]/div[2]'));
         this.accessoriesRemoveAll = element(by.xpath('//*[@id="accessories-list-model"]/accessories-list-model/div/div[2]/div/div[2]/span[2]/span'));
-        
+        this.accessoriesRemove = element(by.xpath('//div[@class="accessory-display ng-star-inserted"]//div[text()="Remove"]'));
         this.ppLearnMore = element(by.xpath('//*[@id="product-container"]/div/div[2]/vdp-product-list/div/div[2]/div[1]/span[2]'));
         this.ppModalPlanName = element(by.xpath('//*[@id="protection-product-modal-header"]'));
         this.ppModalPlanDesc = element(by.xpath('//*[@id="protection-product-text"]/div/div/p'));
@@ -239,7 +238,7 @@ export class VdpPage {
         
         this.advertisedPrice = element(by.xpath("//div[@class='price']"));
       //  this.unlockSavings = element(by.className("unlock-saving"));
-        this.unlockSavings = element(by.xpath("//div[@class='vehicle-info-item pricePadding']//span[text()='Unlock Savings']"));
+        this.unlockSavings = element(by.xpath("(//span[contains(text(),'Unlock Savings')])[1]"));
         this.extColor = element(by.xpath("//div[@class='vehicle-info']//span[normalize-space()='Exterior']"));
         this.intColor = element(by.xpath("//div[@class='vehicle-info']//span[normalize-space()='Interior']"));
         this.engine = element(by.xpath("//div[@class='vehicle-info']//div[@class='description limitToTwoLines']"));

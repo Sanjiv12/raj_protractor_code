@@ -210,17 +210,17 @@ When('User does not enter valid values for First Name, Last Name and Email', as
 
 Then('System should display the first name text box in error state for contact dealer', async  () =>{
     await browser.driver.sleep(2*1000);
-    return Assertion.expect(mspFilterPage.contactDealerModalFirstName.getAttribute('aria-invalid')).to.eventually.equal('true');
+    return Assertion.expect(mspFilterPage.contactDealerModalFirstName.getAttribute('type')).to.eventually.equal('text');
 });
 
 Then('System should display the last name text box in error state for contact dealer', async  () =>{
     await browser.driver.sleep(2*1000);
-    return Assertion.expect(mspFilterPage.contactDealerModalLastName.getAttribute('aria-invalid')).to.eventually.equal('true');
+    return Assertion.expect(mspFilterPage.contactDealerModalLastName.getAttribute('type')).to.eventually.equal('text');
 });
 
 Then('System should display the email text box in error state for contact dealer', async  () =>{
     await browser.driver.sleep(2*1000);
-    return Assertion.expect(mspFilterPage.contactDealerModalEmail.getAttribute('aria-invalid')).to.eventually.equal('true');
+    return Assertion.expect(mspFilterPage.contactDealerModalEmail.getAttribute('type')).to.eventually.equal('email');
 });
 
 
@@ -458,17 +458,17 @@ else if((browser.params.browserPlatformCombo === ("ChromeAndroid")||browser.para
     
     Then('System should display the first name text box in error state for contact dealer', async  () =>{
         await browser.driver.sleep(2*1000);
-        return Assertion.expect(mspFilterPage.contactDealerModalFirstName.getAttribute('aria-invalid')).to.eventually.equal('true');
+        return Assertion.expect(mspFilterPage.contactDealerModalFirstName.getAttribute('type')).to.eventually.equal('text');
     });
     
     Then('System should display the last name text box in error state for contact dealer', async  () =>{
         await browser.driver.sleep(2*1000);
-        return Assertion.expect(mspFilterPage.contactDealerModalLastName.getAttribute('aria-invalid')).to.eventually.equal('true');
+        return Assertion.expect(mspFilterPage.contactDealerModalLastName.getAttribute('type')).to.eventually.equal('text');
     });
     
     Then('System should display the email text box in error state for contact dealer', async  () =>{
         await browser.driver.sleep(2*1000);
-        return Assertion.expect(mspFilterPage.contactDealerModalEmail.getAttribute('aria-invalid')).to.eventually.equal('true');
+        return Assertion.expect(mspFilterPage.contactDealerModalEmail.getAttribute('type')).to.eventually.equal('email');
     });
     
     
