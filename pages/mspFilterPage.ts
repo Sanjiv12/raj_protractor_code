@@ -56,7 +56,7 @@ export class MspFilterPage {
     //  this.filtercheckBoxCar = element(by.id('mat-checkbox-1-input'));
         this.filtercheckBoxCar = element(by.xpath('//span[text()="Cars & Minivan"]/parent::span/preceding-sibling::span/input'));
     //  this.appCard = element.all(by.css("div.card-panel-content > app-card-container"));
-        this.appCard = element.all(by.xpath('//div[contains(text(),"Estimate Payment")]'));
+        this.appCard = element.all(by.xpath('//ng-component//div//div[contains(text(),"Estimate Payment")]'));
         this.appCardPrice = element.all(by.css("div.card-panel-content > app-card-container div:nth-of-type(3) > div:nth-of-type(1) > div:nth-of-type(1)"));
         this.filterClear = element(by.xpath("//div[@class='title-container']/div[@class='reset-button ng-star-inserted']"));
         this.filterMinPrice = element(by.css("div.filter-slider-inputs > div:nth-of-type(1) > .filter-slider-input"));
@@ -101,7 +101,7 @@ export class MspFilterPage {
         this.contactDealerModalPhone = element(by.css("input[type='tel']"));
         this.contactDealerModalSendBtn = element(by.xpath('//div[@class="customer-submit"]/button'));
         this.contactDealerModalConf = element(by.className('contactDealer-container ng-star-inserted'));
-        this.contactDealerModalreturnToPage = element(by.className("return_page"));
+        this.contactDealerModalreturnToPage = element(by.xpath('//button[@class="primary-button large"][normalize-space()="Return to Page"]'));
 	this.filterLabel = element(by.xpath('//div[text()="Filters"]'));
 	this.vehiclesList = element.all(by.xpath('//div[@class="vehicle-name"]'));
     this.filtersButtonMobile=element(by.xpath('//div//button[@class="secondary-button small filter-button-sm ng-star-inserted"][contains(text()," Filters ")]'));
