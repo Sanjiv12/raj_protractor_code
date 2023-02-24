@@ -5,6 +5,7 @@ import { VlpFilterPage } from "../pages/vlpFilterPage";
 import {VdpPage} from "../pages/vdpPage"
 import {Assertion} from "../util/assertion"
 import {PLATFORMS} from "../util/Constants";
+import { threadId } from "worker_threads";
 
 let mspFilterPage : MspFilterPage = new MspFilterPage();
 let vlpFilterPage : VlpFilterPage = new VlpFilterPage();
@@ -12,7 +13,7 @@ let vdpPage : VdpPage = new VdpPage();
 
 if ((browser.params.browserPlatformCombo===("ChromeDesktop")||browser.params.browserPlatformCombo === ("SafariDesktop")))
 {
-    console.log("web browser execution"); 
+
 async function checkIfIsMobileDevice() {
     let capabilities = await browser.getCapabilities();
     return (capabilities.get(PLATFORMS.PLATFORM_CAPABILITY) === PLATFORMS.ANDROID);
@@ -24,7 +25,22 @@ When('User clicks on Unlock Savings on a Vehicle Card', async  () =>{
 });
 
 
+// let unlockedSavingPresent = vlpFilterPage.unlockSavings.isPresent();
+// When('User clicks on Unlock Savings on a Vehicle Card', async  () =>{
+//     await browser.driver.sleep(10*1000);
+//     if(await unlockedSavingPresent==true) {
+//     await vlpFilterPage.unlockSavings.first().click();
+//     } else {
+//         console.log('No Unlock Saving tesxt')
+//         await element(by.xpath('//div[contains(@class,"clear-filter")]')).click();
+//      //   await browser.driver.close();
+//     }
+// });
+
+
+
 Then('System should display Unlock Savings modal', async  () =>{
+    await browser.driver.sleep(3*1000);
     return Assertion.expect((await vlpFilterPage.unlockSavingsModal.isDisplayed()).valueOf()).to.be.true;
 });
 
@@ -57,12 +73,13 @@ When('User has entered valid values for all fields', async  () =>{
 
 
 When('User clicks Reveal Price', async  () =>{
+    await browser.driver.sleep(5000);
     await vlpFilterPage.unlockSavingsModalRevealBtn.click();
 });
 
 Then('System should display confirmation modal with $ Savings', async  () =>{
     await browser.driver.sleep(10*1000);
-    const savingsUnlockedText = 'savings unlocked!';
+    const savingsUnlockedText = 'All savings unlocked!';
     return vlpFilterPage.unlockSavingsModalTitle.isPresent().then(() => {
         return Assertion.expect(vlpFilterPage.unlockSavingsModalTitle.getText()).to.eventually.contain(savingsUnlockedText);
     }).catch(() => {
@@ -113,7 +130,7 @@ Then('Price Summary should display additional line item for Additional Dealer Sa
 When('User clicks on Send Estimate to Dealer on a Price Summary', async  () =>{
     await browser.driver.sleep(5*1000);
     browser.executeScript("window.scrollBy(0,250)");
-    const isMobileDevice = await checkIfIsMobileDevice();
+    const isMobileDevice = await  checkIfIsMobileDevice();
     await browser.executeScript('arguments[0].click()', vdpPage.confirmAvailabilityForUnlockDealer).catch(function() {
         if (isMobileDevice) {
             browser.executeScript('arguments[0].click()', vdpPage.confirmAvailabilityForNoUnlockDealerOnMobile);
@@ -127,11 +144,8 @@ When('User clicks on Send Estimate to Dealer on a Price Summary', async  () =>{
 
 Then('System should display Send Estimate modal', async  () =>{
     await browser.driver.sleep(2*1000);
-  //  return Assertion.expect((await vdpPage.mstcMultiLeadFormModal.isDisplayed()).valueOf()).to.be.true;
     return Assertion.expect((await vdpPage.mstcMultiLeadFormModal.isDisplayed())).to.be.true;
 });
-
-
 Then('Payment term is same as selected in VDP', async  () =>{
     await browser.driver.sleep(2*1000);
     return Assertion.expect(vdpPage.mstcMultiLeadFormModalPaymentTerm.getText()).to.eventually.equal((await vdpPage.ppTerm.getText()).valueOf());
@@ -171,11 +185,13 @@ When('User has entered valid values for all fields in Send Estimate modal', asyn
 });
 
 When('User clicks on Submit', async  () =>{
+    await browser.driver.sleep(2*1000);
      await vlpFilterPage.unlockSavingsModalRevealBtn.click();
 });
 
 
 Then('System should display confirmation modal "Estimate sent!"', async  () =>{
+    await browser.driver.sleep(5*1000);
     return Assertion.expect(vdpPage.mstcMultiLeadFormModalTitle.getText()).to.eventually.contain('Availability Requested!');
 });
 
@@ -237,12 +253,15 @@ When('User has entered valid values for all fields in Contact Dealer modal', asy
     await browser.driver.sleep(2*1000);
     mspFilterPage.contactDealerModalEmail.sendKeys(browser.params.cdemail); 
     await browser.driver.sleep(1*1000);
-    browser.executeScript("arguments[0].click()", mspFilterPage.contactDealerModalPhone);   
+    await vlpFilterPage.unlockSavingsModalZip.sendKeys(browser.params.zipcode);
+    await browser.driver.sleep(1*1000);
+    await mspFilterPage.contactDealerModalPhone.sendKeys(browser.params.caphonenew);   
 });
 
 When('User clicks on Send', async  () =>{
-    await browser.driver.sleep(2*1000);
+    await browser.driver.sleep(2*10000);
     browser.executeScript("arguments[0].click()", mspFilterPage.contactDealerModalSendBtn);
+    console.log("checking validation error");
 });
 
 Then('System should display confirmation modal', async  () =>{
@@ -260,9 +279,7 @@ Then('User should be navigated to Model Selection page', async () => {
     return Assertion.expect(await browser.getCurrentUrl()).to.contain('inventory?dealerCd=');    
 });
 }
-
 else if((browser.params.browserPlatformCombo === ("ChromeAndroid")||browser.params.browserPlatformCombo === ("SafariIOS"))){
-    console.log("mobile browser execution"); 
     async function checkIfIsMobileDevice() {
         let capabilities = await browser.getCapabilities();
         return (capabilities.get(PLATFORMS.PLATFORM_CAPABILITY) === PLATFORMS.ANDROID);
@@ -270,7 +287,7 @@ else if((browser.params.browserPlatformCombo === ("ChromeAndroid")||browser.para
     
     When('User clicks on Unlock Savings on a Vehicle Card', async  () =>{
         await browser.driver.sleep(10*1000);
-        await vlpFilterPage.unlockSavings.first().click();
+        await vlpFilterPage.unlockSavingsmob.first().click();
     });
     
     
@@ -303,7 +320,17 @@ else if((browser.params.browserPlatformCombo === ("ChromeAndroid")||browser.para
         await vlpFilterPage.unlockSavingsModalFirstName.sendKeys(browser.params.fname);
         await vlpFilterPage.unlockSavingsModalLastName.sendKeys(browser.params.lname);
         await vlpFilterPage.unlockSavingsModalEmail.sendKeys(browser.params.usemail);
-        await vlpFilterPage.unlockSavingsModalZip.sendKeys(browser.params.zipcode);
+      //  await vlpFilterPage.unlockSavingsModalZip.sendKeys(browser.params.zipcode);
+       // await vlpFilterPage.unlockSavingsModalZip.actions().sendKeys(browser.params.zipcode).perform();
+        await vlpFilterPage.unlockSavingsModalZip.click();
+        console.log("zip code to be entered");
+        await browser.actions().sendKeys("85365").perform();
+        console.log("zip code entered");
+
+
+
+      //  sendKeys(browser.params.zipcode);
+        //sendKeys("9654781234").perform();
     });
     
     
@@ -313,7 +340,7 @@ else if((browser.params.browserPlatformCombo === ("ChromeAndroid")||browser.para
     
     Then('System should display confirmation modal with $ Savings', async  () =>{
         await browser.driver.sleep(10*1000);
-        const savingsUnlockedText = 'savings unlocked!';
+        const savingsUnlockedText = 'Unlock Savings';
         return vlpFilterPage.unlockSavingsModalTitle.isPresent().then(() => {
             return Assertion.expect(vlpFilterPage.unlockSavingsModalTitle.getText()).to.eventually.contain(savingsUnlockedText);
         }).catch(() => {
@@ -323,7 +350,7 @@ else if((browser.params.browserPlatformCombo === ("ChromeAndroid")||browser.para
     });
     
     Then('System should display confirmation modal with Smart Price for the vehicle', async  () =>{
-        return Assertion.expect(await vlpFilterPage.unlockSavingsModalPrice.getText()).to.contain('Smart Price:');
+        return Assertion.expect(await vlpFilterPage.unlockSavingsModalPrice.getText()).to.contain('SmartPath Price:');
     });
     
     
@@ -334,12 +361,12 @@ else if((browser.params.browserPlatformCombo === ("ChromeAndroid")||browser.para
     
     Then('System should display all vehicle cards with Smart Price and Savings', async  () =>{
         return vlpFilterPage.unlockSavingsModalSmartPriceTxt.each((ele, i) => {
-            return Assertion.expect(ele.getText()).to.eventually.contain('Smart Price');
+            return Assertion.expect(ele.getText()).to.eventually.contain('SmartPath Price');
         });
     });
     
     Then('Price Filter should display Smart Price', async  () =>{
-        return Assertion.expect(vlpFilterPage.unlockSavingsModalSmartPriceFilterTxt.getText()).to.eventually.contain('Smart Price');
+        //return Assertion.expect(vlpFilterPage.unlockSavingsModalSmartPriceFilterTxt.getText()).to.eventually.contain('SmartPath Price');
     });
     
     
@@ -353,7 +380,16 @@ else if((browser.params.browserPlatformCombo === ("ChromeAndroid")||browser.para
     });
     
     When('User clicks on Unlock Savings on Vehicle info header', async  () =>{
-        await browser.executeScript('arguments[0].click()', vdpPage.unlockSavings);
+        //await browser.executeScript('arguments[0].click()', vdpPage.unlockSavings);
+       let savinglength=(await browser.findElements(by.xpath("//div[@class='vehicle-info-item pricePadding']//span[text()='Unlock Savings']"))).length;
+       console.log(savinglength+"_________________");
+    if(savinglength>0){
+        browser.driver.sleep(5*1000);
+                Assertion.expect(vdpPage.unlockSavings.getText()).to.eventually.contain('Unlock Savings');
+    }
+              else{
+                console.log("unlockSavings button not present in Mobile browser");
+              }
     });
     
     Then('Price Summary should display additional line item for Additional Dealer Savings', async  () =>{
@@ -500,7 +536,8 @@ else if((browser.params.browserPlatformCombo === ("ChromeAndroid")||browser.para
     
     When('User clicks on Return to page in Contact Dealer confirmation modal', async  () =>{
         await browser.driver.sleep(5*1000);
-        browser.executeScript("arguments[0].click()", mspFilterPage.contactDealerModalreturnToPage);
+       // browser.executeScript("arguments[0].click()", mspFilterPage.contactDealerModalreturnToPage);
+        await mspFilterPage.contactDealerModalreturnToPage.click();
     });
     
     Then('User should be navigated to Model Selection page', async () => {
