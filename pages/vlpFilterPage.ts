@@ -59,6 +59,7 @@ export class VlpFilterPage {
     public vehicleSaveHeartActive : ElementFinder;
     public tooltip : ElementFinder; 
 	public vehicleCount : ElementFinder;
+    public unlockSavingsmob : ElementArrayFinder;
 
     //GXP Top Nav
     public profileIcon : ElementFinder;
@@ -125,5 +126,6 @@ export class VlpFilterPage {
         this.vehicleSaveHeartActive = element(by.css('.//div[contains(@class, "dg-inline-save-heart active")]'));
         this.tooltip = element(by.css('.dg-tooltip'));
 		this.vehicleCount = element(by.xpath('//div[contains(text(),"vehicles at")]'));
+        this.unlockSavingsmob=element.all(by.xpath('//app-card-container[1]//div[@class="text-underscore-link mobile-unlock-saving ng-star-inserted"]'));
     }
 }
