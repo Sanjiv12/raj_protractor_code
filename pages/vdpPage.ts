@@ -264,7 +264,7 @@ export class VdpPage {
         this.carouselImgRight = element(by.xpath('//img[@alt="arrowRight"]'));
         this.additionalDealerSavings = element(by.xpath('//div[@class="flexBox AdditionalDealerSavings"]'));
 
-        this.confirmAvailabilityForUnlockDealer = element(by.className('send-estimate-text'));
+        this.confirmAvailabilityForUnlockDealer = element(by.xpath('//div[@class="text-button ng-star-inserted"][contains(text()," Confirm Availability ")]'));
         this.confirmAvailabilityForNoUnlockDealerOnDesktop = element(by.css('button.confirm-availability'));
         this.confirmAvailabilityForNoUnlockDealerOnMobile = element(by.css('.confirm-availability-btn'));
         this.mstcMultiLeadFormModal = element(by.className('smart-price-modal-container'));
