@@ -203,7 +203,9 @@ export class VdpPage {
         this.accessoriesSelectedCount = element(by.className('accessory-model-header-selected'));
      //   this.accessoriesSelectedTotal = element(by.className('accessory-model-header-total'));
         this.accessoriesSelectedTotal = element(by.xpath("//div[contains(@class,'accessory-model-header-total')]"));
-        this.accessoriesCheckBox = element.all(by.xpath('//div[@class="accessory-card-price-select"]//div[contains(@class,"accessory-checkbox ng-star-inserted")]//mat-checkbox//span[@class="mat-checkbox-inner-container"]'));
+      //  this.accessoriesCheckBox = element.all(by.xpath('//div[@class="accessory-card-price-select"]//div[contains(@class,"accessory-checkbox ng-star-inserted")]//mat-checkbox//span[@class="mat-checkbox-inner-container"]'));
+        this.accessoriesCheckBox = element.all(by.xpath('//div[contains(@class,"accessory-checkbox")]//mat-checkbox//span[@class="mat-checkbox-inner-container"]'));
+
         this.accessoriesDoneButton = element(by.xpath('//div//span[@class="accessory-model-header-done"]//span[contains(text(),"Done")]'));
         this.accessoriesList = element(by.className('accessory-display'));
         this.accessoriesRemoveAll = element(by.xpath('//*[@id="accessories-list-model"]/accessories-list-model/div/div[2]/div/div[2]/span[2]/span'));
