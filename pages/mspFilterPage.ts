@@ -49,6 +49,7 @@ export class MspFilterPage {
     public vehiclesList:ElementArrayFinder;
     public filtersButtonMobile: ElementFinder;
     public applyfiltersMobile:ElementFinder;
+    public selectmodel:ElementFinder;
     constructor() {
 
         //this.popUpClose = element(by.className('dg-close-x'));
@@ -63,7 +64,9 @@ export class MspFilterPage {
         this.filterMaxPrice= element(by.css("div.filter-slider-inputs > div:nth-of-type(2) > .filter-slider-input"));
     //  this.filterMaxPrice= element(by.css("div.filter-slider-inputs > div:nth-of-type(2)"));
         this.filterPriceReset = element(by.css(".reset-button"));
-        this.sortDropDown = element(by.css(".mat-form-field-infix"));
+      //  this.sortDropDown = element(by.css(".mat-form-field-infix"));
+    this.sortDropDown = element(by.css("div.mat-form-field-infix"));
+    //   this.sortDropDown = element(by.xpath('//span[@class="mat-option-text"]'));
     //  this.sortPriceLowToHigh = element(by.id('mat-option-3')); //element(by.css("mat-option[ng-reflect-value='PriceLowToHigh'] > .mat-option-text > span"));
 	    this.sortPriceLowToHigh = element(by.xpath('//span[text()="Sort by Price: Low to High"]')); 
         this.salesClassFilters = element.all(by.xpath('//button[contains(@class, "mat-button-toggle-button")]'));
@@ -106,5 +109,6 @@ export class MspFilterPage {
 	this.vehiclesList = element.all(by.xpath('//div[@class="vehicle-name"]'));
     this.filtersButtonMobile=element(by.xpath('//div//button[@class="secondary-button small filter-button-sm ng-star-inserted"][contains(text()," Filters ")]'));
         this.applyfiltersMobile=element(by.xpath('//div//button[@class="primary-button large ng-tns-c133-34"][contains(text()," Apply Filters ")]'));
+        this.selectmodel=element(by.xpath('(//app-card-container//div[@class="vehicle-image"])[1]'));
     }
 }

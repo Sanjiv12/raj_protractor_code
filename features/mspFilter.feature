@@ -12,6 +12,8 @@ Scenario: MSP - Vehicle Type
 Scenario: MSP - Price Range
 
   Given User is in Model Selection page
+  When User selects one or more options under Vehicle Type in Filters panel
+  Then User Select a model and click on it
   When User selects a Price Range for MSRP in Filters panel
   Then Only the applicable priced Model cards should be displayed in the page
 

@@ -36,7 +36,11 @@ Given('User is in Model Selection page with all filters cleared', async () =>{
     await browser.driver.sleep(5*1000);
     //browser.executeScript("arguments[0].click()", mspFilterPage.filterClear);
 });
+Then('User Select a model and click on it',async () => {
     
+    await waitForVisibilityOf(mspFilterPage.selectmodel,"selectmodel");
+    mspFilterPage.selectmodel.click();
+});
 
 When('User selects a Price Range for MSRP in Filters panel', async  () =>{
   
