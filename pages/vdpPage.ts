@@ -279,7 +279,8 @@ export class VdpPage {
         this.mstcMultiLeadFormModalReturnToPage = element(by.css(".return-to-page > .primary-button"));
       //  this.startPurchaseForUnlockDealer = element(by.xpath('/html/body/main/app-root/mat-drawer-container/mat-drawer-content/div/app-vehicle-details/div[1]/div[2]/div[2]/section/vdp-pricing-summary/div/div[3]/div[2]/button[2]'));
         this.startPurchaseForUnlockDealer = element(by.xpath("//div[contains(@class,'price-details')]//button[contains(text(),'Start Purchase')]"));
-        this.startPurchaseForNoUnlockDealer = element(by.xpath('/html/body/main/app-root/mat-drawer-container/mat-drawer-content/div/app-vehicle-details/div[1]/div[2]/div[2]/section/vdp-pricing-summary/div/div[3]/div[2]/button[1]'));
+      //  this.startPurchaseForNoUnlockDealer = element(by.xpath('/html/body/main/app-root/mat-drawer-container/mat-drawer-content/div/app-vehicle-details/div[1]/div[2]/div[2]/section/vdp-pricing-summary/div/div[3]/div[2]/button[1]'));
+        this.startPurchaseForNoUnlockDealer = element(by.xpath('//button[contains(@class,"start-purchase-bdd")]'));
         // this.startPurchaseForUnlockDealer = element(by.xpath('//div[@class="price-details"]/button[2]'));
        // this.startPurchaseForNoUnlockDealer = element(by.xpath('//div[@class="price-details"]/button[1]'));
         this.rightPaneMenu = element(by.xpath('//div[@class="menu-items ng-star-inserted"]'));    //element(by.css("div.right-pane > div.menu-items"));
