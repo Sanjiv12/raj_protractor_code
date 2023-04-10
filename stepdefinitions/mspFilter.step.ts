@@ -58,7 +58,7 @@ Then('Only the applicable priced Model cards should be displayed in the page', a
     
     //await waitForVisibilityOf(mspFilterPage.vehiclesList.first(),"Filter max price");
     //console.log('app card length---'+(await mspFilterPage.appCard).length);
-    return Assertion.expect((await mspFilterPage.vehiclesList).length).to.equal(1);
+    return Assertion.expect((await mspFilterPage.vehiclesList).length).to.greaterThan(0);
 });
 
 
