@@ -194,8 +194,10 @@ export class VdpPage {
         this.accessoriesModal = element(by.className('accessory-model'));
         this.accessoriesViewDetail = element.all(by.xpath('//div[@class="accessory-card-view-part"]//span[@class="text-button view-details"][contains(text(),"View details")]'));
         this.accessoriesDetailModal = element(by.xpath('//accessories-list-model//div[@class="accessory-detail-content"]'));
-        this.accessoriesDetailModalSelect = element(by.xpath('//div[@class="accessory-detail-content-header-select ng-star-inserted"]//span[@class="primary-button large right-align ng-star-inserted"][contains(text(),"Remove") or contains(text(),"Select")]'));
-       // this.accessoriesCardWrapper = element.all(by.className('card-wrapper'));
+       // this.accessoriesDetailModalSelect = element(by.xpath('//div[@class="accessory-detail-content-header-select ng-star-inserted"]//span[@class="primary-button large right-align ng-star-inserted"][contains(text(),"Remove") or contains(text(),"Select")]'));
+        this.accessoriesDetailModalSelect = element(by.xpath('//span[contains(@class,"primary-button large right-align")][contains(text(),"Remove") or contains(text(),"Select")]'));
+
+        // this.accessoriesCardWrapper = element.all(by.className('card-wrapper'));
         this.accessoriesCardWrapper = element.all(by.xpath("//div[contains(@class,'card-wrapper')]"));
 		this.accessoriesCardWrapper_elem = element.all(by.xpath("//div[contains(@class,'card-highlight')]"));
        // this.accessoriesPrice = element.all(by.className('accessory-price'));
