@@ -63,13 +63,14 @@ export class VdpPage {
     public ppModalPlanDetails : ElementFinder;
     public ppModalViewBrochure : ElementFinder;
     public ppModalFooter : ElementFinder;    
-    public ppPlanSelectCb : ElementArrayFinder;
+    public ppPlanSelectCb : ElementFinder;
+    public ppPlanSelectCb1 : ElementFinder;
     public ppTerm : ElementFinder;
     public ppTotal : ElementFinder;
     public dueAtSigning : ElementFinder;
-    public ppPlanOptionClick : ElementArrayFinder;
+    public ppPlanOptionClick : ElementFinder;
     public ppPlanOption : ElementArrayFinder;
-    public ppPlanSelectCbClick : ElementArrayFinder;
+    public ppPlanSelectCbClick : ElementFinder;
     public alertModal : ElementFinder;
     public alertModalButton : ElementFinder;
     public paymentOptionRb1 : ElementFinder;
@@ -212,28 +213,42 @@ export class VdpPage {
         this.accessoriesList = element(by.className('accessory-display'));
         this.accessoriesRemoveAll = element(by.xpath('//*[@id="accessories-list-model"]/accessories-list-model/div/div[2]/div/div[2]/span[2]/span'));
         this.accessoriesRemove = element(by.xpath('//div[@class="accessory-display ng-star-inserted"]//div[text()="Remove"]'));
-        this.ppLearnMore = element(by.xpath('//*[@id="product-container"]/div/div[2]/vdp-product-list/div/div[2]/div[1]/span[2]'));
-        this.ppModalPlanName = element(by.xpath('//*[@id="protection-product-modal-header"]'));
-        this.ppModalPlanDesc = element(by.xpath('//*[@id="protection-product-text"]/div/div/p'));
-        this.ppModalVideo = element(by.xpath('//*[@id="protection-products-modal-container"]/div[3]/video'));
+       // this.ppLearnMore = element(by.xpath('//*[@id="product-container"]/div/div[2]/vdp-product-list/div/div[2]/div[1]/span[2]'));
+        this.ppLearnMore = element(by.xpath('(//vdp-product-list//span[contains(@class,"learn-more-btn")]//a)[last()]'));
 
-        this.ppModalCoverageLength = element(by.className('select-content'));  //element(by.xpath('//*[@id="protection-products-modal-component"]/vdp-protection-products-model/protection-products-model-content/div/div[2]/con-slim-combobox/div/mat-form-field/div'));
+     //   this.ppModalPlanName = element(by.xpath('//*[@id="protection-product-modal-header"]'));
+        this.ppModalPlanName = element(by.xpath('//div[@class="protection-product-modal-header"]'));
+
+      //  this.ppModalPlanDesc = element(by.xpath('//*[@id="protection-product-text"]/div/div/p'));
+        this.ppModalPlanDesc = element(by.xpath('//*[@id="protection-product-text"]/div/div'));
+      //  this.ppModalVideo = element(by.xpath('//*[@id="protection-products-modal-container"]/div[3]/video'));
+        this.ppModalVideo = element(by.xpath('//div[@class="protection-products-container"]//div//video'));
+        
+       // this.ppModalCoverageLength = element(by.className('select-content'));  
+        this.ppModalCoverageLength = element(by.xpath('//*[@id="protection-products-modal-component"]/vdp-protection-products-model/protection-products-model-content/div/div[2]/con-slim-combobox/div/mat-form-field/div'));
+        
         this.ppModalTotalDue = element(by.xpath('//*[@id="protection-products-modal-component"]/vdp-protection-products-model/protection-products-model-content/div/div[2]/div/span[1]'));
-        this.ppModalSelectButton = element(by.xpath('//*[@id="protection-products-modal-component"]/vdp-protection-products-model/protection-products-model-content/div/div[2]/div/div'));
+       // this.ppModalSelectButton = element(by.xpath('//*[@id="protection-products-modal-component"]/vdp-protection-products-model/protection-products-model-content/div/div[2]/div/div'));
+        this.ppModalSelectButton = element(by.xpath('//div[contains(@class,"select-button")]'));
         this.ppModalPlanDetails = element(by.xpath('//*[@id="protection-products-modal-component"]/vdp-protection-products-model/protection-products-model-content/div/div[3]/div/div'));
         this.ppModalViewBrochure = element(by.xpath('//*[@id="protection-products-modal-component"]/vdp-protection-products-model/protection-products-model-content/div/div[4]'));
         this.ppModalFooter = element(by.className('product-footer-container'));
         
-        this.ppPlanSelectCbClick = element.all(by.xpath('//html/body/main/app-root/mat-drawer-container/mat-drawer-content/app-vehicle-details/div/div[2]/div/section[1]/div[4]/vpd-protection-product/div/div/div[2]/vdp-product-list/div/div[3]/div[2]/con-checkbox/div/mat-checkbox/label/div')); 
-        this.ppPlanSelectCb = element.all(by.xpath('//html/body/main/app-root/mat-drawer-container/mat-drawer-content/app-vehicle-details/div/div[2]/div/section[1]/div[4]/vpd-protection-product/div/div/div[2]/vdp-product-list/div/div[3]/div[2]/con-checkbox/div/mat-checkbox/label/div/input')); 
+       // this.ppPlanSelectCbClick = element.all(by.xpath('//html/body/main/app-root/mat-drawer-container/mat-drawer-content/app-vehicle-details/div/div[2]/div/section[1]/div[4]/vpd-protection-product/div/div/div[2]/vdp-product-list/div/div[3]/div[2]/con-checkbox/div/mat-checkbox/label/div')); 
+        this.ppPlanSelectCbClick = element(by.xpath('(//vdp-product-list//span[contains(@class,"mat-checkbox-label")])[last()]')); 
+        this.ppPlanSelectCb = element(by.xpath('(//vdp-product-list//input[contains(@class,"mat-checkbox-input")])[last()]')); 
+        this.ppPlanSelectCb1 = element(by.xpath('(//vdp-product-list//input[contains(@class,"mat-checkbox-input")])[last()]'));
         this.ppTerm = element(by.className('term'));
         this.ppTotal = element(by.className('product-container-content-total'));
         this.dueAtSigning =  element(by.xpath('//div[@class="term-length"]/div[2]/span'));  //element(by.xpath('/html/body/main/app-root/mat-drawer-container/mat-drawer-content/app-vehicle-details/div/div[2]/div/section[2]/vdp-pricing-summary/div/div[3]/div[1]/div/div[2]/div[2]/span'));
-        this.ppPlanOptionClick = element.all(by.className('product-type')); 
+       // this.ppPlanOptionClick = element.all(by.className('product-type')); 
+        this.ppPlanOptionClick = element(by.xpath('(//vdp-product-list//div[contains(@class,"mat-select-arrow")])[last()-2]'));
         this.ppPlanOption = element.all(by.css('mat-option > .mat-option-text > span')); 
         this.alertModal = element(by.className('mat-dialog-title'));
         this.alertModalButton = element(by.css('.got-it'));
-        this.paymentOptionRb1 = element(by.xpath('/html/body/main/app-root/mat-drawer-container/mat-drawer-content/app-vehicle-details/div/div[2]/div[1]/section/div[1]/vdp-payment-estimation/div/mat-tab-group/div/mat-tab-body[1]/div/app-lease/div/div[3]/app-payment-option-list/div/mat-radio-group/div/con-payment-radiobutton-list/div/mat-radio-group/mat-radio-button[1]/label/div[1]/input'));
+       // this.paymentOptionRb1 = element(by.xpath('/html/body/main/app-root/mat-drawer-container/mat-drawer-content/app-vehicle-details/div/div[2]/div[1]/section/div[1]/vdp-payment-estimation/div/mat-tab-group/div/mat-tab-body[1]/div/app-lease/div/div[3]/app-payment-option-list/div/mat-radio-group/div/con-payment-radiobutton-list/div/mat-radio-group/mat-radio-button[1]/label/div[1]/input'));
+        this.paymentOptionRb1 = element(by.xpath('(//app-payment-option-list//mat-radio-button//span//input[@class="mat-radio-input"])[last()]'));
+        
         this.productContainer = element(by.xpath('//*[@id="product-container"]')); //*[@id="product-container"]
 
         this.vin = element(by.className('vin'));

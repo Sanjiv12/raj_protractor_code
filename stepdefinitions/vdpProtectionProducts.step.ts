@@ -14,6 +14,7 @@ let vdpPage : VdpPage = new VdpPage();
 When('User clicks on Learn more CTA for a Protection product', async  () =>{
     await browser.driver.sleep(20*1000);
     vdpPage.ppLearnMore.click();
+    await browser.driver.sleep(10*1000);
 });
 
 Then('System should open Protection products detail modal with Plan Name', async () => {
@@ -64,7 +65,9 @@ Then('System should open Protection products detail modal with Disclaimers at th
 
 When('User selects a Protection product', async  () =>{
     await browser.driver.sleep(20*1000);
-    vdpPage.ppPlanSelectCbClick.first().click();
+  //  vdpPage.ppPlanSelectCbClick.first().click();
+    vdpPage.ppPlanSelectCbClick.click();
+    await browser.driver.sleep(10*1000);
 });
 
 
@@ -79,7 +82,7 @@ Then('System should update the total amount in Step 4', async () => {
 });
 
 Then('Price summary should be updated', async () => {
-    await browser.driver.sleep(5*1000);
+    await browser.driver.sleep(10*1000);
     vdpPage.dueAtSigning.getText().then((value) => {
         let due : number  = Number(((value.replace(' due at signing','')).replace('$','').trim()).replace(',',''));
         return Assertion.expect(due).to.be.gt(0);
@@ -89,7 +92,8 @@ Then('Price summary should be updated', async () => {
 
 When('User changes the plan for the Protection product selected', async  () =>{
     await browser.driver.sleep(5*1000);
-    vdpPage.ppPlanOptionClick.first().click();
+   // vdpPage.ppPlanOptionClick.first().click();
+    vdpPage.ppPlanOptionClick.click();
     await browser.driver.sleep(5*1000);
     vdpPage.ppPlanOption.first().click();
     await browser.driver.sleep(10*1000);
@@ -97,33 +101,49 @@ When('User changes the plan for the Protection product selected', async  () =>{
 
 
 Then('System should not remove the check from Selection check box', async () => {
-    return Assertion.expect(vdpPage.ppPlanSelectCb.getAttribute('aria-checked')).to.eventually.eql(['true']);
+    await browser.driver.sleep(5*1000);
+  //  return Assertion.expect(vdpPage.ppPlanSelectCb.isSelected()).to.be.true;
+   // return Assertion.expect(vdpPage.accessoriesDetailModal.isDisplayed().valueOf()).to.eventually.be.true;
+   return await vdpPage.ppPlanSelectCb1.isSelected().then((value)=>{
+expect(value).to.equal(true);
+});
 });
 
 
 When('User clicks on Select CTA', async  () =>{
     await browser.driver.sleep(5*1000);
     vdpPage.ppModalSelectButton.click();
+    await browser.driver.sleep(10*1000);
 });
 
 Then('System should navigate back to Vehicle Details page with the protection product selected', async () => {
-    await browser.driver.sleep(10*1000);
-    return Assertion.expect(vdpPage.ppPlanSelectCb.getAttribute('aria-checked')).to.eventually.eql(['true']);
+    await browser.driver.sleep(15*1000);
+   // return Assertion.expect(vdpPage.ppPlanSelectCb.getAttribute('aria-checked')).to.eventually.eql(['true']);
+   return await vdpPage.ppPlanSelectCb1.isSelected().then((value)=>{
+    console.log("check box value"+value);
+expect(value).to.equal(true);
+});
 });
 
 When('User clicks on Remove CTA for the Protection product', async  () =>{
-    await browser.driver.sleep(5*1000);
+    await browser.driver.sleep(10*1000);
     vdpPage.ppModalSelectButton.click();
+    await browser.driver.sleep(10*1000);
 });
 
 Then('System should navigate back to Vehicle Details page with the protection product deselected', async () => {
     await browser.driver.sleep(10*1000);
-    return Assertion.expect(vdpPage.ppPlanSelectCb.getAttribute('aria-checked')).to.eventually.eql(['false']);
+ //   return Assertion.expect(vdpPage.ppPlanSelectCb.getAttribute('aria-checked')).to.eventually.eql(['false']);
+    return await vdpPage.ppPlanSelectCb1.isSelected().then((value)=>{
+        console.log("check box value"+value);
+    expect(value).to.equal(false);
+});
 });
 
 When('User deselects the Select check box for the Protection product', async  () =>{
     await browser.driver.sleep(5*1000);
-    vdpPage.ppPlanSelectCbClick.first().click();
+   // vdpPage.ppPlanSelectCbClick.first().click();
+    vdpPage.ppPlanSelectCbClick.click();
 });
 
 
@@ -131,6 +151,7 @@ When('User changes the Payment term in Step 1', async  () =>{
     await browser.driver.sleep(10*1000);
     //vdpPage.paymentOptionsList.click();
     browser.executeScript('arguments[0].click()', vdpPage.paymentOptionRb1);
+    await browser.driver.sleep(10*1000);
 });
 
 

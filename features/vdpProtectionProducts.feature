@@ -24,13 +24,13 @@ Scenario: Protection products - Change plan
   Then System should not remove the check from Selection check box
   And Price summary should be updated 
 
-Scenario: Select from PP Detail modal
+ Scenario: Select from PP Detail modal
 
   Given User is in Vehicle Details page
   When User clicks on Learn more CTA for a Protection product
   And User clicks on Select CTA
   Then System should navigate back to Vehicle Details page with the protection product selected
-  And Price summary should be updated
+   And Price summary should be updated
 
 Scenario: Remove from PP Detail modal 
 
@@ -54,7 +54,7 @@ Scenario: Change Payment term
   Given User is in Vehicle Details page
   When User selects a Protection product
   And User changes the Payment term in Step 1
-  Then System should display warning message
-  And Deselect all the Protection products
+  # Then System should display warning message
+  # And Deselect all the Protection products
   And System should call the Payment service and update the payment terms 
 

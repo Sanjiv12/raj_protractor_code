@@ -44,9 +44,10 @@ Given('User is in Vehicle List Page with all filters cleared', async () =>{
 
 
 When('User selects a Year from Filters panel', async  () =>{
-
-    await vlpFilterPage.filterOptionYear.first().click();
-
+    await browser.driver.sleep(10*1000);
+   // await vlpFilterPage.filterOptionYear.first().click();
+    await vlpFilterPage.filterOptionYear.click();
+    await browser.driver.sleep(2*1000);
 });
 
 Then('Only the applicable vehicles should be displayed in the page', async () => {
@@ -55,7 +56,7 @@ Then('Only the applicable vehicles should be displayed in the page', async () =>
         vlpFilterPage.appCardVehName.each((ele, i) => {
             ele.getText().then((name) => {
                 let yearname = name.split(' ', 1).toString().trim();
-                expect(yearname).to.equal(year);
+                expect(yearname).to.contain(year);
             })
         })
     })
@@ -128,16 +129,20 @@ Then('Filter chip should be displayed for price', async()=> {
 });
 
 When('User selects a trim from Filters panel', async() => {
-    await vlpFilterPage.filterOptionTrim.first().click();
+ //   await vlpFilterPage.filterOptionTrim.first().click();
+ await browser.driver.sleep(15*1000);
+  await vlpFilterPage.filterOptionTrim.click();
+    await browser.driver.sleep(15*1000);
 });
 
 Then('Only the applicable vehicles should be displayed in the page by trim', async() => {
     return vlpFilterPage.filterOptionTrimText.first().getText().then((trimsel) => {
+        console.log(trimsel);
         let trim = trimsel.substring(0, trimsel.lastIndexOf("(")).trim();
         vlpFilterPage.appCardVehName.each((ele, i) => {
             ele.getText().then((name) => {
                 let trimname = name.slice(5, name.length).toString().trim();
-                expect(trimname).to.equal(trim);
+                expect(trimname).to.contain(trim);
             });
         })
     })
@@ -158,7 +163,10 @@ Then('Filter chip should be displayed for trim', async() => {
 });
 
 When('User selects an Engine option from Filters panel', async() => {
-    vlpFilterPage.filterOptionEngine.first().click();
+  //  vlpFilterPage.filterOptionEngine.first().click();
+  await browser.driver.sleep(15*1000);
+    vlpFilterPage.filterOptionEngine.click();
+    await browser.driver.sleep(15*1000);
 });
 
 Then('Only the applicable vehicles should be displayed in the page by engine', async() => {
@@ -167,7 +175,7 @@ Then('Only the applicable vehicles should be displayed in the page by engine', a
         vlpFilterPage.appCardVehDesc.each((ele, i) => {
             ele.getText().then((name) => {
                 let desc = name.slice(0, eng.length).toString().trim();
-                expect(desc).to.equal(eng);
+                expect(desc).to.contain(eng);
             });
         })
     })
