@@ -31,6 +31,7 @@ Then('User should be navigated to Vehicle Details page', async () => {
 });
 
 Then('Default tab is Lease', async () => {
+    await browser.driver.sleep(5*1000);
     await waitForVisibilityOf(vdpPage.tabDefault,"tabDefault");
     //await browser.driver.sleep(15*1000);
  //   return Assertion.expect(vdpPage.tabDefault.getAttribute('aria-selected')).to.eventually.equal('true');
@@ -113,6 +114,7 @@ Given('User is in Vehicle Details page', async() => {
      
         await waitForVisibilityOf(mspFilterPage.sortDropDown,"sortdropdown")
         await mspFilterPage.sortDropDown.click();
+        await browser.driver.sleep(2*1000);
         await waitForVisibilityOf(mspFilterPage.sortPriceLowToHigh,"sortLowToHigh");        
         await mspFilterPage.sortPriceLowToHigh.click(); 
         await browser.driver.sleep(2*1000);
@@ -195,7 +197,7 @@ When('User updates Mileage', async  () =>{
 });
 
 Then('System should call the Payment service and update the payment terms', async  () =>{
-    
+    await browser.driver.sleep(10*1000);
     return expect((await vdpPage.paymentOptionsList).length).to.be.gt(0);
 });
 
@@ -220,12 +222,14 @@ Then('User should be navigated to Vehicle Details page', async () => {
 });
 
 Then('Default tab is Lease', async () => {
+    await browser.driver.sleep(5*1000);
     await waitForVisibilityOf(vdpPage.tabDefault,"tabDefault");
   //  await browser.driver.sleep(2*1000);
     return Assertion.expect(vdpPage.tabDefault.getAttribute('class')).to.eventually.contain('mat-tab-label-content');
 });
 
 Then('Cash down is 10% of listed price', async () => {
+    await browser.driver.sleep(5*1000);
     await waitForVisibilityOf(vdpPage.price,"price");
     //await browser.driver.sleep(5*1000);
     vdpPage.price.getText().then(async (value) => {

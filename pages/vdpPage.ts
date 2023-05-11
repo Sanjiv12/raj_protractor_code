@@ -281,7 +281,7 @@ export class VdpPage {
         this.vehDetailModalTab4mobile = element(by.xpath("//div[@class='mat-tab-labels']//div[contains(text(),'Package & Accessories')]"));
         this.vehDetailModalDisclosure = element(by.xpath('//div[@class="Disclosure"]'));
        // this.carouselImgRight = element(by.xpath('//img[@alt="arrowRight"]'));
-        this.carouselImgRight = element(by.xpath('//img[@alt="right arrow"][@class="arrow-right-large ng-star-inserted"]'));
+        this.carouselImgRight = element(by.xpath('//img[@alt="right arrow"][contains(@class,"arrow-right-small") or contains(@class,"arrow-right-large")]'));
         this.additionalDealerSavings = element(by.xpath('//div[@class="flexBox AdditionalDealerSavings"]'));
 
         this.confirmAvailabilityForUnlockDealer = element(by.xpath('//div[@class="text-button ng-star-inserted"][contains(text()," Confirm Availability ")]'));

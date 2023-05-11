@@ -50,6 +50,9 @@ export class MspFilterPage {
     public filtersButtonMobile: ElementFinder;
     public applyfiltersMobile:ElementFinder;
     public selectmodel:ElementFinder;
+    public filterMob:ElementFinder;
+    public filterpricemob: ElementFinder;
+    public filterclosemob: ElementFinder;
     constructor() {
 
         //this.popUpClose = element(by.className('dg-close-x'));
@@ -106,9 +109,13 @@ export class MspFilterPage {
         this.contactDealerModalConf = element(by.className('contactDealer-container ng-star-inserted'));
         this.contactDealerModalreturnToPage = element(by.xpath('//button[@class="primary-button large"][normalize-space()="Return to Page"]'));
 	this.filterLabel = element(by.xpath('//div[text()="Filters"]'));
-	this.vehiclesList = element.all(by.xpath('//div[@class="vehicle-name"]'));
+	this.vehiclesList = element.all(by.xpath('//div[contains(@class,"vehicle-name")]'));
     this.filtersButtonMobile=element(by.xpath('//div//button[@class="secondary-button small filter-button-sm ng-star-inserted"][contains(text()," Filters ")]'));
         this.applyfiltersMobile=element(by.xpath('//div//button[@class="primary-button large ng-tns-c133-34"][contains(text()," Apply Filters ")]'));
         this.selectmodel=element(by.xpath('(//app-card-container//div[@class="vehicle-image"])[1]'));
+        this.filterMob=element(by.xpath('//button[@class="secondary-button small filter-btn"]'));
+        this.filterpricemob=element(by.xpath('(//mat-panel-title[contains(@class,"mat-expansion-panel-header")])[3]'));
+        this.filterclosemob=element(by.xpath('(//div[contains(@class,"close-wrapper")])[2]'));
+    
     }
 }
