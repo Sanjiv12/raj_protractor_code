@@ -6,7 +6,7 @@ Scenario: Navigating to VDP Payment Estimation - Defaults
 
   Given User is in Vehicle Details page
   Then Default tab is Lease
-  And Cash down is 10% of listed price
+   And Cash down is 10% of listed price
   And Default Annual Mileage is 12000 miles
   And Default Credit Rating is Excellent
   And Default Terms are displayed

@@ -321,7 +321,7 @@ else if((browser.params.browserPlatformCombo === ("ChromeAndroid")||browser.para
      // caPage.createAccountPhone.sendKeys("9876543218");
      
      // let num =9876;
-      browser.executeScript("document.getElementById('tel').value='(547) 896-5412'");
+      browser.executeScript("document.getElementById('tel').value='9849641128'");
       //browser.executeScript(caPage.createAccountPhone.value='9876543215');
     //   caPage.createAccountPhone.sendKeys(num);
     //   caPage.createAccountPhone.sendKeys(protractor.Key.NUMPAD1);
@@ -335,6 +335,7 @@ else if((browser.params.browserPlatformCombo === ("ChromeAndroid")||browser.para
     When('User enters a valid password', async  () =>{
         caPage.createAccountPassword.sendKeys(browser.params.capwdnew);
         await browser.driver.sleep(1*1000);
+        browser.actions().sendKeys(protractor.Key.TAB).perform();
     });
     
     

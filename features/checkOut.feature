@@ -4,13 +4,13 @@ A MST-C user starts the checkout process
 
 Scenario: Review Deal - logged in user
 
-  Given User is in Vehicle Details page
-  When User Signs In
-  And User clicks on Start Purchase
-  Then System should navigate the user to Review Deal page
-  And System should display Enter Zip Code modal
+Given User is in Vehicle Details page
+When User Signs In
+And User clicks on Start Purchase
+Then System should navigate the user to Review Deal page
+And System should display Enter Zip Code modal
 
-Scenario: Review Deal - Zip not confirmed 
+Scenario: Review Deal - Zip not confirmed
 
   Given User is in Vehicle Details page
   When User Signs In
