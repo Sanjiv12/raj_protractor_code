@@ -320,15 +320,12 @@ else if((browser.params.browserPlatformCombo === ("ChromeAndroid")||browser.para
         await vlpFilterPage.unlockSavingsModalFirstName.sendKeys(browser.params.fname);
         await vlpFilterPage.unlockSavingsModalLastName.sendKeys(browser.params.lname);
         await vlpFilterPage.unlockSavingsModalEmail.sendKeys(browser.params.usemail);
-      //  await vlpFilterPage.unlockSavingsModalZip.sendKeys(browser.params.zipcode);
+       await vlpFilterPage.unlockSavingsModalZip.sendKeys(browser.params.zipcode);
        // await vlpFilterPage.unlockSavingsModalZip.actions().sendKeys(browser.params.zipcode).perform();
-        await vlpFilterPage.unlockSavingsModalZip.click();
-        console.log("zip code to be entered");
-        await browser.actions().sendKeys("85365").perform();
-        console.log("zip code entered");
-
-
-
+        // await vlpFilterPage.unlockSavingsModalZip.click();
+        // console.log("zip code to be entered");
+        // await browser.actions().sendKeys("85365").perform();
+        // console.log("zip code entered");
       //  sendKeys(browser.params.zipcode);
         //sendKeys("9654781234").perform();
     });
@@ -520,6 +517,8 @@ else if((browser.params.browserPlatformCombo === ("ChromeAndroid")||browser.para
         mspFilterPage.contactDealerModalLastName.sendKeys(browser.params.lname);
         await browser.driver.sleep(2*1000);
         mspFilterPage.contactDealerModalEmail.sendKeys(browser.params.cdemail); 
+        await browser.driver.sleep(1*1000);
+        await vlpFilterPage.unlockSavingsModalZip.sendKeys(browser.params.zipcode);
         await browser.driver.sleep(1*1000);
         browser.executeScript("arguments[0].click()", mspFilterPage.contactDealerModalPhone);   
     });

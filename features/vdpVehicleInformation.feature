@@ -1,7 +1,7 @@
 
 Feature: VDP - Vehicle Infromation
 A MST-C user selects a vehicle
- 
+ @smoke
 Scenario: Navigating to VDP (Price not unlocked)
 
   Given User is in Vehicle Details page
@@ -19,7 +19,7 @@ Scenario: Navigating to VDP (Price not unlocked)
   Then Vehicle Information should be displayed with Toyota Care Image
   Then Vehicle Information should be displayed with Toyota Safety Sense Logo
   Then Vehicle Information should be displayed with Image Carousal
-
+@regression
 Scenario: Vehicle Details Modal
 
   Given User is in Vehicle Details page
@@ -33,7 +33,7 @@ Scenario: Vehicle Details Modal
   Then System should open Vehicle Detail modal with Safety Features tab
   Then System should open Vehicle Detail modal with Package & Accessories tab
   Then System should open Vehicle Detail modal with Disclosures in the bottom
-
+@regression
 Scenario: Image carousal
 
   Given User is in Vehicle Details page

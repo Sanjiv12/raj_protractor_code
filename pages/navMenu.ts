@@ -17,7 +17,7 @@ export class NavMenu {
     public desktopCreateAccountLink : ElementFinder;
 
     constructor() {
-        this.profileIcon = element(by.xpath('//*[contains(@class, "dg-menu-dropdown-icon")]/img[@alt="Select to display the Digital Garage menu options"]'));
+        this.profileIcon = element(by.xpath('//div[@id="dg-man-icon"]'));
         this.dgComponentMenuDropdownDesktop = element(by.className('dg-component-menu-dropdown'));
         this.savesPageLinkOut= element(by.id('dg-menu-saves-page-linkout'));
         this.dgLoginButton = element(by.id('dg-login-btn'));

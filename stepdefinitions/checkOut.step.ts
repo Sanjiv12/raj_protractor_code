@@ -6,14 +6,30 @@ import {Assertion} from "../util/assertion"
 import {DigitalGarageTopNav} from "../dg-features/digitalGarageTopNav";
 import { NavMenu } from "../pages/navMenu";
 import {CSS_CLASSES, INVENTORY_REVIEW_URL, LOGIN_PAGE_URL, ATTRIBUTES} from "../util/Constants";
-
+import { waitForVisibilityOf } from "../util/waitForVisibilityOf";
 let createAccountPage : CreateAccountPage = new CreateAccountPage();
 let navMenu : NavMenu = new NavMenu();
 let vdpPage : VdpPage = new VdpPage();
 let caPage : CreateAccountPage = new CreateAccountPage();
 let topNav : DigitalGarageTopNav = new DigitalGarageTopNav();
 
+// When(/User Signs In(\s\"(.*?)\")?(\s\"(.*?)\")?/, async(email?: string, password?: string) =>{
+//     await waitForVisibilityOf(navMenu.profileIcon, 'Top Nav Profile Icon');
+//     await navMenu.profileIcon.click();
+
+    // await waitForVisibilityOf(navMenu.dgComponentMenuDropdownDesktop, 'Dropdown Element');
+    // await navMenu.dgLoginButton.click();
+    //  if (await hasNotPreviouslyLoggedIn()) {
+    //      await createAccountPage.userName.sendKeys(email || browser.params.caemailreg);
+    //      await createAccountPage.nextStepButton.click();
+    //      await createAccountPage.userPwd.sendKeys(password || browser.params.capwdreg);
+    //      await createAccountPage.signInButton.click();
+    //  }
+//  });
+
+
 Then('System should navigate the user to Review Deal page', async  () =>{
+    await browser.driver.sleep(10*1000);
     await vdpPage.reviewDealPageTitle.isDisplayed();
     return Assertion.expect(await browser.getCurrentUrl()).to.contain(INVENTORY_REVIEW_URL);
 });

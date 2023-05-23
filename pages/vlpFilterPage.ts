@@ -64,6 +64,7 @@ export class VlpFilterPage {
 	public vehicleCount : ElementFinder;
     public unlockSavingsmob : ElementArrayFinder;
     public modelDropDownmobile: ElementFinder;
+    public modelDropDownclosemobile: ElementFinder;
 
     //GXP Top Nav
     public profileIcon : ElementFinder;
@@ -138,5 +139,6 @@ export class VlpFilterPage {
 		this.vehicleCount = element(by.xpath('//div[contains(text(),"vehicles at")]'));
         this.unlockSavingsmob=element.all(by.xpath('//app-card-container[1]//div[@class="text-underscore-link mobile-unlock-saving ng-star-inserted"]'));
         this.modelDropDownmobile = element(by.xpath('//button[contains(@class,"secondary-button small filter")]'));
+        this.modelDropDownclosemobile=element(by.xpath('(//img[contains(@class,"close-button")])[2]'));      
       }
 }

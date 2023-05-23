@@ -418,7 +418,9 @@ else if((browser.params.browserPlatformCombo === ("ChromeAndroid")||browser.para
     
     When('User selects one or more vehicle series from Model in Filters panel', async  () =>{
         await vlpFilterPage.modelDropDownmobile.click();
-        await vlpFilterPage.modelDropDown.click();
+       // await vlpFilterPage.modelDropDown.click();
+        await browser.driver.sleep(2*1000);
+        await vlpFilterPage.modelDropDownclosemobile.click();
         await browser.driver.sleep(2*1000);
         browser.driver.findElement(By.xpath("//body")).click();
     });
