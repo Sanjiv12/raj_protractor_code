@@ -28,24 +28,33 @@ let until = protractor.ExpectedConditions;
 
 let MAX_TIME_WAIT = 10000;
 
-
-When(/User Signs In(\s\"(.*?)\")?(\s\"(.*?)\")?/, async(email?: string, password?: string) =>{
-    await waitForVisibilityOf(navMenu.profileIcon, 'Top Nav Profile Icon');
-    await browser.driver.sleep(5*1000);
+When(
+  /User Signs In(\s\"(.*?)\")?(\s\"(.*?)\")?/,
+  async (email?: string, password?: string) => {
+    await waitForVisibilityOf(navMenu.profileIcon, "Top Nav Profile Icon");
+    await browser.driver.sleep(5 * 1000);
     await navMenu.profileIcon.click();
-    await browser.driver.sleep(5*1000);
-    await waitForVisibilityOf(navMenu.dgComponentMenuDropdownDesktop, 'Dropdown Element');
-    await browser.driver.sleep(5*1000);
+    await browser.driver.sleep(5 * 1000);
+    await waitForVisibilityOf(
+      navMenu.dgComponentMenuDropdownDesktop,
+      "Dropdown Element"
+    );
+    await browser.driver.sleep(5 * 1000);
     await navMenu.dgLoginButton.click();
-    await browser.driver.sleep(5*1000);
-     if (await hasNotPreviouslyLoggedIn()) {
-         await createAccountPage.userName.sendKeys(email || browser.params.caemailreg);
-         await createAccountPage.nextStepButton.click();
-         await createAccountPage.userPwd.sendKeys(password || browser.params.capwdreg);
-         await createAccountPage.signInButton.click();
-         await browser.driver.sleep(5*1000);
-     }
- });
+    await browser.driver.sleep(5 * 1000);
+    if (await hasNotPreviouslyLoggedIn()) {
+      await createAccountPage.userName.sendKeys(
+        email || browser.params.caemailreg
+      );
+      await createAccountPage.nextStepButton.click();
+      await createAccountPage.userPwd.sendKeys(
+        password || browser.params.capwdreg
+      );
+      await createAccountPage.signInButton.click();
+      await browser.driver.sleep(20 * 1000);
+    }
+  }
+);
 
 Given("User is not logged in to account", async () => {
   await browser.driver.wait(
@@ -76,11 +85,11 @@ Given("User is in Saves page", async () => {
   await navigateToSavesPage();
 });
 
-Given('User is in Vehicle List page GXP', async () => {
-    const mspPageUrl = constructVlpUrl();
-    await browser.get(mspPageUrl);
+Given("User is in Vehicle List page GXP", async () => {
+  const mspPageUrl = constructVlpUrl();
+  await browser.get(mspPageUrl);
 
-    await waitForVisibilityOf(mspFilterPage.sortDropDown, 'Model Card');
+  await waitForVisibilityOf(mspFilterPage.sortDropDown, "Model Card");
 });
 
 When("User loads the Saves page", async () => {
