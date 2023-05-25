@@ -200,9 +200,7 @@ export class VdpPage {
       )
     );
     this.tabCash = element(
-      by.xpath(
-        "/html/body/main/app-root/mat-drawer-container/mat-drawer-content/div/app-vehicle-details/div[1]/div[2]/div[1]/section/div[1]/vdp-payment-estimation/div/mat-tab-group/mat-tab-header/div[2]/div/div/div[3]"
-      )
+      by.xpath('(//div[@class="mat-tab-label-content"])[3]')
     );
     this.termSelectedFinance = element(
       by.xpath(
@@ -589,7 +587,7 @@ export class VdpPage {
     this.confirmZipText = element(by.className("text-button confirm_zip"));
     this.zipTaxDesc = element(by.className("edit_zip_tax_desc"));
     this.chsFinanceBtn = element(
-      by.xpath('//button[text()=" Next: Choose Financing "]')
+      by.xpath('//button[contains(@class,"primary-button large")]')
     );
     this.zipCodeModalInput = element(
       by.xpath(
@@ -611,7 +609,7 @@ export class VdpPage {
     this.editDetailsBtn = element(
       by.className("text-button edit_Details_button")
     );
-    this.financeOption = element.all(by.className("mat-radio-button"));
+    this.financeOption = element.all(by.className("mat-radio-inner-circle"));
     this.tfsFinance = this.financeOption.first();
     this.ownFinance = this.financeOption.last();
     this.applyFinanceModal = element(
